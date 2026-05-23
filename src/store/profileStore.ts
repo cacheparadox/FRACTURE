@@ -30,7 +30,7 @@ export interface AppSettings {
   crtEnabled: boolean;
   audioEnabled: boolean;
   introsEnabled: boolean;
-  grainEnabled: boolean;
+  grainOpacity: number; // 0 to 0.2
   glitchEnabled: boolean;
 }
 
@@ -67,7 +67,7 @@ interface ProfileState {
     pathTaken?: string[]
   ) => void;
   completeOnboarding: (calibrationScores: Record<string, number>) => void;
-  setSetting: (key: keyof AppSettings, value: boolean) => void;
+  setSetting: <K extends keyof AppSettings>(key: K, value: AppSettings[K]) => void;
   setPowerOn: (value: boolean) => void;
   setBooting: (value: boolean) => void;
   purgeData: () => void;
@@ -87,7 +87,7 @@ export const useProfileStore = create<ProfileState>()(
         crtEnabled: true,
         audioEnabled: true,
         introsEnabled: true,
-        grainEnabled: true,
+        grainOpacity: 0.04,
         glitchEnabled: true,
       },
       addScores: (newScores, scenarioId, scenarioTitle = "", endingId = "", endingSummary = "", pathTaken = []) => set((state) => {
@@ -143,6 +143,13 @@ export const useProfileStore = create<ProfileState>()(
         calibrationScores: {},
         powerOn: false,
         booting: false,
+        settings: {
+          crtEnabled: true,
+          audioEnabled: true,
+          introsEnabled: true,
+          grainOpacity: 0.04,
+          glitchEnabled: true,
+        },
       }),
     }),
     {

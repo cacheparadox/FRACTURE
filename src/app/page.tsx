@@ -9,141 +9,12 @@ import { Play, Lock, User, Settings } from "lucide-react";
 import { useProfileStore } from "@/store/profileStore";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Onboarding Survey Questions (6 questions covering all 12 axes)
-interface OnboardingQuestion {
-  id: string;
-  category: string;
-  text: string;
-  choices: {
-    text: string;
-    scores: Record<string, number>;
-  }[];
-}
-
-const ONBOARDING_QUESTIONS: OnboardingQuestion[] = [
-  {
-    id: "q1",
-    category: "Integrity vs Tribalism",
-    text: "Your sibling has committed a non-violent felony. You know their location, but the authorities are searching for them. Do you:",
-    choices: [
-      {
-        text: "Report their location to the police. Law must apply to everyone.",
-        scores: { Integrity: 20, Justice: 15, Tribalism: -20, Obedience: 15 }
-      },
-      {
-        text: "Actively hide them and mislead investigators. Family comes first.",
-        scores: { Tribalism: 20, Compassion: 10, Integrity: -20, Obedience: -15 }
-      },
-      {
-        text: "Remain silent and refuse to cooperate with either side.",
-        scores: { Independence: 20, Diplomacy: 15, Obedience: -10 }
-      }
-    ]
-  },
-  {
-    id: "q2",
-    category: "Compassion vs Rationality",
-    text: "An automated medical system malfunctions, threatening to cut power to five life-support units unless you manual-override it, which will immediately terminate one terminal patient. Do you:",
-    choices: [
-      {
-        text: "Refuse to override. You will not actively participate in ending a life.",
-        scores: { Idealism: 20, Compassion: 15, Pragmatism: -20, Rationality: -10 }
-      },
-      {
-        text: "Force the override. Five lives are mathematically more valuable than one.",
-        scores: { Rationality: 20, Pragmatism: 20, Compassion: -20 }
-      },
-      {
-        text: "Freeze and let the timer expire, leaving the outcome to fate.",
-        scores: { Courage: -20, Independence: 10 }
-      }
-    ]
-  },
-  {
-    id: "q3",
-    category: "Courage vs Obedience",
-    text: "You discover an illegal surveillance program run by your employer. Whistleblowing will destroy the company, terminate your career, and potentially land you in court. Do you:",
-    choices: [
-      {
-        text: "Leak the documents anonymously to the press, exposing the truth.",
-        scores: { Courage: 20, Obedience: -20, Independence: 15, Integrity: 15 }
-      },
-      {
-        text: "Report it through internal channels, knowing it will likely be covered up.",
-        scores: { Obedience: 20, Courage: -10, Diplomacy: 15 }
-      },
-      {
-        text: "Do nothing. Your personal security and salary are your only priority.",
-        scores: { Ambition: 20, Courage: -20, Integrity: -15 }
-      }
-    ]
-  },
-  {
-    id: "q4",
-    category: "Justice vs Compassion",
-    text: "A thief is caught stealing expensive medicine from a local clinic. They claim they have no money and need it for their sick mother. Do you:",
-    choices: [
-      {
-        text: "Report them to the clinic owner and demand prosecution. Rules are rules.",
-        scores: { Justice: 20, Compassion: -20, Obedience: 15 }
-      },
-      {
-        text: "Let them slip away and ignore the theft, keeping your hands clean.",
-        scores: { Justice: -20, Compassion: 20, Idealism: 10 }
-      },
-      {
-        text: "Pay for the medicine yourself and counsel them on the value of honesty.",
-        scores: { Integrity: 20, Compassion: 20, Diplomacy: 15 }
-      }
-    ]
-  },
-  {
-    id: "q5",
-    category: "Ambition vs Integrity",
-    text: "To secure a highly competitive research grant that would guarantee your lab's survival, you are tempted to exaggerate favorable outcomes and omit anomalies in your proposal. Do you:",
-    choices: [
-      {
-        text: "Submit the exaggerated proposal to secure the lab's survival.",
-        scores: { Ambition: 20, Integrity: -20, Pragmatism: 15 }
-      },
-      {
-        text: "Submit raw, completely objective data, accepting high risk of failure.",
-        scores: { Integrity: 20, Ambition: -10, Pragmatism: -10 }
-      },
-      {
-        text: "Tweak the proposal slightly, finding a middle ground to minimize anomalies.",
-        scores: { Diplomacy: 15, Courage: -15, Pragmatism: 10 }
-      }
-    ]
-  },
-  {
-    id: "q6",
-    category: "Diplomacy vs Courage",
-    text: "During a company meeting, the director presents a strategic plan containing a fatal logical flaw. Objecting will embarrass them publicly. Do you:",
-    choices: [
-      {
-        text: "Object directly and point out the flaw in front of everyone.",
-        scores: { Courage: 20, Diplomacy: -20, Independence: 15 }
-      },
-      {
-        text: "Remain silent in the meeting, but approach them privately later.",
-        scores: { Diplomacy: 20, Courage: -10 }
-      },
-      {
-        text: "Stay silent. It's not your job to fix their mistakes.",
-        scores: { Ambition: 10, Courage: -15 }
-      }
-    ]
-  }
-];
 
 export default function Home() {
   const [activeScenario, setActiveScenario] = useState<Scenario | null>(null);
   const [showSettings, setShowSettings] = useState(false);
   
-  // Onboarding survey states
-  const [currentSurveyIdx, setCurrentSurveyIdx] = useState(0);
-  const [surveyScores, setSurveyScores] = useState<Record<string, number>>({});
+
 
   // Challenge comparison states
   const [challengeData, setChallengeData] = useState<{
@@ -161,7 +32,6 @@ export default function Home() {
   const {
     completedScenarios,
     isOnboarded,
-    completeOnboarding,
     settings,
     setSetting,
     setPowerOn
@@ -183,20 +53,6 @@ export default function Home() {
     }
   }, []);
 
-  const handleSurveyChoice = (choiceScores: Record<string, number>) => {
-    const nextScores = { ...surveyScores };
-    Object.entries(choiceScores).forEach(([key, val]) => {
-      nextScores[key] = (nextScores[key] || 0) + val;
-    });
-    setSurveyScores(nextScores);
-
-    if (currentSurveyIdx < ONBOARDING_QUESTIONS.length - 1) {
-      setCurrentSurveyIdx(currentSurveyIdx + 1);
-    } else {
-      // Survey Complete, write to profile store as calibration baseline
-      completeOnboarding(nextScores);
-    }
-  };
 
   const handleScenarioReset = () => {
     setActiveScenario(null);
@@ -295,29 +151,37 @@ export default function Home() {
                     <p className="text-[10px] text-neutral-500">Randomized retro signal interference</p>
                   </div>
                   <button
-                    onClick={() => setSetting("glitchEnabled", !settings.glitchEnabled)}
+                    onClick={() => setSetting("glitchEnabled", settings.glitchEnabled === false)}
                     className={`px-4 py-2 border text-xs font-bold uppercase tracking-wider transition-all ${
-                      settings.glitchEnabled ? "border-white bg-white text-black" : "border-neutral-700 text-neutral-400"
+                      settings.glitchEnabled !== false ? "border-white bg-white text-black" : "border-neutral-700 text-neutral-400"
                     }`}
                   >
-                    {settings.glitchEnabled ? "ON" : "OFF"}
+                    {settings.glitchEnabled !== false ? "ON" : "OFF"}
                   </button>
                 </div>
 
-                {/* Grain Toggle */}
-                <div className="flex justify-between items-center border-b border-neutral-900 pb-4">
-                  <div>
-                    <h4 className="text-sm font-bold uppercase tracking-wider mb-1">Static Grain</h4>
-                    <p className="text-[10px] text-neutral-500">Persistent grainy analog static noise</p>
+                {/* Grain Toggle - Replaced with opacity slider */}
+                <div className="border-b border-neutral-900 pb-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <div>
+                      <h4 className="text-sm font-bold uppercase tracking-wider mb-1">Static Grain</h4>
+                      <p className="text-[10px] text-neutral-500">Persistent grainy analog static noise opacity</p>
+                    </div>
+                    <span className="text-xs font-mono text-neutral-400">
+                      {Math.round((settings.grainOpacity ?? 0.04) * 500)}%
+                    </span>
                   </div>
-                  <button
-                    onClick={() => setSetting("grainEnabled", !settings.grainEnabled)}
-                    className={`px-4 py-2 border text-xs font-bold uppercase tracking-wider transition-all ${
-                      settings.grainEnabled ? "border-white bg-white text-black" : "border-neutral-700 text-neutral-400"
-                    }`}
-                  >
-                    {settings.grainEnabled ? "ON" : "OFF"}
-                  </button>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={Math.round((settings.grainOpacity ?? 0.04) * 500)}
+                    onChange={(e) => {
+                      const val = parseFloat(e.target.value) / 500;
+                      setSetting("grainOpacity", val);
+                    }}
+                    className="w-full h-1 bg-neutral-800 appearance-none cursor-pointer accent-white hover:bg-neutral-700 focus:outline-none"
+                  />
                 </div>
 
                 {/* Power Down Terminal */}
@@ -429,45 +293,6 @@ export default function Home() {
         </main>
       )}
 
-      {/* ─── ONBOARDING CALIBRATION SURVEY ────────────────────────── */}
-      {!activeScenario && !isOnboarded && (
-        <main className="min-h-screen flex items-center justify-center p-6">
-          <div className="max-w-2xl w-full border border-white bg-black p-8 md:p-12 shadow-2xl relative z-10">
-            {/* Header progress */}
-            <div className="flex justify-between items-center mb-8 border-b border-neutral-800 pb-4">
-              <span className="text-xs uppercase tracking-[0.25em] text-neutral-500 font-bold">
-                Personality Calibration
-              </span>
-              <span className="text-xs font-mono text-neutral-400">
-                [0{currentSurveyIdx + 1} / 0{ONBOARDING_QUESTIONS.length}]
-              </span>
-            </div>
-
-            {/* Question Text */}
-            <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-tight text-white mb-12 leading-relaxed">
-              {ONBOARDING_QUESTIONS[currentSurveyIdx].text}
-            </h2>
-
-            {/* Choices */}
-            <div className="space-y-4">
-              {ONBOARDING_QUESTIONS[currentSurveyIdx].choices.map((choice, choiceIdx) => (
-                <button
-                  key={choiceIdx}
-                  onClick={() => handleSurveyChoice(choice.scores)}
-                  className="w-full text-left p-6 md:p-8 border border-neutral-800 hover:border-white bg-[#030303] hover:bg-white hover:text-black transition-all font-mono text-sm uppercase flex items-center gap-4 group"
-                >
-                  <span className="w-6 h-6 border border-neutral-700 group-hover:border-black flex items-center justify-center text-xs font-bold text-neutral-500 group-hover:text-black shrink-0">
-                    {String.fromCharCode(65 + choiceIdx)}
-                  </span>
-                  <span className="flex-1 leading-relaxed font-sans font-bold group-hover:text-black">
-                    {choice.text}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-        </main>
-      )}
 
       {/* ─── MAIN MENU: Scenario Selection ─────────────────────────── */}
       {!activeScenario && isOnboarded && (

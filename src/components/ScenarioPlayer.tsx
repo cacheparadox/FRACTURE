@@ -142,15 +142,43 @@ export default function ScenarioPlayer({ scenario, onComplete, onReset }: Props)
     setScores(newScores);
 
     // 3. Determine next step
-    const nextId = choice.next_node;
+    let nextId = choice.next_node;
     const isEnding = scenario.endings.find((e) => e.ending_id === nextId);
+
+    // If it's a node transition (not an ending), check for conditional alternative nodes with matching prefix
+    if (!isEnding) {
+      // Find any node that shares the base ID name or prefix (e.g. "l_5" matches "l_5" or "l_5_alt")
+      const basePrefix = nextId.split("_").slice(0, 2).join("_"); // matches e.g. "l_5"
+      const candidateNodes = scenario.nodes.filter(
+        (n) => n.node_id === nextId || n.node_id.startsWith(basePrefix + "_")
+      );
+
+      if (candidateNodes.length > 1) {
+        // Find candidate that matches flags, default to first match
+        const matchingNode = candidateNodes.find((n) => {
+          if (n.visibility === "always") return false; // prefer conditional nodes first
+          return n.required_flags.every((f) => newFlags[f]);
+        });
+        if (matchingNode) {
+          nextId = matchingNode.node_id;
+        } else {
+          // Fallback to the default "always" node if no conditional ones are met
+          const defaultNode = candidateNodes.find((n) => n.visibility === "always" || n.node_id === nextId);
+          if (defaultNode) {
+            nextId = defaultNode.node_id;
+          }
+        }
+      }
+    }
+
+    const nextIsEnding = scenario.endings.find((e) => e.ending_id === nextId);
 
     // Append to path
     const updatedPath = [...pathTaken, nextId];
     setPathTaken(updatedPath);
 
-    if (isEnding) {
-      setEnding(isEnding);
+    if (nextIsEnding) {
+      setEnding(nextIsEnding);
       setPhase("ending");
       setShaking(true);
       setTimeout(() => setShaking(false), 300);
@@ -159,12 +187,12 @@ export default function ScenarioPlayer({ scenario, onComplete, onReset }: Props)
         newScores as Record<string, number>,
         scenario.scenario_id,
         scenario.title,
-        isEnding.ending_id,
-        isEnding.summary,
+        nextIsEnding.ending_id,
+        nextIsEnding.summary,
         updatedPath
       );
       if (onComplete) {
-        onComplete({ ending: isEnding, scores: newScores, flags: newFlags });
+        onComplete({ ending: nextIsEnding, scores: newScores, flags: newFlags });
       }
     } else {
       setDepth((d) => d + 1);

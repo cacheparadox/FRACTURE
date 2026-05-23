@@ -306,16 +306,16 @@ export default function Home() {
       {/* ─── MAIN MENU: Scenario Selection ─────────────────────────── */}
       {!activeScenario && isOnboarded && (
         <main className="max-w-6xl mx-auto py-24 px-6 relative z-20">
-          <header className="mb-24 flex justify-between items-start">
+          <header className="mb-16 md:mb-24 flex flex-wrap justify-between items-start gap-6">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             >
-              <h1 className="text-6xl sm:text-8xl md:text-9xl font-black tracking-tighter mb-4 text-white leading-none uppercase">
+              <h1 className="text-5xl sm:text-7xl md:text-9xl font-black tracking-tighter mb-4 text-white leading-none uppercase">
                 Fracture
               </h1>
-              <p className="text-lg md:text-xl text-neutral-400 font-medium tracking-widest max-w-xl uppercase leading-relaxed">
+              <p className="text-sm md:text-xl text-neutral-400 font-medium tracking-widest max-w-xl uppercase leading-relaxed">
                 Deterministic behavioral simulation.
               </p>
             </motion.div>

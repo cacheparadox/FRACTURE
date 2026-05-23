@@ -39,6 +39,15 @@ export default function Home() {
 
   const scenarios = scenariosData as unknown as Scenario[];
 
+  // Sort scenarios: completed ones go to the bottom
+  const sortedScenarios = [...scenarios].sort((a, b) => {
+    const aCompleted = completedScenarios.includes(a.scenario_id);
+    const bCompleted = completedScenarios.includes(b.scenario_id);
+    if (aCompleted && !bCompleted) return 1;
+    if (!aCompleted && bCompleted) return -1;
+    return 0;
+  });
+
   // Decode challenge hash from URL
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -344,7 +353,8 @@ export default function Home() {
             transition={{ duration: 1, delay: 0.2 }}
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
-            {scenarios.map((scenario, index) => {
+            {sortedScenarios.map((scenario) => {
+              const originalIndex = scenarios.findIndex((s) => s.scenario_id === scenario.scenario_id);
               const isCompleted = completedScenarios.includes(scenario.scenario_id);
               const isChallengeTarget = challengeData?.scenarioId === scenario.scenario_id;
 
@@ -366,7 +376,7 @@ export default function Home() {
                     <div className="flex items-center justify-between mb-6">
                       <div className="flex items-center gap-4">
                         <span className="text-xs font-mono tracking-widest text-neutral-500 group-hover:text-neutral-800 transition-colors">
-                          [{index.toString().padStart(2, "0")}]
+                          [{originalIndex.toString().padStart(2, "0")}]
                         </span>
                         <span
                           className={`text-[10px] uppercase tracking-widest px-2 py-1 border font-bold transition-colors ${

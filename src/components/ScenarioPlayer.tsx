@@ -8,6 +8,7 @@ import { useProfileStore } from "@/store/profileStore";
 import { AXIS_DATA } from "@/lib/axisData";
 import TypewriterText from "./TypewriterText";
 import AudioDrone from "./AudioDrone";
+import DecisionTreeMap from "./DecisionTreeMap";
 
 // ─── Axis Labels (derived from axisData) ────────────────────────────
 const AXIS_LABELS: Record<string, [string, string]> = Object.fromEntries(
@@ -401,38 +402,12 @@ export default function ScenarioPlayer({ scenario, onComplete, onReset }: Props)
                 </div>
               </div>
 
-              {/* Decision Replay Ghost Trail */}
+              {/* Decision Replay Branching Tree Map */}
               <div className="mb-16">
                 <h3 className="text-xs uppercase tracking-[0.2em] text-neutral-500 mb-8 font-bold border-l-4 border-white pl-4">
-                  Decision Trail
+                  Decision Map
                 </h3>
-                <div className="space-y-6">
-                  {pathTaken.map((nodeId, idx) => {
-                    const node = scenario.nodes.find((n) => n.node_id === nodeId);
-                    if (!node) return null;
-                    return (
-                      <div key={nodeId} className="flex gap-4 items-start text-neutral-400">
-                        <span className="text-neutral-600 font-mono text-xs mt-1">
-                          [{idx + 1}]
-                        </span>
-                        <div className="flex-1 text-sm">
-                          <p className="text-neutral-300 leading-relaxed mb-2 font-medium">
-                            {node.text}
-                          </p>
-                          {idx < pathTaken.length - 1 && (() => {
-                            const nextNodeId = pathTaken[idx + 1];
-                            const chosen = node.choices.find((c) => c.next_node === nextNodeId);
-                            return chosen ? (
-                              <p className="text-white uppercase tracking-wider font-mono text-xs font-bold border-l border-neutral-700 pl-3 py-1">
-                                Chosen: {chosen.text}
-                              </p>
-                            ) : null;
-                          })()}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                <DecisionTreeMap scenario={scenario} pathTaken={pathTaken} />
               </div>
 
               {/* Compare with Friend Link */}

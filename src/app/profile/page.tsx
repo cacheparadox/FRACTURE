@@ -109,7 +109,7 @@ export default function ProfilePage() {
           className="mb-16 flex flex-col md:flex-row justify-between items-start gap-8"
         >
           <div>
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-none uppercase mb-4">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter text-white leading-none uppercase mb-4 break-words">
               Psychological
               <br />
               Profile

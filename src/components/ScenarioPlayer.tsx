@@ -8,7 +8,6 @@ import { useProfileStore } from "@/store/profileStore";
 import { AXIS_DATA } from "@/lib/axisData";
 import TypewriterText from "./TypewriterText";
 import AudioDrone from "./AudioDrone";
-import DecisionTreeMap from "./DecisionTreeMap";
 
 // ─── Axis Labels (derived from axisData) ────────────────────────────
 const AXIS_LABELS: Record<string, [string, string]> = Object.fromEntries(
@@ -252,12 +251,12 @@ export default function ScenarioPlayer({ scenario, onComplete, onReset }: Props)
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="text-center px-8">
+            <div className="text-center px-4">
               <motion.h1
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 2, ease: "easeOut" }}
-                className="text-6xl md:text-8xl font-black uppercase tracking-tighter text-white select-none mb-6"
+                className="text-4xl sm:text-6xl md:text-8xl font-black uppercase tracking-tighter text-white select-none mb-6 break-words px-2"
               >
                 {scenario.title}
               </motion.h1>
@@ -281,12 +280,12 @@ export default function ScenarioPlayer({ scenario, onComplete, onReset }: Props)
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 1.02, y: -10 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-2xl mx-auto w-full bg-[#050505] border border-white/20 p-8 md:p-12 shadow-2xl relative overflow-hidden mt-16"
+            className="max-w-2xl mx-auto w-full bg-[#050505] border border-white/20 p-6 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden mt-16"
           >
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
 
             {/* Scenario text with typewriter effect */}
-            <div className="text-3xl md:text-4xl font-medium leading-snug text-white mb-16 relative z-10 tracking-wide min-h-[160px]">
+            <div className="text-2xl sm:text-3xl md:text-4xl font-medium leading-snug text-white mb-12 md:mb-16 relative z-10 tracking-wide min-h-[160px]">
               <TypewriterText
                 text={currentNode.text}
                 speed={25}
@@ -319,14 +318,14 @@ export default function ScenarioPlayer({ scenario, onComplete, onReset }: Props)
                     <button
                       key={choice.choice_id}
                       onClick={() => handleChoice(choice)}
-                      className="w-full text-left p-6 md:p-8 border border-white/20 bg-black hover:bg-white hover:text-black hover:border-white transition-all group flex items-center justify-between"
+                      className="w-full text-left p-4 sm:p-6 md:p-8 border border-white/20 bg-black hover:bg-white hover:text-black hover:border-white transition-all group flex items-center justify-between"
                     >
-                      <div className="flex items-center gap-6">
+                      <div className="flex items-center gap-4 sm:gap-6">
                         {/* Key indicator */}
                         <span className="w-8 h-8 border border-white/30 flex items-center justify-center text-xs font-bold text-neutral-500 group-hover:border-black group-hover:text-black transition-colors shrink-0">
                           {idx + 1}
                         </span>
-                        <span className="text-xl md:text-2xl font-bold uppercase tracking-tight text-neutral-300 group-hover:text-black transition-colors">
+                        <span className="text-base sm:text-lg md:text-2xl font-bold uppercase tracking-tight text-neutral-300 group-hover:text-black transition-colors">
                           {choice.text}
                         </span>
                       </div>
@@ -345,7 +344,7 @@ export default function ScenarioPlayer({ scenario, onComplete, onReset }: Props)
             key="ending"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`max-w-3xl mx-auto w-full p-8 md:p-12 border border-white bg-black text-white shadow-2xl relative overflow-hidden mt-8 ${shaking ? "animate-shake" : ""}`}
+            className={`max-w-3xl mx-auto w-full p-6 sm:p-8 md:p-12 border border-white bg-black text-white shadow-2xl relative overflow-hidden mt-8 ${shaking ? "animate-shake" : ""}`}
           >
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
 
@@ -402,13 +401,7 @@ export default function ScenarioPlayer({ scenario, onComplete, onReset }: Props)
                 </div>
               </div>
 
-              {/* Decision Replay Branching Tree Map */}
-              <div className="mb-16">
-                <h3 className="text-xs uppercase tracking-[0.2em] text-neutral-500 mb-8 font-bold border-l-4 border-white pl-4">
-                  Decision Map
-                </h3>
-                <DecisionTreeMap scenario={scenario} pathTaken={pathTaken} />
-              </div>
+
 
               {/* Compare with Friend Link */}
               <div className="mb-12 p-6 border border-neutral-800 bg-[#030303] flex flex-col md:flex-row justify-between items-start md:items-center gap-4">

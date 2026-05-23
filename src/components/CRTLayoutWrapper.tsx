@@ -289,6 +289,7 @@ const OnboardingSurvey = ({ onComplete }: { onComplete: (scores: Record<string, 
 const CalculatingBaseline = ({ onComplete }: { onComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
   const [logs, setLogs] = useState<string[]>([]);
+  const { isOnboarded } = useProfileStore();
   
   const steps = [
     { threshold: 10, log: "ISOLATING NEURAL CHANNELS..." },
@@ -301,6 +302,7 @@ const CalculatingBaseline = ({ onComplete }: { onComplete: () => void }) => {
   ];
 
   useEffect(() => {
+    const speed = isOnboarded ? 20 : 60;
     const timer = setInterval(() => {
       setProgress(p => {
         const next = p + 2;
@@ -311,9 +313,9 @@ const CalculatingBaseline = ({ onComplete }: { onComplete: () => void }) => {
         }
         return next;
       });
-    }, 60);
+    }, speed);
     return () => clearInterval(timer);
-  }, []);
+  }, [isOnboarded]);
 
   useEffect(() => {
     const currentStep = steps.find(s => progress >= s.threshold && !logs.includes(s.log));
@@ -385,11 +387,11 @@ export default function CRTLayoutWrapper({
     }
   }, [powerOn, booting]);
 
-  // Handle auto-advancing from logo to calculating if already onboarded
+  // Handle auto-advancing from logo to zooming if already onboarded
   useEffect(() => {
     if (localBootState === 'logo' && isOnboarded) {
       const timer = setTimeout(() => {
-        setLocalBootState('calculating');
+        setLocalBootState('zooming');
       }, 1500);
       return () => clearTimeout(timer);
     }
@@ -399,7 +401,7 @@ export default function CRTLayoutWrapper({
   useEffect(() => {
     if (localBootState === 'zooming') {
       const timer = setTimeout(() => {
-        setLocalBootState('active');
+        setLocalBootState('calculating');
       }, 1500);
       return () => clearTimeout(timer);
     }
@@ -513,13 +515,13 @@ export default function CRTLayoutWrapper({
       {/* The Bezel Wrapper */}
       <div
         className={`fixed z-10 transition-all duration-[1500ms] ease-in-out flex flex-col ${
-          localBootState === 'zooming'
+          localBootState === 'zooming' || localBootState === 'calculating'
             ? 'w-screen h-screen top-0 left-0 p-0 border-0 bg-transparent'
             : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-4xl aspect-[4/3] rounded-3xl p-6 border-[16px] border-t-[#333] border-l-[#333] border-r-[#111] border-b-[#111] bg-[#171717] crt-bezel'
         }`}
       >
-        {/* Bezel Frame elements (Dials, Labels, Knobs) - only visible when not zooming */}
-        {localBootState !== 'zooming' && (
+        {/* Bezel Frame elements (Dials, Labels, Knobs) - only visible when not zooming / calculating */}
+        {localBootState !== 'zooming' && localBootState !== 'calculating' && (
           <>
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_55%,rgba(0,0,0,0.95)_100%)] pointer-events-none rounded-xl z-20" />
             <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/5 to-transparent pointer-events-none z-20 transform -skew-y-12 origin-top-left" />
@@ -529,12 +531,12 @@ export default function CRTLayoutWrapper({
           </>
         )}
 
-        {/* Screen container: Bounded cutout in Bezel, expanding to fixed inset-0 when zooming */}
+        {/* Screen container: Bounded cutout in Bezel, expanding to fixed inset-0 when zooming / calculating */}
         <div
           className={`bg-black overflow-hidden flex flex-col relative shadow-inner ${
             crtEnabled && localBootState !== 'off' ? "crt-active" : ""
           } ${glitchClass} ${
-            localBootState === 'zooming'
+            localBootState === 'zooming' || localBootState === 'calculating'
               ? 'w-full h-full border-0 rounded-none'
               : 'w-full h-[84%] border-4 border-[#0c0c0c] rounded-xl'
           }`}
@@ -585,13 +587,13 @@ export default function CRTLayoutWrapper({
               <OnboardingSurvey
                 onComplete={(scores) => {
                   completeOnboarding(scores);
-                  setLocalBootState('calculating');
+                  setLocalBootState('zooming');
                 }}
               />
             )}
 
             {localBootState === 'calculating' && (
-              <CalculatingBaseline onComplete={() => setLocalBootState('zooming')} />
+              <CalculatingBaseline onComplete={() => setLocalBootState('active')} />
             )}
 
             {localBootState === 'zooming' && (
@@ -605,7 +607,7 @@ export default function CRTLayoutWrapper({
         </div>
 
         {/* Bezel controls (knobs, dials, power switch) at the bottom */}
-        {localBootState !== 'zooming' && (
+        {localBootState !== 'zooming' && localBootState !== 'calculating' && (
           <div className="w-full h-[16%] mt-4 flex justify-between items-center px-4 shrink-0">
             <div className="flex gap-4">
               <div className="w-5 h-5 rounded-full bg-[#111] border border-[#222] shadow-inner" />

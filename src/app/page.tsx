@@ -303,7 +303,7 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             >
-              <h1 className="text-8xl md:text-9xl font-black tracking-tighter mb-4 text-white leading-none uppercase">
+              <h1 className="text-6xl sm:text-8xl md:text-9xl font-black tracking-tighter mb-4 text-white leading-none uppercase">
                 Fracture
               </h1>
               <p className="text-lg md:text-xl text-neutral-400 font-medium tracking-widest max-w-xl uppercase leading-relaxed">
@@ -388,7 +388,7 @@ export default function Home() {
                       )}
                     </div>
 
-                    <h3 className="text-3xl font-black uppercase tracking-tighter mb-2 transition-colors">
+                    <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tighter mb-2 transition-colors">
                       {scenario.title}
                     </h3>
                     <p

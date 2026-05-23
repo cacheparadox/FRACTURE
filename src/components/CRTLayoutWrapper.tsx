@@ -512,10 +512,10 @@ export default function CRTLayoutWrapper({
 
       {/* The Bezel Wrapper */}
       <div
-        className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-4xl aspect-[4/3] rounded-3xl z-10 transition-all duration-[1500ms] ease-in-out flex flex-col p-6 border-[#222] bg-[#171717] ${
+        className={`fixed z-10 transition-all duration-[1500ms] ease-in-out flex flex-col ${
           localBootState === 'zooming'
-            ? 'w-screen h-screen max-w-none aspect-none rounded-none top-0 left-0 translate-x-0 translate-y-0 p-0 border-0 bg-transparent'
-            : 'border-[16px] border-t-[#333] border-l-[#333] border-r-[#111] border-b-[#111] crt-bezel'
+            ? 'w-screen h-screen top-0 left-0 p-0 border-0 bg-transparent'
+            : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-4xl aspect-[4/3] rounded-3xl p-6 border-[16px] border-t-[#333] border-l-[#333] border-r-[#111] border-b-[#111] bg-[#171717] crt-bezel'
         }`}
       >
         {/* Bezel Frame elements (Dials, Labels, Knobs) - only visible when not zooming */}

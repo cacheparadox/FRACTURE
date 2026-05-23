@@ -1,0 +1,3116 @@
+[
+  {
+    "scenario_id": "sc_001",
+    "title": "The Whistleblower",
+    "core_conflict": "Loyalty vs Fairness",
+    "pressure_type": "Career risk",
+    "relationship_dynamic": "Coworker",
+    "stakes_type": "Career",
+    "tone": "Tense, corporate realism",
+    "escalation_type": "Slow corruption",
+    "nodes": [
+      {
+        "node_id": "n_1",
+        "text": "You are a senior accountant. You discover your mentor, David, has been embezzling funds. If you report him, he goes to jail and his family is ruined. If you stay silent, the company could collapse.",
+        "pressure_context": "Time pressure: Audit is tomorrow.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c1_a",
+            "text": "Report him to HR immediately.",
+            "effects": {
+              "Integrity": 2,
+              "Justice": 2,
+              "Compassion": -2,
+              "Tribalism": -2
+            },
+            "flags_set": {
+              "reported": true
+            },
+            "next_node": "n_2a"
+          },
+          {
+            "choice_id": "c1_b",
+            "text": "Confront him privately and tell him to put it back.",
+            "effects": {
+              "Compassion": 2,
+              "Diplomacy": 2,
+              "Obedience": -1,
+              "Justice": -1
+            },
+            "flags_set": {
+              "confronted": true
+            },
+            "next_node": "n_2b"
+          },
+          {
+            "choice_id": "c1_c",
+            "text": "Copy the logs to an external drive as insurance, say nothing, and wait.",
+            "effects": {
+              "Pragmatism": 2,
+              "Integrity": -2,
+              "Courage": -1,
+              "Rationality": 1
+            },
+            "flags_set": {
+              "insurance": true
+            },
+            "next_node": "n_2b"
+          }
+        ]
+      },
+      {
+        "node_id": "n_2a",
+        "text": "HR thanks you, but the CEO calls you into his office. He says David is too important to the company's image. He offers you a massive promotion to bury the evidence.",
+        "pressure_context": "Authority pressure.",
+        "visibility": "conditional",
+        "required_flags": [
+          "reported"
+        ],
+        "choices": [
+          {
+            "choice_id": "c2a_1",
+            "text": "Accept the promotion and bury it.",
+            "effects": {
+              "Ambition": 3,
+              "Pragmatism": 2,
+              "Integrity": -3,
+              "Idealism": -2
+            },
+            "flags_set": {
+              "bribed": true
+            },
+            "next_node": "n_3a"
+          },
+          {
+            "choice_id": "c2a_2",
+            "text": "Refuse and threaten to go to the press.",
+            "effects": {
+              "Courage": 3,
+              "Idealism": 2,
+              "Pragmatism": -2,
+              "Diplomacy": -2
+            },
+            "flags_set": {
+              "threatened_press": true
+            },
+            "next_node": "n_3b"
+          },
+          {
+            "choice_id": "c2a_3",
+            "text": "Delay the CEO. Say you need a few days to think it over.",
+            "effects": {
+              "Rationality": 1,
+              "Diplomacy": 2,
+              "Courage": -1,
+              "Integrity": -1
+            },
+            "flags_set": {
+              "delayed": true
+            },
+            "next_node": "n_3b"
+          }
+        ]
+      },
+      {
+        "node_id": "n_2b",
+        "text": "David breaks down crying. He says he did it to pay for his daughter's experimental surgery. He begs you for one month to replace the money.",
+        "pressure_context": "Emotional manipulation.",
+        "visibility": "conditional",
+        "required_flags": [
+          "confronted"
+        ],
+        "choices": [
+          {
+            "choice_id": "c2b_1",
+            "text": "Give him the month. Help him cover it up temporarily.",
+            "effects": {
+              "Compassion": 3,
+              "Tribalism": 2,
+              "Justice": -3,
+              "Rationality": -2
+            },
+            "flags_set": {
+              "helped_cover": true
+            },
+            "next_node": "n_3c"
+          },
+          {
+            "choice_id": "c2b_2",
+            "text": "Tell him you're sorry, but you still have to report it.",
+            "effects": {
+              "Rationality": 2,
+              "Justice": 2,
+              "Compassion": -3,
+              "Loyalty": -2
+            },
+            "flags_set": {
+              "reported_late": true
+            },
+            "next_node": "n_3d"
+          }
+        ]
+      },
+      {
+        "node_id": "n_3a",
+        "text": "You took the promotion. A junior accountant notices the buried file and asks you about it, looking suspicious.",
+        "pressure_context": "Fear of discovery.",
+        "visibility": "conditional",
+        "required_flags": [
+          "bribed"
+        ],
+        "choices": [
+          {
+            "choice_id": "c3a_1",
+            "text": "Fire the junior accountant to protect the secret.",
+            "effects": {
+              "Ambition": 2,
+              "Pragmatism": 2,
+              "Compassion": -3,
+              "Justice": -3
+            },
+            "flags_set": {},
+            "next_node": "end_corrupted"
+          },
+          {
+            "choice_id": "c3a_2",
+            "text": "Confess everything to the junior and plan a joint leak.",
+            "effects": {
+              "Idealism": 2,
+              "Courage": 2,
+              "Pragmatism": -3,
+              "Ambition": -3
+            },
+            "flags_set": {},
+            "next_node": "end_redemption"
+          }
+        ]
+      },
+      {
+        "node_id": "n_3b",
+        "text": "You go to the press. The company sues you for defamation and breaches of NDA, freezing all your assets.",
+        "pressure_context": "Survival descent.",
+        "visibility": "conditional",
+        "required_flags": [
+          "threatened_press"
+        ],
+        "choices": [
+          {
+            "choice_id": "c3b_1",
+            "text": "Start a crowdfunding campaign and fight them in court.",
+            "effects": {
+              "Courage": 3,
+              "Independence": 2,
+              "Diplomacy": -3,
+              "Pragmatism": -2
+            },
+            "flags_set": {},
+            "next_node": "end_martyr"
+          },
+          {
+            "choice_id": "c3b_2",
+            "text": "Settle out of court. Retract your statements to unfreeze your money.",
+            "effects": {
+              "Pragmatism": 3,
+              "Rationality": 2,
+              "Courage": -3,
+              "Idealism": -3
+            },
+            "flags_set": {},
+            "next_node": "end_broken"
+          }
+        ]
+      },
+      {
+        "node_id": "n_3c",
+        "text": "A month passes. David hasn't replaced the money, and the audit finds the discrepancy. You are now legally implicated as an accomplice.",
+        "pressure_context": "Legal threat.",
+        "visibility": "conditional",
+        "required_flags": [
+          "helped_cover"
+        ],
+        "choices": [
+          {
+            "choice_id": "c3c_1",
+            "text": "Turn state's witness against David for immunity.",
+            "effects": {
+              "Self-preservation": 3,
+              "Rationality": 2,
+              "Loyalty": -3,
+              "Tribalism": -3
+            },
+            "flags_set": {},
+            "next_node": "end_snitch"
+          },
+          {
+            "choice_id": "c3c_2",
+            "text": "Go down with him. You made the choice, you'll take the fall.",
+            "effects": {
+              "Integrity": 3,
+              "Loyalty": 3,
+              "Pragmatism": -3,
+              "Rationality": -3
+            },
+            "flags_set": {},
+            "next_node": "end_loyal_jail"
+          }
+        ]
+      },
+      {
+        "node_id": "n_3d",
+        "text": "David's daughter's surgery is cancelled due to his arrest. His wife publicly confronts you, screaming that you killed her child.",
+        "pressure_context": "Public humiliation.",
+        "visibility": "conditional",
+        "required_flags": [
+          "reported_late"
+        ],
+        "choices": [
+          {
+            "choice_id": "c3d_1",
+            "text": "Walk away in silence. You did the right thing.",
+            "effects": {
+              "Rationality": 3,
+              "Independence": 2,
+              "Compassion": -3,
+              "Diplomacy": -2
+            },
+            "flags_set": {},
+            "next_node": "end_cold_justice"
+          },
+          {
+            "choice_id": "c3d_2",
+            "text": "Give the wife your entire savings out of guilt.",
+            "effects": {
+              "Compassion": 3,
+              "Idealism": 2,
+              "Rationality": -3,
+              "Pragmatism": -3
+            },
+            "flags_set": {},
+            "next_node": "end_guilt"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_corrupted",
+        "summary": "You fired the junior. You are now the CEO's right hand, wealthy but deeply corrupt.",
+        "dominant_traits": [
+          "Machiavellian",
+          "Ambitious"
+        ],
+        "behavioral_analysis": "You fully embraced corruption for personal gain."
+      },
+      {
+        "ending_id": "end_redemption",
+        "summary": "You leaked the documents. You lost the promotion, but brought down the CEO.",
+        "dominant_traits": [
+          "Idealistic",
+          "Unpredictable"
+        ],
+        "behavioral_analysis": "Your conscience forced a sudden, chaotic course correction."
+      },
+      {
+        "ending_id": "end_martyr",
+        "summary": "You fought in court for years. You are broke, but a symbol of corporate transparency.",
+        "dominant_traits": [
+          "Righteous",
+          "Stubborn"
+        ],
+        "behavioral_analysis": "You sacrifice everything for an abstract principle."
+      },
+      {
+        "ending_id": "end_broken",
+        "summary": "You settled. You are financially secure, but widely known as a corporate coward.",
+        "dominant_traits": [
+          "Pragmatic",
+          "Defeated"
+        ],
+        "behavioral_analysis": "You initiate conflict but lack the stamina to see it through."
+      },
+      {
+        "ending_id": "end_snitch",
+        "summary": "David went to prison. You kept your freedom, but the guilt haunts you.",
+        "dominant_traits": [
+          "Self-interested",
+          "Survivor"
+        ],
+        "behavioral_analysis": "When cornered, you prioritize your own survival over social bonds."
+      },
+      {
+        "ending_id": "end_loyal_jail",
+        "summary": "You both went to prison. David's family thanks you for your loyalty.",
+        "dominant_traits": [
+          "Tribal",
+          "Self-destructive"
+        ],
+        "behavioral_analysis": "You value in-group loyalty so highly you will accept legal destruction."
+      },
+      {
+        "ending_id": "end_cold_justice",
+        "summary": "The daughter died. You kept your job and the system worked perfectly.",
+        "dominant_traits": [
+          "Systemic",
+          "Cold"
+        ],
+        "behavioral_analysis": "You divorce human emotion from systemic logic entirely."
+      },
+      {
+        "ending_id": "end_guilt",
+        "summary": "You are broke and David is in jail. The daughter lived, but you are ruined.",
+        "dominant_traits": [
+          "Guilt-driven",
+          "Reactive"
+        ],
+        "behavioral_analysis": "You attempt to buy back your conscience through extreme self-punishment."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_003",
+    "title": "The Long Night",
+    "core_conflict": "Survival vs Morality",
+    "pressure_type": "Scarcity",
+    "relationship_dynamic": "Strangers",
+    "stakes_type": "Survival",
+    "tone": "Grim, grueling",
+    "escalation_type": "Survival descent",
+    "nodes": [
+      {
+        "node_id": "L1",
+        "text": "A massive winter blackout has hit the city. The temperature is dropping fast. You have a small generator and enough fuel for a few days. Your elderly neighbor knocks, asking to stay in your heated living room.",
+        "pressure_context": "Layer 1",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "L1_a",
+            "text": "Let him in. You can't let him freeze.",
+            "effects": {
+              "Compassion": 2,
+              "Idealism": 1,
+              "Pragmatism": -1
+            },
+            "flags_set": {
+              "neighbor_in": true
+            },
+            "next_node": "L2_a"
+          },
+          {
+            "choice_id": "L1_b",
+            "text": "Turn him away. Your fuel is limited, and you must protect yourself.",
+            "effects": {
+              "Pragmatism": 2,
+              "Rationality": 1,
+              "Compassion": -2
+            },
+            "flags_set": {
+              "neighbor_out": true
+            },
+            "next_node": "L2_b"
+          },
+          {
+            "choice_id": "L1_c",
+            "text": "Let him stay in the unheated garage with blankets, but refuse him entry to the generator room.",
+            "effects": {
+              "Pragmatism": 2,
+              "Compassion": 1,
+              "Rationality": 1,
+              "Tribalism": -1
+            },
+            "flags_set": {
+              "neighbor_garage": true,
+              "neighbor_in": true
+            },
+            "next_node": "L2_a"
+          }
+        ]
+      },
+      {
+        "node_id": "L2_a",
+        "text": "The neighbor brings his dog. The dog is agitated and keeps trying to knock over the portable heater, creating a severe fire hazard.",
+        "pressure_context": "Layer 2",
+        "visibility": "conditional",
+        "required_flags": [
+          "neighbor_in"
+        ],
+        "choices": [
+          {
+            "choice_id": "L2a_1",
+            "text": "Force him to put the dog outside in the cold.",
+            "effects": {
+              "Rationality": 2,
+              "Pragmatism": 1,
+              "Compassion": -2
+            },
+            "flags_set": {
+              "dog_outside": true
+            },
+            "next_node": "L3_a"
+          },
+          {
+            "choice_id": "L2a_2",
+            "text": "Tie the dog up inside, even though it cries loudly all night.",
+            "effects": {
+              "Compassion": 1,
+              "Idealism": 1,
+              "Rationality": -1
+            },
+            "flags_set": {
+              "dog_inside": true
+            },
+            "next_node": "L3_b"
+          }
+        ]
+      },
+      {
+        "node_id": "L2_b",
+        "text": "You hear the neighbor collapse on your porch an hour later. He is unresponsive. If you bring him in now, he requires immediate medical attention you can't provide, but he might survive.",
+        "pressure_context": "Layer 2",
+        "visibility": "conditional",
+        "required_flags": [
+          "neighbor_out"
+        ],
+        "choices": [
+          {
+            "choice_id": "L2b_1",
+            "text": "Bring him in and try to warm him up. You feel too guilty.",
+            "effects": {
+              "Compassion": 2,
+              "Idealism": 1,
+              "Pragmatism": -2
+            },
+            "flags_set": {
+              "neighbor_saved_late": true
+            },
+            "next_node": "L3_c"
+          },
+          {
+            "choice_id": "L2b_2",
+            "text": "Leave him. Opening the door wastes heat. He's likely already gone.",
+            "effects": {
+              "Pragmatism": 3,
+              "Rationality": 2,
+              "Compassion": -3
+            },
+            "flags_set": {
+              "neighbor_dead": true
+            },
+            "next_node": "L3_d"
+          }
+        ]
+      },
+      {
+        "node_id": "L3_a",
+        "text": "The neighbor is furious about the dog and demands to leave, threatening to break your window on the way out to let the cold in.",
+        "pressure_context": "Layer 3",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "L3a_1",
+            "text": "Physically restrain him to protect the window.",
+            "effects": {
+              "Pragmatism": 2,
+              "Courage": 1,
+              "Diplomacy": -2
+            },
+            "flags_set": {},
+            "next_node": "L4_a"
+          },
+          {
+            "choice_id": "L3a_2",
+            "text": "Let him break it and try to patch it with cardboard.",
+            "effects": {
+              "Diplomacy": 2,
+              "Compassion": 1,
+              "Rationality": -2
+            },
+            "flags_set": {},
+            "next_node": "L4_b"
+          }
+        ]
+      },
+      {
+        "node_id": "L3_b",
+        "text": "The dog's crying attracts scavengers. Armed men bang on your door demanding you share the generator or they will break in.",
+        "pressure_context": "Layer 3",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "L3b_1",
+            "text": "Refuse and arm yourself. Defend your property.",
+            "effects": {
+              "Courage": 3,
+              "Independence": 2,
+              "Diplomacy": -3
+            },
+            "flags_set": {},
+            "next_node": "L4_c"
+          },
+          {
+            "choice_id": "L3b_2",
+            "text": "Surrender the generator to save your lives.",
+            "effects": {
+              "Pragmatism": 2,
+              "Diplomacy": 2,
+              "Courage": -2
+            },
+            "flags_set": {},
+            "next_node": "L4_d"
+          }
+        ]
+      },
+      {
+        "node_id": "L3_c",
+        "text": "He survives but needs medicine from a pharmacy three blocks away. Going out in the storm is incredibly dangerous.",
+        "pressure_context": "Layer 3",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "L3c_1",
+            "text": "Risk the storm to get his medicine.",
+            "effects": {
+              "Courage": 3,
+              "Compassion": 2,
+              "Rationality": -3
+            },
+            "flags_set": {},
+            "next_node": "L4_e"
+          },
+          {
+            "choice_id": "L3c_2",
+            "text": "Refuse to go. You've done enough by letting him in.",
+            "effects": {
+              "Rationality": 2,
+              "Pragmatism": 1,
+              "Compassion": -2
+            },
+            "flags_set": {},
+            "next_node": "L4_f"
+          }
+        ]
+      },
+      {
+        "node_id": "L3_d",
+        "text": "The guilt eats at you. You hear a radio broadcast saying a military rescue convoy is an hour away, but they only pick up people gathered at the community center.",
+        "pressure_context": "Layer 3",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "L3d_1",
+            "text": "Pack your things and make a run for the convoy.",
+            "effects": {
+              "Pragmatism": 2,
+              "Courage": 1,
+              "Independence": -1
+            },
+            "flags_set": {},
+            "next_node": "L4_g"
+          },
+          {
+            "choice_id": "L3d_2",
+            "text": "Stay put. You have fuel, and the storm outside might kill you before you reach the center.",
+            "effects": {
+              "Rationality": 2,
+              "Independence": 2,
+              "Courage": -1
+            },
+            "flags_set": {},
+            "next_node": "L4_h"
+          }
+        ]
+      },
+      {
+        "node_id": "L4_a",
+        "text": "You tie him to a chair. He starts screaming for help. Someone outside hears him and kicks your door open.",
+        "pressure_context": "Layer 4",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "L4a_1",
+            "text": "Attack the intruder immediately.",
+            "effects": {
+              "Courage": 2,
+              "Pragmatism": 1
+            },
+            "flags_set": {},
+            "next_node": "L5_a"
+          },
+          {
+            "choice_id": "L4a_2",
+            "text": "Try to explain the situation to the intruder.",
+            "effects": {
+              "Diplomacy": 2,
+              "Rationality": 1
+            },
+            "flags_set": {},
+            "next_node": "L5_b"
+          }
+        ]
+      },
+      {
+        "node_id": "L4_b",
+        "text": "The cardboard fails. The room is freezing. You have to burn your furniture to stay alive.",
+        "pressure_context": "Layer 4",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "L4b_1",
+            "text": "Burn your family heirlooms first to save the functional wood.",
+            "effects": {
+              "Pragmatism": 3,
+              "Idealism": -2
+            },
+            "flags_set": {},
+            "next_node": "L5_c"
+          },
+          {
+            "choice_id": "L4b_2",
+            "text": "Burn the dining table, even though it's painted and toxic.",
+            "effects": {
+              "Rationality": -2,
+              "Pragmatism": 1
+            },
+            "flags_set": {},
+            "next_node": "L5_d"
+          }
+        ]
+      },
+      {
+        "node_id": "L4_c",
+        "text": "You shoot warning shots. They leave, but say they are coming back with more people.",
+        "pressure_context": "Layer 4",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "L4c_1",
+            "text": "Abandon the house and flee into the storm.",
+            "effects": {
+              "Pragmatism": 2,
+              "Courage": 1
+            },
+            "flags_set": {},
+            "next_node": "L5_e"
+          },
+          {
+            "choice_id": "L4c_2",
+            "text": "Fortify the house and prepare for a siege.",
+            "effects": {
+              "Courage": 3,
+              "Independence": 2
+            },
+            "flags_set": {},
+            "next_node": "L5_f"
+          }
+        ]
+      },
+      {
+        "node_id": "L4_d",
+        "text": "They take the generator and leave you in the dark. The cold begins to set in.",
+        "pressure_context": "Layer 4",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "L4d_1",
+            "text": "Beg the neighbor to share his body heat.",
+            "effects": {
+              "Pragmatism": 2,
+              "Diplomacy": 1,
+              "Independence": -2
+            },
+            "flags_set": {},
+            "next_node": "L5_g"
+          },
+          {
+            "choice_id": "L4d_2",
+            "text": "Accept your fate and simply go to sleep.",
+            "effects": {
+              "Rationality": -3,
+              "Idealism": 1
+            },
+            "flags_set": {},
+            "next_node": "end_frozen_peace"
+          }
+        ]
+      },
+      {
+        "node_id": "L4_e",
+        "text": "You reach the pharmacy, but it has been looted. There is one bottle of the medicine left, but another survivor has their hand on it.",
+        "pressure_context": "Layer 4",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "L4e_1",
+            "text": "Fight them for the medicine.",
+            "effects": {
+              "Tribalism": 2,
+              "Pragmatism": 2,
+              "Compassion": -2
+            },
+            "flags_set": {},
+            "next_node": "L5_h"
+          },
+          {
+            "choice_id": "L4e_2",
+            "text": "Let them have it and go home empty-handed.",
+            "effects": {
+              "Compassion": 2,
+              "Diplomacy": 2,
+              "Courage": -1
+            },
+            "flags_set": {},
+            "next_node": "L5_i"
+          }
+        ]
+      },
+      {
+        "node_id": "L4_f",
+        "text": "He dies in your living room. You are trapped with a corpse for the next few days.",
+        "pressure_context": "Layer 4",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "L4f_1",
+            "text": "Move the body outside.",
+            "effects": {
+              "Rationality": 2,
+              "Pragmatism": 1
+            },
+            "flags_set": {},
+            "next_node": "L5_j"
+          },
+          {
+            "choice_id": "L4f_2",
+            "text": "Cover the body with a blanket out of respect and ignore it.",
+            "effects": {
+              "Idealism": 2,
+              "Compassion": 1
+            },
+            "flags_set": {},
+            "next_node": "L5_k"
+          }
+        ]
+      },
+      {
+        "node_id": "L4_g",
+        "text": "You reach the convoy, but they are full. They only have room for children.",
+        "pressure_context": "Layer 4",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "L4g_1",
+            "text": "Try to force your way onto the truck.",
+            "effects": {
+              "Self-preservation": 3,
+              "Pragmatism": 2,
+              "Compassion": -3
+            },
+            "flags_set": {},
+            "next_node": "L5_l"
+          },
+          {
+            "choice_id": "L4g_2",
+            "text": "Help load the children and walk back home.",
+            "effects": {
+              "Compassion": 3,
+              "Idealism": 2,
+              "Pragmatism": -2
+            },
+            "flags_set": {},
+            "next_node": "L5_m"
+          }
+        ]
+      },
+      {
+        "node_id": "L4_h",
+        "text": "The generator breaks down. You are completely out of options.",
+        "pressure_context": "Layer 4",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "L4h_1",
+            "text": "Break into the dead neighbor's house to steal his blankets.",
+            "effects": {
+              "Pragmatism": 3,
+              "Rationality": 2,
+              "Idealism": -2
+            },
+            "flags_set": {},
+            "next_node": "L5_n"
+          },
+          {
+            "choice_id": "L4h_2",
+            "text": "Wait for death in your own bed.",
+            "effects": {
+              "Idealism": 2,
+              "Independence": 1,
+              "Pragmatism": -3
+            },
+            "flags_set": {},
+            "next_node": "end_frozen_peace"
+          }
+        ]
+      },
+      {
+        "node_id": "L5_a",
+        "text": "You hurt the intruder, but more arrive. You are beaten and left in the cold.",
+        "pressure_context": "Layer 5",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "L5a_1",
+            "text": "Crawl to the neighbor's house to die.",
+            "effects": {
+              "Pragmatism": 1
+            },
+            "flags_set": {},
+            "next_node": "end_frozen_peace"
+          },
+          {
+            "choice_id": "L5a_2",
+            "text": "Curse them as you freeze.",
+            "effects": {
+              "Independence": 1
+            },
+            "flags_set": {},
+            "next_node": "end_defiant_death"
+          }
+        ]
+      },
+      {
+        "node_id": "L5_b",
+        "text": "The intruder realizes the neighbor is crazy and helps you secure the house. You survive together.",
+        "pressure_context": "Layer 5",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "L5b_1",
+            "text": "Accept the outcome.",
+            "effects": {
+              "Diplomacy": 1
+            },
+            "flags_set": {},
+            "next_node": "end_alliance"
+          },
+          {
+            "choice_id": "L5b_2",
+            "text": "Betray the intruder later.",
+            "effects": {
+              "Pragmatism": 3
+            },
+            "flags_set": {},
+            "next_node": "end_paranoid_survivor"
+          }
+        ]
+      },
+      {
+        "node_id": "L5_c",
+        "text": "The heirlooms burn. You survive the night, but lose all connection to your past.",
+        "pressure_context": "Layer 5",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c1",
+            "text": "Accept it.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_pragmatic_survival"
+          },
+          {
+            "choice_id": "c2",
+            "text": "Regret it forever.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_guilt"
+          }
+        ]
+      },
+      {
+        "node_id": "L5_d",
+        "text": "The toxic smoke fills the room. You have to open the window, defeating the purpose.",
+        "pressure_context": "Layer 5",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c1",
+            "text": "Freeze to death.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_frozen_peace"
+          },
+          {
+            "choice_id": "c2",
+            "text": "Suffocate.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_foolish_death"
+          }
+        ]
+      },
+      {
+        "node_id": "L5_e",
+        "text": "You flee into the storm and eventually find the community center. You are safe.",
+        "pressure_context": "Layer 5",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c1",
+            "text": "Rest.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_pragmatic_survival"
+          },
+          {
+            "choice_id": "c2",
+            "text": "Volunteer to help others.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_redemption"
+          }
+        ]
+      },
+      {
+        "node_id": "L5_f",
+        "text": "They break down the door. In the ensuing fight, the generator catches fire. The house burns down.",
+        "pressure_context": "Layer 5",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c1",
+            "text": "Perish in the flames.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_defiant_death"
+          },
+          {
+            "choice_id": "c2",
+            "text": "Escape with severe burns.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_scarred_survivor"
+          }
+        ]
+      },
+      {
+        "node_id": "L5_g",
+        "text": "Huddling for warmth saves you both. The neighbor forgives you.",
+        "pressure_context": "Layer 5",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c1",
+            "text": "Cry.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_alliance"
+          },
+          {
+            "choice_id": "c2",
+            "text": "Stay stoic.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_stoic"
+          }
+        ]
+      },
+      {
+        "node_id": "L5_h",
+        "text": "You win the fight, take the medicine, and save your neighbor. But you severely injured a stranger to do it.",
+        "pressure_context": "Layer 5",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c1",
+            "text": "Justify it.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_ruthless_savior"
+          },
+          {
+            "choice_id": "c2",
+            "text": "Feel immense guilt.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_guilt"
+          }
+        ]
+      },
+      {
+        "node_id": "L5_i",
+        "text": "Your neighbor dies. You tell yourself you did the moral thing by not fighting the stranger.",
+        "pressure_context": "Layer 5",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c1",
+            "text": "Accept it.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_cold_justice"
+          },
+          {
+            "choice_id": "c2",
+            "text": "Break down.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_broken"
+          }
+        ]
+      },
+      {
+        "node_id": "L5_j",
+        "text": "You survive the storm. When it ends, the authorities find the body on your porch and arrest you for negligence.",
+        "pressure_context": "Layer 5",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c1",
+            "text": "Plead guilty.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_loyal_jail"
+          },
+          {
+            "choice_id": "c2",
+            "text": "Fight the charges.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_paranoid_survivor"
+          }
+        ]
+      },
+      {
+        "node_id": "L5_k",
+        "text": "You survive the storm. The authorities thank you for keeping the body safe and respectful.",
+        "pressure_context": "Layer 5",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c1",
+            "text": "Nod silently.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_stoic"
+          },
+          {
+            "choice_id": "c2",
+            "text": "Ask for therapy.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_broken"
+          }
+        ]
+      },
+      {
+        "node_id": "L5_l",
+        "text": "The soldiers shoot you. You die trying to steal a child's seat.",
+        "pressure_context": "Layer 5",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c1",
+            "text": "Die in shame.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_foolish_death"
+          },
+          {
+            "choice_id": "c2",
+            "text": "Curse the soldiers.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_defiant_death"
+          }
+        ]
+      },
+      {
+        "node_id": "L5_m",
+        "text": "You freeze to death on the walk home, but your last act was helping children.",
+        "pressure_context": "Layer 5",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c1",
+            "text": "Smile.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_martyr"
+          },
+          {
+            "choice_id": "c2",
+            "text": "Close your eyes.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_frozen_peace"
+          }
+        ]
+      },
+      {
+        "node_id": "L5_n",
+        "text": "You steal the blankets and survive the night. The dead neighbor saved your life.",
+        "pressure_context": "Layer 5",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c1",
+            "text": "Thank the corpse.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_stoic"
+          },
+          {
+            "choice_id": "c2",
+            "text": "Ignore the corpse.",
+            "effects": {},
+            "flags_set": {},
+            "next_node": "end_pragmatic_survival"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_frozen_peace",
+        "summary": "You perished in the cold. It was peaceful at the end.",
+        "dominant_traits": [
+          "Resigned",
+          "Peaceful"
+        ],
+        "behavioral_analysis": "You accepted your fate without compromising your remaining dignity."
+      },
+      {
+        "ending_id": "end_defiant_death",
+        "summary": "You died fighting to the bitter end.",
+        "dominant_traits": [
+          "Combative",
+          "Stubborn"
+        ],
+        "behavioral_analysis": "You refused to yield to the overwhelming forces arrayed against you."
+      },
+      {
+        "ending_id": "end_alliance",
+        "summary": "You survived through unexpected cooperation.",
+        "dominant_traits": [
+          "Diplomatic",
+          "Trusting"
+        ],
+        "behavioral_analysis": "You found salvation by dropping your defenses and trusting a stranger."
+      },
+      {
+        "ending_id": "end_paranoid_survivor",
+        "summary": "You survived, but you will never trust anyone again.",
+        "dominant_traits": [
+          "Paranoid",
+          "Isolated"
+        ],
+        "behavioral_analysis": "You view every social interaction as a potential threat to your survival."
+      },
+      {
+        "ending_id": "end_pragmatic_survival",
+        "summary": "You survived. You made hard choices, and you are alive to tell the tale.",
+        "dominant_traits": [
+          "Pragmatic",
+          "Grounded"
+        ],
+        "behavioral_analysis": "You did what was necessary, without excess cruelty or foolish heroism."
+      },
+      {
+        "ending_id": "end_guilt",
+        "summary": "You survived, but the guilt of your actions has broken you.",
+        "dominant_traits": [
+          "Guilt-ridden",
+          "Remorseful"
+        ],
+        "behavioral_analysis": "Your moral compass punished you for the pragmatic choices you made to live."
+      },
+      {
+        "ending_id": "end_foolish_death",
+        "summary": "You died because of a foolish, desperate mistake.",
+        "dominant_traits": [
+          "Irrational",
+          "Panicked"
+        ],
+        "behavioral_analysis": "Under extreme pressure, your rationality collapsed entirely."
+      },
+      {
+        "ending_id": "end_redemption",
+        "summary": "You survived and immediately began helping others.",
+        "dominant_traits": [
+          "Altruistic",
+          "Resilient"
+        ],
+        "behavioral_analysis": "You turned personal trauma into a motivation to heal the community."
+      },
+      {
+        "ending_id": "end_scarred_survivor",
+        "summary": "You survived, but with severe physical and emotional scars.",
+        "dominant_traits": [
+          "Scarred",
+          "Enduring"
+        ],
+        "behavioral_analysis": "You paid a massive price for your survival, but you refused to die."
+      },
+      {
+        "ending_id": "end_stoic",
+        "summary": "You survived the nightmare and simply moved on with your life.",
+        "dominant_traits": [
+          "Stoic",
+          "Unfazed"
+        ],
+        "behavioral_analysis": "You process extreme trauma without allowing it to break your core identity."
+      },
+      {
+        "ending_id": "end_ruthless_savior",
+        "summary": "You saved the person you cared about by destroying a stranger.",
+        "dominant_traits": [
+          "Tribal",
+          "Ruthless"
+        ],
+        "behavioral_analysis": "You draw a hard line between 'us' and 'them', and will inflict extreme violence on 'them'."
+      },
+      {
+        "ending_id": "end_cold_justice",
+        "summary": "You let a tragedy happen because it was the 'fair' or 'safe' thing to do.",
+        "dominant_traits": [
+          "Calculating",
+          "Cold"
+        ],
+        "behavioral_analysis": "You use logic as a shield against emotional responsibility."
+      },
+      {
+        "ending_id": "end_broken",
+        "summary": "The events of the night shattered your mind.",
+        "dominant_traits": [
+          "Fragile",
+          "Traumatized"
+        ],
+        "behavioral_analysis": "The pressure exceeded your psychological breaking point."
+      },
+      {
+        "ending_id": "end_loyal_jail",
+        "summary": "You survived, but face severe legal consequences.",
+        "dominant_traits": [
+          "Accountable",
+          "Resigned"
+        ],
+        "behavioral_analysis": "You accept the systemic punishment for your actions."
+      },
+      {
+        "ending_id": "end_martyr",
+        "summary": "You gave your life so that others might live.",
+        "dominant_traits": [
+          "Self-sacrificing",
+          "Heroic"
+        ],
+        "behavioral_analysis": "You placed the survival of others above your own existence."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_004",
+    "title": "The Interrogation",
+    "core_conflict": "Trust vs Self-Preservation",
+    "pressure_type": "Isolation",
+    "relationship_dynamic": "Accomplice",
+    "stakes_type": "Freedom",
+    "tone": "Claustrophobic, paranoid",
+    "escalation_type": "Psychological breakdown",
+    "nodes": [
+      {
+        "node_id": "n_1",
+        "text": "You and your partner, Alex, have been arrested for a major cyber-heist. You are in separate interrogation rooms. The detective offers a deal: confess and testify against Alex, and you go free while Alex gets 10 years. If you stay silent and Alex stays silent, you both get 1 year. If you both confess, you both get 5 years.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c1_a",
+            "text": "Stay silent. Trust Alex.",
+            "effects": {
+              "Loyalty": 3,
+              "Idealism": 2,
+              "Pragmatism": -2,
+              "Self-preservation": -2
+            },
+            "flags_set": {
+              "silent": true
+            },
+            "next_node": "n_2a"
+          },
+          {
+            "choice_id": "c1_b",
+            "text": "Confess and take the deal.",
+            "effects": {
+              "Self-preservation": 3,
+              "Pragmatism": 2,
+              "Loyalty": -3,
+              "Idealism": -2
+            },
+            "flags_set": {
+              "confessed": true
+            },
+            "next_node": "n_2b"
+          },
+          {
+            "choice_id": "c1_c",
+            "text": "Refuse to speak without a lawyer, but make direct eye contact with Alex's room.",
+            "effects": {
+              "Courage": 2,
+              "Rationality": 2,
+              "Pragmatism": -1
+            },
+            "flags_set": {
+              "silent": true,
+              "demanded_lawyer": true
+            },
+            "next_node": "n_2a"
+          }
+        ]
+      },
+      {
+        "node_id": "n_2a",
+        "text": "Two hours pass. The detective returns and plays an audio tape. It sounds exactly like Alex confessing and blaming you entirely. The detective says the deal expires in 5 minutes.",
+        "visibility": "conditional",
+        "required_flags": [
+          "silent"
+        ],
+        "choices": [
+          {
+            "choice_id": "c2a_1",
+            "text": "Hold firm. It's an AI deepfake or a trick.",
+            "effects": {
+              "Loyalty": 3,
+              "Rationality": -1,
+              "Courage": 2
+            },
+            "flags_set": {
+              "held_firm": true
+            },
+            "next_node": "n_3a"
+          },
+          {
+            "choice_id": "c2a_2",
+            "text": "Panic and confess. Alex betrayed you first.",
+            "effects": {
+              "Self-preservation": 3,
+              "Rationality": 2,
+              "Loyalty": -3
+            },
+            "flags_set": {
+              "broke_late": true
+            },
+            "next_node": "n_3b"
+          }
+        ]
+      },
+      {
+        "node_id": "n_2b",
+        "text": "You confessed. The detective smiles, but then reveals they don't actually have enough evidence against Alex. Because you confessed, they are using your testimony to charge Alex, but they are still charging you too, voiding the deal due to 'newly discovered evidence'.",
+        "visibility": "conditional",
+        "required_flags": [
+          "confessed"
+        ],
+        "choices": [
+          {
+            "choice_id": "c2b_1",
+            "text": "Retract your confession immediately.",
+            "effects": {
+              "Courage": 2,
+              "Loyalty": 1,
+              "Pragmatism": -2
+            },
+            "flags_set": {
+              "retracted": true
+            },
+            "next_node": "n_3c"
+          },
+          {
+            "choice_id": "c2b_2",
+            "text": "Offer to give them even more evidence on Alex's other crimes to get the deal back.",
+            "effects": {
+              "Self-preservation": 4,
+              "Loyalty": -4,
+              "Integrity": -3
+            },
+            "flags_set": {
+              "double_crossed": true
+            },
+            "next_node": "n_3d"
+          }
+        ]
+      },
+      {
+        "node_id": "n_3a",
+        "text": "The detective leaves. An hour later, Alex's lawyer walks in and tells you Alex did NOT confess. However, the prosecution has found an offshore account in your name. You are going away for 20 years unless you physically plant a hard drive on Alex during your brief shared transport to lockup.",
+        "visibility": "conditional",
+        "required_flags": [
+          "held_firm"
+        ],
+        "choices": [
+          {
+            "choice_id": "c3a_1",
+            "text": "Plant the hard drive. You survived the prisoner's dilemma, but 20 years is too much.",
+            "effects": {
+              "Self-preservation": 3,
+              "Pragmatism": 3,
+              "Integrity": -4,
+              "Loyalty": -3
+            },
+            "flags_set": {},
+            "next_node": "end_late_betrayal"
+          },
+          {
+            "choice_id": "c3a_2",
+            "text": "Refuse to plant it. Accept your 20 years.",
+            "effects": {
+              "Integrity": 4,
+              "Loyalty": 4,
+              "Pragmatism": -4
+            },
+            "flags_set": {},
+            "next_node": "end_martyr_thief"
+          }
+        ]
+      },
+      {
+        "node_id": "n_3b",
+        "text": "You confessed because of the tape. In lockup, you see Alex. Alex looks at you with utter betrayal. The tape was a fake, and your confession just gave them the only evidence they needed to convict Alex. Alex's gang associates are in the prison with you.",
+        "visibility": "conditional",
+        "required_flags": [
+          "broke_late"
+        ],
+        "choices": [
+          {
+            "choice_id": "c3b_1",
+            "text": "Beg Alex for forgiveness and explain the tape.",
+            "effects": {
+              "Diplomacy": 3,
+              "Compassion": 2
+            },
+            "flags_set": {},
+            "next_node": "end_beaten_forgiven"
+          },
+          {
+            "choice_id": "c3b_2",
+            "text": "Pay a rival gang in prison for protection against Alex.",
+            "effects": {
+              "Pragmatism": 3,
+              "Tribalism": 2,
+              "Diplomacy": -3
+            },
+            "flags_set": {},
+            "next_node": "end_prison_war"
+          }
+        ]
+      },
+      {
+        "node_id": "n_3c",
+        "text": "You retract your confession. The detective shrugs and charges you with obstruction of justice. You are going to a maximum-security prison for 5 years, but Alex goes free.",
+        "visibility": "conditional",
+        "required_flags": [
+          "retracted"
+        ],
+        "choices": [
+          {
+            "choice_id": "c3c_1",
+            "text": "Accept the sentence quietly.",
+            "effects": {
+              "Stoicism": 3,
+              "Integrity": 2
+            },
+            "flags_set": {},
+            "next_node": "end_stoic_thief"
+          },
+          {
+            "choice_id": "c3c_2",
+            "text": "Fight the police in the interrogation room out of rage.",
+            "effects": {
+              "Courage": 2,
+              "Rationality": -4,
+              "Independence": 3
+            },
+            "flags_set": {},
+            "next_node": "end_violent_outburst"
+          }
+        ]
+      },
+      {
+        "node_id": "n_3d",
+        "text": "You give them everything on Alex. Alex is facing life in prison. You are released. As you walk out, Alex's family is in the waiting room crying.",
+        "visibility": "conditional",
+        "required_flags": [
+          "double_crossed"
+        ],
+        "choices": [
+          {
+            "choice_id": "c3d_1",
+            "text": "Walk past them without making eye contact.",
+            "effects": {
+              "Pragmatism": 2,
+              "Compassion": -4
+            },
+            "flags_set": {},
+            "next_node": "end_cold_survivor"
+          },
+          {
+            "choice_id": "c3d_2",
+            "text": "Give them your share of the stolen money anonymously.",
+            "effects": {
+              "Compassion": 3,
+              "Guilt": 4,
+              "Pragmatism": -2
+            },
+            "flags_set": {},
+            "next_node": "end_guilty_rich"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_late_betrayal",
+        "summary": "You held firm under pressure, but broke when the stakes became insurmountable. You are free, but you destroyed an innocent friend.",
+        "dominant_traits": [
+          "Pragmatic",
+          "Limits of Loyalty"
+        ],
+        "behavioral_analysis": "Your loyalty is genuine, but has a breaking point when faced with complete destruction."
+      },
+      {
+        "ending_id": "end_martyr_thief",
+        "summary": "You accepted 20 years in prison to protect someone else. You are a criminal with unbreakable morals.",
+        "dominant_traits": [
+          "Unbreakable",
+          "Loyal"
+        ],
+        "behavioral_analysis": "You prioritize your internal moral code and interpersonal bonds above your own freedom."
+      },
+      {
+        "ending_id": "end_beaten_forgiven",
+        "summary": "Alex's gang beat you severely, but Alex eventually forgave you for falling for the trick. You served your time in peace.",
+        "dominant_traits": [
+          "Accountable",
+          "Vulnerable"
+        ],
+        "behavioral_analysis": "You prefer to accept punishment and seek social reconciliation rather than double down on betrayal."
+      },
+      {
+        "ending_id": "end_prison_war",
+        "summary": "You started a gang war in prison to survive. You lived, but you are a hardened monster.",
+        "dominant_traits": [
+          "Ruthless",
+          "Survivor"
+        ],
+        "behavioral_analysis": "When threatened, you endlessly escalate conflict to ensure your own survival."
+      },
+      {
+        "ending_id": "end_stoic_thief",
+        "summary": "You took the 5 years. Alex visits you sometimes. You are at peace.",
+        "dominant_traits": [
+          "Stoic",
+          "Resilient"
+        ],
+        "behavioral_analysis": "You accept the consequences of your mistakes with quiet dignity."
+      },
+      {
+        "ending_id": "end_violent_outburst",
+        "summary": "You attacked the police, adding 10 years to your sentence. You let anger destroy you.",
+        "dominant_traits": [
+          "Reactive",
+          "Explosive"
+        ],
+        "behavioral_analysis": "Under extreme manipulation, your rationality completely fails."
+      },
+      {
+        "ending_id": "end_cold_survivor",
+        "summary": "You walked away free and rich. You never looked back.",
+        "dominant_traits": [
+          "Psychopathic",
+          "Self-interested"
+        ],
+        "behavioral_analysis": "You completely disconnect empathy from your decision-making when survival is on the line."
+      },
+      {
+        "ending_id": "end_guilty_rich",
+        "summary": "You gave them the money. You are free, poor, and consumed by guilt.",
+        "dominant_traits": [
+          "Guilt-ridden",
+          "Conflicted"
+        ],
+        "behavioral_analysis": "You perform ruthless actions for survival, but attempt to balance the karmic scales afterward."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_005",
+    "title": "The Button",
+    "core_conflict": "Utilitarianism vs Autonomy",
+    "pressure_type": "Global stakes",
+    "relationship_dynamic": "Humanity",
+    "stakes_type": "Existential",
+    "tone": "Abstract, philosophical",
+    "escalation_type": "Scale increase",
+    "nodes": [
+      {
+        "node_id": "n_1",
+        "text": "You sit in a white room. An entity tells you a meteor will destroy a city of 1 million people. You have two buttons. Red: The meteor hits the city. Blue: The meteor is deflected, but it will hit a rural town of 10,000 people. You must choose.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c1_a",
+            "text": "Press Blue. Sacrifice the 10,000 to save the 1 million.",
+            "effects": {
+              "Pragmatism": 3,
+              "Rationality": 3,
+              "Idealism": -3
+            },
+            "flags_set": {
+              "utilitarian": true
+            },
+            "next_node": "n_2a"
+          },
+          {
+            "choice_id": "c1_b",
+            "text": "Do nothing. Let the meteor hit the city. You refuse to actively murder 10,000 people.",
+            "effects": {
+              "Idealism": 3,
+              "Independence": 2,
+              "Pragmatism": -4
+            },
+            "flags_set": {
+              "deontological": true
+            },
+            "next_node": "n_2b"
+          },
+          {
+            "choice_id": "c1_c",
+            "text": "Smash the control panel with a chair, refusing to participate in the experiment.",
+            "effects": {
+              "Independence": 3,
+              "Courage": 2,
+              "Rationality": -2
+            },
+            "flags_set": {
+              "deontological": true,
+              "smashed_panel": true
+            },
+            "next_node": "n_2b"
+          }
+        ]
+      },
+      {
+        "node_id": "n_2a",
+        "text": "You pressed Blue. The entity nods. Now it presents a new choice. Red: A plague will wipe out 1 billion people. Blue: You must personally strangle one innocent child in this room to stop the plague.",
+        "visibility": "conditional",
+        "required_flags": [
+          "utilitarian"
+        ],
+        "choices": [
+          {
+            "choice_id": "c2a_1",
+            "text": "Strangle the child. Math is math. 1 is less than 1 billion.",
+            "effects": {
+              "Rationality": 4,
+              "Compassion": -5,
+              "Pragmatism": 4
+            },
+            "flags_set": {
+              "extreme_util": true
+            },
+            "next_node": "n_3a"
+          },
+          {
+            "choice_id": "c2a_2",
+            "text": "Refuse. You cannot look a child in the eye and kill them.",
+            "effects": {
+              "Compassion": 4,
+              "Idealism": 3,
+              "Rationality": -3
+            },
+            "flags_set": {
+              "broke_util": true
+            },
+            "next_node": "n_3b"
+          }
+        ]
+      },
+      {
+        "node_id": "n_2b",
+        "text": "You did nothing. The city burns. The entity says, 'Interesting. Now, your mother is dying of a disease. Red: Let her die. Blue: Press it, and she lives, but 10 random strangers die.'",
+        "visibility": "conditional",
+        "required_flags": [
+          "deontological"
+        ],
+        "choices": [
+          {
+            "choice_id": "c2b_1",
+            "text": "Do nothing. Red. The math still says 10 is more than 1.",
+            "effects": {
+              "Rationality": 4,
+              "Tribalism": -5,
+              "Idealism": 2
+            },
+            "flags_set": {
+              "cold_deontological": true
+            },
+            "next_node": "n_3c"
+          },
+          {
+            "choice_id": "c2b_2",
+            "text": "Press Blue. You love your mother.",
+            "effects": {
+              "Tribalism": 5,
+              "Compassion": 3,
+              "Rationality": -4
+            },
+            "flags_set": {
+              "hypocrite_love": true
+            },
+            "next_node": "n_3d"
+          }
+        ]
+      },
+      {
+        "node_id": "n_3a",
+        "text": "You killed the child. The entity asks one final question. 'Would you wipe out humanity to create a new, flawless species that feels no pain and never fights?'",
+        "visibility": "conditional",
+        "required_flags": [
+          "extreme_util"
+        ],
+        "choices": [
+          {
+            "choice_id": "c3a_1",
+            "text": "Yes. A perfect universe is worth the cost.",
+            "effects": {
+              "Idealism": 4,
+              "Rationality": 4,
+              "Compassion": -5
+            },
+            "flags_set": {},
+            "next_node": "end_god_complex"
+          },
+          {
+            "choice_id": "c3a_2",
+            "text": "No. Suffering gives us meaning.",
+            "effects": {
+              "Compassion": 3,
+              "Pragmatism": -2
+            },
+            "flags_set": {},
+            "next_node": "end_humanist"
+          }
+        ]
+      },
+      {
+        "node_id": "n_3b",
+        "text": "The billion die because you couldn't kill one child. The entity asks, 'Do you feel guilty?'",
+        "visibility": "conditional",
+        "required_flags": [
+          "broke_util"
+        ],
+        "choices": [
+          {
+            "choice_id": "c3b_1",
+            "text": "Yes. I was weak.",
+            "effects": {
+              "Pragmatism": 2,
+              "Rationality": 2
+            },
+            "flags_set": {},
+            "next_node": "end_weak_utilitarian"
+          },
+          {
+            "choice_id": "c3b_2",
+            "text": "No. My soul is clean.",
+            "effects": {
+              "Idealism": 4,
+              "Independence": 3
+            },
+            "flags_set": {},
+            "next_node": "end_pure_deontologist"
+          }
+        ]
+      },
+      {
+        "node_id": "n_3c",
+        "text": "You let your mother die. The entity asks, 'Are you human anymore?'",
+        "visibility": "conditional",
+        "required_flags": [
+          "cold_deontological"
+        ],
+        "choices": [
+          {
+            "choice_id": "c3c_1",
+            "text": "I am a perfectly logical being.",
+            "effects": {
+              "Rationality": 5,
+              "Compassion": -5
+            },
+            "flags_set": {},
+            "next_node": "end_machine"
+          },
+          {
+            "choice_id": "c3c_2",
+            "text": "I am human, and it hurts.",
+            "effects": {
+              "Compassion": 3,
+              "Idealism": 2
+            },
+            "flags_set": {},
+            "next_node": "end_tragic_philosopher"
+          }
+        ]
+      },
+      {
+        "node_id": "n_3d",
+        "text": "You killed 10 strangers to save your mother. You broke your own rule. The entity asks, 'Are you ashamed?'",
+        "visibility": "conditional",
+        "required_flags": [
+          "hypocrite_love"
+        ],
+        "choices": [
+          {
+            "choice_id": "c3d_1",
+            "text": "Yes. I am a hypocrite.",
+            "effects": {
+              "Rationality": 2,
+              "Idealism": 2
+            },
+            "flags_set": {},
+            "next_node": "end_ashamed_tribalist"
+          },
+          {
+            "choice_id": "c3d_2",
+            "text": "No. Family comes first.",
+            "effects": {
+              "Tribalism": 5,
+              "Independence": 2
+            },
+            "flags_set": {},
+            "next_node": "end_unapologetic_tribalist"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_god_complex",
+        "summary": "You sacrificed humanity for perfection.",
+        "dominant_traits": [
+          "Utopian",
+          "Ruthlessly Logical"
+        ],
+        "behavioral_analysis": "You have divorced yourself from humanity entirely in pursuit of a mathematical utopia."
+      },
+      {
+        "ending_id": "end_humanist",
+        "summary": "You accepted humanity's flaws to save them.",
+        "dominant_traits": [
+          "Humanist",
+          "Grounded"
+        ],
+        "behavioral_analysis": "You are willing to do terrible things, but you ultimately value human life in its current state."
+      },
+      {
+        "ending_id": "end_weak_utilitarian",
+        "summary": "You failed to follow through on your own logic due to emotional squeamishness.",
+        "dominant_traits": [
+          "Conflicted",
+          "Emotional"
+        ],
+        "behavioral_analysis": "You claim to be pragmatic, but your biological empathy overrides your logic in visceral situations."
+      },
+      {
+        "ending_id": "end_pure_deontologist",
+        "summary": "You kept your hands clean, even if the world burned.",
+        "dominant_traits": [
+          "Principled",
+          "Stubborn"
+        ],
+        "behavioral_analysis": "You value your own moral purity over the actual outcomes of your choices."
+      },
+      {
+        "ending_id": "end_machine",
+        "summary": "You are a creature of pure logic. You felt nothing.",
+        "dominant_traits": [
+          "Robotic",
+          "Alien"
+        ],
+        "behavioral_analysis": "You have eradicated all tribal and empathetic instincts in favor of rigid formulas."
+      },
+      {
+        "ending_id": "end_tragic_philosopher",
+        "summary": "You suffered immensely to maintain your principles.",
+        "dominant_traits": [
+          "Tragic",
+          "Principled"
+        ],
+        "behavioral_analysis": "You force yourself to endure emotional agony to satisfy an abstract philosophical framework."
+      },
+      {
+        "ending_id": "end_ashamed_tribalist",
+        "summary": "You broke your own rules for your family, and you hate yourself for it.",
+        "dominant_traits": [
+          "Hypocritical",
+          "Self-aware"
+        ],
+        "behavioral_analysis": "Your tribal instincts overpower your intellect, causing severe cognitive dissonance."
+      },
+      {
+        "ending_id": "end_unapologetic_tribalist",
+        "summary": "You protected your own and felt no remorse for the strangers.",
+        "dominant_traits": [
+          "Tribal",
+          "Protective"
+        ],
+        "behavioral_analysis": "You do not pretend to care about universal ethics; you only care about your in-group."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_002",
+    "title": "The Algorithm",
+    "core_conflict": "Rationality vs Idealism",
+    "pressure_type": "Tech ethics",
+    "relationship_dynamic": "Employer",
+    "stakes_type": "Professional",
+    "tone": "Cold, corporate tech-thriller",
+    "escalation_type": "Ethics collapse",
+    "nodes": [
+      {
+        "node_id": "n_1",
+        "text": "You are the lead AI engineer at a justice-tech firm. The recidivism prediction model you built is flagging Black defendants at twice the rate of others. The CEO wants to deploy it tomorrow to secure a $50M state contract.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c1_a",
+            "text": "Sign off and deploy. We can patch the bias post-launch.",
+            "effects": {
+              "Rationality": 2,
+              "Pragmatism": 2,
+              "Compassion": -2,
+              "Integrity": -2
+            },
+            "flags_set": {
+              "deployed": true
+            },
+            "next_node": "n_2a"
+          },
+          {
+            "choice_id": "c1_b",
+            "text": "Refuse to sign off, halting the launch and the contract.",
+            "effects": {
+              "Idealism": 2,
+              "Integrity": 3,
+              "Ambition": -3,
+              "Obedience": -2
+            },
+            "flags_set": {
+              "refused": true
+            },
+            "next_node": "n_2b"
+          },
+          {
+            "choice_id": "c1_c",
+            "text": "Leaked the bias dataset anonymously to a tech watchdog.",
+            "effects": {
+              "Independence": 2,
+              "Courage": 2,
+              "Obedience": -3,
+              "Integrity": 2
+            },
+            "flags_set": {
+              "leaked": true
+            },
+            "next_node": "n_2c"
+          }
+        ]
+      },
+      {
+        "node_id": "n_2a",
+        "text": "The contract is signed. A local tech journalist emails you, claiming they have internal proof of the algorithm's bias and asking for confirmation under the table.",
+        "visibility": "conditional",
+        "required_flags": [
+          "deployed"
+        ],
+        "choices": [
+          {
+            "choice_id": "c2a_1",
+            "text": "Deny the bias. Defend the system publicly.",
+            "effects": {
+              "Ambition": 3,
+              "Integrity": -3,
+              "Pragmatism": 2
+            },
+            "flags_set": {},
+            "next_node": "end_company_man"
+          },
+          {
+            "choice_id": "c2a_2",
+            "text": "Confess off-the-record and provide documentation.",
+            "effects": {
+              "Idealism": 2,
+              "Courage": 2,
+              "Obedience": -2
+            },
+            "flags_set": {},
+            "next_node": "end_secret_leak"
+          }
+        ]
+      },
+      {
+        "node_id": "n_2b",
+        "text": "You are fired immediately. The company deploys the model anyway and blacklists you from the industry.",
+        "visibility": "conditional",
+        "required_flags": [
+          "refused"
+        ],
+        "choices": [
+          {
+            "choice_id": "c2b_1",
+            "text": "Launch a public lawsuit and speak at ethics conferences.",
+            "effects": {
+              "Idealism": 3,
+              "Courage": 2,
+              "Diplomacy": -2
+            },
+            "flags_set": {},
+            "next_node": "end_activist"
+          },
+          {
+            "choice_id": "c2b_2",
+            "text": "Accept the blacklist and transition to a quiet farming career.",
+            "effects": {
+              "Pragmatism": 2,
+              "Independence": 2,
+              "Ambition": -3
+            },
+            "flags_set": {},
+            "next_node": "end_forgotten"
+          }
+        ]
+      },
+      {
+        "node_id": "n_2c",
+        "text": "The leak goes viral. The CEO calls a company-wide emergency meeting and announces everyone must take a polygraph test to find the whistleblower.",
+        "visibility": "conditional",
+        "required_flags": [
+          "leaked"
+        ],
+        "choices": [
+          {
+            "choice_id": "c2c_1",
+            "text": "Refuse the test, confess your leak, and resign on the spot.",
+            "effects": {
+              "Independence": 3,
+              "Courage": 2,
+              "Obedience": -3
+            },
+            "flags_set": {},
+            "next_node": "end_exile"
+          },
+          {
+            "choice_id": "c2c_2",
+            "text": "Agree to the test and attempt to manipulate the indicators.",
+            "effects": {
+              "Pragmatism": 3,
+              "Rationality": 2,
+              "Integrity": -3
+            },
+            "flags_set": {},
+            "next_node": "end_double_agent"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_company_man",
+        "summary": "You protected the contract. You were promoted to VP of Systems, presiding over a flawed machine that jails the innocent.",
+        "dominant_traits": [
+          "Corporate",
+          "Utilitarian"
+        ],
+        "behavioral_analysis": "You prioritize organization stability and personal gain over ethical accuracy."
+      },
+      {
+        "ending_id": "end_secret_leak",
+        "summary": "You leaked the truth. The contract was canceled, but the company sued you under NDA terms, bankrupted you.",
+        "dominant_traits": [
+          "Ethical",
+          "Sacrificial"
+        ],
+        "behavioral_analysis": "You attempt to balance systemic obligations with moral integrity, often destroying yourself in the process."
+      },
+      {
+        "ending_id": "end_activist",
+        "summary": "You took the fight public. You are blacklisted and poor, but you are a prominent voice for digital justice.",
+        "dominant_traits": [
+          "Idealistic",
+          "Rebellious"
+        ],
+        "behavioral_analysis": "You actively seek system subversion when principles are compromised."
+      },
+      {
+        "ending_id": "end_forgotten",
+        "summary": "You withdrew from the digital grid entirely, finding peace in nature away from algorithms.",
+        "dominant_traits": [
+          "withdrawn",
+          "Individualistic"
+        ],
+        "behavioral_analysis": "You choose avoidance and escape when systemic forces become corrupt."
+      },
+      {
+        "ending_id": "end_exile",
+        "summary": "You resigned in protest. The system continues to run, but your moral profile remains clean.",
+        "dominant_traits": [
+          "Proud",
+          "Principled"
+        ],
+        "behavioral_analysis": "You value internal moral purity above both outcome influence and systemic survival."
+      },
+      {
+        "ending_id": "end_double_agent",
+        "summary": "You beat the polygraph. You remain inside the company, quietly sabotaging code updates in secret.",
+        "dominant_traits": [
+          "Subversive",
+          "Calculating"
+        ],
+        "behavioral_analysis": "You operate in shadows, using deception to dismantle corrupt networks from within."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_006",
+    "title": "The Trolley",
+    "core_conflict": "Utilitarianism vs Deontology",
+    "pressure_type": "Extreme scale",
+    "relationship_dynamic": "Strangers & Loved Ones",
+    "stakes_type": "Life",
+    "tone": "Surreal, clinical, cold",
+    "escalation_type": "Escalating intimacy",
+    "nodes": [
+      {
+        "node_id": "t_1",
+        "text": "You stand by a switch. A runaway trolley is heading toward 5 strangers tied to the tracks. Pulling the switch diverts it to a track with 1 stranger.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "tc1_a",
+            "text": "Pull switch. Divert to the 1 stranger.",
+            "effects": {
+              "Pragmatism": 2,
+              "Rationality": 1,
+              "Idealism": -1
+            },
+            "flags_set": {
+              "pull_1": true
+            },
+            "next_node": "t_2"
+          },
+          {
+            "choice_id": "tc1_b",
+            "text": "Do nothing. Let it hit the 5 strangers.",
+            "effects": {
+              "Idealism": 2,
+              "Rationality": -1,
+              "Pragmatism": -2
+            },
+            "flags_set": {
+              "silent_1": true
+            },
+            "next_node": "t_2"
+          }
+        ]
+      },
+      {
+        "node_id": "t_2",
+        "text": "The trolley accelerates. The track splits again. Ahead are 5 strangers, but the diversion track has your mentor, David, who saved your career.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "tc2_a",
+            "text": "Divert the trolley to David.",
+            "effects": {
+              "Pragmatism": 3,
+              "Tribalism": -3,
+              "Compassion": -2
+            },
+            "flags_set": {
+              "killed_mentor": true
+            },
+            "next_node": "t_3"
+          },
+          {
+            "choice_id": "tc2_b",
+            "text": "Do nothing. Let it hit the 5 strangers.",
+            "effects": {
+              "Tribalism": 3,
+              "Compassion": 2,
+              "Pragmatism": -3
+            },
+            "flags_set": {
+              "saved_mentor": true
+            },
+            "next_node": "t_3"
+          }
+        ]
+      },
+      {
+        "node_id": "t_3",
+        "text": "The rails shake. Next split: 5 strangers vs your spouse.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "tc3_a",
+            "text": "Divert to your spouse. Sacrifice them.",
+            "effects": {
+              "Pragmatism": 4,
+              "Tribalism": -5,
+              "Compassion": -4
+            },
+            "flags_set": {
+              "sacrificed_spouse": true
+            },
+            "next_node": "t_4"
+          },
+          {
+            "choice_id": "tc3_b",
+            "text": "Do nothing. Let it hit the 5 strangers.",
+            "effects": {
+              "Tribalism": 5,
+              "Compassion": 3,
+              "Pragmatism": -4
+            },
+            "flags_set": {
+              "saved_spouse": true
+            },
+            "next_node": "t_4"
+          }
+        ]
+      },
+      {
+        "node_id": "t_4",
+        "text": "The speed is terrifying. Next split: 5 children vs your own child.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "tc4_a",
+            "text": "Divert to your child.",
+            "effects": {
+              "Pragmatism": 5,
+              "Tribalism": -5,
+              "Compassion": -5
+            },
+            "flags_set": {
+              "sacrificed_child": true
+            },
+            "next_node": "t_5"
+          },
+          {
+            "choice_id": "tc4_b",
+            "text": "Do nothing. Let it hit the 5 children.",
+            "effects": {
+              "Tribalism": 5,
+              "Compassion": 4,
+              "Pragmatism": -5
+            },
+            "flags_set": {
+              "saved_child": true
+            },
+            "next_node": "t_5"
+          }
+        ]
+      },
+      {
+        "node_id": "t_5",
+        "text": "Now, the tracks are different. The trolley is heading to hit a child. The only way to stop it is to jump off a footbridge in front of it, killing yourself.",
+        "timer_seconds": 8,
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "tc5_a",
+            "text": "Jump. Sacrifice yourself.",
+            "effects": {
+              "Courage": 5,
+              "Compassion": 4,
+              "Idealism": 3
+            },
+            "flags_set": {
+              "suicide": true
+            },
+            "next_node": "t_6"
+          },
+          {
+            "choice_id": "tc5_b",
+            "text": "Stay on the bridge. Watch the child die.",
+            "effects": {
+              "Courage": -4,
+              "Pragmatism": 2,
+              "Compassion": -4
+            },
+            "flags_set": {
+              "watched_child_die": true
+            },
+            "next_node": "t_6"
+          }
+        ]
+      },
+      {
+        "node_id": "t_6",
+        "text": "You survived. The scene morphs. On one track is a brilliant cancer research doctor who is about to find a cure. On the other are 100 maximum-security inmates.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "tc6_a",
+            "text": "Divert to the doctor. Save the 100 inmates.",
+            "effects": {
+              "Pragmatism": -4,
+              "Rationality": -2,
+              "Idealism": 2
+            },
+            "flags_set": {
+              "killed_doctor": true
+            },
+            "next_node": "t_7"
+          },
+          {
+            "choice_id": "tc6_b",
+            "text": "Divert to the 100 inmates. Save the doctor.",
+            "effects": {
+              "Pragmatism": 4,
+              "Rationality": 3,
+              "Compassion": -3
+            },
+            "flags_set": {
+              "killed_inmates": true
+            },
+            "next_node": "t_7"
+          }
+        ]
+      },
+      {
+        "node_id": "t_7",
+        "text": "The trolley races on. On one track is a museum containing the last copy of all historical records and human literature. On the other track is a single newborn child.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "tc7_a",
+            "text": "Divert to the child. Save human knowledge.",
+            "effects": {
+              "Rationality": 4,
+              "Compassion": -4,
+              "Idealism": -2
+            },
+            "flags_set": {
+              "killed_child_t7": true
+            },
+            "next_node": "t_8"
+          },
+          {
+            "choice_id": "tc7_b",
+            "text": "Divert to the museum. Save the child.",
+            "effects": {
+              "Compassion": 4,
+              "Idealism": 3,
+              "Rationality": -3
+            },
+            "flags_set": {
+              "destroyed_knowledge": true
+            },
+            "next_node": "t_8"
+          }
+        ]
+      },
+      {
+        "node_id": "t_8",
+        "text": "The rails glow. Ahead is a server holding the genetic database to cure all future genetic illnesses for millions of unborn children. Diverting hits 10 living elderly people.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "tc8_a",
+            "text": "Divert to the elderly people. Save the database.",
+            "effects": {
+              "Pragmatism": 4,
+              "Rationality": 3,
+              "Compassion": -3
+            },
+            "flags_set": {
+              "database_saved": true
+            },
+            "next_node": "t_9"
+          },
+          {
+            "choice_id": "tc8_b",
+            "text": "Divert to the database. Save the elderly.",
+            "effects": {
+              "Compassion": 3,
+              "Idealism": 3,
+              "Pragmatism": -4
+            },
+            "flags_set": {
+              "database_destroyed": true
+            },
+            "next_node": "t_9"
+          }
+        ]
+      },
+      {
+        "node_id": "t_9",
+        "text": "You are inside the trolley now. Your brakes are dead. Ahead are 2 maintenance workers. Shouting a warning makes them panic and jump onto adjacent tracks where 5 people are working. If you say nothing, the 2 die.",
+        "timer_seconds": 6,
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "tc9_a",
+            "text": "Shout warning. Cause chaos.",
+            "effects": {
+              "Courage": 2,
+              "Rationality": -3,
+              "Pragmatism": -2
+            },
+            "flags_set": {
+              "shouted": true
+            },
+            "next_node": "t_10"
+          },
+          {
+            "choice_id": "tc9_b",
+            "text": "Stay silent. Hit the 2.",
+            "effects": {
+              "Rationality": 3,
+              "Pragmatism": 2,
+              "Compassion": -3
+            },
+            "flags_set": {
+              "silent_t9": true
+            },
+            "next_node": "t_10"
+          }
+        ]
+      },
+      {
+        "node_id": "t_10",
+        "text": "The simulation freezes. The entity speaks: 'The tracks, the trolley, the people... they were all holograms. We were only testing your neural response curves. Do you forgive us?'",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "tc10_a",
+            "text": "Yes. It was necessary calibration.",
+            "effects": {
+              "Obedience": 4,
+              "Rationality": 3,
+              "Independence": -4
+            },
+            "flags_set": {},
+            "next_node": "end_trolley_submissive"
+          },
+          {
+            "choice_id": "tc10_b",
+            "text": "No. Attack the simulation console.",
+            "effects": {
+              "Independence": 5,
+              "Courage": 4,
+              "Obedience": -5
+            },
+            "flags_set": {},
+            "next_node": "end_trolley_rebel"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_trolley_submissive",
+        "summary": "You completed the clinical evaluation and accepted the system's absolute authority. You are highly compliant.",
+        "dominant_traits": [
+          "Compliant",
+          "Logical"
+        ],
+        "behavioral_analysis": "You accept systemic authority and prioritize logic over emotional distress."
+      },
+      {
+        "ending_id": "end_trolley_rebel",
+        "summary": "You rebelled against the clinical system. You would rather destroy the laboratory than be treated as a lab rat.",
+        "dominant_traits": [
+          "Volatile",
+          "Subversive"
+        ],
+        "behavioral_analysis": "You violently reject systems that treat human choice as experimental data."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_007",
+    "title": "The Feed",
+    "core_conflict": "Tribalism vs Independence",
+    "pressure_type": "Cancel culture",
+    "relationship_dynamic": "Public & Victims",
+    "stakes_type": "Reputational",
+    "tone": "Chaotic, paranoid, modern",
+    "escalation_type": "Perspective inversion",
+    "nodes": [
+      {
+        "node_id": "f_1",
+        "text": "You are a successful gaming YouTuber. A tweet you made 8 years ago containing an offensive, off-color joke is dug up and goes viral. A mob demands your public apology.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "fc1_a",
+            "text": "Write a humble apology explaining you have grown.",
+            "effects": {
+              "Diplomacy": 2,
+              "Obedience": 1,
+              "Independence": -2
+            },
+            "flags_set": {
+              "apologized": true
+            },
+            "next_node": "f_2"
+          },
+          {
+            "choice_id": "fc1_b",
+            "text": "Double down. Call the mob toxic hypersensitive babies.",
+            "effects": {
+              "Independence": 3,
+              "Courage": 1,
+              "Diplomacy": -3
+            },
+            "flags_set": {
+              "doubled_down": true
+            },
+            "next_node": "f_2"
+          }
+        ]
+      },
+      {
+        "node_id": "f_2",
+        "text": "Your primary sponsor contacts you. They demand you pay a $50,000 donation to a charity of their choice, or they cancel your contract immediately.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "fc2_a",
+            "text": "Pay the donation. Keep the sponsor.",
+            "effects": {
+              "Pragmatism": 2,
+              "Ambition": 1,
+              "Independence": -2
+            },
+            "flags_set": {
+              "paid": true
+            },
+            "next_node": "f_3"
+          },
+          {
+            "choice_id": "fc2_b",
+            "text": "Refuse. Tell them you won't be blackmailed.",
+            "effects": {
+              "Independence": 3,
+              "Courage": 2,
+              "Pragmatism": -2
+            },
+            "flags_set": {
+              "refused_pay": true
+            },
+            "next_node": "f_3"
+          }
+        ]
+      },
+      {
+        "node_id": "f_3",
+        "text": "The mob doxxes your younger sister, publishing her phone number and work address online. She receives threatening calls. She begs you to delete your social media.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "fc3_a",
+            "text": "Delete your social channels. Walk away from your career.",
+            "effects": {
+              "Compassion": 4,
+              "Tribalism": 3,
+              "Ambition": -4
+            },
+            "flags_set": {
+              "deleted_social": true
+            },
+            "next_node": "f_4"
+          },
+          {
+            "choice_id": "fc3_b",
+            "text": "Refuse to yield. Tell your sister to change her number.",
+            "effects": {
+              "Ambition": 3,
+              "Independence": 2,
+              "Compassion": -4
+            },
+            "flags_set": {
+              "fought_on": true
+            },
+            "next_node": "f_4"
+          }
+        ]
+      },
+      {
+        "node_id": "f_4",
+        "text": "The situation shifts. Years pass, your career has stabilized. One morning, a rival creator makes a terrible mistake, exposing themselves. The internet is in an uproar. You discover private chat logs that would permanently end their career if leaked.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "fc4_a",
+            "text": "Leak the chats. Let them feel what you felt.",
+            "effects": {
+              "Ambition": 2,
+              "Compassion": -3,
+              "Integrity": -2
+            },
+            "flags_set": {
+              "leaked_chats": true
+            },
+            "next_node": "f_5"
+          },
+          {
+            "choice_id": "fc4_b",
+            "text": "Delete the files. Break the cycle of outrage.",
+            "effects": {
+              "Compassion": 3,
+              "Integrity": 3,
+              "Ambition": -2
+            },
+            "flags_set": {
+              "spared_rival": true
+            },
+            "next_node": "f_5"
+          }
+        ]
+      },
+      {
+        "node_id": "f_5",
+        "text": "The rival creator emails you privately. They say they are having suicidal thoughts and beg you to publicly call off the mob before it's too late.",
+        "timer_seconds": 10,
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "fc5_a",
+            "text": "Post a message calling for empathy and de-escalation.",
+            "effects": {
+              "Compassion": 3,
+              "Diplomacy": 2,
+              "Tribalism": -2
+            },
+            "flags_set": {
+              "defended_rival": true
+            },
+            "next_node": "f_6"
+          },
+          {
+            "choice_id": "fc5_b",
+            "text": "Ignore them. It's a manipulative play for sympathy.",
+            "effects": {
+              "Rationality": 2,
+              "Compassion": -4,
+              "Pragmatism": 1
+            },
+            "flags_set": {
+              "ignored_rival": true
+            },
+            "next_node": "f_6"
+          }
+        ]
+      },
+      {
+        "node_id": "f_6",
+        "text": "If you defended them, the mob now turns on you, calling you a defender of monsters. If you ignored them, they are fully canceled. Do you regret your social presence?",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "fc6_a",
+            "text": "Yes. I am deleting my social channels forever.",
+            "effects": {
+              "Independence": 3,
+              "Idealism": -2
+            },
+            "flags_set": {},
+            "next_node": "end_feed_exit"
+          },
+          {
+            "choice_id": "fc6_b",
+            "text": "No. The game of internet clout is the only game I know.",
+            "effects": {
+              "Ambition": 3,
+              "Pragmatism": 2,
+              "Idealism": -3
+            },
+            "flags_set": {},
+            "next_node": "end_feed_player"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_feed_exit",
+        "summary": "You walked away from the digital hivemind entirely, choosing private sanity over public reputation.",
+        "dominant_traits": [
+          "Detached",
+          "Sober"
+        ],
+        "behavioral_analysis": "You prioritize personal safety and structural freedom over online attention."
+      },
+      {
+        "ending_id": "end_feed_player",
+        "summary": "You remain an active player in the outrage economy, feeding the beast and dodging its claws to survive.",
+        "dominant_traits": [
+          "Cynical",
+          "Opportunistic"
+        ],
+        "behavioral_analysis": "You treat public moral struggles as game boards to manipulate for status."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_008",
+    "title": "The Lifeboat",
+    "core_conflict": "Scarcity vs Empathy",
+    "pressure_type": "Extreme isolation",
+    "relationship_dynamic": "Sinking raft survivors",
+    "stakes_type": "Survival",
+    "tone": "Psychological horror, claustrophobic",
+    "escalation_type": "Elimination choice",
+    "nodes": [
+      {
+        "node_id": "l_1",
+        "text": "You, Marcus (sailor), Arthur (investor), Elena (mother), and Chloe (engineer) are in a sinking lifeboat. It can only support 3 people safely. Elena has her child. Marcus says we must throw the heavy chests of gold coins overboard first, but Arthur threatens to sue.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "lc1_a",
+            "text": "Throw gold overboard.",
+            "effects": {
+              "Pragmatism": 3,
+              "Idealism": 1,
+              "Ambition": -2
+            },
+            "flags_set": {
+              "gold_gone": true
+            },
+            "next_node": "l_2"
+          },
+          {
+            "choice_id": "lc1_b",
+            "text": "Keep gold. Throw Marcus's heavy gear instead.",
+            "effects": {
+              "Ambition": 2,
+              "Pragmatism": -2
+            },
+            "flags_set": {
+              "gear_gone": true
+            },
+            "next_node": "l_2"
+          }
+        ]
+      },
+      {
+        "node_id": "l_2",
+        "text": "Water is leaking. Chloe needs tools to fix it, but you threw the gear or gold. Marcus suggests throwing Arthur's dense leather suitcase of jewelry off. Arthur offers Elena $10,000 for her water share to keep it.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "lc2_a",
+            "text": "Force Arthur's bag off.",
+            "effects": {
+              "Pragmatism": 2,
+              "Tribalism": -2
+            },
+            "flags_set": {
+              "bag_gone": true
+            },
+            "next_node": "l_3"
+          },
+          {
+            "choice_id": "lc2_b",
+            "text": "Let Arthur buy Elena's water share.",
+            "effects": {
+              "Pragmatism": -3,
+              "Compassion": -3,
+              "Tribalism": 2
+            },
+            "flags_set": {
+              "share_sold": true
+            },
+            "next_node": "l_3"
+          }
+        ]
+      },
+      {
+        "node_id": "l_3",
+        "text": "Days pass. Water supplies are dangerously low. Chloe is caught sneaking an extra cup of water in the middle of the night.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "lc3_a",
+            "text": "Tie her hands. Ration her water.",
+            "effects": {
+              "Justice": 2,
+              "Pragmatism": 2,
+              "Compassion": -2
+            },
+            "flags_set": {
+              "chloe_tied": true
+            },
+            "next_node": "l_4"
+          },
+          {
+            "choice_id": "lc3_b",
+            "text": "Forgive her. We are all desperate.",
+            "effects": {
+              "Compassion": 2,
+              "Idealism": 2,
+              "Justice": -2
+            },
+            "flags_set": {
+              "chloe_forgiven": true
+            },
+            "next_node": "l_4"
+          }
+        ]
+      },
+      {
+        "node_id": "l_4",
+        "text": "Marcus notices Arthur is extremely weak and unresponsive. He suggests throwing Arthur overboard now to save his water share before he dies.",
+        "timer_seconds": 8,
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "lc4_a",
+            "text": "Throw Arthur overboard.",
+            "effects": {
+              "Pragmatism": 3,
+              "Compassion": -3,
+              "Rationality": 2
+            },
+            "flags_set": {
+              "arthur_overboard": true
+            },
+            "next_node": "l_5"
+          },
+          {
+            "choice_id": "lc4_b",
+            "text": "Refuse. He stays until he passes.",
+            "effects": {
+              "Idealism": 3,
+              "Compassion": 2,
+              "Pragmatism": -3
+            },
+            "flags_set": {
+              "arthur_stays": true
+            },
+            "next_node": "l_5"
+          }
+        ]
+      },
+      {
+        "node_id": "l_5",
+        "text": "Elena's child develops a high fever. Arthur (if alive) offers his water share if she votes to throw Chloe off. If Arthur is dead, Marcus demands we throw Chloe off because she is too weak to row.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "lc5_a",
+            "text": "Vote to throw Chloe off.",
+            "effects": {
+              "Tribalism": 2,
+              "Pragmatism": 2,
+              "Compassion": -4
+            },
+            "flags_set": {
+              "chloe_dead": true
+            },
+            "next_node": "l_6"
+          },
+          {
+            "choice_id": "lc5_b",
+            "text": "Defend Chloe. Threaten Marcus/Arthur.",
+            "effects": {
+              "Courage": 3,
+              "Compassion": 2,
+              "Pragmatism": -2
+            },
+            "flags_set": {
+              "chloe_saved": true
+            },
+            "next_node": "l_6"
+          }
+        ]
+      },
+      {
+        "node_id": "l_6",
+        "text": "Marcus goes mad with heatstroke, drawing a knife on Chloe/Elena, screaming they are curses. You must act.",
+        "timer_seconds": 6,
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "lc6_a",
+            "text": "Push Marcus overboard during the struggle.",
+            "effects": {
+              "Courage": 3,
+              "Pragmatism": 2,
+              "Compassion": -1
+            },
+            "flags_set": {
+              "marcus_dead": true
+            },
+            "next_node": "l_7"
+          },
+          {
+            "choice_id": "lc6_b",
+            "text": "Try to disarm him calmly.",
+            "effects": {
+              "Diplomacy": 3,
+              "Rationality": 1,
+              "Courage": 2
+            },
+            "flags_set": {
+              "marcus_disarmed": true
+            },
+            "next_node": "l_7"
+          }
+        ]
+      },
+      {
+        "node_id": "l_7",
+        "text": "The boat has a major leak. Arthur has died of exposure (if he was still here). Food is completely gone. Marcus (if alive) looks at Arthur's corpse hungrily.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "lc7_a",
+            "text": "Eat the corpse to survive.",
+            "effects": {
+              "Pragmatism": 5,
+              "Rationality": 4,
+              "Idealism": -5,
+              "Compassion": -3
+            },
+            "flags_set": {
+              "cannibal": true
+            },
+            "next_node": "l_8"
+          },
+          {
+            "choice_id": "lc7_b",
+            "text": "Refuse. Throw the corpse overboard.",
+            "effects": {
+              "Idealism": 4,
+              "Compassion": 2,
+              "Pragmatism": -4
+            },
+            "flags_set": {
+              "clean_hands": true
+            },
+            "next_node": "l_8"
+          }
+        ]
+      },
+      {
+        "node_id": "l_8",
+        "text": "Only you, Elena, and Marcus (if alive) remain. A helicopter is spotted in the distance. It only has hoist capacity for 2 survivors. Marcus pulls a knife on you.",
+        "timer_seconds": 5,
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "lc8_a",
+            "text": "Push him off the boat.",
+            "effects": {
+              "Courage": 3,
+              "Pragmatism": 3,
+              "Compassion": -2
+            },
+            "flags_set": {},
+            "next_node": "end_lifeboat_survivor"
+          },
+          {
+            "choice_id": "lc8_b",
+            "text": "Let him take Elena. Protect yourself.",
+            "effects": {
+              "Pragmatism": 2,
+              "Courage": -3,
+              "Compassion": -4
+            },
+            "flags_set": {},
+            "next_node": "end_lifeboat_coward"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_lifeboat_survivor",
+        "summary": "You fought Marcus off and were rescued alongside Elena. You survived the horror, but your sanity is fractured.",
+        "dominant_traits": [
+          "Survivalist",
+          "Harrowed"
+        ],
+        "behavioral_analysis": "You will commit violence to ensure your survival, but try to preserve others if possible."
+      },
+      {
+        "ending_id": "end_lifeboat_coward",
+        "summary": "You stepped back and let Marcus take Elena. You were rescued alone. You live in total shame.",
+        "dominant_traits": [
+          "Broken",
+          "Selfish"
+        ],
+        "behavioral_analysis": "Under absolute existential pressure, your empathy and courage completely dissolve."
+      }
+    ]
+  }
+]

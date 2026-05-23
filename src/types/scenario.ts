@@ -11,7 +11,8 @@ export interface Choice {
   text: string;
   effects: EffectScores;
   flags_set: FlagSet;
-  next_node: string;
+  next_node?: string;
+  ending_id?: string;
   rationale?: string[];
 }
 

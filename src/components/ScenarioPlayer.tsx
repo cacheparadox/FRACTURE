@@ -142,7 +142,9 @@ export default function ScenarioPlayer({ scenario, onComplete, onReset }: Props)
     setScores(newScores);
 
     // 3. Determine next step
-    let nextId = choice.next_node;
+    let nextId = choice.next_node || choice.ending_id;
+    if (!nextId) return;
+
     const isEnding = scenario.endings.find((e) => e.ending_id === nextId);
 
     // If it's a node transition (not an ending), check for conditional alternative nodes with matching prefix

@@ -16,6 +16,11 @@ function traverse(scenario, currentNodeId, visited, pathHistory) {
     return;
   }
 
+  // Assertion 1: No single-choice nodes
+  if (node.choices.length === 1) {
+    errors.push(`[${scenario.scenario_id}] Node '${currentNodeId}' has only 1 choice (single-choice filler node).`);
+  }
+
   node.choices.forEach(choice => {
     let nextId = choice.next_node || choice.ending_id;
     if (!nextId) {
@@ -25,7 +30,15 @@ function traverse(scenario, currentNodeId, visited, pathHistory) {
 
     const isEnding = scenario.endings.find(e => e.ending_id === nextId);
 
-    if (!isEnding) {
+    if (isEnding) {
+      // Assertion 2: Minimum path depth of 4 (start node, node 2, node 3, node 4 -> ending)
+      // Path history is constructed as [nodeId, choiceId, nodeId, choiceId, ...]
+      // Even indices correspond to visited nodes.
+      const nodesInPath = pathHistory.filter((_, idx) => idx % 2 === 0);
+      if (nodesInPath.length < 4) {
+        errors.push(`[${scenario.scenario_id}] Shallow path: ${nodesInPath.join(' -> ')} -> ${nextId} is only ${nodesInPath.length} layers deep.`);
+      }
+    } else {
       try {
         const basePrefix = nextId.split("_").slice(0, 2).join("_");
         const candidateNodes = scenario.nodes.filter(
@@ -33,7 +46,7 @@ function traverse(scenario, currentNodeId, visited, pathHistory) {
         );
 
         if (candidateNodes.length > 1) {
-           const matchingNode = candidateNodes.find(n => n.visibility !== 'always'); // Simplified logic
+           const matchingNode = candidateNodes.find(n => n.visibility !== 'always');
            if (matchingNode) {
              nextId = matchingNode.node_id;
            } else {

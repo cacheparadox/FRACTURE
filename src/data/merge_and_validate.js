@@ -4,24 +4,11 @@ const path = require('path');
 const dataDir = __dirname;
 const scenariosPath = path.join(dataDir, 'scenarios.json');
 
-// 1. Load original scenarios and filter for sc_001 to sc_008
-let originalScenarios = [];
-if (fs.existsSync(scenariosPath)) {
-  const rawData = fs.readFileSync(scenariosPath, 'utf8');
-  const allOriginal = JSON.parse(rawData);
-  // Keep only the first 8 scenarios
-  originalScenarios = allOriginal.filter(s => {
-    const num = parseInt(s.scenario_id.replace('sc_', ''), 10);
-    return num >= 1 && num <= 8;
-  });
-  console.log(`Kept ${originalScenarios.length} original scenarios.`);
-}
+// 1. Load batches 1 through 8
+let mergedScenarios = [];
 
-// 2. Load batches 1 through 6
-let mergedScenarios = [...originalScenarios];
-
-for (let i = 1; i <= 6; i++) {
-  const batchPath = path.join(dataDir, `batch${i}.json`);
+for (let i = 1; i <= 8; i++) {
+  const batchPath = path.join(dataDir, `batch_${i}.json`);
   if (fs.existsSync(batchPath)) {
     try {
       const batchData = fs.readFileSync(batchPath, 'utf8');
@@ -41,12 +28,12 @@ for (let i = 1; i <= 6; i++) {
       
       const parsedBatch = JSON.parse(cleanData);
       mergedScenarios = mergedScenarios.concat(parsedBatch);
-      console.log(`Loaded batch ${i} with ${parsedBatch.length} scenarios.`);
+      console.log(`Loaded batch_${i}.json with ${parsedBatch.length} scenarios.`);
     } catch (e) {
-      console.error(`Error parsing batch${i}.json:`, e);
+      console.error(`Error parsing batch_${i}.json:`, e);
     }
   } else {
-    console.error(`batch${i}.json not found!`);
+    console.error(`batch_${i}.json not found!`);
   }
 }
 

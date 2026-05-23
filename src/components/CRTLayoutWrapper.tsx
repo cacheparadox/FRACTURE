@@ -246,33 +246,33 @@ const OnboardingSurvey = ({ onComplete }: { onComplete: (scores: Record<string, 
   }, [currentIdx, question]);
 
   return (
-    <div className="p-6 flex flex-col justify-between h-full w-full font-mono text-left select-none box-border">
+    <div className="p-8 md:p-16 flex flex-col justify-between h-full w-full font-mono text-left select-none box-border max-w-4xl mx-auto">
       {/* Header */}
-      <div className="flex justify-between items-center border-b border-neutral-900 pb-3 mb-4 shrink-0">
-        <span className="text-[9px] uppercase tracking-[0.2em] text-neutral-500 font-bold">
+      <div className="flex justify-between items-center border-b border-neutral-900 pb-4 mb-6 shrink-0">
+        <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-neutral-500 font-bold">
           Personality Calibration
         </span>
-        <span className="text-[9px] text-neutral-400 font-bold">
+        <span className="text-[10px] sm:text-xs text-neutral-400 font-bold">
           [0{currentIdx + 1} / 0{ONBOARDING_QUESTIONS.length}]
         </span>
       </div>
 
       {/* Question Text */}
-      <div className="flex-1 flex flex-col justify-center mb-6">
-        <p className="text-[11px] md:text-[12px] font-bold text-white uppercase tracking-wider leading-relaxed">
+      <div className="flex-1 flex flex-col justify-center mb-8">
+        <p className="text-lg sm:text-xl md:text-3xl font-bold text-white uppercase tracking-wider leading-relaxed">
           {question.text}
         </p>
       </div>
 
       {/* Choices */}
-      <div className="space-y-2 shrink-0">
+      <div className="space-y-3 shrink-0">
         {question.choices.map((choice, idx) => (
           <button
             key={idx}
             onClick={() => handleSelect(choice.scores)}
-            className="w-full text-left p-3 border border-neutral-900 hover:border-red-500 hover:bg-red-950/20 text-neutral-300 hover:text-white transition-all text-[9px] md:text-[10px] uppercase flex items-start gap-3 cursor-pointer"
+            className="w-full text-left p-4 sm:p-5 border border-neutral-900 hover:border-red-500 hover:bg-red-950/20 text-neutral-300 hover:text-white transition-all text-xs sm:text-sm md:text-lg uppercase flex items-start gap-4 cursor-pointer"
           >
-            <span className="w-4 h-4 border border-neutral-800 flex items-center justify-center text-[9px] font-bold text-neutral-500 shrink-0 mt-0.5">
+            <span className="w-5 h-5 md:w-6 md:h-6 border border-neutral-800 flex items-center justify-center text-[10px] md:text-xs font-bold text-neutral-500 shrink-0 mt-0.5">
               {String.fromCharCode(65 + idx)}
             </span>
             <span className="flex-1 leading-normal font-sans font-bold">
@@ -325,30 +325,30 @@ const CalculatingBaseline = ({ onComplete }: { onComplete: () => void }) => {
   }, [progress, logs]);
 
   return (
-    <div className="p-6 flex flex-col justify-between h-full w-full font-mono text-left select-none text-red-500 box-border">
-      <div className="flex justify-between items-center border-b border-neutral-900 pb-3 mb-6 shrink-0">
-        <span className="text-[9px] uppercase tracking-[0.2em] font-bold text-neutral-500">
+    <div className="p-8 md:p-16 flex flex-col justify-between h-full w-full font-mono text-left select-none text-red-500 box-border max-w-4xl mx-auto">
+      <div className="flex justify-between items-center border-b border-neutral-900 pb-4 mb-8 shrink-0">
+        <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] font-bold text-neutral-500">
           Neural Baseline Calibration
         </span>
-        <span className="text-[9px] font-bold text-red-500">
+        <span className="text-[10px] sm:text-xs font-bold text-red-500">
           [RUNNING]
         </span>
       </div>
 
-      <div className="flex-1 flex flex-col justify-start space-y-2 mb-6 overflow-y-auto">
+      <div className="flex-1 flex flex-col justify-start space-y-3 mb-8 overflow-y-auto">
         {logs.map((log, idx) => (
-          <div key={idx} className="text-[9px] leading-normal uppercase">
+          <div key={idx} className="text-xs sm:text-sm md:text-lg leading-normal uppercase">
             &gt; {log}
           </div>
         ))}
       </div>
 
-      <div className="space-y-2 shrink-0">
-        <div className="flex justify-between text-[9px] font-bold">
+      <div className="space-y-3 shrink-0">
+        <div className="flex justify-between text-xs sm:text-sm font-bold">
           <span>PROGRESS</span>
           <span>{progress}%</span>
         </div>
-        <div className="w-full h-4 border border-neutral-900 p-0.5 bg-black">
+        <div className="w-full h-6 border border-neutral-900 p-1 bg-black">
           <div className="h-full bg-red-500 transition-all duration-75" style={{ width: `${progress}%` }} />
         </div>
       </div>
@@ -401,11 +401,15 @@ export default function CRTLayoutWrapper({
   useEffect(() => {
     if (localBootState === 'zooming') {
       const timer = setTimeout(() => {
-        setLocalBootState('calculating');
+        if (isOnboarded) {
+          setLocalBootState('calculating');
+        } else {
+          setLocalBootState('survey');
+        }
       }, 1500);
       return () => clearTimeout(timer);
     }
-  }, [localBootState]);
+  }, [localBootState, isOnboarded]);
 
   const crtEnabled = settings?.crtEnabled !== false;
   const grainOpacity = settings?.grainOpacity ?? 0.04;
@@ -515,13 +519,13 @@ export default function CRTLayoutWrapper({
       {/* The Bezel Wrapper */}
       <div
         className={`fixed z-10 transition-all duration-[1500ms] ease-in-out flex flex-col ${
-          localBootState === 'zooming' || localBootState === 'calculating'
+          localBootState === 'zooming' || localBootState === 'calculating' || localBootState === 'survey'
             ? 'w-screen h-screen top-0 left-0 p-0 border-0 bg-transparent'
             : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-4xl aspect-[4/3] rounded-3xl p-6 border-[16px] border-t-[#333] border-l-[#333] border-r-[#111] border-b-[#111] bg-[#171717] crt-bezel'
         }`}
       >
-        {/* Bezel Frame elements (Dials, Labels, Knobs) - only visible when not zooming / calculating */}
-        {localBootState !== 'zooming' && localBootState !== 'calculating' && (
+        {/* Bezel Frame elements (Dials, Labels, Knobs) - only visible when not zooming / calculating / survey */}
+        {localBootState !== 'zooming' && localBootState !== 'calculating' && localBootState !== 'survey' && (
           <>
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_55%,rgba(0,0,0,0.95)_100%)] pointer-events-none rounded-xl z-20" />
             <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/5 to-transparent pointer-events-none z-20 transform -skew-y-12 origin-top-left" />
@@ -531,12 +535,12 @@ export default function CRTLayoutWrapper({
           </>
         )}
 
-        {/* Screen container: Bounded cutout in Bezel, expanding to fixed inset-0 when zooming / calculating */}
+        {/* Screen container: Bounded cutout in Bezel, expanding to fixed inset-0 when zooming / calculating / survey */}
         <div
           className={`bg-black overflow-hidden flex flex-col relative shadow-inner ${
             crtEnabled && localBootState !== 'off' ? "crt-active" : ""
           } ${glitchClass} ${
-            localBootState === 'zooming' || localBootState === 'calculating'
+            localBootState === 'zooming' || localBootState === 'calculating' || localBootState === 'survey'
               ? 'w-full h-full border-0 rounded-none'
               : 'w-full h-[84%] border-4 border-[#0c0c0c] rounded-xl'
           }`}
@@ -579,7 +583,7 @@ export default function CRTLayoutWrapper({
             {localBootState === 'logo' && (
               <LogoScreen
                 isOnboarded={isOnboarded}
-                onStart={() => setLocalBootState('survey')}
+                onStart={() => setLocalBootState('zooming')}
               />
             )}
 
@@ -587,7 +591,7 @@ export default function CRTLayoutWrapper({
               <OnboardingSurvey
                 onComplete={(scores) => {
                   completeOnboarding(scores);
-                  setLocalBootState('zooming');
+                  setLocalBootState('calculating');
                 }}
               />
             )}
@@ -607,7 +611,7 @@ export default function CRTLayoutWrapper({
         </div>
 
         {/* Bezel controls (knobs, dials, power switch) at the bottom */}
-        {localBootState !== 'zooming' && localBootState !== 'calculating' && (
+        {localBootState !== 'zooming' && localBootState !== 'calculating' && localBootState !== 'survey' && (
           <div className="w-full h-[16%] mt-4 flex justify-between items-center px-4 shrink-0">
             <div className="flex gap-4">
               <div className="w-5 h-5 rounded-full bg-[#111] border border-[#222] shadow-inner" />

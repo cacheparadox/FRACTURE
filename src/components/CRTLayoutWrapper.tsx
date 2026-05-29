@@ -173,8 +173,15 @@ const BiosText = ({ onComplete }: { onComplete: () => void }) => {
 // Logo Screen Component
 const LogoScreen = ({ isOnboarded, onStart }: { isOnboarded: boolean; onStart: () => void }) => {
   return (
-    <div className="flex flex-col items-center justify-center h-full p-4 font-mono select-none text-center">
-      <pre className="text-[6px] sm:text-[8px] md:text-[9px] text-red-500 font-bold leading-tight mb-8 animate-pulse drop-shadow-[0_0_8px_#ef4444]">
+    <div className="flex flex-col items-center justify-center h-full p-6 font-mono select-none text-center max-w-2xl mx-auto w-full relative">
+      {/* Corner Brackets for Tactical HUD Look */}
+      <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-red-500/40" />
+      <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-red-500/40" />
+      <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-red-500/40" />
+      <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-red-500/40" />
+
+      {/* ASCII Logo with glow */}
+      <pre className="text-[5px] sm:text-[7px] md:text-[8px] text-red-500 font-bold leading-none mb-4 animate-pulse drop-shadow-[0_0_12px_rgba(239,68,68,0.7)] select-none">
 {`
 ███████╗██████╗  █████╗  ██████╗████████╗██╗   ██╗██████╗ ███████╗
 ██╔════╝██╔══██╗██╔══██╗██╔════╝╚══██╔══╝██║   ██║██╔══██╗██╔════╝
@@ -184,10 +191,33 @@ const LogoScreen = ({ isOnboarded, onStart }: { isOnboarded: boolean; onStart: (
 ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝
 `}
       </pre>
-      
-      <p className="text-[10px] text-neutral-500 uppercase tracking-[0.3em] mb-12">
-        Behavioral Profiling Module
-      </p>
+
+      <div className="flex items-center gap-2 mb-8">
+        <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping" />
+        <p className="text-[10px] text-neutral-400 uppercase tracking-[0.4em] font-black">
+          Behavioral Profiling Module v4.8
+        </p>
+      </div>
+
+      {/* Cyber Status Readouts Grid */}
+      <div className="grid grid-cols-2 gap-x-8 gap-y-2 border border-neutral-900 bg-neutral-950/80 p-4 rounded mb-10 w-full max-w-sm text-left text-[9px] uppercase tracking-wider text-neutral-500 border-dashed">
+        <div className="flex justify-between border-b border-neutral-900 pb-1">
+          <span>SYS.LOC</span>
+          <span className="text-red-500 font-bold">MAIN_OS_B12</span>
+        </div>
+        <div className="flex justify-between border-b border-neutral-900 pb-1">
+          <span>NEURAL.SYNC</span>
+          <span className="text-red-500 font-bold">98.4%</span>
+        </div>
+        <div className="flex justify-between">
+          <span>ENCRYPTION</span>
+          <span className="text-green-500 font-bold">AES_ACTIVE</span>
+        </div>
+        <div className="flex justify-between">
+          <span>DIL.AXIS</span>
+          <span className="text-red-500 font-bold">12_CALIBRATED</span>
+        </div>
+      </div>
 
       {isOnboarded ? (
         <div className="flex flex-col items-center gap-2">
@@ -199,9 +229,16 @@ const LogoScreen = ({ isOnboarded, onStart }: { isOnboarded: boolean; onStart: (
       ) : (
         <button
           onClick={onStart}
-          className="px-8 py-3 border border-red-500 text-red-500 hover:bg-red-500 hover:text-black text-xs font-black uppercase tracking-[0.2em] transition-all cursor-pointer shadow-[0_0_15px_rgba(239,68,68,0.2)] hover:shadow-[0_0_25px_rgba(239,68,68,0.5)] active:scale-95"
+          className="relative px-12 py-4 overflow-hidden border border-red-500 bg-transparent text-red-500 hover:bg-red-500 hover:text-black text-xs font-black uppercase tracking-[0.25em] transition-all duration-300 cursor-pointer shadow-[0_0_15px_rgba(239,68,68,0.2)] hover:shadow-[0_0_30px_rgba(239,68,68,0.6)] group active:scale-95"
         >
-          Start Game
+          {/* Pulsing button overlay */}
+          <span className="absolute inset-0 bg-red-500/10 animate-pulse group-hover:hidden" />
+          {/* Chevron elements */}
+          <span className="inline-flex items-center gap-2">
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">-&gt;</span>
+            [ ENGAGE NEURAL LINK ]
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">&lt;-</span>
+          </span>
         </button>
       )}
     </div>
@@ -371,6 +408,17 @@ export default function CRTLayoutWrapper({
     // If store is already powered on when page loads, go straight to active.
     if (useProfileStore.getState().powerOn) {
       setLocalBootState('active');
+    } else {
+      // Auto-boot sequence on fresh load
+      const timer = setTimeout(() => {
+        setBooting(true);
+        setLocalBootState('powering-on');
+        setTimeout(() => {
+          setPowerOn(true);
+          setBooting(false);
+        }, 700);
+      }, 500);
+      return () => clearTimeout(timer);
     }
   }, []);
 
@@ -387,25 +435,11 @@ export default function CRTLayoutWrapper({
     }
   }, [powerOn, booting]);
 
-  // Handle auto-advancing from logo to zooming if already onboarded
+  // Handle auto-advancing from logo to calculating/survey if already onboarded
   useEffect(() => {
     if (localBootState === 'logo' && isOnboarded) {
       const timer = setTimeout(() => {
-        setLocalBootState('zooming');
-      }, 1500);
-      return () => clearTimeout(timer);
-    }
-  }, [localBootState, isOnboarded]);
-
-  // Handle zooming state transition timer
-  useEffect(() => {
-    if (localBootState === 'zooming') {
-      const timer = setTimeout(() => {
-        if (isOnboarded) {
-          setLocalBootState('calculating');
-        } else {
-          setLocalBootState('survey');
-        }
+        setLocalBootState('calculating');
       }, 1500);
       return () => clearTimeout(timer);
     }
@@ -510,146 +544,88 @@ export default function CRTLayoutWrapper({
     );
   }
 
-  // ─── RENDERING CASE: Bezel Boot sequence (Off, BIOS, Logo, Survey, Calculating, Zooming) ─
+  // ─── RENDERING CASE: Fullscreen Boot sequence (Off, BIOS, Logo, Survey, Calculating, Zooming) ─
   return (
-    <main className="min-h-screen bg-[#060606] flex items-center justify-center p-4 font-mono select-none overflow-hidden relative w-full">
+    <main className="min-h-screen bg-black flex flex-col items-center justify-center font-mono select-none overflow-hidden relative w-full">
       {/* Radial overlay on the whole viewport to give CRT glass vibe */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_45%,rgba(0,0,0,0.9)_100%)] pointer-events-none z-40" />
 
-      {/* The Bezel Wrapper */}
+      {/* Screen container: Fill the viewport completely */}
       <div
-        className={`fixed z-10 transition-all duration-[1500ms] ease-in-out flex flex-col ${
-          localBootState === 'zooming' || localBootState === 'calculating' || localBootState === 'survey'
-            ? 'w-screen h-screen top-0 left-0 p-0 border-0 bg-transparent'
-            : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-4xl aspect-[4/3] rounded-3xl p-6 border-[16px] border-t-[#333] border-l-[#333] border-r-[#111] border-b-[#111] bg-[#171717] crt-bezel'
-        }`}
+        className={`w-full min-h-screen bg-black overflow-hidden flex flex-col relative ${
+          crtEnabled && localBootState !== 'off' ? "crt-active" : ""
+        } ${glitchClass}`}
       >
-        {/* Bezel Frame elements (Dials, Labels, Knobs) - only visible when not zooming / calculating / survey */}
-        {localBootState !== 'zooming' && localBootState !== 'calculating' && localBootState !== 'survey' && (
-          <>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_55%,rgba(0,0,0,0.95)_100%)] pointer-events-none rounded-xl z-20" />
-            <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/5 to-transparent pointer-events-none z-20 transform -skew-y-12 origin-top-left" />
-            <div className="absolute top-3 left-6 text-[#2a2a2a] text-[9px] uppercase tracking-[0.3em] font-black">
-              FRACTURE // EVALUATION MODULE
-            </div>
-          </>
+        {/* Static noise overlay inside the screen */}
+        {localBootState !== 'off' && grainOpacity > 0 && (
+          <div
+            className="static-overlay pointer-events-none z-30"
+            style={{ opacity: grainOpacity }}
+          />
         )}
 
-        {/* Screen container: Bounded cutout in Bezel, expanding to fixed inset-0 when zooming / calculating / survey */}
-        <div
-          className={`bg-black overflow-hidden flex flex-col relative shadow-inner ${
-            crtEnabled && localBootState !== 'off' ? "crt-active" : ""
-          } ${glitchClass} ${
-            localBootState === 'zooming' || localBootState === 'calculating' || localBootState === 'survey'
-              ? 'w-full h-full border-0 rounded-none'
-              : 'w-full h-[84%] border-4 border-[#0c0c0c] rounded-xl'
-          }`}
-          style={{ transition: 'all 1500ms ease-in-out' }}
-        >
-          {/* Static noise overlay inside the screen */}
-          {localBootState !== 'off' && grainOpacity > 0 && (
-            <div
-              className="static-overlay pointer-events-none z-30"
-              style={{ opacity: grainOpacity }}
+        {/* Screen corner shadow overlay */}
+        {crtEnabled && localBootState !== 'off' && (
+          <div className="absolute inset-0 pointer-events-none z-20 rounded-none border-[4px] border-black/10 box-border shadow-[inset_0_0_80px_rgba(0,0,0,0.85)]" />
+        )}
+
+        {/* Render different boot sequences inside the screen */}
+        <div className="relative z-10 w-full h-full flex-1 flex flex-col justify-center items-center">
+          {localBootState === 'off' && (
+            <div 
+              onClick={handlePowerSwitch}
+              className="z-10 text-center max-w-xs px-4 cursor-pointer hover:scale-105 transition-transform flex flex-col items-center justify-center"
+            >
+              <div className="w-16 h-16 rounded-full border border-neutral-800 flex items-center justify-center mb-6 hover:border-red-500 transition-colors group">
+                <div className="w-8 h-8 rounded-full bg-neutral-900 group-hover:bg-red-950/40 flex items-center justify-center transition-colors">
+                  <span className="text-[10px] text-neutral-500 group-hover:text-red-500 font-bold font-mono">I/O</span>
+                </div>
+              </div>
+              <h2 className="text-neutral-700 text-xs font-black uppercase tracking-[0.25em] mb-2 animate-pulse">
+                System Depowered
+              </h2>
+              <p className="text-neutral-500 text-[9px] uppercase tracking-widest leading-relaxed font-bold">
+                Click here to engage terminal
+              </p>
+            </div>
+          )}
+
+          {localBootState === 'powering-on' && (
+            <div className="w-[85%] h-[3px] bg-white crt-booting shadow-[0_0_12px_#fff]" />
+          )}
+
+          {localBootState === 'bios' && (
+            <BiosText onComplete={() => setLocalBootState('logo')} />
+          )}
+
+          {localBootState === 'logo' && (
+            <LogoScreen
+              isOnboarded={isOnboarded}
+              onStart={() => setLocalBootState('survey')}
             />
           )}
 
-          {/* Screen corner shadow overlay */}
-          {crtEnabled && localBootState !== 'off' && (
-            <div className="absolute inset-0 pointer-events-none z-20 rounded-none border-[4px] border-black/10 box-border shadow-[inset_0_0_80px_rgba(0,0,0,0.85)]" />
+          {localBootState === 'survey' && (
+            <OnboardingSurvey
+              onComplete={(scores) => {
+                completeOnboarding(scores);
+                setLocalBootState('calculating');
+              }}
+            />
           )}
 
-          {/* Render different boot sequences inside the screen */}
-          <div className="relative z-10 w-full h-full flex flex-col justify-center items-center">
-            {localBootState === 'off' && (
-              <div className="z-10 text-center max-w-xs px-4">
-                <h2 className="text-[#1a1a1a] text-xs font-black uppercase tracking-[0.25em] mb-2 animate-pulse">
-                  System Depowered
-                </h2>
-                <p className="text-[#151515] text-[9px] uppercase tracking-widest leading-relaxed font-bold">
-                  Toggle the switch in the bezel controls to engage.
-                </p>
-              </div>
-            )}
+          {localBootState === 'calculating' && (
+            <CalculatingBaseline onComplete={() => setLocalBootState('active')} />
+          )}
 
-            {localBootState === 'powering-on' && (
-              <div className="w-[85%] h-[3px] bg-white crt-booting shadow-[0_0_12px_#fff]" />
-            )}
-
-            {localBootState === 'bios' && (
-              <BiosText onComplete={() => setLocalBootState('logo')} />
-            )}
-
-            {localBootState === 'logo' && (
-              <LogoScreen
-                isOnboarded={isOnboarded}
-                onStart={() => setLocalBootState('zooming')}
-              />
-            )}
-
-            {localBootState === 'survey' && (
-              <OnboardingSurvey
-                onComplete={(scores) => {
-                  completeOnboarding(scores);
-                  setLocalBootState('calculating');
-                }}
-              />
-            )}
-
-            {localBootState === 'calculating' && (
-              <CalculatingBaseline onComplete={() => setLocalBootState('active')} />
-            )}
-
-            {localBootState === 'zooming' && (
-              <div className="flex flex-col items-center justify-center text-red-500 font-mono">
-                <span className="text-[10px] uppercase tracking-[0.3em] font-black animate-pulse">
-                  establishing neural uplink...
-                </span>
-              </div>
-            )}
-          </div>
+          {localBootState === 'zooming' && (
+            <div className="flex flex-col items-center justify-center text-red-500 font-mono">
+              <span className="text-[10px] uppercase tracking-[0.3em] font-black animate-pulse">
+                establishing neural uplink...
+              </span>
+            </div>
+          )}
         </div>
-
-        {/* Bezel controls (knobs, dials, power switch) at the bottom */}
-        {localBootState !== 'zooming' && localBootState !== 'calculating' && localBootState !== 'survey' && (
-          <div className="w-full h-[16%] mt-4 flex justify-between items-center px-4 shrink-0">
-            <div className="flex gap-4">
-              <div className="w-5 h-5 rounded-full bg-[#111] border border-[#222] shadow-inner" />
-              <div className="w-5 h-5 rounded-full bg-[#111] border border-[#222] shadow-inner" />
-              <div className="w-5 h-5 rounded-full bg-[#111] border border-[#222] shadow-inner" />
-            </div>
-
-            <div className="flex items-center gap-4">
-              <div className="flex flex-col items-center">
-                <div
-                  className={`w-2.5 h-2.5 rounded-full mb-1 border border-neutral-900 transition-all ${
-                    localBootState !== 'off'
-                      ? 'bg-red-500 shadow-[0_0_8px_#ef4444]'
-                      : 'bg-red-950/70'
-                  }`}
-                />
-                <span className="text-[7px] text-neutral-600 tracking-widest font-black uppercase">
-                  Power
-                </span>
-              </div>
-
-              <button
-                onClick={handlePowerSwitch}
-                className="w-12 h-8 bg-[#1a1a1a] border-2 border-[#0d0d0d] rounded flex flex-col justify-end items-center p-0.5 active:bg-[#151515] shadow-inner cursor-pointer"
-              >
-                <div
-                  className={`w-8 h-4 bg-[#252525] border border-[#333] shadow-sm flex items-center justify-center transform active:translate-y-0.5 transition-transform ${
-                    localBootState !== 'off' ? 'translate-y-0.5 border-t-[#111]' : ''
-                  }`}
-                >
-                  <span className="text-[7px] text-neutral-500 font-bold uppercase">
-                    ON
-                  </span>
-                </div>
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     </main>
   );

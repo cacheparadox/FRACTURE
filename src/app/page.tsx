@@ -303,8 +303,7 @@ export default function Home() {
       )}
 
 
-      {/* ─── MAIN MENU: Scenario Selection ─────────────────────────── */}
-      {!activeScenario && isOnboarded && (
+        {!activeScenario && isOnboarded && (
         <main className="max-w-6xl mx-auto py-24 px-6 relative z-20">
           <header className="mb-16 md:mb-24 flex flex-wrap justify-between items-start gap-6">
             <motion.div
@@ -312,13 +311,35 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             >
-              <h1 className="text-5xl sm:text-7xl md:text-9xl font-black tracking-tighter mb-4 text-white leading-none uppercase">
+              <h1 className="text-5xl sm:text-7xl md:text-9xl font-black tracking-tighter mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-white to-red-600 leading-none uppercase drop-shadow-[0_0_15px_rgba(239,68,68,0.35)] relative group select-none">
                 Fracture
+                {/* Visual scanline stripe overlay on text */}
+                <span className="absolute left-0 top-1/2 w-full h-[2px] bg-red-500/30 opacity-70 blur-[1px] animate-pulse" />
               </h1>
               <p className="text-sm md:text-xl text-neutral-400 font-medium tracking-widest max-w-xl uppercase leading-relaxed">
                 Deterministic behavioral simulation.
               </p>
             </motion.div>
+ 
+            {/* System Diagnostics HUD */}
+            <div className="hidden lg:flex flex-col gap-1 border border-neutral-900 bg-neutral-950 p-4 font-mono text-[9px] uppercase tracking-wider text-neutral-500 w-64 border-dashed rounded relative">
+              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-red-500/40" />
+              <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-red-500/40" />
+              <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-red-500/40" />
+              <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-red-500/40" />
+              <div className="flex justify-between border-b border-neutral-900 pb-1">
+                <span>Completed</span>
+                <span className="text-white font-bold">{completedScenarios.length} / {scenarios.length}</span>
+              </div>
+              <div className="flex justify-between border-b border-neutral-900 pb-1">
+                <span>Neural Sync</span>
+                <span className="text-green-500 font-bold">100% Stable</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Module Link</span>
+                <span className="text-red-500 font-bold">Active_Uplink</span>
+              </div>
+            </div>
 
             {/* Controls: Settings, Profile */}
             <div className="flex items-center gap-4">
@@ -335,7 +356,7 @@ export default function Home() {
               >
                 <Settings className="w-6 h-6" />
               </button>
-
+ 
               <Link
                 href="/profile"
                 className="p-4 border border-neutral-800 hover:border-white hover:bg-neutral-900 transition-all text-neutral-400 hover:text-white"
@@ -345,7 +366,7 @@ export default function Home() {
               </Link>
             </div>
           </header>
-
+ 
           {/* Scenario Grid */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -357,20 +378,29 @@ export default function Home() {
               const originalIndex = scenarios.findIndex((s) => s.scenario_id === scenario.scenario_id);
               const isCompleted = completedScenarios.includes(scenario.scenario_id);
               const isChallengeTarget = challengeData?.scenarioId === scenario.scenario_id;
-
+ 
               return (
                 <button
                   key={scenario.scenario_id}
                   onClick={() => !isCompleted && setActiveScenario(scenario)}
                   disabled={isCompleted}
-                  className={`relative p-8 md:p-12 border text-left flex flex-col justify-between aspect-[1.8/1] transition-all group ${
+                  className={`relative p-8 md:p-12 border text-left flex flex-col justify-between aspect-[1.8/1] transition-all group overflow-hidden ${
                     isCompleted
                       ? "border-neutral-900 bg-neutral-950/40 text-neutral-600 cursor-not-allowed"
                       : isChallengeTarget
-                      ? "border-red-900 hover:border-red-500 hover:bg-[#080101]"
-                      : "border-neutral-800 bg-[#020202] hover:border-white hover:bg-white hover:text-black"
+                      ? "border-red-900 bg-black hover:border-red-500 hover:bg-[#080101] shadow-[0_0_15px_rgba(239,68,68,0.05)] hover:shadow-[0_0_20px_rgba(239,68,68,0.15)]"
+                      : "border-neutral-800 bg-[#020202] hover:border-white hover:bg-white hover:text-black hover:shadow-[0_0_15px_rgba(255,255,255,0.05)]"
                   }`}
                 >
+                  {/* Tactical corner brackets */}
+                  <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-neutral-800 group-hover:border-red-500 transition-colors duration-300" />
+                  <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-neutral-800 group-hover:border-red-500 transition-colors duration-300" />
+                  <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-neutral-800 group-hover:border-red-500 transition-colors duration-300" />
+                  <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-neutral-800 group-hover:border-red-500 transition-colors duration-300" />
+
+                  {/* Pulsing scanline overlay on hover */}
+                  <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.15)_50%)] bg-[size:100%_4px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
                   <div className="relative z-10 w-full">
                     {/* Top row */}
                     <div className="flex items-center justify-between mb-6">
@@ -391,13 +421,21 @@ export default function Home() {
                         </span>
                       </div>
                       
-                      {isChallengeTarget && (
-                        <span className="text-[9px] bg-red-950 text-red-400 px-2 py-0.5 border border-red-900 font-bold uppercase tracking-widest animate-pulse">
-                          Challenge
+                      {/* Blinking status dot indicator */}
+                      <div className="flex items-center gap-2">
+                        <span className={`w-1.5 h-1.5 rounded-full ${
+                          isCompleted 
+                            ? "bg-neutral-700" 
+                            : isChallengeTarget 
+                            ? "bg-red-500 animate-ping" 
+                            : "bg-green-500 animate-pulse"
+                        }`} />
+                        <span className="text-[8px] font-mono tracking-widest text-neutral-500 group-hover:text-neutral-800 transition-colors">
+                          {isCompleted ? "COMPLETED" : isChallengeTarget ? "CHALLENGE" : "AVAILABLE"}
                         </span>
-                      )}
+                      </div>
                     </div>
-
+ 
                     <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tighter mb-2 transition-colors">
                       {scenario.title}
                     </h3>
@@ -413,7 +451,7 @@ export default function Home() {
                       {scenario.core_conflict}
                     </p>
                   </div>
-
+ 
                   {/* Play / Lock Indicator */}
                   <div className="flex justify-end relative z-10 w-full mt-6">
                     <div

@@ -92,5 +92,5 @@ if (errors.length > 0) {
   console.log("Validation Errors Found:");
   errors.forEach(e => console.log(e));
 } else {
-  console.log("All 48 scenarios passed the simulation test. 0 errors.");
+  console.log(`All ${scenarios.length} scenarios passed the simulation test. 0 errors.`);
 }

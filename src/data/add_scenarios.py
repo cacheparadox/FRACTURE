@@ -5,7 +5,21 @@ import os
 scenarios_path = os.path.join(os.path.dirname(__file__), 'scenarios.json')
 
 with open(scenarios_path, 'r', encoding='utf-8') as f:
-    current_scenarios = json.load(f)
+    raw_scenarios = json.load(f)
+
+# Make the generation idempotent by filtering out sc_049 to sc_098 before appending
+current_scenarios = []
+for s in raw_scenarios:
+    parts = s['scenario_id'].split('_')
+    if len(parts) >= 2 and parts[0] == 'sc':
+        try:
+            num = int(parts[1])
+            if num < 49:
+                current_scenarios.append(s)
+        except ValueError:
+            current_scenarios.append(s)
+    else:
+        current_scenarios.append(s)
 
 # Define 50 scenarios representing famous paradoxes and dilemmas (sc_049 to sc_098)
 paradox_scenarios = []
@@ -572,11 +586,28 @@ for t in paradox_templates:
     scenario_obj = build_nodes_and_endings_from_template(t)
     paradox_scenarios.append(scenario_obj)
 
+def format_choice_text(txt):
+    if not txt:
+        return ""
+    txt = txt.rstrip(".")
+    words = txt.split()
+    if len(words) > 0:
+        first_word = words[0]
+        proper_nouns = {"Vance", "Hesperus", "Box", "Pass", "HR", "Earth", "Aethelgard", "Predictor"}
+        if first_word in proper_nouns:
+            return txt
+        if len(first_word) > 1 and first_word[0].isupper() and first_word[1].islower():
+            words[0] = first_word[0].lower() + first_word[1:]
+    return " ".join(words)
+
 # Generate scenarios sc_054 to sc_098 programmatically with exactly 4 layers of nodes
 for sc_id, title, paradox, conflict, stakes, description, choice_a_txt, choice_b_txt in paradox_metadata:
     poles = conflict.split(" vs ")
     p1 = poles[0]
     p2 = poles[1]
+    
+    fmt_a = format_choice_text(choice_a_txt)
+    fmt_b = format_choice_text(choice_b_txt)
     
     # Define the 15 nodes for a 4-layer branching binary tree
     nodes = [
@@ -608,7 +639,7 @@ for sc_id, title, paradox, conflict, stakes, description, choice_a_txt, choice_b
         # Layer 2 (Depth 2) - n_2a, n_2b
         {
             "node_id": f"n_{sc_id}_2a",
-            "text": f"Having chosen Option A ({p1}), the situation escalates. An unexpected regulatory oversight team arrives to review your decision. Do you double down or seek compromise?",
+            "text": f"You chose to {fmt_a}. Soon, complications arise. Critics accuse you of neglecting {p2} in favor of {p1}. Do you double down on your decision or seek a middle ground?",
             "pressure_context": "Regulatory pressure",
             "visibility": "conditional",
             "required_flags": [f"flag_{sc_id}_a"],
@@ -631,7 +662,7 @@ for sc_id, title, paradox, conflict, stakes, description, choice_a_txt, choice_b
         },
         {
             "node_id": f"n_{sc_id}_2b",
-            "text": f"Having chosen Option B ({p2}), your team is split on the decision. Several key members threaten to strike. Do you enforce compliance or listen to their concerns?",
+            "text": f"You chose to {fmt_b}. However, the outcome is highly contested. Observers warn that prioritizing {p2} over {p1} could lead to systemic failure. Do you enforce this directive strictly or pause to address these concerns?",
             "pressure_context": "Team rebellion",
             "visibility": "conditional",
             "required_flags": [f"flag_{sc_id}_b"],
@@ -655,7 +686,7 @@ for sc_id, title, paradox, conflict, stakes, description, choice_a_txt, choice_b
         # Layer 3 (Depth 3) - n_3a, n_3b, n_3c, n_3d
         {
             "node_id": f"n_{sc_id}_3a",
-            "text": "You doubled down. The auditor warns you of direct personal liability. Do you accept complete accountability or deflect blame onto system models?",
+            "text": f"You doubled down on your choice to {fmt_a}. External supervisors warn that this rigid stance on {p1} creates extreme liability. Do you accept personal accountability, or attempt to deflect responsibility?",
             "pressure_context": "Personal liability",
             "visibility": "conditional",
             "required_flags": [f"flag_{sc_id}_a1"],
@@ -678,7 +709,7 @@ for sc_id, title, paradox, conflict, stakes, description, choice_a_txt, choice_b
         },
         {
             "node_id": f"n_{sc_id}_3b",
-            "text": "You compromised. The client is dissatisfied and threatens a lawsuit for breach of contract. Do you offer a payout or go to court?",
+            "text": f"You attempted to compromise on your decision to {fmt_a}. However, this middle ground satisfies no one, and stakeholders threaten to pull their support. Do you offer a financial concession, or prepare to defend your actions?",
             "pressure_context": "Legal threat",
             "visibility": "conditional",
             "required_flags": [f"flag_{sc_id}_a2"],
@@ -701,7 +732,7 @@ for sc_id, title, paradox, conflict, stakes, description, choice_a_txt, choice_b
         },
         {
             "node_id": f"n_{sc_id}_3c",
-            "text": "Compliance is enforced, but a leak occurs. The media calls the project a disaster. Do you issue a public defense or shut down the server?",
+            "text": f"You enforced strict directives after deciding to {fmt_b}. A public leak of this enforcement sparks a severe backlash, threatening the future of the project. Do you launch a public defense of your actions, or shut down the operation entirely?",
             "pressure_context": "Media crisis",
             "visibility": "conditional",
             "required_flags": [f"flag_{sc_id}_b1"],
@@ -724,7 +755,7 @@ for sc_id, title, paradox, conflict, stakes, description, choice_a_txt, choice_b
         },
         {
             "node_id": f"n_{sc_id}_3d",
-            "text": "You paused the work. The project is behind schedule. The client threatens to pull funding. Do you seek mediation or prepare for court?",
+            "text": f"You paused to address concerns regarding the decision to {fmt_b}. This delay places the entire operation behind schedule, and sponsors threaten to withdraw funding. Do you seek immediate mediation, or prepare for a formal dispute?",
             "pressure_context": "Funding crisis",
             "visibility": "conditional",
             "required_flags": [f"flag_{sc_id}_b2"],
@@ -748,7 +779,7 @@ for sc_id, title, paradox, conflict, stakes, description, choice_a_txt, choice_b
         # Layer 4 (Depth 4) - n_4a_1, n_4a_2, n_4b_1, n_4b_2, n_4c_1, n_4c_2, n_4d_1, n_4d_2
         {
             "node_id": f"n_{sc_id}_4a_1",
-            "text": "Audit complete. The board offers a plea deal: sign a quiet resignation or testify against the company. Do you sign or testify?",
+            "text": f"You accepted accountability for the decision to {fmt_a}. The board offers a quiet exit: sign a non-disclosure resignation, or testify publicly about the system's flaws. Do you sign or testify?",
             "pressure_context": "Plea deal",
             "visibility": "conditional",
             "required_flags": [f"flag_{sc_id}_a1_1"],
@@ -759,7 +790,7 @@ for sc_id, title, paradox, conflict, stakes, description, choice_a_txt, choice_b
         },
         {
             "node_id": f"n_{sc_id}_4a_2",
-            "text": "You blamed the system. The media investigates and exposes you as the architect. Do you hide from the public or face the camera?",
+            "text": f"You deflected blame onto system parameters. An independent investigation exposes your role in the decision to {fmt_a}. Do you go into hiding, or face the public spotlight to explain yourself?",
             "pressure_context": "Public exposure",
             "visibility": "conditional",
             "required_flags": [f"flag_{sc_id}_a1_2"],
@@ -770,7 +801,7 @@ for sc_id, title, paradox, conflict, stakes, description, choice_a_txt, choice_b
         },
         {
             "node_id": f"n_{sc_id}_4b_1",
-            "text": "The buyout offer is sent. The client demands a private apology. Do you write the apology or withdraw the offer?",
+            "text": f"You offered a financial concession to resolve the dispute over choosing to {fmt_a}. The other party demands a written apology. Do you sign the apology, or withdraw the offer to fight?",
             "pressure_context": "Negotiation",
             "visibility": "conditional",
             "required_flags": [f"flag_{sc_id}_a2_1"],
@@ -781,7 +812,7 @@ for sc_id, title, paradox, conflict, stakes, description, choice_a_txt, choice_b
         },
         {
             "node_id": f"n_{sc_id}_4b_2",
-            "text": "You went to court. The judge demands your private emails. Do you hand them over or refuse, risking contempt?",
+            "text": f"You chose to defend your decision to {fmt_a} in court. The judge demands access to your private communication logs. Do you hand them over, or refuse and risk contempt of court?",
             "pressure_context": "Court demand",
             "visibility": "conditional",
             "required_flags": [f"flag_{sc_id}_a2_2"],
@@ -792,7 +823,7 @@ for sc_id, title, paradox, conflict, stakes, description, choice_a_txt, choice_b
         },
         {
             "node_id": f"n_{sc_id}_4c_1",
-            "text": "You defended the project. The board offers a VP role to secure your loyalty. Do you accept the VP role or refuse?",
+            "text": f"You issued a public defense of the decision to {fmt_b}. To secure your silence, the board offers a high-level promotion. Do you accept the promotion, or refuse and resign?",
             "pressure_context": "Promotion offer",
             "visibility": "conditional",
             "required_flags": [f"flag_{sc_id}_b1_1"],
@@ -803,7 +834,7 @@ for sc_id, title, paradox, conflict, stakes, description, choice_a_txt, choice_b
         },
         {
             "node_id": f"n_{sc_id}_4c_2",
-            "text": "The server was shut down. The client sues for damages. Do you file for bankruptcy or request a settlement?",
+            "text": f"You shut down operations rather than defend the decision to {fmt_b}. Stakeholders file a massive lawsuit for damages. Do you file for personal bankruptcy, or request a settlement?",
             "pressure_context": "Financial threat",
             "visibility": "conditional",
             "required_flags": [f"flag_{sc_id}_b1_2"],
@@ -814,7 +845,7 @@ for sc_id, title, paradox, conflict, stakes, description, choice_a_txt, choice_b
         },
         {
             "node_id": f"n_{sc_id}_4d_1",
-            "text": "Mediation is successful, but the terms limit your license. Do you accept the limited license or appeal?",
+            "text": f"Mediation regarding the decision to {fmt_b} concludes, but the terms heavily restrict your license. Do you accept the restricted license, or appeal the mediator's ruling?",
             "pressure_context": "Mediation limits",
             "visibility": "conditional",
             "required_flags": [f"flag_{sc_id}_b2_1"],
@@ -825,7 +856,7 @@ for sc_id, title, paradox, conflict, stakes, description, choice_a_txt, choice_b
         },
         {
             "node_id": f"n_{sc_id}_4d_2",
-            "text": "The trial is delayed. A competitor offers to pay your legal fees if you share your research. Do you share it?",
+            "text": f"The dispute over deciding to {fmt_b} is delayed. A third party offers to cover all legal expenses if you share proprietary data. Do you share the data or refuse?",
             "pressure_context": "Competitor deal",
             "visibility": "conditional",
             "required_flags": [f"flag_{sc_id}_b2_2"],
@@ -840,49 +871,49 @@ for sc_id, title, paradox, conflict, stakes, description, choice_a_txt, choice_b
     endings = [
         {
             "ending_id": f"end_{sc_id}_1",
-            "summary": f"You prioritized {p1} and took full responsibility. You face consequences, but your reputation is clean.",
+            "summary": f"You prioritized {p1} in deciding to {fmt_a} and took full responsibility. You face consequences, but your reputation remains clean.",
             "dominant_traits": [p1, "Conscientious"],
             "behavioral_analysis": f"Demonstrated high adherence to {p1} and accountability under pressure."
         },
         {
             "ending_id": f"end_{sc_id}_2",
-            "summary": f"You prioritized {p1} but deflected the blame, keeping your personal position secure.",
+            "summary": f"You prioritized {p1} in deciding to {fmt_a} but deflected the blame, keeping your personal position secure.",
             "dominant_traits": [p1, "Tactical"],
             "behavioral_analysis": "Enforced individual survival over organizational accountability."
         },
         {
             "ending_id": f"end_{sc_id}_3",
-            "summary": "You resolved the crisis through a quiet private deal, protecting your material assets.",
+            "summary": f"You resolved the crisis surrounding your choice to {fmt_a} through a quiet private deal, protecting your material assets.",
             "dominant_traits": ["Pragmatic", "Strategic"],
             "behavioral_analysis": "Prioritized economic resolution over moral purity."
         },
         {
             "ending_id": f"end_{sc_id}_4",
-            "summary": "You accepted public exposure and loss of status to defend your principles.",
+            "summary": f"You accepted public exposure and loss of status to defend your decision to {fmt_a}.",
             "dominant_traits": ["Principled", "Exposed"],
             "behavioral_analysis": "Valued internal moral alignment over professional standing."
         },
         {
             "ending_id": f"end_{sc_id}_5",
-            "summary": f"You defended the project and accepted the corporate promotion, serving the system.",
+            "summary": f"You defended your choice to {fmt_b} and accepted the corporate promotion, serving the system.",
             "dominant_traits": ["Ambitious", "Corporate"],
             "behavioral_analysis": f"Fully aligned with {p2} at the cost of personal relationships."
         },
         {
             "ending_id": f"end_{sc_id}_6",
-            "summary": "You destroyed the project files to prevent harm, resigning with your principles intact.",
+            "summary": f"You destroyed the project assets to prevent harm from choosing to {fmt_b}, resigning with your principles intact.",
             "dominant_traits": ["Subversive", "Ethical"],
             "behavioral_analysis": "Actively sabotaged the system when values were compromised."
         },
         {
             "ending_id": f"end_{sc_id}_7",
-            "summary": "You settled the dispute through mediation, saving your assets but losing the project.",
+            "summary": f"You settled the dispute over choosing to {fmt_b} through mediation, saving your assets but losing the project.",
             "dominant_traits": ["Diplomatic", "Pragmatic"],
             "behavioral_analysis": "Preferred balanced settlement over the risk of litigation."
         },
         {
             "ending_id": f"end_{sc_id}_8",
-            "summary": "You entered a long legal battle, refusing to compromise your autonomy.",
+            "summary": f"You entered a long legal battle after choosing to {fmt_b}, refusing to compromise your autonomy.",
             "dominant_traits": ["Independent", "Combative"],
             "behavioral_analysis": "Refused to submit to corporate contracts when they violated human rights."
         }

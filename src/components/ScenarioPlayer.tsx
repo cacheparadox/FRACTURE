@@ -151,7 +151,15 @@ export default function ScenarioPlayer({ scenario, onComplete, onReset }: Props)
     if (!isEnding) {
       // Find any node that shares the base ID name or prefix (e.g. "l_5" matches "l_5" or "l_5_alt")
       const parts = nextId.split("_");
-      const basePrefix = parts[0] === "l" ? parts.slice(0, 2).join("_") : parts.slice(0, 3).join("_");
+      let basePrefix = nextId;
+      if (parts[0] === "l") {
+        basePrefix = parts.slice(0, 2).join("_");
+      } else if (parts[0] === "n" && parts[1] === "sc") {
+        basePrefix = parts.slice(0, 4).join("_");
+      } else if (parts[0] === "n") {
+        basePrefix = parts.slice(0, 3).join("_");
+      }
+
       const candidateNodes = scenario.nodes.filter(
         (n) => n.node_id === nextId || n.node_id.startsWith(basePrefix + "_")
       );

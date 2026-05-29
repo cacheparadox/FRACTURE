@@ -40,7 +40,16 @@ function traverse(scenario, currentNodeId, visited, pathHistory) {
       }
     } else {
       try {
-        const basePrefix = nextId.split("_").slice(0, 2).join("_");
+        const parts = nextId.split("_");
+        let basePrefix = nextId;
+        if (parts[0] === "l") {
+          basePrefix = parts.slice(0, 2).join("_");
+        } else if (parts[0] === "n" && parts[1] === "sc") {
+          basePrefix = parts.slice(0, 4).join("_");
+        } else if (parts[0] === "n") {
+          basePrefix = parts.slice(0, 3).join("_");
+        }
+
         const candidateNodes = scenario.nodes.filter(
           n => n.node_id === nextId || n.node_id.startsWith(basePrefix + "_")
         );

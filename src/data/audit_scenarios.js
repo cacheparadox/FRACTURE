@@ -36,13 +36,33 @@ scenarios.forEach((scenario) => {
     node.choices.forEach(choice => {
       const next = choice.next_node;
       
-      // Match candidate nodes using same prefix logic as ScenarioPlayer
-      const basePrefix = next.split("_").slice(0, 2).join("_");
+      // If choice has no next_node, but has ending_id, verify it points to a valid ending
+      if (!next) {
+        if (!choice.ending_id) {
+          console.error(`  [ERROR] Node "${currentId}" choice "${choice.choice_id}" has neither next_node nor ending_id`);
+          totalErrors++;
+        } else if (!endingIds.has(choice.ending_id)) {
+          console.error(`  [ERROR] Node "${currentId}" choice "${choice.choice_id}" points to non-existent ending "${choice.ending_id}"`);
+          totalErrors++;
+        }
+        return;
+      }
+      
+      const parts = next.split("_");
+      let basePrefix = next;
+      if (parts[0] === "l") {
+        basePrefix = parts.slice(0, 2).join("_");
+      } else if (parts[0] === "n" && parts[1] === "sc") {
+        basePrefix = parts.slice(0, 4).join("_");
+      } else if (parts[0] === "n") {
+        basePrefix = parts.slice(0, 3).join("_");
+      }
+      
       const candidates = scenario.nodes.filter(
         n => n.node_id === next || n.node_id.startsWith(basePrefix + "_")
       );
       
-      if (candidates.length === 0 && !endingIds.has(next)) {
+      if (candidates.length === 0) {
         console.error(`  [ERROR] Node "${currentId}" choice "${choice.choice_id}" points to non-existent target "${next}"`);
         totalErrors++;
       }

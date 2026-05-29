@@ -436,6 +436,9 @@ export default function ProfilePage() {
               scenario={selectedResult.scenario}
               result={selectedResult.result}
               onClose={() => setSelectedResult(null)}
+              onReplay={(scen) => {
+                router.push(`/?replay=${scen.scenario_id}`);
+              }}
             />
           )}
         </AnimatePresence>

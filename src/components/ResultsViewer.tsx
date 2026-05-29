@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { X, Share2, Award } from "lucide-react";
+import { X, Share2, Award, RotateCcw } from "lucide-react";
 import { Scenario } from "@/types/scenario";
 import { ScenarioResult } from "@/store/profileStore";
 import { AXIS_DATA } from "@/lib/axisData";
@@ -15,9 +15,10 @@ interface Props {
   scenario: Scenario;
   result: ScenarioResult;
   onClose: () => void;
+  onReplay?: (scenario: Scenario) => void;
 }
 
-export default function ResultsViewer({ scenario, result, onClose }: Props) {
+export default function ResultsViewer({ scenario, result, onClose, onReplay }: Props) {
   const p1 = scenario.core_conflict.split(" vs ")[0];
   const p2 = scenario.core_conflict.split(" vs ")[1];
 
@@ -128,16 +129,25 @@ export default function ResultsViewer({ scenario, result, onClose }: Props) {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
+            {onReplay && (
+              <button
+                onClick={() => onReplay(scenario)}
+                className="flex-1 py-4 border border-white hover:bg-white hover:text-black text-white font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-3 transition-colors bg-black cursor-pointer animate-fade-in"
+              >
+                <RotateCcw className="w-4 h-4" />
+                Re-run Simulation
+              </button>
+            )}
             <button
               onClick={handleCopyLink}
-              className="flex-1 py-4 border border-white/40 hover:border-white text-white font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-3 transition-colors bg-black"
+              className="flex-1 py-4 border border-white/40 hover:border-white text-white font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-3 transition-colors bg-black cursor-pointer"
             >
               <Share2 className="w-4 h-4" />
               Copy Share Link
             </button>
             <button
               onClick={onClose}
-              className="py-4 px-8 border border-neutral-800 hover:border-white text-neutral-400 hover:text-white font-bold uppercase tracking-widest text-xs transition-colors"
+              className="flex-1 sm:flex-none sm:px-8 py-4 border border-neutral-800 hover:border-white text-neutral-400 hover:text-white font-bold uppercase tracking-widest text-xs transition-colors cursor-pointer"
             >
               Close
             </button>

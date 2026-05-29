@@ -51,17 +51,38 @@ export default function Home() {
     return 0;
   });
 
-  // Decode challenge hash from URL
+  // Decode challenge hash from URL or check for replay query param
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const compareParam = params.get("compare");
+    let shouldCleanUrl = false;
+
     if (compareParam) {
       try {
         const decoded = JSON.parse(atob(compareParam));
         setChallengeData(decoded);
+        const targetScen = (scenariosData as unknown as Scenario[]).find((s) => s.scenario_id === decoded.scenarioId);
+        if (targetScen) {
+          setActiveScenario(targetScen);
+        }
+        shouldCleanUrl = true;
       } catch (e) {
         console.error("Failed to decode challenge payload", e);
       }
+    }
+
+    const replayParam = params.get("replay");
+    if (replayParam) {
+      const targetScen = (scenariosData as unknown as Scenario[]).find((s) => s.scenario_id === replayParam);
+      if (targetScen) {
+        setActiveScenario(targetScen);
+      }
+      shouldCleanUrl = true;
+    }
+
+    if (shouldCleanUrl) {
+      const newUrl = window.location.pathname;
+      window.history.replaceState({}, document.title, newUrl);
     }
   }, []);
 
@@ -387,7 +408,7 @@ export default function Home() {
                   key={scenario.scenario_id}
                   onClick={() => {
                     if (isCompleted) {
-                      const res = scenarioHistory.find((h) => h.scenarioId === scenario.scenario_id);
+                      const res = [...scenarioHistory].reverse().find((h) => h.scenarioId === scenario.scenario_id);
                       if (res) {
                         setSelectedResult({ scenario, result: res });
                       }
@@ -491,6 +512,10 @@ export default function Home() {
             scenario={selectedResult.scenario}
             result={selectedResult.result}
             onClose={() => setSelectedResult(null)}
+            onReplay={(scen) => {
+              setActiveScenario(scen);
+              setSelectedResult(null);
+            }}
           />
         )}
       </AnimatePresence>

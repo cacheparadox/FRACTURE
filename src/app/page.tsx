@@ -5,13 +5,15 @@ import Link from "next/link";
 import scenariosData from "@/data/scenarios.json";
 import { Scenario, Ending } from "@/types/scenario";
 import ScenarioPlayer from "@/components/ScenarioPlayer";
-import { Play, Lock, User, Settings } from "lucide-react";
-import { useProfileStore } from "@/store/profileStore";
+import { Play, Lock, User, Settings, Eye } from "lucide-react";
+import { useProfileStore, ScenarioResult } from "@/store/profileStore";
 import { motion, AnimatePresence } from "framer-motion";
+import ResultsViewer from "@/components/ResultsViewer";
 
 
 export default function Home() {
   const [activeScenario, setActiveScenario] = useState<Scenario | null>(null);
+  const [selectedResult, setSelectedResult] = useState<{ scenario: Scenario; result: ScenarioResult } | null>(null);
   const [showSettings, setShowSettings] = useState(false);
   
 
@@ -31,6 +33,7 @@ export default function Home() {
 
   const {
     completedScenarios,
+    scenarioHistory,
     isOnboarded,
     settings,
     setSetting,
@@ -378,15 +381,23 @@ export default function Home() {
               const originalIndex = scenarios.findIndex((s) => s.scenario_id === scenario.scenario_id);
               const isCompleted = completedScenarios.includes(scenario.scenario_id);
               const isChallengeTarget = challengeData?.scenarioId === scenario.scenario_id;
- 
+  
               return (
                 <button
                   key={scenario.scenario_id}
-                  onClick={() => !isCompleted && setActiveScenario(scenario)}
-                  disabled={isCompleted}
+                  onClick={() => {
+                    if (isCompleted) {
+                      const res = scenarioHistory.find((h) => h.scenarioId === scenario.scenario_id);
+                      if (res) {
+                        setSelectedResult({ scenario, result: res });
+                      }
+                    } else {
+                      setActiveScenario(scenario);
+                    }
+                  }}
                   className={`relative p-8 md:p-12 border text-left flex flex-col justify-between aspect-[1.8/1] transition-all group overflow-hidden ${
                     isCompleted
-                      ? "border-neutral-900 bg-neutral-950/40 text-neutral-600 cursor-not-allowed"
+                      ? "border-neutral-950 bg-neutral-950/20 text-neutral-400 hover:border-neutral-700 hover:bg-neutral-950/50"
                       : isChallengeTarget
                       ? "border-red-900 bg-black hover:border-red-500 hover:bg-[#080101] shadow-[0_0_15px_rgba(239,68,68,0.05)] hover:shadow-[0_0_20px_rgba(239,68,68,0.15)]"
                       : "border-neutral-800 bg-[#020202] hover:border-white hover:bg-white hover:text-black hover:shadow-[0_0_15px_rgba(255,255,255,0.05)]"
@@ -411,7 +422,7 @@ export default function Home() {
                         <span
                           className={`text-[10px] uppercase tracking-widest px-2 py-1 border font-bold transition-colors ${
                             isCompleted
-                              ? "border-neutral-800 text-neutral-700"
+                              ? "border-neutral-900 text-neutral-500"
                               : isChallengeTarget
                               ? "border-red-800 text-red-500"
                               : "border-white/30 text-white/50 group-hover:border-black group-hover:text-black"
@@ -425,7 +436,7 @@ export default function Home() {
                       <div className="flex items-center gap-2">
                         <span className={`w-1.5 h-1.5 rounded-full ${
                           isCompleted 
-                            ? "bg-neutral-700" 
+                            ? "bg-neutral-850" 
                             : isChallengeTarget 
                             ? "bg-red-500 animate-ping" 
                             : "bg-green-500 animate-pulse"
@@ -442,7 +453,7 @@ export default function Home() {
                     <p
                       className={`text-sm font-medium tracking-wide uppercase transition-colors ${
                         isCompleted
-                          ? "text-neutral-600"
+                          ? "text-neutral-500 group-hover:text-neutral-400"
                           : isChallengeTarget
                           ? "text-red-700 group-hover:text-red-400"
                           : "text-neutral-400 group-hover:text-black"
@@ -457,13 +468,13 @@ export default function Home() {
                     <div
                       className={`w-12 h-12 flex items-center justify-center border transition-all ${
                         isCompleted
-                          ? "border-neutral-800 text-neutral-800"
+                          ? "border-neutral-900 text-neutral-500 group-hover:border-neutral-550 group-hover:text-white"
                           : isChallengeTarget
                           ? "border-red-900 text-red-500 group-hover:border-red-500 group-hover:bg-red-500 group-hover:text-black"
                           : "border-white/20 text-white group-hover:border-black group-hover:bg-black group-hover:text-white"
                       }`}
                     >
-                      {isCompleted ? <Lock className="w-5 h-5" /> : <Play className="w-5 h-5 ml-1" />}
+                      {isCompleted ? <Eye className="w-5 h-5" /> : <Play className="w-5 h-5 ml-1" />}
                     </div>
                   </div>
                 </button>
@@ -472,6 +483,17 @@ export default function Home() {
           </motion.div>
         </main>
       )}
+
+      {/* Results Viewer Modal */}
+      <AnimatePresence>
+        {selectedResult && (
+          <ResultsViewer
+            scenario={selectedResult.scenario}
+            result={selectedResult.result}
+            onClose={() => setSelectedResult(null)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

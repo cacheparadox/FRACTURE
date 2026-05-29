@@ -6,8 +6,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useProfileStore } from "@/store/profileStore";
+import { useProfileStore, ScenarioResult } from "@/store/profileStore";
 import { AXIS_DATA, calculateArchetype, calculateConsistency } from "@/lib/axisData";
+import scenariosData from "@/data/scenarios.json";
+import ResultsViewer from "@/components/ResultsViewer";
+import { Scenario } from "@/types/scenario";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -15,6 +18,7 @@ export default function ProfilePage() {
   const [expandedAxis, setExpandedAxis] = useState<string | null>(null);
   const [confirmPurge, setConfirmPurge] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [selectedResult, setSelectedResult] = useState<{ scenario: Scenario; result: ScenarioResult } | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -381,12 +385,18 @@ export default function ProfilePage() {
           ) : (
             <div className="space-y-3">
               {scenarioHistory.map((entry, i) => (
-                <motion.div
+                <motion.button
                   key={`${entry.scenarioId}-${entry.timestamp}`}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.05 * i }}
-                  className="border border-neutral-800 hover:border-neutral-600 transition-colors p-6 flex flex-col md:flex-row justify-between gap-4"
+                  onClick={() => {
+                    const scen = scenariosData.find((s) => s.scenario_id === entry.scenarioId);
+                    if (scen) {
+                      setSelectedResult({ scenario: scen as any, result: entry });
+                    }
+                  }}
+                  className="border border-neutral-800 hover:border-neutral-600 hover:bg-neutral-950/40 text-left w-full bg-black transition-colors p-6 flex flex-col md:flex-row justify-between gap-4"
                 >
                   <div className="flex-1 min-w-0">
                     <h4 className="text-sm font-black uppercase tracking-[0.15em] mb-2">
@@ -413,11 +423,22 @@ export default function ProfilePage() {
                       })}
                     </p>
                   </div>
-                </motion.div>
+                </motion.button>
               ))}
             </div>
           )}
         </motion.section>
+
+        {/* Results Viewer Modal */}
+        <AnimatePresence>
+          {selectedResult && (
+            <ResultsViewer
+              scenario={selectedResult.scenario}
+              result={selectedResult.result}
+              onClose={() => setSelectedResult(null)}
+            />
+          )}
+        </AnimatePresence>
 
         {/* Footer spacer */}
         <div className="h-24" />

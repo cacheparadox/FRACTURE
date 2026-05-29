@@ -294,7 +294,7 @@ def build_nodes_and_endings_from_template(t):
         # Layer 1 (Depth 1) - n_1
         {
             "node_id": f"n_{sc_id}_1",
-            "text": f"{setup} [Theme: {paradox}]",
+            "text": setup,
             "pressure_context": "Initial dilemma",
             "visibility": "always",
             "required_flags": [],
@@ -609,316 +609,1368 @@ for sc_id, title, paradox, conflict, stakes, description, choice_a_txt, choice_b
     fmt_a = format_choice_text(choice_a_txt)
     fmt_b = format_choice_text(choice_b_txt)
     
-    # Define the 15 nodes for a 4-layer branching binary tree
-    nodes = [
-        # Layer 1 (Depth 1) - n_1
-        {
-            "node_id": f"n_{sc_id}_1",
-            "text": f"{description} [Theme: {paradox}]",
-            "pressure_context": "Initial dilemma",
-            "visibility": "always",
-            "required_flags": [],
-            "choices": [
-                {
-                    "choice_id": f"c_{sc_id}_1_a",
-                    "text": choice_a_txt,
-                    "effects": {p1: 3, p2: -2},
-                    "flags_set": {f"flag_{sc_id}_a": True},
-                    "next_node": f"n_{sc_id}_2a"
-                },
-                {
-                    "choice_id": f"c_{sc_id}_1_b",
-                    "text": choice_b_txt,
-                    "effects": {p2: 3, p1: -2},
-                    "flags_set": {f"flag_{sc_id}_b": True},
-                    "next_node": f"n_{sc_id}_2b"
-                }
-            ],
-            "timer_seconds": 12
-        },
-        # Layer 2 (Depth 2) - n_2a, n_2b
-        {
-            "node_id": f"n_{sc_id}_2a",
-            "text": f"You chose to {fmt_a}. Soon, complications arise. Critics accuse you of neglecting {p2} in favor of {p1}. Do you double down on your decision or seek a middle ground?",
-            "pressure_context": "Regulatory pressure",
-            "visibility": "conditional",
-            "required_flags": [f"flag_{sc_id}_a"],
-            "choices": [
-                {
-                    "choice_id": f"c_{sc_id}_2a_a",
-                    "text": "Double down on your course of action.",
-                    "effects": {p1: 2, "Courage": 2},
-                    "flags_set": {f"flag_{sc_id}_a1": True},
-                    "next_node": f"n_{sc_id}_3a"
-                },
-                {
-                    "choice_id": f"c_{sc_id}_2a_b",
-                    "text": "Seek a middle-ground compromise.",
-                    "effects": {"Diplomacy": 2, "Pragmatism": 2},
-                    "flags_set": {f"flag_{sc_id}_a2": True},
-                    "next_node": f"n_{sc_id}_3b"
-                }
-            ]
-        },
-        {
-            "node_id": f"n_{sc_id}_2b",
-            "text": f"You chose to {fmt_b}. However, the outcome is highly contested. Observers warn that prioritizing {p2} over {p1} could lead to systemic failure. Do you enforce this directive strictly or pause to address these concerns?",
-            "pressure_context": "Team rebellion",
-            "visibility": "conditional",
-            "required_flags": [f"flag_{sc_id}_b"],
-            "choices": [
-                {
-                    "choice_id": f"c_{sc_id}_2b_a",
-                    "text": "Enforce compliance with strict directives.",
-                    "effects": {"Obedience": 3, "Justice": 1},
-                    "flags_set": {f"flag_{sc_id}_b1": True},
-                    "next_node": f"n_{sc_id}_3c"
-                },
-                {
-                    "choice_id": f"c_{sc_id}_2b_b",
-                    "text": "Pause work to address their ethical concerns.",
-                    "effects": {"Compassion": 3, "Diplomacy": 2},
-                    "flags_set": {f"flag_{sc_id}_b2": True},
-                    "next_node": f"n_{sc_id}_3d"
-                }
-            ]
-        },
-        # Layer 3 (Depth 3) - n_3a, n_3b, n_3c, n_3d
-        {
-            "node_id": f"n_{sc_id}_3a",
-            "text": f"You doubled down on your choice to {fmt_a}. External supervisors warn that this rigid stance on {p1} creates extreme liability. Do you accept personal accountability, or attempt to deflect responsibility?",
-            "pressure_context": "Personal liability",
-            "visibility": "conditional",
-            "required_flags": [f"flag_{sc_id}_a1"],
-            "choices": [
-                {
-                    "choice_id": f"c_{sc_id}_3a_a",
-                    "text": "Accept personal accountability.",
-                    "effects": {"Integrity": 3, "Courage": 2},
-                    "flags_set": {f"flag_{sc_id}_a1_1": True},
-                    "next_node": f"n_{sc_id}_4a_1"
-                },
-                {
-                    "choice_id": f"c_{sc_id}_3a_b",
-                    "text": "Deflect blame to system parameters.",
-                    "effects": {"Pragmatism": 3, "Integrity": -3},
-                    "flags_set": {f"flag_{sc_id}_a1_2": True},
-                    "next_node": f"n_{sc_id}_4a_2"
-                }
-            ]
-        },
-        {
-            "node_id": f"n_{sc_id}_3b",
-            "text": f"You attempted to compromise on your decision to {fmt_a}. However, this middle ground satisfies no one, and stakeholders threaten to pull their support. Do you offer a financial concession, or prepare to defend your actions?",
-            "pressure_context": "Legal threat",
-            "visibility": "conditional",
-            "required_flags": [f"flag_{sc_id}_a2"],
-            "choices": [
-                {
-                    "choice_id": f"c_{sc_id}_3b_a",
-                    "text": "Offer a financial buyout.",
-                    "effects": {"Pragmatism": 3, "Integrity": -2},
-                    "flags_set": {f"flag_{sc_id}_a2_1": True},
-                    "next_node": f"n_{sc_id}_4b_1"
-                },
-                {
-                    "choice_id": f"c_{sc_id}_3b_b",
-                    "text": "Face them in court.",
-                    "effects": {"Courage": 3, "Independence": 2},
-                    "flags_set": {f"flag_{sc_id}_a2_2": True},
-                    "next_node": f"n_{sc_id}_4b_2"
-                }
-            ]
-        },
-        {
-            "node_id": f"n_{sc_id}_3c",
-            "text": f"You enforced strict directives after deciding to {fmt_b}. A public leak of this enforcement sparks a severe backlash, threatening the future of the project. Do you launch a public defense of your actions, or shut down the operation entirely?",
-            "pressure_context": "Media crisis",
-            "visibility": "conditional",
-            "required_flags": [f"flag_{sc_id}_b1"],
-            "choices": [
-                {
-                    "choice_id": f"c_{sc_id}_3c_a",
-                    "text": "Issue a public defense of the project.",
-                    "effects": {"Ambition": 3, "Rationality": 1},
-                    "flags_set": {f"flag_{sc_id}_b1_1": True},
-                    "next_node": f"n_{sc_id}_4c_1"
-                },
-                {
-                    "choice_id": f"c_{sc_id}_3c_b",
-                    "text": "Shut down the server, destroying assets.",
-                    "effects": {"Idealism": 3, "Courage": 2},
-                    "flags_set": {f"flag_{sc_id}_b1_2": True},
-                    "next_node": f"n_{sc_id}_4c_2"
-                }
-            ]
-        },
-        {
-            "node_id": f"n_{sc_id}_3d",
-            "text": f"You paused to address concerns regarding the decision to {fmt_b}. This delay places the entire operation behind schedule, and sponsors threaten to withdraw funding. Do you seek immediate mediation, or prepare for a formal dispute?",
-            "pressure_context": "Funding crisis",
-            "visibility": "conditional",
-            "required_flags": [f"flag_{sc_id}_b2"],
-            "choices": [
-                {
-                    "choice_id": f"c_{sc_id}_3d_a",
-                    "text": "Seek immediate mediation.",
-                    "effects": {"Diplomacy": 3, "Pragmatism": 2},
-                    "flags_set": {f"flag_{sc_id}_b2_1": True},
-                    "next_node": f"n_{sc_id}_4d_1"
-                },
-                {
-                    "choice_id": f"c_{sc_id}_3d_b",
-                    "text": "Prepare for a court battle.",
-                    "effects": {"Courage": 3, "Independence": 2},
-                    "flags_set": {f"flag_{sc_id}_b2_2": True},
-                    "next_node": f"n_{sc_id}_4d_2"
-                }
-            ]
-        },
-        # Layer 4 (Depth 4) - n_4a_1, n_4a_2, n_4b_1, n_4b_2, n_4c_1, n_4c_2, n_4d_1, n_4d_2
-        {
-            "node_id": f"n_{sc_id}_4a_1",
-            "text": f"You accepted accountability for the decision to {fmt_a}. The board offers a quiet exit: sign a non-disclosure resignation, or testify publicly about the system's flaws. Do you sign or testify?",
-            "pressure_context": "Plea deal",
-            "visibility": "conditional",
-            "required_flags": [f"flag_{sc_id}_a1_1"],
-            "choices": [
-                {"choice_id": f"c_{sc_id}_4a1_a", "text": "Sign the quiet resignation.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_1"},
-                {"choice_id": f"c_{sc_id}_4a1_b", "text": "Testify against the company.", "effects": {"Integrity": 3, "Courage": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_2"}
-            ]
-        },
-        {
-            "node_id": f"n_{sc_id}_4a_2",
-            "text": f"You deflected blame onto system parameters. An independent investigation exposes your role in the decision to {fmt_a}. Do you go into hiding, or face the public spotlight to explain yourself?",
-            "pressure_context": "Public exposure",
-            "visibility": "conditional",
-            "required_flags": [f"flag_{sc_id}_a1_2"],
-            "choices": [
-                {"choice_id": f"c_{sc_id}_4a2_a", "text": "Hide from the public.", "effects": {"Courage": -2}, "flags_set": {}, "ending_id": f"end_{sc_id}_2"},
-                {"choice_id": f"c_{sc_id}_4a2_b", "text": "Face the camera and explain.", "effects": {"Courage": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_3"}
-            ]
-        },
-        {
-            "node_id": f"n_{sc_id}_4b_1",
-            "text": f"You offered a financial concession to resolve the dispute over choosing to {fmt_a}. The other party demands a written apology. Do you sign the apology, or withdraw the offer to fight?",
-            "pressure_context": "Negotiation",
-            "visibility": "conditional",
-            "required_flags": [f"flag_{sc_id}_a2_1"],
-            "choices": [
-                {"choice_id": f"c_{sc_id}_4b1_a", "text": "Write the private apology.", "effects": {"Diplomacy": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_3"},
-                {"choice_id": f"c_{sc_id}_4b1_b", "text": "Withdraw the offer and fight.", "effects": {"Courage": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_4"}
-            ]
-        },
-        {
-            "node_id": f"n_{sc_id}_4b_2",
-            "text": f"You chose to defend your decision to {fmt_a} in court. The judge demands access to your private communication logs. Do you hand them over, or refuse and risk contempt of court?",
-            "pressure_context": "Court demand",
-            "visibility": "conditional",
-            "required_flags": [f"flag_{sc_id}_a2_2"],
-            "choices": [
-                {"choice_id": f"c_{sc_id}_4b2_a", "text": "Hand over the emails.", "effects": {"Obedience": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_4"},
-                {"choice_id": f"c_{sc_id}_4b2_b", "text": "Refuse to hand them over.", "effects": {"Independence": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_5"}
-            ]
-        },
-        {
-            "node_id": f"n_{sc_id}_4c_1",
-            "text": f"You issued a public defense of the decision to {fmt_b}. To secure your silence, the board offers a high-level promotion. Do you accept the promotion, or refuse and resign?",
-            "pressure_context": "Promotion offer",
-            "visibility": "conditional",
-            "required_flags": [f"flag_{sc_id}_b1_1"],
-            "choices": [
-                {"choice_id": f"c_{sc_id}_4c1_a", "text": "Accept the VP role.", "effects": {"Ambition": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_5"},
-                {"choice_id": f"c_{sc_id}_4c1_b", "text": "Refuse the role and leave.", "effects": {"Integrity": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_6"}
-            ]
-        },
-        {
-            "node_id": f"n_{sc_id}_4c_2",
-            "text": f"You shut down operations rather than defend the decision to {fmt_b}. Stakeholders file a massive lawsuit for damages. Do you file for personal bankruptcy, or request a settlement?",
-            "pressure_context": "Financial threat",
-            "visibility": "conditional",
-            "required_flags": [f"flag_{sc_id}_b1_2"],
-            "choices": [
-                {"choice_id": f"c_{sc_id}_4c2_a", "text": "File for bankruptcy.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_6"},
-                {"choice_id": f"c_{sc_id}_4c2_b", "text": "Request a settlement.", "effects": {"Diplomacy": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_7"}
-            ]
-        },
-        {
-            "node_id": f"n_{sc_id}_4d_1",
-            "text": f"Mediation regarding the decision to {fmt_b} concludes, but the terms heavily restrict your license. Do you accept the restricted license, or appeal the mediator's ruling?",
-            "pressure_context": "Mediation limits",
-            "visibility": "conditional",
-            "required_flags": [f"flag_{sc_id}_b2_1"],
-            "choices": [
-                {"choice_id": f"c_{sc_id}_4d1_a", "text": "Accept the limited license.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_7"},
-                {"choice_id": f"c_{sc_id}_4d1_b", "text": "Appeal the mediation terms.", "effects": {"Independence": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_8"}
-            ]
-        },
-        {
-            "node_id": f"n_{sc_id}_4d_2",
-            "text": f"The dispute over deciding to {fmt_b} is delayed. A third party offers to cover all legal expenses if you share proprietary data. Do you share the data or refuse?",
-            "pressure_context": "Competitor deal",
-            "visibility": "conditional",
-            "required_flags": [f"flag_{sc_id}_b2_2"],
-            "choices": [
-                {"choice_id": f"c_{sc_id}_4d2_a", "text": "Share the research.", "effects": {"Pragmatism": 2, "Integrity": -2}, "flags_set": {}, "ending_id": f"end_{sc_id}_8"},
-                {"choice_id": f"c_{sc_id}_4d2_b", "text": "Refuse to share.", "effects": {"Integrity": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_1"}
-            ]
-        }
-    ]
+    # Determine the theme of the scenario
+    tech_ids = {"sc_055", "sc_062", "sc_070", "sc_071", "sc_083", "sc_084", "sc_088", "sc_094", "sc_095", "sc_096", "sc_097"}
+    temporal_ids = {"sc_058", "sc_093"}
+    economic_ids = {"sc_056", "sc_064", "sc_065", "sc_067", "sc_073", "sc_074", "sc_078", "sc_079", "sc_085", "sc_090"}
+    survival_ids = {"sc_057", "sc_063", "sc_072", "sc_075", "sc_080", "sc_082", "sc_086", "sc_087"}
     
-    # Define 8 unique endings
-    endings = [
-        {
-            "ending_id": f"end_{sc_id}_1",
-            "summary": f"You prioritized {p1} in deciding to {fmt_a} and took full responsibility. You face consequences, but your reputation remains clean.",
-            "dominant_traits": [p1, "Conscientious"],
-            "behavioral_analysis": f"Demonstrated high adherence to {p1} and accountability under pressure."
-        },
-        {
-            "ending_id": f"end_{sc_id}_2",
-            "summary": f"You prioritized {p1} in deciding to {fmt_a} but deflected the blame, keeping your personal position secure.",
-            "dominant_traits": [p1, "Tactical"],
-            "behavioral_analysis": "Enforced individual survival over organizational accountability."
-        },
-        {
-            "ending_id": f"end_{sc_id}_3",
-            "summary": f"You resolved the crisis surrounding your choice to {fmt_a} through a quiet private deal, protecting your material assets.",
-            "dominant_traits": ["Pragmatic", "Strategic"],
-            "behavioral_analysis": "Prioritized economic resolution over moral purity."
-        },
-        {
-            "ending_id": f"end_{sc_id}_4",
-            "summary": f"You accepted public exposure and loss of status to defend your decision to {fmt_a}.",
-            "dominant_traits": ["Principled", "Exposed"],
-            "behavioral_analysis": "Valued internal moral alignment over professional standing."
-        },
-        {
-            "ending_id": f"end_{sc_id}_5",
-            "summary": f"You defended your choice to {fmt_b} and accepted the corporate promotion, serving the system.",
-            "dominant_traits": ["Ambitious", "Corporate"],
-            "behavioral_analysis": f"Fully aligned with {p2} at the cost of personal relationships."
-        },
-        {
-            "ending_id": f"end_{sc_id}_6",
-            "summary": f"You destroyed the project assets to prevent harm from choosing to {fmt_b}, resigning with your principles intact.",
-            "dominant_traits": ["Subversive", "Ethical"],
-            "behavioral_analysis": "Actively sabotaged the system when values were compromised."
-        },
-        {
-            "ending_id": f"end_{sc_id}_7",
-            "summary": f"You settled the dispute over choosing to {fmt_b} through mediation, saving your assets but losing the project.",
-            "dominant_traits": ["Diplomatic", "Pragmatic"],
-            "behavioral_analysis": "Preferred balanced settlement over the risk of litigation."
-        },
-        {
-            "ending_id": f"end_{sc_id}_8",
-            "summary": f"You entered a long legal battle after choosing to {fmt_b}, refusing to compromise your autonomy.",
-            "dominant_traits": ["Independent", "Combative"],
-            "behavioral_analysis": "Refused to submit to corporate contracts when they violated human rights."
-        }
-    ]
-    
+    if sc_id in tech_ids:
+        theme = "tech"
+    elif sc_id in temporal_ids:
+        theme = "temporal"
+    elif sc_id in economic_ids:
+        theme = "economic"
+    elif sc_id in survival_ids:
+        theme = "survival"
+    else:
+        theme = "philosophical"
+
+    if theme == "tech":
+        nodes = [
+            # Layer 1 (Depth 1) - n_1
+            {
+                "node_id": f"n_{sc_id}_1",
+                "text": description,
+                "pressure_context": "Initial dilemma",
+                "visibility": "always",
+                "required_flags": [],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_1_a",
+                        "text": choice_a_txt,
+                        "effects": {p1: 3, p2: -2},
+                        "flags_set": {f"flag_{sc_id}_a": True},
+                        "next_node": f"n_{sc_id}_2a"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_1_b",
+                        "text": choice_b_txt,
+                        "effects": {p2: 3, p1: -2},
+                        "flags_set": {f"flag_{sc_id}_b": True},
+                        "next_node": f"n_{sc_id}_2b"
+                    }
+                ],
+                "timer_seconds": 12
+            },
+            # Layer 2 (Depth 2) - n_2a, n_2b
+            {
+                "node_id": f"n_{sc_id}_2a",
+                "text": f"Your choice to {fmt_a} causes a critical heap overflow in the primary node. The system enters a safe-mode cycle. To keep the simulation running, you must decide how to handle the memory buffer.",
+                "pressure_context": "System instability",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_2a_a",
+                        "text": "Override the system safety limits.",
+                        "effects": {p1: 2, "Courage": 2},
+                        "flags_set": {f"flag_{sc_id}_a1": True},
+                        "next_node": f"n_{sc_id}_3a"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_2a_b",
+                        "text": "Initiate a database rollback.",
+                        "effects": {"Diplomacy": 2, "Pragmatism": 2},
+                        "flags_set": {f"flag_{sc_id}_a2": True},
+                        "next_node": f"n_{sc_id}_3b"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_2b",
+                "text": f"Choosing to {fmt_b} triggers a cryptographic mismatch. The core encryption keys are now out of sync, threatening a full system lock. How do you respond?",
+                "pressure_context": "Cryptographic lock",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_2b_a",
+                        "text": "Force compliance using an override key.",
+                        "effects": {"Obedience": 3, "Justice": 1},
+                        "flags_set": {f"flag_{sc_id}_b1": True},
+                        "next_node": f"n_{sc_id}_3c"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_2b_b",
+                        "text": "Halt synchronization to check drift.",
+                        "effects": {"Compassion": 3, "Diplomacy": 2},
+                        "flags_set": {f"flag_{sc_id}_b2": True},
+                        "next_node": f"n_{sc_id}_3d"
+                    }
+                ]
+            },
+            # Layer 3 (Depth 3) - n_3a, n_3b, n_3c, n_3d
+            {
+                "node_id": f"n_{sc_id}_3a",
+                "text": f"You overrode the safety limits. The simulation stabilized, but the high voltage has burned out the primary cooling unit. Do you bypass the auxiliary cooling block or shut down non-essential sectors?",
+                "pressure_context": "Hardware thermal threat",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a1"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3a_a",
+                        "text": "Bypass auxiliary cooling block.",
+                        "effects": {"Integrity": 3, "Courage": 2},
+                        "flags_set": {f"flag_{sc_id}_a1_1": True},
+                        "next_node": f"n_{sc_id}_4a_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3a_b",
+                        "text": "Shut down non-essential sectors.",
+                        "effects": {"Pragmatism": 3, "Integrity": -3},
+                        "flags_set": {f"flag_{sc_id}_a1_2": True},
+                        "next_node": f"n_{sc_id}_4a_2"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_3b",
+                "text": f"You initiated a rollback. The database is clean, but a metadata mismatch has stranded several active user connections in the virtual buffer. Do you force-terminate their sessions or rebuild the connection tables?",
+                "pressure_context": "Stranded connections",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a2"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3b_a",
+                        "text": "Force-terminate active sessions.",
+                        "effects": {"Pragmatism": 3, "Integrity": -2},
+                        "flags_set": {f"flag_{sc_id}_a2_1": True},
+                        "next_node": f"n_{sc_id}_4b_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3b_b",
+                        "text": "Rebuild connection tables manually.",
+                        "effects": {"Courage": 3, "Independence": 2},
+                        "flags_set": {f"flag_{sc_id}_a2_2": True},
+                        "next_node": f"n_{sc_id}_4b_2"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_3c",
+                "text": f"You forced the override. The keys matched, but the crude force-mount corrupted the security logs. The firewall has flagged this as an intrusion and closed all ports. Do you bypass the firewall or isolate the network?",
+                "pressure_context": "Intrusion warning",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b1"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3c_a",
+                        "text": "Bypass the local firewall.",
+                        "effects": {"Ambition": 3, "Rationality": 1},
+                        "flags_set": {f"flag_{sc_id}_b1_1": True},
+                        "next_node": f"n_{sc_id}_4c_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3c_b",
+                        "text": "Isolate the network segment.",
+                        "effects": {"Idealism": 3, "Courage": 2},
+                        "flags_set": {f"flag_{sc_id}_b1_2": True},
+                        "next_node": f"n_{sc_id}_4c_2"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_3d",
+                "text": f"You halted the sync to diagnose the drift. While analyzing the code, you discover a hidden backdoor siphoning telemetry to an external server. Do you close the backdoor or monitor it?",
+                "pressure_context": "Backdoor discovered",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b2"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3d_a",
+                        "text": "Close the backdoor immediately.",
+                        "effects": {"Diplomacy": 3, "Pragmatism": 2},
+                        "flags_set": {f"flag_{sc_id}_b2_1": True},
+                        "next_node": f"n_{sc_id}_4d_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3d_b",
+                        "text": "Monitor the data stream.",
+                        "effects": {"Courage": 3, "Independence": 2},
+                        "flags_set": {f"flag_{sc_id}_b2_2": True},
+                        "next_node": f"n_{sc_id}_4d_2"
+                    }
+                ]
+            },
+            # Layer 4 (Depth 4) - n_4a_1, n_4a_2, n_4b_1, n_4b_2, n_4c_1, n_4c_2, n_4d_1, n_4d_2
+            {
+                "node_id": f"n_{sc_id}_4a_1",
+                "text": "Bypassing the cooling block worked, but the heat has melted the physical telemetry drives. Do you extract the backup tapes or format the core?",
+                "pressure_context": "Melted drives",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a1_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4a1_a", "text": "Extract the physical backup tapes.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_1"},
+                    {"choice_id": f"c_{sc_id}_4a1_b", "text": "Format the core to prevent fire.", "effects": {"Integrity": 3, "Courage": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_2"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4a_2",
+                "text": "Shutting down sectors preserved the mainframe, but the affected users are protesting the sudden outage. Do you ignore their complaints or offer credit compensations?",
+                "pressure_context": "User protests",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a1_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4a2_a", "text": "Ignore user complaints.", "effects": {"Courage": -2}, "flags_set": {}, "ending_id": f"end_{sc_id}_2"},
+                    {"choice_id": f"c_{sc_id}_4a2_b", "text": "Offer credit compensations.", "effects": {"Courage": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_3"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4b_1",
+                "text": "Terminating the sessions caused permanent user data loss. The corporate audit demands a statement. Do you blame a software glitch or confess your intervention?",
+                "pressure_context": "Audit demand",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a2_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4b1_a", "text": "Blame the software glitch.", "effects": {"Diplomacy": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_3"},
+                    {"choice_id": f"c_{sc_id}_4b1_b", "text": "Confess manual intervention.", "effects": {"Courage": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_4"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4b_2",
+                "text": "Rebuilding the connection tables took hours, but the users are safe. However, the system is now running at 200% latency. Do you throttle performance or buy server bandwidth?",
+                "pressure_context": "System latency",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a2_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4b2_a", "text": "Throttle system performance.", "effects": {"Obedience": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_4"},
+                    {"choice_id": f"c_{sc_id}_4b2_b", "text": "Purchase external bandwidth.", "effects": {"Independence": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_5"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4c_1",
+                "text": "Bypassing the firewall exposed the system. A malware payload is executing in the registry. Do you run a destructive wipe or deploy quarantine filters?",
+                "pressure_context": "Malware payload",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b1_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4c1_a", "text": "Execute destructive system wipe.", "effects": {"Ambition": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_5"},
+                    {"choice_id": f"c_{sc_id}_4c1_b", "text": "Deploy local quarantine filters.", "effects": {"Integrity": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_6"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4c_2",
+                "text": "Isolating the network prevented external damage, but the system is now completely cut off from the global grid. Do you operate offline or restore connections?",
+                "pressure_context": "Network isolation",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b1_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4c2_a", "text": "Operate in offline mode.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_6"},
+                    {"choice_id": f"c_{sc_id}_4c2_b", "text": "Restore connections under monitoring.", "effects": {"Diplomacy": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_7"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4d_1",
+                "text": "You closed the backdoor. The siphoning stopped, but the hacker triggers a remote self-destruct script in retaliation. Do you pull the physical power plug or run a counter-exploit?",
+                "pressure_context": "Self-destruct threat",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b2_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4d1_a", "text": "Pull the physical power plug.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_7"},
+                    {"choice_id": f"c_{sc_id}_4d1_b", "text": "Execute a counter-exploit.", "effects": {"Independence": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_8"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4d_2",
+                "text": "Monitoring the stream revealed the receiver is a government security office. They demand you hand over the source code. Do you comply or refuse?",
+                "pressure_context": "Government demand",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b2_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4d2_a", "text": "Hand over the source code.", "effects": {"Pragmatism": 2, "Integrity": -2}, "flags_set": {}, "ending_id": f"end_{sc_id}_8"},
+                    {"choice_id": f"c_{sc_id}_4d2_b", "text": "Refuse and delete the logs.", "effects": {"Integrity": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_1"}
+                ]
+            }
+        ]
+        
+        endings = [
+            {"ending_id": f"end_{sc_id}_1", "summary": f"You stabilized the core through technical override, but lost physical telemetry backups.", "dominant_traits": [p1, "Conscientious"], "behavioral_analysis": "Valued core system runtime over physical data storage integrity."},
+            {"ending_id": f"end_{sc_id}_2", "summary": f"You formatted the core to avoid hardware fire, losing active simulation progress.", "dominant_traits": [p1, "Tactical"], "behavioral_analysis": "Prioritized fire safety over system uptime under pressure."},
+            {"ending_id": f"end_{sc_id}_3", "summary": f"You compensated users for the system rollback, preserving trust at minor cost.", "dominant_traits": ["Pragmatic", "Strategic"], "behavioral_analysis": "Maintained client relations through economic concessions."},
+            {"ending_id": f"end_{sc_id}_4", "summary": f"You confessed to the database intervention, facing severe corporate review.", "dominant_traits": ["Principled", "Exposed"], "behavioral_analysis": "Exhibited extreme integrity by admitting manual errors to the auditors."},
+            {"ending_id": f"end_{sc_id}_5", "summary": f"You siphoned bandwidth to maintain operations, keeping system latency low.", "dominant_traits": ["Ambitious", "Corporate"], "behavioral_analysis": "Acquired high-cost infrastructure to sustain user experience limits."},
+            {"ending_id": f"end_{sc_id}_6", "summary": f"You wiped the database to eradicate malware, saving the hardware from code decay.", "dominant_traits": ["Subversive", "Ethical"], "behavioral_analysis": "Used scorched-earth sanitization to remove malicious registry files."},
+            {"ending_id": f"end_{sc_id}_7", "summary": f"You operated offline, preventing external infection but losing network connectivity.", "dominant_traits": ["Diplomatic", "Pragmatic"], "behavioral_analysis": "Chose complete network isolation to secure localized databases."},
+            {"ending_id": f"end_{sc_id}_8", "summary": f"You counter-exploited the hacker, securing the mainframe through digital warfare.", "dominant_traits": ["Independent", "Combative"], "behavioral_analysis": "Defeated threat actors using advanced cybersecurity procedures."}
+        ]
+
+    elif theme == "temporal":
+        nodes = [
+            # Layer 1 (Depth 1) - n_1
+            {
+                "node_id": f"n_{sc_id}_1",
+                "text": description,
+                "pressure_context": "Initial dilemma",
+                "visibility": "always",
+                "required_flags": [],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_1_a",
+                        "text": choice_a_txt,
+                        "effects": {p1: 3, p2: -2},
+                        "flags_set": {f"flag_{sc_id}_a": True},
+                        "next_node": f"n_{sc_id}_2a"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_1_b",
+                        "text": choice_b_txt,
+                        "effects": {p2: 3, p1: -2},
+                        "flags_set": {f"flag_{sc_id}_b": True},
+                        "next_node": f"n_{sc_id}_2b"
+                    }
+                ],
+                "timer_seconds": 12
+            },
+            # Layer 2 (Depth 2) - n_2a, n_2b
+            {
+                "node_id": f"n_{sc_id}_2a",
+                "text": f"Deciding to {fmt_a} creates a minor temporal echo. The local chronology begins to shift, and you detect duplicate signatures in the system logs. How do you stabilize the timeline?",
+                "pressure_context": "Chronology shift",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_2a_a",
+                        "text": "Initiate a chronological purge of the echo.",
+                        "effects": {p1: 2, "Courage": 2},
+                        "flags_set": {f"flag_{sc_id}_a1": True},
+                        "next_node": f"n_{sc_id}_3a"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_2a_b",
+                        "text": "Allow the echo to run to observe its drift.",
+                        "effects": {"Diplomacy": 2, "Pragmatism": 2},
+                        "flags_set": {f"flag_{sc_id}_a2": True},
+                        "next_node": f"n_{sc_id}_3b"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_2b",
+                "text": f"Your choice to {fmt_b} causes a temporal displacement in the coordinates. The portal is unstable, and the arrival time of your payload is drifting. How do you secure the target?",
+                "pressure_context": "Displacement drift",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_2b_a",
+                        "text": "Force portal open using high power.",
+                        "effects": {"Obedience": 3, "Justice": 1},
+                        "flags_set": {f"flag_{sc_id}_b1": True},
+                        "next_node": f"n_{sc_id}_3c"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_2b_b",
+                        "text": "Shut portal and calculate new timeline.",
+                        "effects": {"Compassion": 3, "Diplomacy": 2},
+                        "flags_set": {f"flag_{sc_id}_b2": True},
+                        "next_node": f"n_{sc_id}_3d"
+                    }
+                ]
+            },
+            # Layer 3 (Depth 3) - n_3a, n_3b, n_3c, n_3d
+            {
+                "node_id": f"n_{sc_id}_3a",
+                "text": f"You purged the echo, but the displacement has erased a key historical event from your database, causing a localized memory fracture. Do you reconstruct the memory or accept the blank timeline?",
+                "pressure_context": "Memory fracture",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a1"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3a_a",
+                        "text": "Synthesize the missing history.",
+                        "effects": {"Integrity": 3, "Courage": 2},
+                        "flags_set": {f"flag_{sc_id}_a1_1": True},
+                        "next_node": f"n_{sc_id}_4a_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3a_b",
+                        "text": "Accept the blank timeline.",
+                        "effects": {"Pragmatism": 3, "Integrity": -3},
+                        "flags_set": {f"flag_{sc_id}_a1_2": True},
+                        "next_node": f"n_{sc_id}_4a_2"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_3b",
+                "text": f"You let the echo run. The twin timeline is now interacting with the present, and observers see ghosts of alternate choices. Do you erect dampeners or bridge the two timelines?",
+                "pressure_context": "Reality interference",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a2"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3b_a",
+                        "text": "Erect temporal dampeners.",
+                        "effects": {"Pragmatism": 3, "Integrity": -2},
+                        "flags_set": {f"flag_{sc_id}_a2_1": True},
+                        "next_node": f"n_{sc_id}_4b_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3b_b",
+                        "text": "Bridge timelines together.",
+                        "effects": {"Courage": 3, "Independence": 2},
+                        "flags_set": {f"flag_{sc_id}_a2_2": True},
+                        "next_node": f"n_{sc_id}_4b_2"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_3c",
+                "text": f"Forcing the portal open caused a micro-singularity at the destination. It is slowly consuming local matter. Do you collapse the portal or feed energy to stabilize the throat?",
+                "pressure_context": "Micro-singularity threat",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b1"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3c_a",
+                        "text": "Collapse the portal immediately.",
+                        "effects": {"Ambition": 3, "Rationality": 1},
+                        "flags_set": {f"flag_{sc_id}_b1_1": True},
+                        "next_node": f"n_{sc_id}_4c_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3c_b",
+                        "text": "Feed energy to stabilize the throat.",
+                        "effects": {"Idealism": 3, "Courage": 2},
+                        "flags_set": {f"flag_{sc_id}_b1_2": True},
+                        "next_node": f"n_{sc_id}_4c_2"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_3d",
+                "text": f"You shut down the portal. The calculation reveals that avoiding the paradox requires you to stay in the target timeline forever. Do you accept the exile or risk returning anyway?",
+                "pressure_context": "Paradox calculations",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b2"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3d_a",
+                        "text": "Accept timeline exile.",
+                        "effects": {"Diplomacy": 3, "Pragmatism": 2},
+                        "flags_set": {f"flag_{sc_id}_b2_1": True},
+                        "next_node": f"n_{sc_id}_4d_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3d_b",
+                        "text": "Risk returning to the present.",
+                        "effects": {"Courage": 3, "Independence": 2},
+                        "flags_set": {f"flag_{sc_id}_b2_2": True},
+                        "next_node": f"n_{sc_id}_4d_2"
+                    }
+                ]
+            },
+            # Layer 4 (Depth 4) - n_4a_1, n_4a_2, n_4b_1, n_4b_2, n_4c_1, n_4c_2, n_4d_1, n_4d_2
+            {
+                "node_id": f"n_{sc_id}_4a_1",
+                "text": "Synthesizing the history worked, but the artificial memories are causing mental degradation. Do you administer stabilizers or wipe the subject's memory?",
+                "pressure_context": "Mental degradation",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a1_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4a1_a", "text": "Administer temporal stabilizers.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_1"},
+                    {"choice_id": f"c_{sc_id}_4a1_b", "text": "Wipe memory completely.", "effects": {"Integrity": 3, "Courage": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_2"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4a_2",
+                "text": "Accepting the blank timeline leaves the subject in a vegetative state, but the universe is stable. Do you keep them on life support or let them pass?",
+                "pressure_context": "Vegetative subject",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a1_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4a2_a", "text": "Keep them on life support.", "effects": {"Courage": -2}, "flags_set": {}, "ending_id": f"end_{sc_id}_2"},
+                    {"choice_id": f"c_{sc_id}_4a2_b", "text": "Let them pass peacefully.", "effects": {"Courage": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_3"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4b_1",
+                "text": "The dampeners isolated the echoes, but now the city is split into disconnected reality bubbles. Do you force a merger of the bubbles or keep them separated?",
+                "pressure_context": "Reality bubbles",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a2_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4b1_a", "text": "Force merger of bubbles.", "effects": {"Diplomacy": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_3"},
+                    {"choice_id": f"c_{sc_id}_4b1_b", "text": "Maintain bubble separation.", "effects": {"Courage": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_4"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4b_2",
+                "text": "Bridging the timelines unified the present, but now every action is mirrored by an alternate self. Do you accept your double or fight for dominance?",
+                "pressure_context": "Double presence",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a2_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4b2_a", "text": "Coexist with alternate self.", "effects": {"Obedience": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_4"},
+                    {"choice_id": f"c_{sc_id}_4b2_b", "text": "Eliminate alternate self.", "effects": {"Independence": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_5"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4c_1",
+                "text": "Collapsing the portal cut off the singularity, but trapped your retrieval team on the other side. Do you launch a rescue probe or write them off?",
+                "pressure_context": "Stranded team",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b1_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4c1_a", "text": "Launch a rescue probe.", "effects": {"Ambition": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_5"},
+                    {"choice_id": f"c_{sc_id}_4c1_b", "text": "Write off stranded team.", "effects": {"Integrity": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_6"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4c_2",
+                "text": "Stabilizing the throat succeeded, but the anomaly has created a permanent gateway. Strange energy is bleeding through. Do you shield the area or build a research base?",
+                "pressure_context": "Gateway bleeding",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b1_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4c2_a", "text": "Shield area and quarantine.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_6"},
+                    {"choice_id": f"c_{sc_id}_4c2_b", "text": "Build a research base.", "effects": {"Diplomacy": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_7"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4d_1",
+                "text": "You accepted exile. In this primitive timeline, you have advanced technology. Do you rule as a deity or live in hiding?",
+                "pressure_context": "Deity status",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b2_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4d1_a", "text": "Rule as technological deity.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_7"},
+                    {"choice_id": f"c_{sc_id}_4d1_b", "text": "Live in complete hiding.", "effects": {"Independence": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_8"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4d_2",
+                "text": "You returned, but your timeline presence is now out of phase. You are a ghost, unable to touch anything. Do you search for a phase-shifter or accept your ghost form?",
+                "pressure_context": "Ghost state",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b2_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4d2_a", "text": "Search for phase-shifter.", "effects": {"Pragmatism": 2, "Integrity": -2}, "flags_set": {}, "ending_id": f"end_{sc_id}_8"},
+                    {"choice_id": f"c_{sc_id}_4d2_b", "text": "Accept phase-shifted state.", "effects": {"Integrity": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_1"}
+                ]
+            }
+        ]
+        
+        endings = [
+            {"ending_id": f"end_{sc_id}_1", "summary": f"You stabilized the timeline echo but caused mental memory fractures in key subjects.", "dominant_traits": [p1, "Conscientious"], "behavioral_analysis": "Prioritized timeline integrity at the cost of cognitive health."},
+            {"ending_id": f"end_{sc_id}_2", "summary": f"You wiped the subject's memory clean, leaving a blank history record but keeping the present stable.", "dominant_traits": [p1, "Tactical"], "behavioral_analysis": "Selected drastic amnestic overrides to resolve temporal paradoxes."},
+            {"ending_id": f"end_{sc_id}_3", "summary": f"You merged local reality bubbles together, creating minor geographical overlaps.", "dominant_traits": ["Pragmatic", "Strategic"], "behavioral_analysis": "Forced spatial integration of disjointed temporal frameworks."},
+            {"ending_id": f"end_{sc_id}_4", "summary": f"You accepted the presence of your alternate double, sharing resource allocations.", "dominant_traits": ["Principled", "Exposed"], "behavioral_analysis": "Exhibited high coexistence capacity with parallel self-identities."},
+            {"ending_id": f"end_{sc_id}_5", "summary": f"You launched a rescue probe to retrieve stranded members from the closed singularity.", "dominant_traits": ["Ambitious", "Corporate"], "behavioral_analysis": "Deployed capital-intensive probes into hostile gravity regions."},
+            {"ending_id": f"end_{sc_id}_6", "summary": f"You quarantined the gateway site, leaving the team stranded in the past forever.", "dominant_traits": ["Subversive", "Ethical"], "behavioral_analysis": "Enforced strict isolation to prevent cross-timeline contamination."},
+            {"ending_id": f"end_{sc_id}_7", "summary": f"You established a primitive empire as a deity, modifying local laws using futuristic knowledge.", "dominant_traits": ["Diplomatic", "Pragmatic"], "behavioral_analysis": "Adapted to historical exile by building an advanced empire."},
+            {"ending_id": f"end_{sc_id}_8", "summary": f"You returned as a phase-shifted phantom, monitoring the present without influence.", "dominant_traits": ["Independent", "Combative"], "behavioral_analysis": "Accepted non-physical observer status to preserve the prime timeline."}
+        ]
+
+    elif theme == "economic":
+        nodes = [
+            # Layer 1 (Depth 1) - n_1
+            {
+                "node_id": f"n_{sc_id}_1",
+                "text": description,
+                "pressure_context": "Initial dilemma",
+                "visibility": "always",
+                "required_flags": [],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_1_a",
+                        "text": choice_a_txt,
+                        "effects": {p1: 3, p2: -2},
+                        "flags_set": {f"flag_{sc_id}_a": True},
+                        "next_node": f"n_{sc_id}_2a"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_1_b",
+                        "text": choice_b_txt,
+                        "effects": {p2: 3, p1: -2},
+                        "flags_set": {f"flag_{sc_id}_b": True},
+                        "next_node": f"n_{sc_id}_2b"
+                    }
+                ],
+                "timer_seconds": 12
+            },
+            # Layer 2 (Depth 2) - n_2a, n_2b
+            {
+                "node_id": f"n_{sc_id}_2a",
+                "text": f"Your choice to {fmt_a} incurs an unexpected tariff. The project's liquidity drops to a critical low, and you are unable to cover the upcoming operational expenses. How do you balance the ledger?",
+                "pressure_context": "Liquidity crisis",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_2a_a",
+                        "text": "Liquidate reserve assets.",
+                        "effects": {p1: 2, "Courage": 2},
+                        "flags_set": {f"flag_{sc_id}_a1": True},
+                        "next_node": f"n_{sc_id}_3a"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_2a_b",
+                        "text": "Request an emergency credit extension.",
+                        "effects": {"Diplomacy": 2, "Pragmatism": 2},
+                        "flags_set": {f"flag_{sc_id}_a2": True},
+                        "next_node": f"n_{sc_id}_3b"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_2b",
+                "text": f"Choosing to {fmt_b} disrupts the local supply lines. A key contractor demands an immediate renegotiation of their fee, halting all deliveries. How do you proceed?",
+                "pressure_context": "Supply chain disruption",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_2b_a",
+                        "text": "Accept terms to resume deliveries.",
+                        "effects": {"Obedience": 3, "Justice": 1},
+                        "flags_set": {f"flag_{sc_id}_b1": True},
+                        "next_node": f"n_{sc_id}_3c"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_2b_b",
+                        "text": "Terminate contract and sue for breach.",
+                        "effects": {"Compassion": 3, "Diplomacy": 2},
+                        "flags_set": {f"flag_{sc_id}_b2": True},
+                        "next_node": f"n_{sc_id}_3d"
+                    }
+                ]
+            },
+            # Layer 3 (Depth 3) - n_3a, n_3b, n_3c, n_3d
+            {
+                "node_id": f"n_{sc_id}_3a",
+                "text": f"You liquidated the assets. The books are balanced, but the loss of reserves has downgraded your corporate credit rating. Do you cut research budgets or reduce employee benefits?",
+                "pressure_context": "Credit rating drop",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a1"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3a_a",
+                        "text": "Cut research budgets.",
+                        "effects": {"Integrity": 3, "Courage": 2},
+                        "flags_set": {f"flag_{sc_id}_a1_1": True},
+                        "next_node": f"n_{sc_id}_4a_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3a_b",
+                        "text": "Reduce employee benefits.",
+                        "effects": {"Pragmatism": 3, "Integrity": -3},
+                        "flags_set": {f"flag_{sc_id}_a1_2": True},
+                        "next_node": f"n_{sc_id}_4a_2"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_3b",
+                "text": f"The credit extension was approved, but the high interest rates drain weekly cash flow. A predatory lender offers to buy your debt in exchange for a board seat. Do you accept their offer or face liquidation?",
+                "pressure_context": "Predatory debt offer",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a2"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3b_a",
+                        "text": "Accept lender's board seat.",
+                        "effects": {"Pragmatism": 3, "Integrity": -2},
+                        "flags_set": {f"flag_{sc_id}_a2_1": True},
+                        "next_node": f"n_{sc_id}_4b_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3b_b",
+                        "text": "Refuse and face liquidation.",
+                        "effects": {"Courage": 3, "Independence": 2},
+                        "flags_set": {f"flag_{sc_id}_a2_2": True},
+                        "next_node": f"n_{sc_id}_4b_2"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_3c",
+                "text": f"You accepted their terms. Deliveries have resumed, but your margins are now razor-thin. To survive, you must find a way to offset the cost. Do you raise product prices or source cheaper materials?",
+                "pressure_context": "Thin margins",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b1"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3c_a",
+                        "text": "Raise product prices.",
+                        "effects": {"Ambition": 3, "Rationality": 1},
+                        "flags_set": {f"flag_{sc_id}_b1_1": True},
+                        "next_node": f"n_{sc_id}_4c_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3c_b",
+                        "text": "Source cheaper raw materials.",
+                        "effects": {"Idealism": 3, "Courage": 2},
+                        "flags_set": {f"flag_{sc_id}_b1_2": True},
+                        "next_node": f"n_{sc_id}_4c_2"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_3d",
+                "text": f"You terminated the contract. The legal dispute has tied up your operating capital in court escrow. Without funds, the facility is running on fumes. Do you lay off half the workforce or sell proprietary patents?",
+                "pressure_context": "Operating capital frozen",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b2"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3d_a",
+                        "text": "Lay off half the workforce.",
+                        "effects": {"Diplomacy": 3, "Pragmatism": 2},
+                        "flags_set": {f"flag_{sc_id}_b2_1": True},
+                        "next_node": f"n_{sc_id}_4d_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3d_b",
+                        "text": "Sell proprietary patents.",
+                        "effects": {"Courage": 3, "Independence": 2},
+                        "flags_set": {f"flag_{sc_id}_b2_2": True},
+                        "next_node": f"n_{sc_id}_4d_2"
+                    }
+                ]
+            },
+            # Layer 4 (Depth 4) - n_4a_1, n_4a_2, n_4b_1, n_4b_2, n_4c_1, n_4c_2, n_4d_1, n_4d_2
+            {
+                "node_id": f"n_{sc_id}_4a_1",
+                "text": "Cutting research halted all future development. The company is stable but stagnant. Do you merge with a competitor or continue independently?",
+                "pressure_context": "Stagnant business",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a1_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4a1_a", "text": "Merge with competitor.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_1"},
+                    {"choice_id": f"c_{sc_id}_4a1_b", "text": "Remain independent.", "effects": {"Integrity": 3, "Courage": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_2"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4a_2",
+                "text": "Reducing benefits led to a massive union protest outside your gates. Do you negotiate with the union reps or lock them out?",
+                "pressure_context": "Union protest",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a1_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4a2_a", "text": "Negotiate with union.", "effects": {"Courage": -2}, "flags_set": {}, "ending_id": f"end_{sc_id}_2"},
+                    {"choice_id": f"c_{sc_id}_4a2_b", "text": "Lock workers out.", "effects": {"Courage": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_3"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4b_1",
+                "text": "The lender takes the board seat and immediately votes to replace you as CEO. Do you launch a proxy fight or accept the buyout?",
+                "pressure_context": "CEO replacement vote",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a2_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4b1_a", "text": "Launch proxy battle.", "effects": {"Diplomacy": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_3"},
+                    {"choice_id": f"c_{sc_id}_4b1_b", "text": "Accept cash buyout.", "effects": {"Courage": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_4"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4b_2",
+                "text": "Liquidation starts. The court auctioneer is selling off the assets. Do you buy back the core code using personal funds or let it go?",
+                "pressure_context": "Asset liquidation",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a2_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4b2_a", "text": "Buy core code back.", "effects": {"Obedience": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_4"},
+                    {"choice_id": f"c_{sc_id}_4b2_b", "text": "Let assets be sold.", "effects": {"Independence": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_5"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4c_1",
+                "text": "Raising prices drove away your customer base. The sales volume collapses. Do you pivot to a luxury brand or return to original pricing?",
+                "pressure_context": "Sales volume collapse",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b1_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4c1_a", "text": "Pivot to luxury brand.", "effects": {"Ambition": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_5"},
+                    {"choice_id": f"c_{sc_id}_4c1_b", "text": "Return to original pricing.", "effects": {"Integrity": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_6"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4c_2",
+                "text": "The cheaper materials are fragile. Several products fail in the field, causing minor accidents. Do you issue a recall or deny liability?",
+                "pressure_context": "Fragile materials",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b1_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4c2_a", "text": "Issue product recall.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_6"},
+                    {"choice_id": f"c_{sc_id}_4c2_b", "text": "Deny liability completely.", "effects": {"Diplomacy": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_7"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4d_1",
+                "text": "Laying off the workforce halted operations. The remaining staff are overworked. Do you automate the tasks with AI or close the site?",
+                "pressure_context": "Overworked staff",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b2_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4d1_a", "text": "Automate tasks with AI.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_7"},
+                    {"choice_id": f"c_{sc_id}_4d1_b", "text": "Close site permanently.", "effects": {"Independence": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_8"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4d_2",
+                "text": "Selling the patents saved the company, but your competitor is now using your tech. Do you sue for infringement or design a replacement?",
+                "pressure_context": "Competitor using tech",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b2_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4d2_a", "text": "Sue for infringement.", "effects": {"Pragmatism": 2, "Integrity": -2}, "flags_set": {}, "ending_id": f"end_{sc_id}_8"},
+                    {"choice_id": f"c_{sc_id}_4d2_b", "text": "Design replacement tech.", "effects": {"Integrity": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_1"}
+                ]
+            }
+        ]
+        
+        endings = [
+            {"ending_id": f"end_{sc_id}_1", "summary": f"You merged with a competitor, sacrificing autonomous control to stay financially solvent.", "dominant_traits": [p1, "Conscientious"], "behavioral_analysis": "Valued corporate survival over corporate autonomy."},
+            {"ending_id": f"end_{sc_id}_2", "summary": f"You maintained independent status but are running at a continuous budget deficit.", "dominant_traits": [p1, "Tactical"], "behavioral_analysis": "Chose independent operations despite extreme capital constraints."},
+            {"ending_id": f"end_{sc_id}_3", "summary": f"You locked out union representatives, suffering permanent labor relations damage.", "dominant_traits": ["Pragmatic", "Strategic"], "behavioral_analysis": "Prioritized operations schedule over collective labor agreements."},
+            {"ending_id": f"end_{sc_id}_4", "summary": f"You accepted a cash buyout from a predatory lender, retiring from the firm completely.", "dominant_traits": ["Principled", "Exposed"], "behavioral_analysis": "Liquidated your ownership stake to exit high-interest debt cycles."},
+            {"ending_id": f"end_{sc_id}_5", "summary": f"You pivoted to a luxury market structure, recovering margins from wealthier clients.", "dominant_traits": ["Ambitious", "Corporate"], "behavioral_analysis": "Modified pricing models to serve high-end luxury client niches."},
+            {"ending_id": f"end_{sc_id}_6", "summary": f"You issued a voluntary product recall, absorbing massive short-term losses to secure consumer safety.", "dominant_traits": ["Subversive", "Ethical"], "behavioral_analysis": "Placed consumer welfare above quarterly balance sheets."},
+            {"ending_id": f"end_{sc_id}_7", "summary": f"You automated the facility using algorithms, operating at minimal labor expense.", "dominant_traits": ["Diplomatic", "Pragmatic"], "behavioral_analysis": "Removed human overhead to optimize system profit parameters."},
+            {"ending_id": f"end_{sc_id}_8", "summary": f"You shut down operations permanently, declaring bankruptcy to erase local liabilities.", "dominant_traits": ["Independent", "Combative"], "behavioral_analysis": "Terminated corporate liability through complete asset dissolution."}
+        ]
+
+    elif theme == "survival":
+        nodes = [
+            # Layer 1 (Depth 1) - n_1
+            {
+                "node_id": f"n_{sc_id}_1",
+                "text": description,
+                "pressure_context": "Initial dilemma",
+                "visibility": "always",
+                "required_flags": [],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_1_a",
+                        "text": choice_a_txt,
+                        "effects": {p1: 3, p2: -2},
+                        "flags_set": {f"flag_{sc_id}_a": True},
+                        "next_node": f"n_{sc_id}_2a"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_1_b",
+                        "text": choice_b_txt,
+                        "effects": {p2: 3, p1: -2},
+                        "flags_set": {f"flag_{sc_id}_b": True},
+                        "next_node": f"n_{sc_id}_2b"
+                    }
+                ],
+                "timer_seconds": 12
+            },
+            # Layer 2 (Depth 2) - n_2a, n_2b
+            {
+                "node_id": f"n_{sc_id}_2a",
+                "text": f"Deciding to {fmt_a} triggers a structural warning. The main dome's pressure hull is buckling under external forces. You must act to secure the perimeter.",
+                "pressure_context": "Structural failure",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_2a_a",
+                        "text": "Reinforce hull plates manually.",
+                        "effects": {p1: 2, "Courage": 2},
+                        "flags_set": {f"flag_{sc_id}_a1": True},
+                        "next_node": f"n_{sc_id}_3a"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_2a_b",
+                        "text": "Evacuate damaged sector immediately.",
+                        "effects": {"Diplomacy": 2, "Pragmatism": 2},
+                        "flags_set": {f"flag_{sc_id}_a2": True},
+                        "next_node": f"n_{sc_id}_3b"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_2b",
+                "text": f"Choosing to {fmt_b} exposes the sector to an external environmental hazard. Toxins are seeping into the air filtration unit. How do you secure the air supply?",
+                "pressure_context": "Toxin seepage",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_2b_a",
+                        "text": "Initiate emergency purge of ventilation.",
+                        "effects": {"Obedience": 3, "Justice": 1},
+                        "flags_set": {f"flag_{sc_id}_b1": True},
+                        "next_node": f"n_{sc_id}_3c"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_2b_b",
+                        "text": "Seal intakes and use reserve oxygen.",
+                        "effects": {"Compassion": 3, "Diplomacy": 2},
+                        "flags_set": {f"flag_{sc_id}_b2": True},
+                        "next_node": f"n_{sc_id}_3d"
+                    }
+                ]
+            },
+            # Layer 3 (Depth 3) - n_3a, n_3b, n_3c, n_3d
+            {
+                "node_id": f"n_{sc_id}_3a",
+                "text": f"You reinforced the hull, but the extra weight has overloaded the local power grid, cutting off lighting. Do you route battery power to the grid or stay in the dark?",
+                "pressure_context": "Power grid overload",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a1"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3a_a",
+                        "text": "Route battery power to the grid.",
+                        "effects": {"Integrity": 3, "Courage": 2},
+                        "flags_set": {f"flag_{sc_id}_a1_1": True},
+                        "next_node": f"n_{sc_id}_4a_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3a_b",
+                        "text": "Conserve battery for life support.",
+                        "effects": {"Pragmatism": 3, "Integrity": -3},
+                        "flags_set": {f"flag_{sc_id}_a1_2": True},
+                        "next_node": f"n_{sc_id}_4a_2"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_3b",
+                "text": f"You evacuated the sector. The refugees are packed into the core module, but food rations are dangerously low. Do you enforce strict rationing or send a party to scavenge?",
+                "pressure_context": "Refugee supply shortage",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a2"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3b_a",
+                        "text": "Enforce strict food rationing.",
+                        "effects": {"Pragmatism": 3, "Integrity": -2},
+                        "flags_set": {f"flag_{sc_id}_a2_1": True},
+                        "next_node": f"n_{sc_id}_4b_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3b_b",
+                        "text": "Send a scavenging party.",
+                        "effects": {"Courage": 3, "Independence": 2},
+                        "flags_set": {f"flag_{sc_id}_a2_2": True},
+                        "next_node": f"n_{sc_id}_4b_2"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_3c",
+                "text": f"The purge cleared the toxins, but the venting blew out the secondary seals. A severe storm is approaching the valley. Do you weld the seals in the storm or retreat to the bunker?",
+                "pressure_context": "Blown ventilation seals",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b1"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3c_a",
+                        "text": "Weld seals in the storm.",
+                        "effects": {"Ambition": 3, "Rationality": 1},
+                        "flags_set": {f"flag_{sc_id}_b1_1": True},
+                        "next_node": f"n_{sc_id}_4c_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3c_b",
+                        "text": "Retreat to safety bunker.",
+                        "effects": {"Idealism": 3, "Courage": 2},
+                        "flags_set": {f"flag_{sc_id}_b1_2": True},
+                        "next_node": f"n_{sc_id}_4c_2"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_3d",
+                "text": f"You sealed the air intakes. The reserve oxygen is steady, but carbon dioxide levels are rising rapidly. Do you bypass CO2 scrubbers or open manual vents slightly?",
+                "pressure_context": "Carbon dioxide spike",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b2"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3d_a",
+                        "text": "Bypass CO2 scrubbers.",
+                        "effects": {"Diplomacy": 3, "Pragmatism": 2},
+                        "flags_set": {f"flag_{sc_id}_b2_1": True},
+                        "next_node": f"n_{sc_id}_4d_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3d_b",
+                        "text": "Open manual vents slightly.",
+                        "effects": {"Courage": 3, "Independence": 2},
+                        "flags_set": {f"flag_{sc_id}_b2_2": True},
+                        "next_node": f"n_{sc_id}_4d_2"
+                    }
+                ]
+            },
+            # Layer 4 (Depth 4) - n_4a_1, n_4a_2, n_4b_1, n_4b_2, n_4c_1, n_4c_2, n_4d_1, n_4d_2
+            {
+                "node_id": f"n_{sc_id}_4a_1",
+                "text": "Routing battery power restored lights, but a short circuit starts an electrical fire in the power bay. Do you flood the bay with inert gas or fight it with foam?",
+                "pressure_context": "Power bay fire",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a1_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4a1_a", "text": "Flood bay with inert gas.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_1"},
+                    {"choice_id": f"c_{sc_id}_4a1_b", "text": "Fight fire with foam.", "effects": {"Integrity": 3, "Courage": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_2"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4a_2",
+                "text": "Conserving the battery kept life support running, but the darkness caused panic. A riot breaks out near the escape pods. Do you deploy crowd control or lock the pod bay?",
+                "pressure_context": "Pod bay riot",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a1_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4a2_a", "text": "Deploy crowd control.", "effects": {"Courage": -2}, "flags_set": {}, "ending_id": f"end_{sc_id}_2"},
+                    {"choice_id": f"c_{sc_id}_4a2_b", "text": "Lock pod bay doors.", "effects": {"Courage": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_3"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4b_1",
+                "text": "Rationing kept everyone alive, but the malnutrition has triggered a viral outbreak. Do you quarantine the sick or share meds equally?",
+                "pressure_context": "Viral outbreak",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a2_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4b1_a", "text": "Quarantine the sick.", "effects": {"Diplomacy": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_3"},
+                    {"choice_id": f"c_{sc_id}_4b1_b", "text": "Distribute meds equally.", "effects": {"Courage": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_4"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4b_2",
+                "text": "The scavengers returned with supplies, but brought back a leaking radioactive container. Do you eject it or construct a lead shield?",
+                "pressure_context": "Radioactive leakage",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a2_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4b2_a", "text": "Eject container into wild.", "effects": {"Obedience": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_4"},
+                    {"choice_id": f"c_{sc_id}_4b2_b", "text": "Construct lead shield.", "effects": {"Independence": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_5"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4c_1",
+                "text": "Welding in the storm succeeded, but you were struck by debris, fracturing your arm. Do you amputate the limb or treat it with antiseptic?",
+                "pressure_context": "Severely fractured arm",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b1_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4c1_a", "text": "Amputate damaged limb.", "effects": {"Ambition": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_5"},
+                    {"choice_id": f"c_{sc_id}_4c1_b", "text": "Treat wound with antiseptic.", "effects": {"Integrity": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_6"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4c_2",
+                "text": "Retreating to the bunker saved you, but the storm destroyed the outer antennas. You are cut off from rescue signals. Do you wait in the bunker or climb the mast to fix it?",
+                "pressure_context": "Antenna collapse",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b1_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4c2_a", "text": "Wait in bunker for rescue.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_6"},
+                    {"choice_id": f"c_{sc_id}_4c2_b", "text": "Climb mast to fix antenna.", "effects": {"Diplomacy": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_7"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4d_1",
+                "text": "Bypassing the scrubbers released toxic fumes, causing several crew members to hallucinate. One is holding the air valve open. Do you subdue them or reason with them?",
+                "pressure_context": "Hallucinating crew member",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b2_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4d1_a", "text": "Subdue crew member.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_7"},
+                    {"choice_id": f"c_{sc_id}_4d1_b", "text": "Reason with them.", "effects": {"Independence": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_8"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4d_2",
+                "text": "Opening the vents slightly let in clean air, but also let in a wild toxic creature nesting in the pipes. Do you flush the pipes with steam or hunt the creature?",
+                "pressure_context": "Creature in ventilation",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b2_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4d2_a", "text": "Flush pipes with steam.", "effects": {"Pragmatism": 2, "Integrity": -2}, "flags_set": {}, "ending_id": f"end_{sc_id}_8"},
+                    {"choice_id": f"c_{sc_id}_4d2_b", "text": "Hunt creature with rifle.", "effects": {"Integrity": 3}, "ending_id": f"end_{sc_id}_1"}
+                ]
+            }
+        ]
+        
+        endings = [
+            {"ending_id": f"end_{sc_id}_1", "summary": f"You flooded the power bay with inert gas, preserving structural integrity but losing backup battery systems.", "dominant_traits": [p1, "Conscientious"], "behavioral_analysis": "Chose immediate fire suppression over system power reserves."},
+            {"ending_id": f"end_{sc_id}_2", "summary": f"You fought the fire with foam but suffered minor toxic inhalation while securing the dome.", "dominant_traits": [p1, "Tactical"], "behavioral_analysis": "Exhibited high physical risk tolerance to resolve safety incidents."},
+            {"ending_id": f"end_{sc_id}_3", "summary": f"You locked the pod bay doors, preventing the riot from damaging escape vectors.", "dominant_traits": ["Pragmatic", "Strategic"], "behavioral_analysis": "Enforced quarantine gates under direct crowd pressure."},
+            {"ending_id": f"end_{sc_id}_4", "summary": f"You distributed medical supplies equally, resolving the outbreak but leaving reserves depleted.", "dominant_traits": ["Principled", "Exposed"], "behavioral_analysis": "Prioritized egalitarian resource allocation over stock security."},
+            {"ending_id": f"end_{sc_id}_5", "summary": f"You amputated your damaged limb in the field, surviving the infection but losing physical capabilities.", "dominant_traits": ["Ambitious", "Corporate"], "behavioral_analysis": "Exhibited drastic self-preservation capability under isolation."},
+            {"ending_id": f"end_{sc_id}_6", "summary": f"You retreated to the bunker, surviving the storm safely but losing connection to the rescue grid.", "dominant_traits": ["Subversive", "Ethical"], "behavioral_analysis": "Accepted signal isolation to preserve physical safety parameters."},
+            {"ending_id": f"end_{sc_id}_7", "summary": f"You climbed the antenna mast to repair signals, securing direct rescue dispatch.", "dominant_traits": ["Diplomatic", "Pragmatic"], "behavioral_analysis": "Confronted height hazards to restore communication arrays."},
+            {"ending_id": f"end_{sc_id}_8", "summary": f"You flushed the ventilation pipes with hot steam, killing the creature and clearing the air channels.", "dominant_traits": ["Independent", "Combative"], "behavioral_analysis": "Resolved hazard threats using high-pressure thermal flushes."}
+        ]
+
+    else: # theme == "philosophical"
+        nodes = [
+            # Layer 1 (Depth 1) - n_1
+            {
+                "node_id": f"n_{sc_id}_1",
+                "text": description,
+                "pressure_context": "Initial dilemma",
+                "visibility": "always",
+                "required_flags": [],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_1_a",
+                        "text": choice_a_txt,
+                        "effects": {p1: 3, p2: -2},
+                        "flags_set": {f"flag_{sc_id}_a": True},
+                        "next_node": f"n_{sc_id}_2a"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_1_b",
+                        "text": choice_b_txt,
+                        "effects": {p2: 3, p1: -2},
+                        "flags_set": {f"flag_{sc_id}_b": True},
+                        "next_node": f"n_{sc_id}_2b"
+                    }
+                ],
+                "timer_seconds": 12
+            },
+            # Layer 2 (Depth 2) - n_2a, n_2b
+            {
+                "node_id": f"n_{sc_id}_2a",
+                "text": f"Your decision to {fmt_a} challenges the local ethical council. They argue your choice violates the primary directive of collective fairness. How do you justify your action?",
+                "pressure_context": "Ethical challenge",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_2a_a",
+                        "text": "Argue from utilitarian benefit.",
+                        "effects": {p1: 2, "Courage": 2},
+                        "flags_set": {f"flag_{sc_id}_a1": True},
+                        "next_node": f"n_{sc_id}_3a"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_2a_b",
+                        "text": "Defend decision as moral right.",
+                        "effects": {"Diplomacy": 2, "Pragmatism": 2},
+                        "flags_set": {f"flag_{sc_id}_a2": True},
+                        "next_node": f"n_{sc_id}_3b"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_2b",
+                "text": f"Choosing to {fmt_b} creates an epistemic conflict. By prioritizing this option, you are forced to ignore empirical data that contradicts your premise. How do you resolve the doubt?",
+                "pressure_context": "Epistemic conflict",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_2b_a",
+                        "text": "Double down on initial logic.",
+                        "effects": {"Obedience": 3, "Justice": 1},
+                        "flags_set": {f"flag_{sc_id}_b1": True},
+                        "next_node": f"n_{sc_id}_3c"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_2b_b",
+                        "text": "Re-open inquiry for new data.",
+                        "effects": {"Compassion": 3, "Diplomacy": 2},
+                        "flags_set": {f"flag_{sc_id}_b2": True},
+                        "next_node": f"n_{sc_id}_3d"
+                    }
+                ]
+            },
+            # Layer 3 (Depth 3) - n_3a, n_3b, n_3c, n_3d
+            {
+                "node_id": f"n_{sc_id}_3a",
+                "text": f"You argued for the greater good. The council accepts it, but demands you sacrifice the property of a minority group to achieve this outcome. Do you comply or refuse?",
+                "pressure_context": "Utilitarian demands",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a1"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3a_a",
+                        "text": "Comply with sacrifice demand.",
+                        "effects": {"Integrity": 3, "Courage": 2},
+                        "flags_set": {f"flag_{sc_id}_a1_1": True},
+                        "next_node": f"n_{sc_id}_4a_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3a_b",
+                        "text": "Refuse sacrifice demand.",
+                        "effects": {"Pragmatism": 3, "Integrity": -3},
+                        "flags_set": {f"flag_{sc_id}_a1_2": True},
+                        "next_node": f"n_{sc_id}_4a_2"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_3b",
+                "text": f"You defended the moral right. However, this has angered the general population, who are suffering from the practical fallout of your choice. Do you enforce your ruling or resign?",
+                "pressure_context": "Public anger",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a2"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3b_a",
+                        "text": "Enforce moral ruling strictly.",
+                        "effects": {"Pragmatism": 3, "Integrity": -2},
+                        "flags_set": {f"flag_{sc_id}_a2_1": True},
+                        "next_node": f"n_{sc_id}_4b_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3b_b",
+                        "text": "Resign position in protest.",
+                        "effects": {"Courage": 3, "Independence": 2},
+                        "flags_set": {f"flag_{sc_id}_a2_2": True},
+                        "next_node": f"n_{sc_id}_4b_2"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_3c",
+                "text": f"You doubled down on your initial logic. But the logical paradox has caused a schism among your students, split between rival schools. Do you choose a side or remain neutral?",
+                "pressure_context": "Academic schism",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b1"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3c_a",
+                        "text": "Align with rationalist faction.",
+                        "effects": {"Ambition": 3, "Rationality": 1},
+                        "flags_set": {f"flag_{sc_id}_b1_1": True},
+                        "next_node": f"n_{sc_id}_4c_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3c_b",
+                        "text": "Remain neutral mediator.",
+                        "effects": {"Idealism": 3, "Courage": 2},
+                        "flags_set": {f"flag_{sc_id}_b1_2": True},
+                        "next_node": f"n_{sc_id}_4c_2"
+                    }
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_3d",
+                "text": f"You re-opened the inquiry. The new data shows your initial premise was wrong, but admitting this will destroy your academic career. Do you publish the correction or suppress the data?",
+                "pressure_context": "Career-destroying data",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b2"],
+                "choices": [
+                    {
+                        "choice_id": f"c_{sc_id}_3d_a",
+                        "text": "Publish correction and fallout.",
+                        "effects": {"Diplomacy": 3, "Pragmatism": 2},
+                        "flags_set": {f"flag_{sc_id}_b2_1": True},
+                        "next_node": f"n_{sc_id}_4d_1"
+                    },
+                    {
+                        "choice_id": f"c_{sc_id}_3d_b",
+                        "text": "Suppress data to protect career.",
+                        "effects": {"Courage": 3, "Independence": 2},
+                        "flags_set": {f"flag_{sc_id}_b2_2": True},
+                        "next_node": f"n_{sc_id}_4d_2"
+                    }
+                ]
+            },
+            # Layer 4 (Depth 4) - n_4a_1, n_4a_2, n_4b_1, n_4b_2, n_4c_1, n_4c_2, n_4d_1, n_4d_2
+            {
+                "node_id": f"n_{sc_id}_4a_1",
+                "text": "You authorized the sacrifice. The minority group has launched a high court appeal. Do you hire a lawyer or defend yourself?",
+                "pressure_context": "High court appeal",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a1_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4a1_a", "text": "Hire professional lawyer.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_1"},
+                    {"choice_id": f"c_{sc_id}_4a1_b", "text": "Defend yourself in court.", "effects": {"Integrity": 3, "Courage": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_2"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4a_2",
+                "text": "Refusing the sacrifice has stalled the project. The board wants to replace you. Do you fight their vote or accept a consultant role?",
+                "pressure_context": "Replacement vote",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a1_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4a2_a", "text": "Fight board's vote.", "effects": {"Courage": -2}, "flags_set": {}, "ending_id": f"end_{sc_id}_2"},
+                    {"choice_id": f"c_{sc_id}_4a2_b", "text": "Accept consultant role.", "effects": {"Courage": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_3"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4b_1",
+                "text": "Enforcing the ruling strictly sparked protests. The police ask to clear the square. Do you authorize force or withdraw the ruling?",
+                "pressure_context": "Square protest",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a2_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4b1_a", "text": "Authorize force to clear.", "effects": {"Diplomacy": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_3"},
+                    {"choice_id": f"c_{sc_id}_4b1_b", "text": "Withdraw ruling immediately.", "effects": {"Courage": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_4"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4b_2",
+                "text": "You resigned. An activist group asks you to lead their campaign to overthrow the council. Do you join them or retire?",
+                "pressure_context": "Activist campaign",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_a2_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4b2_a", "text": "Join overthrow campaign.", "effects": {"Obedience": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_4"},
+                    {"choice_id": f"c_{sc_id}_4b2_b", "text": "Live life in retirement.", "effects": {"Independence": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_5"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4c_1",
+                "text": "Aligning with the rationalists has isolated you from empiricists who accuse you of dogmatism. Do you publish a defense or ignore them?",
+                "pressure_context": "Dogmatism accusation",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b1_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4c1_a", "text": "Publish logical defense.", "effects": {"Ambition": 3}, "flags_set": {}, "ending_id": f"end_{sc_id}_5"},
+                    {"choice_id": f"c_{sc_id}_4c1_b", "text": "Ignore their accusations.", "effects": {"Integrity": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_6"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4c_2",
+                "text": "Remaining neutral has led both factions to view you as a coward plotting your banishment. Do you seek an alliance or accept banishment?",
+                "pressure_context": "Banishment plot",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b1_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4c2_a", "text": "Seek private alliance.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_6"},
+                    {"choice_id": f"c_{sc_id}_4c2_b", "text": "Accept banishment quietly.", "effects": {"Diplomacy": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_7"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4d_1",
+                "text": "Publishing the correction destroyed your credibility, but you feel free. A minor university offers a teaching post. Do you accept it or retire?",
+                "pressure_context": "Teaching post offer",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b2_1"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4d1_a", "text": "Accept teaching post.", "effects": {"Pragmatism": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_7"},
+                    {"choice_id": f"c_{sc_id}_4d1_b", "text": "Retire from academic life.", "effects": {"Independence": 2}, "flags_set": {}, "ending_id": f"end_{sc_id}_8"}
+                ]
+            },
+            {
+                "node_id": f"n_{sc_id}_4d_2",
+                "text": "Suppressing the data worked, but a colleague has found your notes and threatens blackmail. Do you promote them or report them?",
+                "pressure_context": "Blackmail threat",
+                "visibility": "conditional",
+                "required_flags": [f"flag_{sc_id}_b2_2"],
+                "choices": [
+                    {"choice_id": f"c_{sc_id}_4d2_a", "text": "Promote them for silence.", "effects": {"Pragmatism": 2, "Integrity": -2}, "flags_set": {}, "ending_id": f"end_{sc_id}_8"},
+                    {"choice_id": f"c_{sc_id}_4d2_b", "text": "Report blackmail immediately.", "effects": {"Integrity": 3}, "ending_id": f"end_{sc_id}_1"}
+                ]
+            }
+        ]
+        
+        endings = [
+            {"ending_id": f"end_{sc_id}_1", "summary": f"You authorized local sacrifices under utilitarian logic, defending the decision in court.", "dominant_traits": [p1, "Conscientious"], "behavioral_analysis": "Upheld collective logic even under legal scrutiny."},
+            {"ending_id": f"end_{sc_id}_2", "summary": f"You stood trial alone to defend the ethics of your actions, refusing corporate defense counsel.", "dominant_traits": [p1, "Tactical"], "behavioral_analysis": "Refused legal compromises to maintain absolute moral clarity."},
+            {"ending_id": f"end_{sc_id}_3", "summary": f"You stepped down to a consultant position, advising the ethical board from the sidelines.", "dominant_traits": ["Pragmatic", "Strategic"], "behavioral_analysis": "Retreated from direct rule to retain administrative influence."},
+            {"ending_id": f"end_{sc_id}_4", "summary": f"You joined the campaign to challenge the council's dogmas, becoming a prominent reform speaker.", "dominant_traits": ["Principled", "Exposed"], "behavioral_analysis": "Challenged the governing body when its logic became dogmatic."},
+            {"ending_id": f"end_{sc_id}_5", "summary": f"You retired to a quiet life, leaving the ethical schisms of the university behind.", "dominant_traits": ["Ambitious", "Corporate"], "behavioral_analysis": "Withdrew from intellectual dispute to seek personal peace."},
+            {"ending_id": f"end_{sc_id}_6", "summary": f"You published a rigorous logical defense of your school, cementing your academic legacy.", "dominant_traits": ["Subversive", "Ethical"], "behavioral_analysis": "Supported rationalist factions through formal academic publications."},
+            {"ending_id": f"end_{sc_id}_7", "summary": f"You accepted exile from the university, moving to a small remote village to teach simple arithmetic.", "dominant_traits": ["Diplomatic", "Pragmatic"], "behavioral_analysis": "Quietly accepted geographic banishment to preserve your sanity."},
+            {"ending_id": f"end_{sc_id}_8", "summary": f"You promoted the blackmailer, carrying the secret of the data compromise to your grave.", "dominant_traits": ["Independent", "Combative"], "behavioral_analysis": "Chose career self-preservation over empirical scientific honesty."}
+        ]
+
     scenario_obj = {
         "scenario_id": sc_id,
         "title": title,

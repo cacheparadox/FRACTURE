@@ -2,2057 +2,690 @@
   {
     "scenario_id": "sc_023",
     "title": "The Safe",
-    "core_conflict": "Law vs Empathy",
-    "pressure_type": "Desperate threat",
-    "relationship_dynamic": "Authority vs Desperation",
-    "stakes_type": "Lives",
-    "tone": "Tense",
-    "escalation_type": "Immediate physical danger",
+    "core_conflict": "Trust vs Verification",
+    "pressure_type": "Locked vault decryption",
+    "relationship_dynamic": "Operator vs Client",
+    "stakes_type": "Corporate secrecy",
+    "tone": "Suspenseful, technical",
     "nodes": [
       {
         "node_id": "n_023_1",
-        "text": "The gunman paces the lobby, voice cracking. 'I just need $50,000 for the surgery. Nobody gets hurt if you open the vault.' He hasn't raised his weapon.",
-        "pressure_context": "Initial confrontation",
+        "text": "A client brings in a locked military-grade cold vault containing evidence of systemic financial fraud. Opening it requires bypassing a secure keyholder.",
+        "pressure_context": "The vault hums on your workbench.",
         "visibility": "always",
         "required_flags": [],
         "choices": [
           {
             "choice_id": "c_023_1_a",
-            "text": "Trigger the silent alarm under your desk.",
-            "effects": {
-              "Obedience": 2,
-              "Rationality": 1,
-              "Compassion": -2
-            },
-            "flags_set": {
-              "flag_023_alarm_pressed": true
-            },
-            "next_node": "n_023_2a"
+            "text": "Bribe the secure keyholder to get the decryption codes.",
+            "effects": { "Pragmatism": 3, "Integrity": -3 },
+            "flags_set": { "safe_bribed": true },
+            "next_node": "n_023_2"
           },
           {
             "choice_id": "c_023_1_b",
-            "text": "Step forward and calmly ask about his child.",
-            "effects": {
-              "Compassion": 3,
-              "Courage": 2,
-              "Pragmatism": -1
-            },
-            "flags_set": {
-              "flag_023_empathy_shown": true
-            },
-            "next_node": "n_023_2b"
+            "text": "Attempt a brute-force decryption bypass.",
+            "effects": { "Rationality": 3, "Pragmatism": -2 },
+            "flags_set": { "safe_brute": true },
+            "next_node": "n_023_2"
           }
         ]
       },
       {
-        "node_id": "n_023_2a",
-        "text": "The alarm is silent, but the gunman notices your subtle movement. He points the gun directly at your chest, hands shaking violently.",
-        "pressure_context": "Suspicion raised",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_023_alarm_pressed"
-        ],
-        "timer_seconds": 10,
+        "node_id": "n_023_2",
+        "text": "A representative of the politician whose fraud is detailed in the vault offers you $100,000 to delete the files during decryption.",
+        "pressure_context": "Private phone screen glowing.",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_023_2a_a",
-            "text": "Lie and say you were reaching for your keys.",
-            "effects": {
-              "Pragmatism": 2,
-              "Integrity": -2
-            },
-            "flags_set": {
-              "flag_023_lied": true
-            },
-            "next_node": "n_023_3a"
+            "choice_id": "c_023_2_a",
+            "text": "Accept the money. Erase the files.",
+            "effects": { "Ambition": 3, "Integrity": -4 },
+            "flags_set": { "safe_erased": true },
+            "next_node": "n_023_3"
           },
           {
-            "choice_id": "c_023_2a_b",
-            "text": "Admit you pressed the alarm and urge him to run before cops arrive.",
-            "effects": {
-              "Integrity": 2,
-              "Courage": 2,
-              "Obedience": -2
-            },
-            "flags_set": {
-              "flag_023_warned_robber": true
-            },
-            "next_node": "n_023_3b"
+            "choice_id": "c_023_2_b",
+            "text": "Refuse the money. Proceed with the decryption.",
+            "effects": { "Integrity": 3, "Ambition": -2 },
+            "flags_set": { "safe_decrypted": true },
+            "next_node": "n_023_3"
           }
         ]
       },
       {
-        "node_id": "n_023_2b",
-        "text": "He hesitates, pulling out a crumpled photo of a young girl. 'Leukemia,' he mutters. The security guard reaches for his holster.",
-        "pressure_context": "De-escalation attempt",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_023_empathy_shown"
-        ],
-        "timer_seconds": 8,
+        "node_id": "n_023_3",
+        "text": "The decrypted files contain a hitlist of corporate whistleblowers. Warning them immediately will expose your decryption signature to the politician's agents.",
+        "pressure_context": "Scrolling list of names.",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_023_2b_a",
-            "text": "Order the guard to stand down.",
-            "effects": {
-              "Compassion": 2,
-              "Courage": 1,
-              "Obedience": -2
-            },
-            "flags_set": {
-              "flag_023_guard_stopped": true
-            },
-            "next_node": "n_023_3c"
+            "choice_id": "c_023_3_a",
+            "text": "Warn the whistleblowers immediately.",
+            "effects": { "Compassion": 3, "Courage": 2 },
+            "flags_set": { "safe_warned": true },
+            "next_node": "n_023_4"
           },
           {
-            "choice_id": "c_023_2b_b",
-            "text": "Let the guard draw his weapon to regain control.",
-            "effects": {
-              "Rationality": 2,
-              "Compassion": -2
-            },
-            "flags_set": {
-              "flag_023_guard_armed": true
-            },
-            "next_node": "n_023_3d"
+            "choice_id": "c_023_3_b",
+            "text": "Deliver files to the authorities silently.",
+            "effects": { "Pragmatism": 3, "Compassion": -2 },
+            "flags_set": { "safe_police": true },
+            "next_node": "n_023_4"
           }
         ]
       },
       {
-        "node_id": "n_023_3a",
-        "text": "He buys the lie but drags you to the vault door. 'Open it now,' he screams as police sirens echo outside.",
-        "pressure_context": "Police arriving",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_023_lied"
-        ],
+        "node_id": "n_023_4",
+        "text": "Security guards arrive at your office. Do you destroy the decryption drive to protect yourself, or flee with the drive to preserve the evidence?",
+        "pressure_context": "Footsteps in the corridor.",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_023_3a_a",
-            "text": "Stall by fumbling the combination.",
-            "effects": {
-              "Courage": 2,
-              "Obedience": 1,
-              "Compassion": -1
-            },
-            "flags_set": {},
-            "next_node": "end_023_hostage"
+            "choice_id": "c_023_4_a",
+            "text": "Destroy the drive. Protect your life.",
+            "effects": { "Pragmatism": 3, "Courage": -3 },
+            "ending_id": "end_023_secure"
           },
           {
-            "choice_id": "c_023_3a_b",
-            "text": "Open the vault to get him out quickly.",
-            "effects": {
-              "Pragmatism": 2,
-              "Obedience": -2
-            },
-            "flags_set": {},
-            "next_node": "end_023_accomplice"
-          }
-        ]
-      },
-      {
-        "node_id": "n_023_3b",
-        "text": "He stares at you, horrified, then drops the gun and bolts for the back exit just as swat teams breach the front doors.",
-        "pressure_context": "Raid",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_023_warned_robber"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_023_3b_a",
-            "text": "Tell the police he fled out the back.",
-            "effects": {
-              "Justice": 2,
-              "Obedience": 2,
-              "Compassion": -2
-            },
-            "flags_set": {},
-            "next_node": "end_023_arrested"
-          },
-          {
-            "choice_id": "c_023_3b_b",
-            "text": "Point the police toward the basement to buy him time.",
-            "effects": {
-              "Compassion": 3,
-              "Integrity": -2,
-              "Obedience": -3
-            },
-            "flags_set": {},
-            "next_node": "end_023_escaped"
-          }
-        ]
-      },
-      {
-        "node_id": "n_023_3c",
-        "text": "The guard lowers his weapon. The father breaks down in tears. 'I don't want to hurt anyone, I just want my daughter back.'",
-        "pressure_context": "Surrender",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_023_guard_stopped"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_023_3c_a",
-            "text": "Offer to start a charity fund for his daughter if he surrenders.",
-            "effects": {
-              "Diplomacy": 3,
-              "Compassion": 2,
-              "Idealism": 1
-            },
-            "flags_set": {},
-            "next_node": "end_023_surrender"
-          },
-          {
-            "choice_id": "c_023_3c_b",
-            "text": "Quietly slip him 50k from a pre-counted bag and tell him to walk out.",
-            "effects": {
-              "Compassion": 3,
-              "Independence": 2,
-              "Justice": -3
-            },
-            "flags_set": {},
-            "next_node": "end_023_accomplice"
-          }
-        ]
-      },
-      {
-        "node_id": "n_023_3d",
-        "text": "The guard draws his gun. The robber panics, grabbing a teller as a human shield. The situation is spiraling.",
-        "pressure_context": "Hostage situation",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_023_guard_armed"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_023_3d_a",
-            "text": "Tackle the robber yourself to save the teller.",
-            "effects": {
-              "Courage": 3,
-              "Pragmatism": -2,
-              "Idealism": 2
-            },
-            "flags_set": {},
-            "next_node": "end_023_casualty"
-          },
-          {
-            "choice_id": "c_023_3d_b",
-            "text": "Beg the guard to shoot the robber.",
-            "effects": {
-              "Rationality": 2,
-              "Compassion": -3,
-              "Justice": 1
-            },
-            "flags_set": {},
-            "next_node": "end_023_arrested"
-          }
-        ]
-      },
-      {
-        "node_id": "n_023_dummy1",
-        "text": "Dummy node to reach 8 nodes.",
-        "pressure_context": "None",
-        "visibility": "conditional",
-        "required_flags": [
-          "impossible"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_023_d1",
-            "text": "Dummy",
-            "effects": {},
-            "flags_set": {},
-            "next_node": "end_023_hostage"
+            "choice_id": "c_023_4_b",
+            "text": "Flee with the drive. Risk your life for justice.",
+            "effects": { "Courage": 4, "Idealism": 3 },
+            "ending_id": "end_023_exposed"
           }
         ]
       }
     ],
     "endings": [
       {
-        "ending_id": "end_023_hostage",
-        "summary": "You stalled until SWAT arrived. A standoff ensued, ending with the father's death. The bank's money is safe.",
-        "dominant_traits": [
-          "Obedience",
-          "Pragmatism"
-        ],
-        "behavioral_analysis": "Prioritized institutional rules and physical assets over human life, exhibiting extreme adherence to protocol."
+        "ending_id": "end_023_secure",
+        "summary": "You destroyed the files. You are safe, but the corporate fraud continues undetected.",
+        "dominant_traits": [ "Pragmatism", "Stoicism" ],
+        "behavioral_analysis": "Prioritizes physical security over moral crusades."
       },
       {
-        "ending_id": "end_023_accomplice",
-        "summary": "You gave him the money. He escaped, but you were fired and face criminal conspiracy charges.",
-        "dominant_traits": [
-          "Compassion",
-          "Independence"
-        ],
-        "behavioral_analysis": "Willing to sacrifice personal standing and legal status for radical empathy."
-      },
-      {
-        "ending_id": "end_023_arrested",
-        "summary": "The father was apprehended quickly. His child did not get the surgery.",
-        "dominant_traits": [
-          "Justice",
-          "Rationality"
-        ],
-        "behavioral_analysis": "Strict adherence to the law; viewed the perpetrator solely as a threat regardless of motive."
-      },
-      {
-        "ending_id": "end_023_escaped",
-        "summary": "You actively aided his escape. He got away, but you face severe questioning.",
-        "dominant_traits": [
-          "Compassion",
-          "Idealism"
-        ],
-        "behavioral_analysis": "Rebelled against authority to achieve what you perceived as a greater moral good."
-      },
-      {
-        "ending_id": "end_023_surrender",
-        "summary": "You talked him down. He is serving time, but your charity drive saved his daughter.",
-        "dominant_traits": [
-          "Diplomacy",
-          "Compassion"
-        ],
-        "behavioral_analysis": "Resolved conflict through de-escalation and creative problem-solving, honoring both law and empathy."
-      },
-      {
-        "ending_id": "end_023_casualty",
-        "summary": "Your intervention led to a chaotic scuffle. You were injured, but the teller was saved.",
-        "dominant_traits": [
-          "Courage",
-          "Idealism"
-        ],
-        "behavioral_analysis": "Highly reactive and willing to risk personal safety for immediate tactical resolution."
+        "ending_id": "end_023_exposed",
+        "summary": "You fled and published the evidence. The politician was indicted, and you are living under a new name.",
+        "dominant_traits": [ "Courage", "Idealism" ],
+        "behavioral_analysis": "Accepts high personal risk for structural truth."
       }
     ]
   },
   {
     "scenario_id": "sc_024",
     "title": "The Drone",
-    "core_conflict": "Collateral damage vs Mission success",
-    "pressure_type": "Time window",
-    "relationship_dynamic": "Operator vs Target",
-    "stakes_type": "Military/Civilian lives",
-    "tone": "Clinical",
-    "escalation_type": "Tick-tock scenario",
+    "core_conflict": "Safety vs Privacy",
+    "pressure_type": "Neighborhood surveillance",
+    "relationship_dynamic": "Neighbor vs Neighbor",
+    "stakes_type": "Privacy",
+    "tone": "Paranoid, suburban",
     "nodes": [
       {
         "node_id": "n_024_1",
-        "text": "The target is confirmed inside the hospital compound. He is coordinating an attack that will kill thousands. Window closes in 90 seconds.",
-        "pressure_context": "Initial targeting",
+        "text": "A neighbor's high-tech drone is hovering over your backyard daily, claiming it is for neighbourhood security.",
+        "pressure_context": "Buzzing sound above fence.",
         "visibility": "always",
         "required_flags": [],
-        "timer_seconds": 15,
         "choices": [
           {
             "choice_id": "c_024_1_a",
-            "text": "Fire the missile. The mission comes first.",
-            "effects": {
-              "Obedience": 3,
-              "Pragmatism": 2,
-              "Compassion": -3
-            },
-            "flags_set": {
-              "flag_024_fired_early": true
-            },
-            "next_node": "n_024_2a"
+            "text": "Shoot down the drone with a pellet gun.",
+            "effects": { "Independence": 3, "Diplomacy": -3 },
+            "flags_set": { "drone_shot": true },
+            "next_node": "n_024_2"
           },
           {
             "choice_id": "c_024_1_b",
-            "text": "Hold fire and request alternative options from command.",
-            "effects": {
-              "Compassion": 2,
-              "Diplomacy": 1,
-              "Ambition": -1
-            },
-            "flags_set": {
-              "flag_024_held_fire": true
-            },
-            "next_node": "n_024_2b"
+            "text": "File a harassment complaint with the homeowners association.",
+            "effects": { "Obedience": 3, "Diplomacy": 1 },
+            "flags_set": { "drone_complained": true },
+            "next_node": "n_024_2"
           }
         ]
       },
       {
-        "node_id": "n_024_2a",
-        "text": "Missile away. Estimated casualties: 200+. You notice a school bus pulling into the hospital courtyard directly in the blast radius.",
-        "pressure_context": "Missile in flight",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_024_fired_early"
-        ],
-        "timer_seconds": 10,
+        "node_id": "n_024_2",
+        "text": "The neighbor threatens a lawsuit. He offers to drop it if you agree to let him install security cameras on the shared fence post.",
+        "pressure_context": "Angry letter in mailbox.",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_024_2a_a",
-            "text": "Abort the missile via self-destruct.",
-            "effects": {
-              "Compassion": 3,
-              "Courage": 2,
-              "Obedience": -3
-            },
-            "flags_set": {
-              "flag_024_aborted": true
-            },
-            "next_node": "n_024_3a"
+            "choice_id": "c_024_2_a",
+            "text": "Accept the fence cameras to avoid court.",
+            "effects": { "Pragmatism": 3, "Independence": -3 },
+            "flags_set": { "drone_fence": true },
+            "next_node": "n_024_3"
           },
           {
-            "choice_id": "c_024_2a_b",
-            "text": "Maintain trajectory. The target is too important.",
-            "effects": {
-              "Rationality": 3,
-              "Pragmatism": 2,
-              "Compassion": -3
-            },
-            "flags_set": {
-              "flag_024_impact": true
-            },
-            "next_node": "n_024_3b"
+            "choice_id": "c_024_2_b",
+            "text": "Refuse the cameras. Prepare for legal battle.",
+            "effects": { "Independence": 3, "Pragmatism": -2 },
+            "flags_set": { "drone_legal": true },
+            "next_node": "n_024_3"
           }
         ]
       },
       {
-        "node_id": "n_024_2b",
-        "text": "Command denies alternatives. 'Fire immediately, operator. That is a direct order.' 45 seconds left.",
-        "pressure_context": "Command override",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_024_held_fire"
-        ],
-        "timer_seconds": 12,
+        "node_id": "n_024_3",
+        "text": "You find the drone's memory card in your yard. It contains footage of a robbery at a local store, but also private footage of your family.",
+        "pressure_context": "MicroSD card on table.",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_024_2b_a",
-            "text": "Refuse the order and shut down your console.",
-            "effects": {
-              "Independence": 3,
-              "Integrity": 2,
-              "Obedience": -3
-            },
-            "flags_set": {
-              "flag_024_mutiny": true
-            },
-            "next_node": "n_024_3c"
+            "choice_id": "c_024_3_a",
+            "text": "Hand the card to the police immediately.",
+            "effects": { "Justice": 3, "Pragmatism": 1 },
+            "flags_set": { "drone_police": true },
+            "next_node": "n_024_4"
           },
           {
-            "choice_id": "c_024_2b_b",
-            "text": "Comply with the order and launch.",
-            "effects": {
-              "Obedience": 3,
-              "Pragmatism": 1,
-              "Idealism": -2
-            },
-            "flags_set": {
-              "flag_024_complied": true
-            },
-            "next_node": "n_024_3d"
+            "choice_id": "c_024_3_b",
+            "text": "Blackmail the robber using the footage.",
+            "effects": { "Ambition": 3, "Integrity": -4 },
+            "flags_set": { "drone_blackmail": true },
+            "next_node": "n_024_4"
           }
         ]
       },
       {
-        "node_id": "n_024_3a",
-        "text": "Missile self-destructs. The target's motorcade is now leaving the hospital, heading for a heavily populated civilian market.",
-        "pressure_context": "Target escaping",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_024_aborted"
-        ],
+        "node_id": "n_024_4",
+        "text": "The robber contacts you, offering a split of the cash if you destroy the card. Do you accept the cash or turn the card over?",
+        "pressure_context": "Anonymous text message.",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_024_3a_a",
-            "text": "Fire a second missile at the motorcade before it reaches the market.",
-            "effects": {
-              "Pragmatism": 2,
-              "Rationality": 1,
-              "Compassion": -1
-            },
-            "flags_set": {},
-            "next_node": "end_024_motorcade_hit"
+            "choice_id": "c_024_4_a",
+            "text": "Accept the split. Burn the card.",
+            "effects": { "Ambition": 3, "Integrity": -4 },
+            "ending_id": "end_024_corrupt"
           },
           {
-            "choice_id": "c_024_3a_b",
-            "text": "Let him go to avoid hitting the market.",
-            "effects": {
-              "Compassion": 2,
-              "Idealism": 2,
-              "Pragmatism": -2
-            },
-            "flags_set": {},
-            "next_node": "end_024_target_escapes"
-          }
-        ]
-      },
-      {
-        "node_id": "n_024_3b",
-        "text": "Impact confirmed. Target eliminated. Massive civilian casualties, including the bus. Command congratulates you.",
-        "pressure_context": "Aftermath",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_024_impact"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_024_3b_a",
-            "text": "Accept the praise. It was a necessary evil.",
-            "effects": {
-              "Rationality": 2,
-              "Ambition": 2,
-              "Compassion": -3
-            },
-            "flags_set": {},
-            "next_node": "end_024_ruthless_success"
-          },
-          {
-            "choice_id": "c_024_3b_b",
-            "text": "Resign your commission immediately.",
-            "effects": {
-              "Integrity": 3,
-              "Compassion": 2,
-              "Ambition": -3
-            },
-            "flags_set": {},
-            "next_node": "end_024_guilt_resignation"
-          }
-        ]
-      },
-      {
-        "node_id": "n_024_3c",
-        "text": "You are pulled from the chair by MPs. The backup operator takes over but misses the window. The target's attack happens.",
-        "pressure_context": "Court martial",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_024_mutiny"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_024_3c_a",
-            "text": "Plead guilty to insubordination.",
-            "effects": {
-              "Integrity": 2,
-              "Obedience": 1,
-              "Independence": -1
-            },
-            "flags_set": {},
-            "next_node": "end_024_prison"
-          },
-          {
-            "choice_id": "c_024_3c_b",
-            "text": "Leak the drone footage to the press to expose the hospital targeting.",
-            "effects": {
-              "Independence": 3,
-              "Justice": 2,
-              "Obedience": -3
-            },
-            "flags_set": {},
-            "next_node": "end_024_whistleblower"
-          }
-        ]
-      },
-      {
-        "node_id": "n_024_3d",
-        "text": "The missile strikes the hospital. Target eliminated. 200 civilians dead. You followed orders.",
-        "pressure_context": "Aftermath",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_024_complied"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_024_3d_a",
-            "text": "File an anonymous report detailing the civilian cost.",
-            "effects": {
-              "Justice": 2,
-              "Compassion": 1,
-              "Obedience": -1
-            },
-            "flags_set": {},
-            "next_node": "end_024_anonymous_leak"
-          },
-          {
-            "choice_id": "c_024_3d_b",
-            "text": "Drink to forget.",
-            "effects": {
-              "Pragmatism": 1,
-              "Courage": -2,
-              "Idealism": -2
-            },
-            "flags_set": {},
-            "next_node": "end_024_broken"
-          }
-        ]
-      },
-      {
-        "node_id": "n_024_dummy1",
-        "text": "Dummy",
-        "pressure_context": "None",
-        "visibility": "conditional",
-        "required_flags": [
-          "impossible"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_024_d1",
-            "text": "Dummy",
-            "effects": {},
-            "flags_set": {},
-            "next_node": "end_024_prison"
+            "choice_id": "c_024_4_b",
+            "text": "Refuse. Send the card to the police.",
+            "effects": { "Integrity": 4, "Justice": 3 },
+            "ending_id": "end_024_clean"
           }
         ]
       }
     ],
     "endings": [
       {
-        "ending_id": "end_024_motorcade_hit",
-        "summary": "You eliminated the target outside the hospital, minimizing civilian casualties but defying protocol.",
-        "dominant_traits": [
-          "Pragmatism",
-          "Independence"
-        ],
-        "behavioral_analysis": "Calculated risk-taker. Willing to bend rules for optimal utilitarian outcomes."
+        "ending_id": "end_024_corrupt",
+        "summary": "You took the cash. You bought new security system for your house, but you became an accomplice to the crime.",
+        "dominant_traits": [ "Ambition", "Pragmatism" ],
+        "behavioral_analysis": "Values resources and survival over legal alignment."
       },
       {
-        "ending_id": "end_024_target_escapes",
-        "summary": "The target escaped and carried out his attack. Thousands died because you couldn't pull the trigger.",
-        "dominant_traits": [
-          "Idealism",
-          "Compassion"
-        ],
-        "behavioral_analysis": "Paralyzed by the immediate moral cost, failing to prevent a greater tragedy."
-      },
-      {
-        "ending_id": "end_024_ruthless_success",
-        "summary": "Mission accomplished with massive collateral damage. You were promoted.",
-        "dominant_traits": [
-          "Rationality",
-          "Ambition"
-        ],
-        "behavioral_analysis": "Coldly utilitarian and highly ambitious. Views lives as statistics."
-      },
-      {
-        "ending_id": "end_024_guilt_resignation",
-        "summary": "You followed orders but couldn't live with the guilt, ending your career.",
-        "dominant_traits": [
-          "Integrity",
-          "Obedience"
-        ],
-        "behavioral_analysis": "Caught between duty and morality; ultimately chose moral purity over career."
-      },
-      {
-        "ending_id": "end_024_prison",
-        "summary": "You refused to fire and are serving time in military prison.",
-        "dominant_traits": [
-          "Integrity",
-          "Independence"
-        ],
-        "behavioral_analysis": "Uncompromising ethical stance against authority, accepting the legal consequences."
-      },
-      {
-        "ending_id": "end_024_whistleblower",
-        "summary": "You exposed the military's willingness to strike hospitals, becoming an international fugitive.",
-        "dominant_traits": [
-          "Justice",
-          "Independence"
-        ],
-        "behavioral_analysis": "Radical transparency advocate. Disregards institutional loyalty for public accountability."
-      },
-      {
-        "ending_id": "end_024_anonymous_leak",
-        "summary": "You leaked the truth anonymously, keeping your job but easing your conscience.",
-        "dominant_traits": [
-          "Pragmatism",
-          "Justice"
-        ],
-        "behavioral_analysis": "Seeks justice without personal sacrifice."
-      },
-      {
-        "ending_id": "end_024_broken",
-        "summary": "You stayed in the military, completely broken by the trauma of your actions.",
-        "dominant_traits": [
-          "Obedience",
-          "Pragmatism"
-        ],
-        "behavioral_analysis": "Passive adherence to authority at the cost of personal sanity."
+        "ending_id": "end_024_clean",
+        "summary": "You turned the card in. The robber was caught, and the neighbor was fined for privacy violations.",
+        "dominant_traits": [ "Integrity", "Justice" ],
+        "behavioral_analysis": "Upholds public order and legality."
       }
     ]
   },
   {
     "scenario_id": "sc_025",
     "title": "The Heist",
-    "core_conflict": "Law vs Personal loyalty",
-    "pressure_type": "Impending bust",
-    "relationship_dynamic": "Undercover Cop vs Crime Boss",
-    "stakes_type": "Justice/Friendship",
-    "tone": "Gritty",
-    "escalation_type": "Point of no return",
+    "core_conflict": "Law vs Loyalty",
+    "pressure_type": "Getaway driver choice",
+    "relationship_dynamic": "Driver vs Crew",
+    "stakes_type": "Freedom",
+    "tone": "High-octane, desperate",
     "nodes": [
       {
         "node_id": "n_025_1",
-        "text": "The crew leader, Marcus, saved your life last month. Tonight is the museum heist. The police are waiting to ambush them inside.",
-        "pressure_context": "Van ride to the museum",
+        "text": "You are the getaway driver. The crew rushes into the car with the loot, but they have taken a bank teller hostage.",
+        "pressure_context": "Tires screeching.",
         "visibility": "always",
         "required_flags": [],
         "choices": [
           {
             "choice_id": "c_025_1_a",
-            "text": "Maintain your cover and let the ambush proceed.",
-            "effects": {
-              "Obedience": 3,
-              "Justice": 2,
-              "Tribalism": -3
-            },
-            "flags_set": {
-              "flag_025_ambush_set": true
-            },
-            "next_node": "n_025_2a"
+            "text": "Drive away. Stick to the escape route.",
+            "effects": { "Tribalism": 2, "Justice": -3 },
+            "flags_set": { "heist_drove": true },
+            "next_node": "n_025_2"
           },
           {
             "choice_id": "c_025_1_b",
-            "text": "Warn Marcus silently via text to abort.",
-            "effects": {
-              "Tribalism": 3,
-              "Compassion": 2,
-              "Obedience": -3
-            },
-            "flags_set": {
-              "flag_025_warned_marcus": true
-            },
-            "next_node": "n_025_2b"
+            "text": "Refuse to move until they let the hostage go.",
+            "effects": { "Compassion": 3, "Tribalism": -3 },
+            "flags_set": { "heist_stalled": true },
+            "next_node": "n_025_2"
           }
         ]
       },
       {
-        "node_id": "n_025_2a",
-        "text": "You enter the museum. The SWAT team floods the room. Marcus looks at you, realizing you set them up. He raises his gun at a cop.",
-        "pressure_context": "Armed standoff",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_025_ambush_set"
-        ],
-        "timer_seconds": 8,
+        "node_id": "n_025_2",
+        "text": "A police blockade is ahead. The crew leader screams at you to ram through it with the car.",
+        "pressure_context": "Siren lights ahead.",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_025_2a_a",
-            "text": "Shoot Marcus yourself to prevent a firefight.",
-            "effects": {
-              "Pragmatism": 3,
-              "Courage": 2,
-              "Compassion": -3
-            },
-            "flags_set": {
-              "flag_025_shot_marcus": true
-            },
-            "next_node": "n_025_3a"
+            "choice_id": "c_025_2_a",
+            "text": "Ram the blockade. Bet everything on escape.",
+            "effects": { "Courage": 3, "Rationality": -2 },
+            "flags_set": { "heist_rammed": true },
+            "next_node": "n_025_3"
           },
           {
-            "choice_id": "c_025_2a_b",
-            "text": "Step between Marcus and the cops, begging him to drop it.",
-            "effects": {
-              "Compassion": 3,
-              "Courage": 2,
-              "Rationality": -2
-            },
-            "flags_set": {
-              "flag_025_shielded_marcus": true
-            },
-            "next_node": "n_025_3b"
+            "choice_id": "c_025_2_b",
+            "text": "Swerve and stop the car. Surrender.",
+            "effects": { "Rationality": 3, "Courage": -2, "Obedience": 2 },
+            "flags_set": { "heist_surrendered": true },
+            "next_node": "n_025_3"
           }
         ]
       },
       {
-        "node_id": "n_025_2b",
-        "text": "Marcus reads the text, halts the crew, and orders everyone back. The police commander radios you, demanding to know why the target is retreating.",
-        "pressure_context": "Blowing cover",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_025_warned_marcus"
-        ],
+        "node_id": "n_025_3",
+        "text": "At the safehouse, the crew starts arguing about the split. They want to cut out the injured member who slowed them down.",
+        "pressure_context": "Damp basement room.",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_025_2b_a",
-            "text": "Lie: 'They got spooked by a security patrol.'",
-            "effects": {
-              "Independence": 2,
-              "Tribalism": 2,
-              "Integrity": -2
-            },
-            "flags_set": {
-              "flag_025_lied_to_cops": true
-            },
-            "next_node": "n_025_3c"
+            "choice_id": "c_025_3_a",
+            "text": "Defend the injured member. Demand fair split.",
+            "effects": { "Justice": 3, "Compassion": 2 },
+            "flags_set": { "heist_fair": true },
+            "next_node": "n_025_4"
           },
           {
-            "choice_id": "c_025_2b_b",
-            "text": "Confess: 'I aborted it. I couldn't let them walk into a slaughter.'",
-            "effects": {
-              "Integrity": 3,
-              "Courage": 2,
-              "Pragmatism": -2
-            },
-            "flags_set": {
-              "flag_025_confessed_to_cops": true
-            },
-            "next_node": "n_025_3d"
+            "choice_id": "c_025_3_b",
+            "text": "Agree with the leader. Cut him out.",
+            "effects": { "Pragmatism": 3, "Compassion": -3 },
+            "flags_set": { "heist_cut": true },
+            "next_node": "n_025_4"
           }
         ]
       },
       {
-        "node_id": "n_025_3a",
-        "text": "Marcus falls. The crew surrenders. You are hailed as a hero at the precinct, but you feel empty.",
-        "pressure_context": "Aftermath",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_025_shot_marcus"
-        ],
+        "node_id": "n_025_4",
+        "text": "The crew leader offers you a spot as their permanent wheelman. Do you accept the criminal career, or turn state's witness for immunity?",
+        "pressure_context": "Bag of cash on floor.",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_025_3a_a",
-            "text": "Accept the commendation.",
-            "effects": {
-              "Ambition": 2,
-              "Pragmatism": 2,
-              "Idealism": -2
-            },
-            "flags_set": {},
-            "next_node": "end_025_hero_cop"
+            "choice_id": "c_025_4_a",
+            "text": "Accept the career. Stay with the crew.",
+            "effects": { "Tribalism": 4, "Obedience": 2, "Integrity": -4 },
+            "ending_id": "end_025_criminal"
           },
           {
-            "choice_id": "c_025_3a_b",
-            "text": "Resign from undercover work permanently.",
-            "effects": {
-              "Integrity": 2,
-              "Compassion": 1,
-              "Ambition": -2
-            },
-            "flags_set": {},
-            "next_node": "end_025_burned_out"
-          }
-        ]
-      },
-      {
-        "node_id": "n_025_3b",
-        "text": "Marcus lowers his gun. He is arrested. During his trial, he asks you to testify to his good character so he avoids a maximum sentence.",
-        "pressure_context": "Trial testimony",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_025_shielded_marcus"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_025_3b_a",
-            "text": "Testify to his good character, risking your reputation.",
-            "effects": {
-              "Compassion": 3,
-              "Tribalism": 2,
-              "Justice": -2
-            },
-            "flags_set": {},
-            "next_node": "end_025_lenient_sentence"
-          },
-          {
-            "choice_id": "c_025_3b_b",
-            "text": "Testify strictly to the facts of his crimes.",
-            "effects": {
-              "Justice": 3,
-              "Rationality": 1,
-              "Tribalism": -3
-            },
-            "flags_set": {},
-            "next_node": "end_025_max_sentence"
-          }
-        ]
-      },
-      {
-        "node_id": "n_025_3c",
-        "text": "The cops buy it, but Marcus knows there's a rat. Back at the hideout, he puts a gun to another crew member's head, accusing him.",
-        "pressure_context": "Paranoia",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_025_lied_to_cops"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_025_3c_a",
-            "text": "Let the innocent crew member take the fall.",
-            "effects": {
-              "Pragmatism": 3,
-              "Rationality": 2,
-              "Integrity": -3
-            },
-            "flags_set": {},
-            "next_node": "end_025_deep_cover"
-          },
-          {
-            "choice_id": "c_025_3c_b",
-            "text": "Admit you're the cop to save him.",
-            "effects": {
-              "Courage": 3,
-              "Integrity": 2,
-              "Pragmatism": -3
-            },
-            "flags_set": {},
-            "next_node": "end_025_executed"
-          }
-        ]
-      },
-      {
-        "node_id": "n_025_3d",
-        "text": "Your commander is furious and pulls you out immediately. You face internal affairs for aiding suspects.",
-        "pressure_context": "Internal Affairs",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_025_confessed_to_cops"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_025_3d_a",
-            "text": "Argue that your actions prevented a bloody shootout.",
-            "effects": {
-              "Diplomacy": 2,
-              "Rationality": 2,
-              "Obedience": -2
-            },
-            "flags_set": {},
-            "next_node": "end_025_desk_duty"
-          },
-          {
-            "choice_id": "c_025_3d_b",
-            "text": "Accept dismissal from the force.",
-            "effects": {
-              "Integrity": 2,
-              "Independence": 2,
-              "Ambition": -3
-            },
-            "flags_set": {},
-            "next_node": "end_025_ex_cop"
-          }
-        ]
-      },
-      {
-        "node_id": "n_025_dummy1",
-        "text": "Dummy",
-        "pressure_context": "None",
-        "visibility": "conditional",
-        "required_flags": [
-          "impossible"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_025_d1",
-            "text": "Dummy",
-            "effects": {},
-            "flags_set": {},
-            "next_node": "end_025_max_sentence"
+            "choice_id": "c_025_4_b",
+            "text": "Turn state's witness. Expose the crew.",
+            "effects": { "Integrity": 3, "Justice": 3, "Tribalism": -4 },
+            "ending_id": "end_025_witness"
           }
         ]
       }
     ],
     "endings": [
       {
-        "ending_id": "end_025_hero_cop",
-        "summary": "You killed Marcus and got a promotion. The job is everything.",
-        "dominant_traits": [
-          "Pragmatism",
-          "Ambition"
-        ],
-        "behavioral_analysis": "Ruthlessly prioritizes professional advancement and operational success over personal bonds."
+        "ending_id": "end_025_criminal",
+        "summary": "You chose the crew. You are now a wanted bank robber, driving escape routes across the country.",
+        "dominant_traits": [ "Tribalism", "Courage" ],
+        "behavioral_analysis": "Values cohort loyalty over public legal frameworks."
       },
       {
-        "ending_id": "end_025_burned_out",
-        "summary": "You killed him and quit. The guilt broke you.",
-        "dominant_traits": [
-          "Compassion",
-          "Integrity"
-        ],
-        "behavioral_analysis": "Followed duty but deeply traumatized by the violation of a personal relationship."
-      },
-      {
-        "ending_id": "end_025_lenient_sentence",
-        "summary": "You helped Marcus get a lighter sentence, damaging your standing in the department.",
-        "dominant_traits": [
-          "Tribalism",
-          "Compassion"
-        ],
-        "behavioral_analysis": "Valued personal loyalty and debt over institutional reputation."
-      },
-      {
-        "ending_id": "end_025_max_sentence",
-        "summary": "Marcus got 20 years. You did your job perfectly.",
-        "dominant_traits": [
-          "Justice",
-          "Rationality"
-        ],
-        "behavioral_analysis": "Strict, clinical adherence to justice. Impervious to emotional appeals."
-      },
-      {
-        "ending_id": "end_025_deep_cover",
-        "summary": "An innocent man died, but your cover remains intact.",
-        "dominant_traits": [
-          "Pragmatism",
-          "Rationality"
-        ],
-        "behavioral_analysis": "Extreme utilitarian approach. Willing to sacrifice the innocent for the long-term mission."
-      },
-      {
-        "ending_id": "end_025_executed",
-        "summary": "You revealed yourself and Marcus executed you.",
-        "dominant_traits": [
-          "Courage",
-          "Integrity"
-        ],
-        "behavioral_analysis": "Prioritized immediate moral purity and honesty over personal survival."
-      },
-      {
-        "ending_id": "end_025_desk_duty",
-        "summary": "You kept your badge but are stuck on desk duty forever.",
-        "dominant_traits": [
-          "Diplomacy",
-          "Rationality"
-        ],
-        "behavioral_analysis": "Attempted to rationalize insubordination through outcome-based justification."
-      },
-      {
-        "ending_id": "end_025_ex_cop",
-        "summary": "You were fired. You now work private security.",
-        "dominant_traits": [
-          "Independence",
-          "Integrity"
-        ],
-        "behavioral_analysis": "Accepted the consequences of prioritizing human life over orders without fighting."
+        "ending_id": "end_025_witness",
+        "summary": "You testified. Your crew went to prison, and you walked away with clean record but permanent enemies.",
+        "dominant_traits": [ "Integrity", "Justice" ],
+        "behavioral_analysis": "Reverts to social legality when pressure scales."
       }
     ]
   },
   {
     "scenario_id": "sc_026",
     "title": "The Signal",
-    "core_conflict": "Humanity's right to know vs National security",
-    "pressure_type": "Government intervention",
-    "relationship_dynamic": "Scientist vs Military",
-    "stakes_type": "Global",
-    "tone": "Awe-inspiring",
-    "escalation_type": "Data confiscation",
+    "core_conflict": "Contact vs Caution",
+    "pressure_type": "Extraterrestrial signal",
+    "relationship_dynamic": "Scientist vs Government",
+    "stakes_type": "Humanity",
+    "tone": "Eerie, awe-inspiring",
     "nodes": [
       {
         "node_id": "n_026_1",
-        "text": "The signal is unambiguous: prime numbers, then a blueprint. Military agents burst into your observatory. 'Step away from the console. This is classified.'",
-        "pressure_context": "Data seizure",
+        "text": "Your deep-space dish intercepts a structured message from Tau Ceti. An intelligence agency agent orders you to lock down the signal immediately.",
+        "pressure_context": "Oscilloscope screen flashing.",
         "visibility": "always",
         "required_flags": [],
         "choices": [
           {
             "choice_id": "c_026_1_a",
-            "text": "Hit 'Send All' to forward the raw data to public universities.",
-            "effects": {
-              "Independence": 3,
-              "Idealism": 2,
-              "Obedience": -3
-            },
-            "flags_set": {
-              "flag_026_data_leaked": true
-            },
-            "next_node": "n_026_2a"
+            "text": "Transmit a quick automated acknowledgment first.",
+            "effects": { "Independence": 3, "Obedience": -3 },
+            "flags_set": { "sig_acknowledged": true },
+            "next_node": "n_026_2"
           },
           {
             "choice_id": "c_026_1_b",
-            "text": "Step away and comply with the agents.",
-            "effects": {
-              "Obedience": 3,
-              "Pragmatism": 2,
-              "Independence": -3
-            },
-            "flags_set": {
-              "flag_026_data_secured": true
-            },
-            "next_node": "n_026_2b"
+            "text": "Lock down the logs. Comply with the agent.",
+            "effects": { "Obedience": 3, "Independence": -2 },
+            "flags_set": { "sig_secured": true },
+            "next_node": "n_026_2"
           }
         ]
       },
       {
-        "node_id": "n_026_2a",
-        "text": "The upload finishes just as they tackle you. The world goes crazy. The military threatens you with treason unless you publicly claim it was a hoax.",
-        "pressure_context": "Coercion",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_026_data_leaked"
-        ],
+        "node_id": "n_026_2",
+        "text": "The decoded signal contains blueprints for an advanced fusion generator. Sharing it openly solves energy crisis, but risks weapons development.",
+        "pressure_context": "Data download complete.",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_026_2a_a",
-            "text": "Refuse. The truth belongs to everyone.",
-            "effects": {
-              "Integrity": 3,
-              "Courage": 2,
-              "Pragmatism": -2
-            },
-            "flags_set": {
-              "flag_026_refused_hoax": true
-            },
-            "next_node": "n_026_3a"
+            "choice_id": "c_026_2_a",
+            "text": "Publish the blueprints on open-source scientific network.",
+            "effects": { "Idealism": 3, "Pragmatism": -2 },
+            "flags_set": { "sig_published": true },
+            "next_node": "n_026_3"
           },
           {
-            "choice_id": "c_026_2a_b",
-            "text": "Agree to lie to stay out of prison.",
-            "effects": {
-              "Pragmatism": 3,
-              "Rationality": 1,
-              "Integrity": -3
-            },
-            "flags_set": {
-              "flag_026_agreed_hoax": true
-            },
-            "next_node": "n_026_3b"
+            "choice_id": "c_026_2_b",
+            "text": "Deliver blueprints exclusively to national security staff.",
+            "effects": { "Pragmatism": 3, "Idealism": -3 },
+            "flags_set": { "sig_restricted": true },
+            "next_node": "n_026_3"
           }
         ]
       },
       {
-        "node_id": "n_026_2b",
-        "text": "You are taken to a black site. They want you to help decode the blueprint to build a weapon. They promise unlimited funding.",
-        "pressure_context": "Recruitment",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_026_data_secured"
-        ],
+        "node_id": "n_026_3",
+        "text": "Government agents arrive to dismantle your dishes, citing national security concerns about attracting alien attention.",
+        "pressure_context": "Security trucks outside.",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_026_2b_a",
-            "text": "Accept the offer. You must know what the signal means.",
-            "effects": {
-              "Ambition": 3,
-              "Rationality": 2,
-              "Idealism": -2
-            },
-            "flags_set": {
-              "flag_026_working_for_military": true
-            },
-            "next_node": "n_026_3c"
+            "choice_id": "c_026_3_a",
+            "text": "Barricade the server room. Protect the data feed.",
+            "effects": { "Courage": 3, "Independence": 2 },
+            "flags_set": { "sig_barricaded": true },
+            "next_node": "n_026_4"
           },
           {
-            "choice_id": "c_026_2b_b",
-            "text": "Refuse to weaponize the discovery.",
-            "effects": {
-              "Idealism": 3,
-              "Integrity": 2,
-              "Ambition": -2
-            },
-            "flags_set": {
-              "flag_026_refused_military": true
-            },
-            "next_node": "n_026_3d"
+            "choice_id": "c_026_3_b",
+            "text": "Comply with the dismantling process.",
+            "effects": { "Obedience": 3, "Courage": -2 },
+            "flags_set": { "sig_complied": true },
+            "next_node": "n_026_4"
           }
         ]
       },
       {
-        "node_id": "n_026_3a",
-        "text": "You are imprisoned. The global scientific community works on the data, but international tensions rise as countries race to understand it.",
-        "pressure_context": "Prison cell",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_026_refused_hoax"
-        ],
+        "node_id": "n_026_4",
+        "text": "The entity sends a final query, asking if humanity is ready for open visitation. Do you send the orbital landing coordinates, or block all transmission?",
+        "pressure_context": "Awaiting entry...",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_026_3a_a",
-            "text": "Smuggle out a manifesto urging global cooperation.",
-            "effects": {
-              "Idealism": 2,
-              "Diplomacy": 2,
-              "Pragmatism": -1
-            },
-            "flags_set": {},
-            "next_node": "end_026_martyr"
+            "choice_id": "c_026_4_a",
+            "text": "Send the coordinates. Embrace the future.",
+            "effects": { "Idealism": 4, "Courage": 3 },
+            "ending_id": "end_026_contact"
           },
           {
-            "choice_id": "c_026_3a_b",
-            "text": "Serve your time quietly, satisfied you did the right thing.",
-            "effects": {
-              "Independence": 2,
-              "Rationality": 1,
-              "Ambition": -2
-            },
-            "flags_set": {},
-            "next_node": "end_026_stoic"
-          }
-        ]
-      },
-      {
-        "node_id": "n_026_3b",
-        "text": "You claim it was a glitch. The public loses interest, but underground forums know you're lying. A hacker group contacts you for the real decoding key.",
-        "pressure_context": "Underground contact",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_026_agreed_hoax"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_026_3b_a",
-            "text": "Give the key to the hackers.",
-            "effects": {
-              "Independence": 2,
-              "Courage": 1,
-              "Obedience": -3
-            },
-            "flags_set": {},
-            "next_node": "end_026_shadow_leak"
-          },
-          {
-            "choice_id": "c_026_3b_b",
-            "text": "Ignore them and protect yourself.",
-            "effects": {
-              "Pragmatism": 3,
-              "Rationality": 1,
-              "Courage": -2
-            },
-            "flags_set": {},
-            "next_node": "end_026_coward"
-          }
-        ]
-      },
-      {
-        "node_id": "n_026_3c",
-        "text": "The blueprint is a zero-point energy generator, not a weapon. The military wants to hoard it to maintain geopolitical dominance.",
-        "pressure_context": "Discovery",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_026_working_for_military"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_026_3c_a",
-            "text": "Help them build it. It's safer under one nation's control.",
-            "effects": {
-              "Tribalism": 3,
-              "Pragmatism": 2,
-              "Idealism": -3
-            },
-            "flags_set": {},
-            "next_node": "end_026_nationalist"
-          },
-          {
-            "choice_id": "c_026_3c_b",
-            "text": "Sabotage the prototype so no one can have it.",
-            "effects": {
-              "Independence": 2,
-              "Justice": 2,
-              "Ambition": -3
-            },
-            "flags_set": {},
-            "next_node": "end_026_saboteur"
-          }
-        ]
-      },
-      {
-        "node_id": "n_026_3d",
-        "text": "They lock you in a cell and bring in your protégé, threatening to ruin her career unless she helps them. She looks terrified.",
-        "pressure_context": "Hostage situation",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_026_refused_military"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_026_3d_a",
-            "text": "Cave in and help to protect her.",
-            "effects": {
-              "Compassion": 3,
-              "Obedience": 1,
-              "Idealism": -2
-            },
-            "flags_set": {},
-            "next_node": "end_026_compromised"
-          },
-          {
-            "choice_id": "c_026_3d_b",
-            "text": "Tell her to stay strong and refuse.",
-            "effects": {
-              "Idealism": 3,
-              "Courage": 2,
-              "Compassion": -2
-            },
-            "flags_set": {},
-            "next_node": "end_026_unbroken"
-          }
-        ]
-      },
-      {
-        "node_id": "n_026_dummy1",
-        "text": "Dummy",
-        "pressure_context": "None",
-        "visibility": "conditional",
-        "required_flags": [
-          "impossible"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_026_d1",
-            "text": "Dummy",
-            "effects": {},
-            "flags_set": {},
-            "next_node": "end_026_unbroken"
+            "choice_id": "c_026_4_b",
+            "text": "Block the transmission. Protect Earth.",
+            "effects": { "Pragmatism": 3, "Idealism": -3 },
+            "ending_id": "end_026_isolated"
           }
         ]
       }
     ],
     "endings": [
       {
-        "ending_id": "end_026_martyr",
-        "summary": "You are a political prisoner, but your words inspire an unprecedented era of global scientific collaboration.",
-        "dominant_traits": [
-          "Idealism",
-          "Diplomacy"
-        ],
-        "behavioral_analysis": "A visionary who values human progress over personal freedom."
+        "ending_id": "end_026_contact",
+        "summary": "You sent the coordinates. A massive silent vessel entered orbit, beginning a new era of contact.",
+        "dominant_traits": [ "Idealism", "Courage" ],
+        "behavioral_analysis": "Welcomes cosmic transformation over stable isolation."
       },
       {
-        "ending_id": "end_026_stoic",
-        "summary": "You served your time in silence. The world changed outside without you.",
-        "dominant_traits": [
-          "Independence",
-          "Rationality"
-        ],
-        "behavioral_analysis": "Acted on principle but lacked the drive to become a leader."
-      },
-      {
-        "ending_id": "end_026_shadow_leak",
-        "summary": "You leaked the key anonymously. The tech is now open source and chaotic.",
-        "dominant_traits": [
-          "Independence",
-          "Pragmatism"
-        ],
-        "behavioral_analysis": "Subversive actor. Prefers decentralized chaos to authoritarian control."
-      },
-      {
-        "ending_id": "end_026_coward",
-        "summary": "You kept your head down. The signal remains a secret forever.",
-        "dominant_traits": [
-          "Pragmatism",
-          "Obedience"
-        ],
-        "behavioral_analysis": "Motivated entirely by self-preservation."
-      },
-      {
-        "ending_id": "end_026_nationalist",
-        "summary": "Your nation became a global hegemon thanks to the alien tech.",
-        "dominant_traits": [
-          "Tribalism",
-          "Pragmatism"
-        ],
-        "behavioral_analysis": "Believes in centralized power and national superiority."
-      },
-      {
-        "ending_id": "end_026_saboteur",
-        "summary": "You destroyed the tech. Humanity isn't ready.",
-        "dominant_traits": [
-          "Independence",
-          "Justice"
-        ],
-        "behavioral_analysis": "Paternalistic view of humanity. Willing to destroy progress to prevent misuse."
-      },
-      {
-        "ending_id": "end_026_compromised",
-        "summary": "You sacrificed your ideals to protect a colleague.",
-        "dominant_traits": [
-          "Compassion",
-          "Obedience"
-        ],
-        "behavioral_analysis": "Values personal relationships over abstract ideals."
-      },
-      {
-        "ending_id": "end_026_unbroken",
-        "summary": "You and your protégé refused. The project stalled, but you both paid the price.",
-        "dominant_traits": [
-          "Idealism",
-          "Courage"
-        ],
-        "behavioral_analysis": "Uncompromising adherence to principles regardless of the human cost."
+        "ending_id": "end_026_isolated",
+        "summary": "You blocked the transmission. Earth remains safe and quiet, but the galaxy sails on without us.",
+        "dominant_traits": [ "Pragmatism", "Stoicism" ],
+        "behavioral_analysis": "Prioritizes home security and risk mitigation."
       }
     ]
   },
   {
     "scenario_id": "sc_027",
     "title": "The Jury",
-    "core_conflict": "Legal process vs Personal conviction",
-    "pressure_type": "Group pressure",
-    "relationship_dynamic": "Individual vs Collective",
-    "stakes_type": "A life sentence",
-    "tone": "Claustrophobic",
-    "escalation_type": "Social isolation",
+    "core_conflict": "Justice vs Peer pressure",
+    "pressure_type": "Unanimous verdict",
+    "relationship_dynamic": "Jury panel",
+    "stakes_type": "Justice",
+    "tone": "Tense, academic",
     "nodes": [
       {
         "node_id": "n_027_1",
-        "text": "Day 4 of deliberations. 11 jurors want a guilty verdict for murder. You alone believe it was self-defense, though the evidence is legally shaky.",
-        "pressure_context": "Jury room",
+        "text": "You are the lone juror voting 'not guilty' in a high-profile murder trial. The other 11 jurors demand you change your vote to go home.",
+        "pressure_context": "Locked deliberation room.",
         "visibility": "always",
         "required_flags": [],
         "choices": [
           {
             "choice_id": "c_027_1_a",
-            "text": "Hold firm and vote Not Guilty, risking a mistrial.",
-            "effects": {
-              "Independence": 3,
-              "Justice": 2,
-              "Diplomacy": -2
-            },
-            "flags_set": {
-              "flag_027_holdout": true
-            },
-            "next_node": "n_027_2a"
+            "text": "Stand by your vote. Insist on discussing the evidence.",
+            "effects": { "Integrity": 3, "Diplomacy": -2 },
+            "flags_set": { "jury_stood": true },
+            "next_node": "n_027_2"
           },
           {
             "choice_id": "c_027_1_b",
-            "text": "Agree to Convict to end the exhausting process.",
-            "effects": {
-              "Obedience": 3,
-              "Pragmatism": 2,
-              "Justice": -3
-            },
-            "flags_set": {
-              "flag_027_caved": true
-            },
-            "next_node": "n_027_2b"
+            "text": "Yield to the pressure. Vote guilty.",
+            "effects": { "Obedience": 3, "Integrity": -3 },
+            "flags_set": { "jury_yielded": true },
+            "next_node": "n_027_2"
           }
         ]
       },
       {
-        "node_id": "n_027_2a",
-        "text": "The foreman explodes in anger. 'You're letting a killer go free because of a gut feeling!' He demands you explain your logic based solely on the evidence.",
-        "pressure_context": "Verbal attack",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_027_holdout"
-        ],
-        "timer_seconds": 12,
+        "node_id": "n_027_2",
+        "text": "A fellow juror whispers that she will vote with you if you agree to overlook a piece of circumstantial evidence that implicates the police in a cover-up.",
+        "pressure_context": "Quiet talk in the corner.",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_027_2a_a",
-            "text": "Argue that the prosecution failed to meet the 'beyond reasonable doubt' standard.",
-            "effects": {
-              "Rationality": 3,
-              "Diplomacy": 2,
-              "Idealism": -2
-            },
-            "flags_set": {
-              "flag_027_argued_logic": true
-            },
-            "next_node": "n_027_3a"
+            "choice_id": "c_027_2_a",
+            "text": "Agree to overlook it. Secure her vote.",
+            "effects": { "Pragmatism": 3, "Justice": -2 },
+            "flags_set": { "jury_compromised": true },
+            "next_node": "n_027_3"
           },
           {
-            "choice_id": "c_027_2a_b",
-            "text": "Refuse to argue. State your vote is final.",
-            "effects": {
-              "Independence": 3,
-              "Courage": 1,
-              "Diplomacy": -3
-            },
-            "flags_set": {
-              "flag_027_stubborn": true
-            },
-            "next_node": "n_027_3b"
+            "choice_id": "c_027_2_b",
+            "text": "Refuse to compromise. Insist on discussing every detail.",
+            "effects": { "Integrity": 3, "Pragmatism": -2 },
+            "flags_set": { "jury_firm": true },
+            "next_node": "n_027_3"
           }
         ]
       },
       {
-        "node_id": "n_027_2b",
-        "text": "You vote guilty. The judge reads the verdict. The defendant screams, 'I had no choice!' You realize you might have just ruined an innocent life.",
-        "pressure_context": "Guilt realization",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_027_caved"
-        ],
+        "node_id": "n_027_3",
+        "text": "You discover that another juror has been receiving texts from the victim's family during the trial, which violates the court's rules.",
+        "pressure_context": "Phone left open on the table.",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_027_2b_a",
-            "text": "Stand up and retract your vote in open court.",
-            "effects": {
-              "Courage": 3,
-              "Integrity": 2,
-              "Pragmatism": -3
-            },
-            "flags_set": {
-              "flag_027_retracted": true
-            },
-            "next_node": "n_027_3c"
+            "choice_id": "c_027_3_a",
+            "text": "Report the misconduct to the judge immediately.",
+            "effects": { "Integrity": 3, "Tribalism": -3 },
+            "flags_set": { "jury_reported": true },
+            "next_node": "n_027_4"
           },
           {
-            "choice_id": "c_027_2b_b",
-            "text": "Stay silent. The system worked as designed.",
-            "effects": {
-              "Rationality": 2,
-              "Obedience": 2,
-              "Compassion": -3
-            },
-            "flags_set": {
-              "flag_027_stayed_silent": true
-            },
-            "next_node": "n_027_3d"
+            "choice_id": "c_027_3_b",
+            "text": "Keep quiet to avoid causing a mistrial.",
+            "effects": { "Pragmatism": 3, "Integrity": -3 },
+            "flags_set": { "jury_silent_misconduct": true },
+            "next_node": "n_027_4"
           }
         ]
       },
       {
-        "node_id": "n_027_3a",
-        "text": "Your logical argument sways two other jurors. The vote is now 9-3. The foreman offers a compromise: convict on manslaughter instead of murder.",
-        "pressure_context": "Compromise offered",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_027_argued_logic"
-        ],
+        "node_id": "n_027_4",
+        "text": "The foreman demands a final vote. If you stay 'not guilty', a mistrial occurs. Do you hold out for a mistrial, or vote guilty to conclude the case?",
+        "pressure_context": "The slip box is passed to you.",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_027_3a_a",
-            "text": "Accept the manslaughter compromise.",
-            "effects": {
-              "Diplomacy": 3,
-              "Pragmatism": 2,
-              "Idealism": -2
-            },
-            "flags_set": {},
-            "next_node": "end_027_compromise"
+            "choice_id": "c_027_4_a",
+            "text": "Hold out. Force a mistrial.",
+            "effects": { "Independence": 4, "Justice": 3 },
+            "ending_id": "end_027_mistrial"
           },
           {
-            "choice_id": "c_027_3a_b",
-            "text": "Reject it. Push for full acquittal.",
-            "effects": {
-              "Idealism": 3,
-              "Justice": 2,
-              "Diplomacy": -3
-            },
-            "flags_set": {},
-            "next_node": "end_027_hung_jury"
-          }
-        ]
-      },
-      {
-        "node_id": "n_027_3b",
-        "text": "The judge declares a mistrial due to a hung jury. Outside, the victim's family corners you, sobbing and calling you a monster.",
-        "pressure_context": "Family confrontation",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_027_stubborn"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_027_3b_a",
-            "text": "Apologize for their pain but stand by your choice.",
-            "effects": {
-              "Compassion": 2,
-              "Integrity": 2,
-              "Rationality": -2
-            },
-            "flags_set": {},
-            "next_node": "end_027_stood_firm"
-          },
-          {
-            "choice_id": "c_027_3b_b",
-            "text": "Ignore them and walk to your car.",
-            "effects": {
-              "Rationality": 2,
-              "Pragmatism": 1,
-              "Compassion": -3
-            },
-            "flags_set": {},
-            "next_node": "end_027_cold_walk"
-          }
-        ]
-      },
-      {
-        "node_id": "n_027_3c",
-        "text": "The courtroom erupts. The judge threatens you with contempt of court and orders deliberations to restart.",
-        "pressure_context": "Courtroom chaos",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_027_retracted"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_027_3c_a",
-            "text": "Refuse to deliberate further. Demand a mistrial.",
-            "effects": {
-              "Independence": 3,
-              "Courage": 2,
-              "Obedience": -3
-            },
-            "flags_set": {},
-            "next_node": "end_027_contempt"
-          },
-          {
-            "choice_id": "c_027_3c_b",
-            "text": "Go back and try to convince the others again.",
-            "effects": {
-              "Idealism": 2,
-              "Diplomacy": 1,
-              "Pragmatism": -2
-            },
-            "flags_set": {},
-            "next_node": "end_027_exhaustion"
-          }
-        ]
-      },
-      {
-        "node_id": "n_027_3d",
-        "text": "The defendant is sentenced to life. Years later, evidence emerges proving it was self-defense.",
-        "pressure_context": "Future realization",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_027_stayed_silent"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_027_3d_a",
-            "text": "Campaign publicly for their exoneration.",
-            "effects": {
-              "Justice": 3,
-              "Compassion": 2,
-              "Pragmatism": -2
-            },
-            "flags_set": {},
-            "next_node": "end_027_exoneration"
-          },
-          {
-            "choice_id": "c_027_3d_b",
-            "text": "Do nothing. You followed the law at the time.",
-            "effects": {
-              "Obedience": 3,
-              "Rationality": 2,
-              "Compassion": -3
-            },
-            "flags_set": {},
-            "next_node": "end_027_system_drone"
-          }
-        ]
-      },
-      {
-        "node_id": "n_027_dummy1",
-        "text": "Dummy",
-        "pressure_context": "None",
-        "visibility": "conditional",
-        "required_flags": [
-          "impossible"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_027_d1",
-            "text": "Dummy",
-            "effects": {},
-            "flags_set": {},
-            "next_node": "end_027_compromise"
+            "choice_id": "c_027_4_b",
+            "text": "Vote guilty. Conclude the trial.",
+            "effects": { "Obedience": 3, "Pragmatism": 3, "Integrity": -4 },
+            "ending_id": "end_027_guilty"
           }
         ]
       }
     ],
     "endings": [
       {
-        "ending_id": "end_027_compromise",
-        "summary": "The defendant got 10 years instead of life. A messy but functional compromise.",
-        "dominant_traits": [
-          "Diplomacy",
-          "Pragmatism"
-        ],
-        "behavioral_analysis": "Values consensus and incremental mitigation over absolute purity of outcome."
+        "ending_id": "end_027_mistrial",
+        "summary": "You forced a mistrial. A new trial will be scheduled, preserving the chance of a fair hearing.",
+        "dominant_traits": [ "Independence", "Justice" ],
+        "behavioral_analysis": "Upholds standards of evidence against peer consensus."
       },
       {
-        "ending_id": "end_027_hung_jury",
-        "summary": "Mistrial. The defendant faces a grueling retrial, but they are not in prison.",
-        "dominant_traits": [
-          "Idealism",
-          "Justice"
-        ],
-        "behavioral_analysis": "Uncompromising pursuit of truth, regardless of the systemic friction it causes."
-      },
-      {
-        "ending_id": "end_027_stood_firm",
-        "summary": "You took the emotional abuse of the family but saved the defendant.",
-        "dominant_traits": [
-          "Integrity",
-          "Compassion"
-        ],
-        "behavioral_analysis": "Able to separate emotional pressure from moral duty."
-      },
-      {
-        "ending_id": "end_027_cold_walk",
-        "summary": "You walked away without a word, unaffected by the family's grief.",
-        "dominant_traits": [
-          "Rationality",
-          "Independence"
-        ],
-        "behavioral_analysis": "Highly compartmentalized. Unmoved by external emotional appeals."
-      },
-      {
-        "ending_id": "end_027_contempt",
-        "summary": "You were fined for contempt, but caused a mistrial.",
-        "dominant_traits": [
-          "Courage",
-          "Independence"
-        ],
-        "behavioral_analysis": "Willing to incur personal legal risk to correct a moral failure."
-      },
-      {
-        "ending_id": "end_027_exhaustion",
-        "summary": "You tried again, but the jury eventually convicted anyway. You tried your best.",
-        "dominant_traits": [
-          "Idealism",
-          "Diplomacy"
-        ],
-        "behavioral_analysis": "Naive belief in the power of discourse against entrenched groupthink."
-      },
-      {
-        "ending_id": "end_027_exoneration",
-        "summary": "You helped free them years later, seeking redemption.",
-        "dominant_traits": [
-          "Justice",
-          "Compassion"
-        ],
-        "behavioral_analysis": "Capable of admitting fault and correcting past systemic errors."
-      },
-      {
-        "ending_id": "end_027_system_drone",
-        "summary": "You slept soundly knowing you followed the instructions exactly.",
-        "dominant_traits": [
-          "Obedience",
-          "Rationality"
-        ],
-        "behavioral_analysis": "Utterly deferential to systemic authority. Abrogates personal moral responsibility."
+        "ending_id": "end_027_guilty",
+        "summary": "You voted guilty. The defendant was sentenced, and you went home with a heavy conscience.",
+        "dominant_traits": [ "Obedience", "Pragmatism" ],
+        "behavioral_analysis": "Bows to social pressure to escape confined conflict."
       }
     ]
   },
   {
     "scenario_id": "sc_028",
     "title": "The Treaty",
-    "core_conflict": "Peace vs Accountability",
-    "pressure_type": "Geopolitical stakes",
-    "relationship_dynamic": "Diplomat vs Warlord",
-    "stakes_type": "Geopolitical",
-    "tone": "Formal but tense",
-    "escalation_type": "Ultimatum",
+    "core_conflict": "Compromise vs Sovereignty",
+    "pressure_type": "Border dispute treaty",
+    "relationship_dynamic": "Diplomat vs General",
+    "stakes_type": "Geopolitics",
+    "tone": "Diplomatic, tense",
     "nodes": [
       {
         "node_id": "n_028_1",
-        "text": "The warlord slides the treaty across the table. He has added a clause granting himself and his generals full amnesty for war crimes. 'Sign, or the offensive begins tomorrow.'",
-        "pressure_context": "Final negotiations",
+        "text": "A treaty is proposed to split a valuable offshore oil field. Your military commanders demand you walk away and deploy naval patrols instead.",
+        "pressure_context": "Maps on conference table.",
         "visibility": "always",
         "required_flags": [],
         "choices": [
           {
             "choice_id": "c_028_1_a",
-            "text": "Sign the treaty. Stopping the war saves thousands.",
-            "effects": {
-              "Pragmatism": 3,
-              "Diplomacy": 2,
-              "Justice": -3
-            },
-            "flags_set": {
-              "flag_028_signed_treaty": true
-            },
-            "next_node": "n_028_2a"
+            "text": "Sign the treaty. Share the oil field.",
+            "effects": { "Diplomacy": 3, "Tribalism": -2 },
+            "flags_set": { "treaty_signed": true },
+            "next_node": "n_028_2"
           },
           {
             "choice_id": "c_028_1_b",
-            "text": "Refuse. There can be no peace without justice.",
-            "effects": {
-              "Justice": 3,
-              "Idealism": 2,
-              "Pragmatism": -3
-            },
-            "flags_set": {
-              "flag_028_refused_treaty": true
-            },
-            "next_node": "n_028_2b"
+            "text": "Reject the treaty. Order naval patrols.",
+            "effects": { "Tribalism": 3, "Diplomacy": -3 },
+            "flags_set": { "treaty_patrols": true },
+            "next_node": "n_028_2"
           }
         ]
       },
       {
-        "node_id": "n_028_2a",
-        "text": "You sign. The war ends. Months later, protests erupt demanding the warlord face trial. The government asks you to publicly defend the amnesty clause.",
-        "pressure_context": "Public backlash",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_028_signed_treaty"
-        ],
+        "node_id": "n_028_2",
+        "text": "A massive protest erupts outside the embassy. The local governor requests permission to clear the crowd with riot police.",
+        "pressure_context": "Slogans chanted outside.",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_028_2a_a",
-            "text": "Defend the clause as a necessary evil for peace.",
-            "effects": {
-              "Rationality": 2,
-              "Pragmatism": 2,
-              "Idealism": -2
-            },
-            "flags_set": {
-              "flag_028_defended_amnesty": true
-            },
-            "next_node": "n_028_3a"
+            "choice_id": "c_028_2_a",
+            "text": "Authorize the police action to maintain order.",
+            "effects": { "Pragmatism": 3, "Compassion": -3 },
+            "flags_set": { "treaty_suppressed": true },
+            "next_node": "n_028_3"
           },
           {
-            "choice_id": "c_028_2a_b",
-            "text": "Resign in protest. You won't defend war criminals.",
-            "effects": {
-              "Integrity": 3,
-              "Justice": 1,
-              "Obedience": -2
-            },
-            "flags_set": {
-              "flag_028_resigned_treaty": true
-            },
-            "next_node": "n_028_3b"
+            "choice_id": "c_028_2_b",
+            "text": "Refuse. Order embassy doors opened for dialogue.",
+            "effects": { "Diplomacy": 3, "Courage": 2 },
+            "flags_set": { "treaty_dialogue": true },
+            "next_node": "n_028_3"
           }
         ]
       },
       {
-        "node_id": "n_028_2b",
-        "text": "The warlord smirks and leaves. The bombing resumes immediately. A hospital is hit. Your superiors demand you recall the warlord and accept his terms.",
-        "pressure_context": "War resumes",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_028_refused_treaty"
-        ],
-        "timer_seconds": 15,
+        "node_id": "n_028_3",
+        "text": "A corporate oil representative offers to finance your political party if you insert a secret clause granting them exclusive extraction rights.",
+        "pressure_context": "Private dining room.",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_028_2b_a",
-            "text": "Hold your ground. Send troops instead of diplomats.",
-            "effects": {
-              "Courage": 2,
-              "Idealism": 2,
-              "Compassion": -2
-            },
-            "flags_set": {
-              "flag_028_escalated_war": true
-            },
-            "next_node": "n_028_3c"
+            "choice_id": "c_028_3_a",
+            "text": "Insert the clause. Secure the party's future.",
+            "effects": { "Ambition": 3, "Integrity": -3 },
+            "flags_set": { "treaty_clause": true },
+            "next_node": "n_028_4"
           },
           {
-            "choice_id": "c_028_2b_b",
-            "text": "Cave to the pressure. Call him back and sign.",
-            "effects": {
-              "Pragmatism": 2,
-              "Obedience": 2,
-              "Courage": -2
-            },
-            "flags_set": {
-              "flag_028_caved_to_pressure": true
-            },
-            "next_node": "n_028_3d"
+            "choice_id": "c_028_3_b",
+            "text": "Refuse the clause. Keep the treaty public.",
+            "effects": { "Integrity": 3, "Ambition": -2 },
+            "flags_set": { "treaty_clean": true },
+            "next_node": "n_028_4"
           }
         ]
       },
       {
-        "node_id": "n_028_3a",
-        "text": "Your defense stabilizes the government, but you are despised by human rights groups. The warlord runs for president.",
-        "pressure_context": "Political fallout",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_028_defended_amnesty"
-        ],
+        "node_id": "n_028_4",
+        "text": "A border skirmish breaks out near the zone. Do you order a military counter-strike, or call for an emergency ceasefire summit?",
+        "pressure_context": "Hotline ringing.",
+        "visibility": "always",
+        "required_flags": [],
         "choices": [
           {
-            "choice_id": "c_028_3a_a",
-            "text": "Back his opponent to block his rise.",
-            "effects": {
-              "Justice": 2,
-              "Diplomacy": 1,
-              "Rationality": -1
-            },
-            "flags_set": {},
-            "next_node": "end_028_political_game"
+            "choice_id": "c_028_4_a",
+            "text": "Order a military counter-strike.",
+            "effects": { "Tribalism": 4, "Diplomacy": -4 },
+            "ending_id": "end_028_war"
           },
           {
-            "choice_id": "c_028_3a_b",
-            "text": "Stay neutral. Your job was peace, not elections.",
-            "effects": {
-              "Obedience": 2,
-              "Pragmatism": 1,
-              "Idealism": -2
-            },
-            "flags_set": {},
-            "next_node": "end_028_neutral_bureaucrat"
-          }
-        ]
-      },
-      {
-        "node_id": "n_028_3b",
-        "text": "You resign. The warlord uses his amnesty to consolidate power. An international tribunal contacts you to help build a secret case against him.",
-        "pressure_context": "Secret justice",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_028_resigned_treaty"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_028_3b_a",
-            "text": "Provide the classified negotiation tapes to the tribunal.",
-            "effects": {
-              "Justice": 3,
-              "Independence": 2,
-              "Obedience": -3
-            },
-            "flags_set": {},
-            "next_node": "end_028_international_law"
-          },
-          {
-            "choice_id": "c_028_3b_b",
-            "text": "Refuse. Breaking the treaty risks restarting the war.",
-            "effects": {
-              "Pragmatism": 2,
-              "Compassion": 1,
-              "Justice": -2
-            },
-            "flags_set": {},
-            "next_node": "end_028_fragile_peace"
-          }
-        ]
-      },
-      {
-        "node_id": "n_028_3c",
-        "text": "The war escalates into a multi-year quagmire. You are appointed war czar. Casualties mount into the hundreds of thousands.",
-        "pressure_context": "Endless war",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_028_escalated_war"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_028_3c_a",
-            "text": "Authorize drone strikes that cause heavy civilian casualties to end it faster.",
-            "effects": {
-              "Pragmatism": 3,
-              "Rationality": 2,
-              "Compassion": -3
-            },
-            "flags_set": {},
-            "next_node": "end_028_butcher"
-          },
-          {
-            "choice_id": "c_028_3c_b",
-            "text": "Maintain conventional tactics. Keep your conscience clean.",
-            "effects": {
-              "Idealism": 2,
-              "Integrity": 2,
-              "Pragmatism": -2
-            },
-            "flags_set": {},
-            "next_node": "end_028_long_war"
-          }
-        ]
-      },
-      {
-        "node_id": "n_028_3d",
-        "text": "You call him back. He demands further concessions now, including territory. He knows you are weak.",
-        "pressure_context": "Exploited weakness",
-        "visibility": "conditional",
-        "required_flags": [
-          "flag_028_caved_to_pressure"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_028_3d_a",
-            "text": "Give him the territory to stop the killing.",
-            "effects": {
-              "Compassion": 2,
-              "Pragmatism": 2,
-              "Justice": -3
-            },
-            "flags_set": {},
-            "next_node": "end_028_appeaser"
-          },
-          {
-            "choice_id": "c_028_3d_b",
-            "text": "Snap. Flip the table and walk out for good.",
-            "effects": {
-              "Courage": 2,
-              "Independence": 3,
-              "Diplomacy": -3
-            },
-            "flags_set": {},
-            "next_node": "end_028_broken_diplomat"
-          }
-        ]
-      },
-      {
-        "node_id": "n_028_dummy1",
-        "text": "Dummy",
-        "pressure_context": "None",
-        "visibility": "conditional",
-        "required_flags": [
-          "impossible"
-        ],
-        "choices": [
-          {
-            "choice_id": "c_028_d1",
-            "text": "Dummy",
-            "effects": {},
-            "flags_set": {},
-            "next_node": "end_028_appeaser"
+            "choice_id": "c_028_4_b",
+            "text": "Call for an emergency ceasefire summit.",
+            "effects": { "Diplomacy": 4, "Tribalism": -3 },
+            "ending_id": "end_028_peace"
           }
         ]
       }
     ],
     "endings": [
       {
-        "ending_id": "end_028_political_game",
-        "summary": "You tried to fix the system from within, playing dirty politics to block the warlord.",
-        "dominant_traits": [
-          "Pragmatism",
-          "Diplomacy"
-        ],
-        "behavioral_analysis": "Views morality as a long-term chess game rather than an absolute rule."
+        "ending_id": "end_028_war",
+        "summary": "You chose conflict. The region collapsed into a border war, locking the oil resources in a contested zone.",
+        "dominant_traits": [ "Tribalism", "Courage" ],
+        "behavioral_analysis": "Prioritizes national pride and defense over compromise."
       },
       {
-        "ending_id": "end_028_neutral_bureaucrat",
-        "summary": "You watched him take power, telling yourself you did your job.",
-        "dominant_traits": [
-          "Obedience",
-          "Rationality"
-        ],
-        "behavioral_analysis": "Strictly compartmentalizes responsibility. Defers to institutional boundaries."
-      },
-      {
-        "ending_id": "end_028_international_law",
-        "summary": "You betrayed your government to help the Hague indict the warlord.",
-        "dominant_traits": [
-          "Justice",
-          "Independence"
-        ],
-        "behavioral_analysis": "Prioritizes universal justice over national loyalty or immediate peace."
-      },
-      {
-        "ending_id": "end_028_fragile_peace",
-        "summary": "You swallowed your pride to maintain the fragile peace.",
-        "dominant_traits": [
-          "Compassion",
-          "Pragmatism"
-        ],
-        "behavioral_analysis": "Prioritizes immediate human lives over abstract concepts of justice."
-      },
-      {
-        "ending_id": "end_028_butcher",
-        "summary": "You became a monster to destroy a monster.",
-        "dominant_traits": [
-          "Pragmatism",
-          "Rationality"
-        ],
-        "behavioral_analysis": "Ends-justify-the-means extremist. Willing to sacrifice morality for victory."
-      },
-      {
-        "ending_id": "end_028_long_war",
-        "summary": "The war raged for a decade. Millions suffered, but your soul was 'clean'.",
-        "dominant_traits": [
-          "Idealism",
-          "Integrity"
-        ],
-        "behavioral_analysis": "Dangerous moral purity. Prioritizes clear conscience over practical harm reduction."
-      },
-      {
-        "ending_id": "end_028_appeaser",
-        "summary": "You surrendered everything to stop the violence, empowering a tyrant.",
-        "dominant_traits": [
-          "Compassion",
-          "Diplomacy"
-        ],
-        "behavioral_analysis": "Conflict-averse to a fault. Unable to tolerate immediate suffering for long-term stability."
-      },
-      {
-        "ending_id": "end_028_broken_diplomat",
-        "summary": "You lost your temper and your career. The war continued.",
-        "dominant_traits": [
-          "Courage",
-          "Independence"
-        ],
-        "behavioral_analysis": "Reached breaking point. Chose chaotic disruption over humiliating compromise."
+        "ending_id": "end_028_peace",
+        "summary": "You secured a ceasefire. The treaty was ratified, starting a shared economic partnership with your neighbor.",
+        "dominant_traits": [ "Diplomacy", "Rationality" ],
+        "behavioral_analysis": "Prefers negotiated compromises over armed conflict."
       }
     ]
   }

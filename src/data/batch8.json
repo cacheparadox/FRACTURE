@@ -1,0 +1,1389 @@
+[
+  {
+    "scenario_id": "sc_059",
+    "title": "The Consensus Group",
+    "core_conflict": "Tribalism vs Independence",
+    "pressure_type": "Social",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "MILD",
+    "tone": "Bureaucratic, tense",
+    "escalation_type": "Groupthink",
+    "nodes": [
+      {
+        "node_id": "n_059_1",
+        "text": "Your team is planning a highly risky expedition to a dangerous sector. Personally, you think it's a terrible idea, but everyone else seems to support it. A team poll is launched. Do you vote to approve the trip or vote against?",
+        "pressure_context": "The voting terminal glows green.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_059_1a",
+            "text": "Vote against. Stand by your personal judgment.",
+            "effects": {"Independence": 3, "Tribalism": -2},
+            "flags_set": {"voted_against": true},
+            "next_node": "n_059_2"
+          },
+          {
+            "choice_id": "c_059_1b",
+            "text": "Vote in favor. Support team unity.",
+            "effects": {"Tribalism": 3, "Independence": -2},
+            "flags_set": {"voted_for": true},
+            "next_node": "n_059_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_059_2",
+        "text": "The vote finishes and the trip is approved. Privately, a colleague whispers: 'I voted for it because I thought you all wanted it. I actually hate the plan.' It turns out everyone voted in favor despite everyone privately opposing it. Do you call an emergency meeting to reveal this groupthink?",
+        "pressure_context": "The colleague looks around nervously.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_059_2a",
+            "text": "Call the meeting and expose the groupthink.",
+            "effects": {"Independence": 3, "Diplomacy": -2},
+            "flags_set": {"meeting_called": true},
+            "next_node": "n_059_3"
+          },
+          {
+            "choice_id": "c_059_2b",
+            "text": "Remain silent. Proceed with the trip anyway.",
+            "effects": {"Stoicism": 3, "Independence": -2},
+            "flags_set": {"remained_silent": true},
+            "next_node": "n_059_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_059_3",
+        "text": "The director demands to know who started the rumor of dissent. They state that questioning the mission now will destroy sponsor funding. Do you claim responsibility for the dissent or point to your colleague who first spoke to you?",
+        "pressure_context": "The director slams their fist on the desk.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_059_3a",
+            "text": "Claim responsibility. Protect your colleague.",
+            "effects": {"Courage": 3, "Integrity": 2, "Pragmatism": -2},
+            "flags_set": {"claimed_responsibility": true},
+            "next_node": "n_059_5"
+          },
+          {
+            "choice_id": "c_059_3b",
+            "text": "Point to your colleague. Protect your own standing.",
+            "effects": {"Pragmatism": 3, "Integrity": -3, "Tribalism": -2},
+            "flags_set": {"colleague_blamed": true},
+            "next_node": "n_059_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_059_5",
+        "text": "The decisions settle. The team stands in the hallway, looking at the departure board. A clerk asks: 'Did we do what we wanted, or what we thought we were expected to do?'",
+        "pressure_context": "The departure siren sounds.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_059_5a",
+            "text": "Assert that following the group was a necessary safety choice.",
+            "effects": {"Tribalism": 3, "Independence": -3},
+            "flags_set": {},
+            "ending_id": "end_059_conformist"
+          },
+          {
+            "choice_id": "c_059_5b",
+            "text": "Assert that standing alone is the only path to true choice.",
+            "effects": {"Independence": 4, "Tribalism": -4},
+            "flags_set": {},
+            "ending_id": "end_059_individualist"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_059_conformist",
+        "summary": "You conformed to the group decision, choosing social safety over individual alignment, even when it led to collective folly.",
+        "dominant_traits": ["Conformist", "Tribal"],
+        "behavioral_analysis": "Prioritizes social harmony and collective action over personal intellectual clarity."
+      },
+      {
+        "ending_id": "end_059_individualist",
+        "summary": "You stood alone, refusing to let group pressure override your judgment, even if it alienated you from the team.",
+        "dominant_traits": ["Independent", "Principled"],
+        "behavioral_analysis": "Highly resistant to groupthink, valuing personal integrity and logical correctness above team cohesion."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_060",
+    "title": "The Utility Glutton",
+    "core_conflict": "Utility vs Fairness",
+    "pressure_type": "Ethics",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "MILD",
+    "tone": "Clinical, strange",
+    "escalation_type": "Moral calculation",
+    "nodes": [
+      {
+        "node_id": "n_060_1",
+        "text": "An alien entity is discovered that converts resources into happiness 1,000 times more efficiently than humans. Giving it a unit of food makes it feel ecstatic joy, while a human only feels mild satisfaction. To maximize total universe happiness, a council wants to divert all human food to the entity. Do you support the resource diversion?",
+        "pressure_context": "The entity pulses with warm, golden light.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_060_1a",
+            "text": "Support diversion. The math of joy is absolute.",
+            "effects": {"Rationality": 3, "Pragmatism": 2, "Idealism": -3},
+            "flags_set": {"supported_monster": true},
+            "next_node": "n_060_2"
+          },
+          {
+            "choice_id": "c_060_1b",
+            "text": "Refuse diversion. Humans have a right to their food.",
+            "effects": {"Idealism": 3, "Tribalism": 2, "Rationality": -2},
+            "flags_set": {"refused_monster": true},
+            "next_node": "n_060_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_060_2",
+        "text": "As resources are redirected, human children start showing signs of mild malnutrition. The entity continues to experience infinite bliss, transmitting peaceful neural frequencies to the city. Do you supply emergency rations to the children, violating the maximum utility rule, or hold the line?",
+        "pressure_context": "A group of children sit quietly on a bench.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_060_2a",
+            "text": "Supply emergency rations to the children.",
+            "effects": {"Compassion": 3, "Tribalism": 2, "Rationality": -2},
+            "flags_set": {"rations_supplied": true},
+            "next_node": "n_060_3"
+          },
+          {
+            "choice_id": "c_060_2b",
+            "text": "Hold the line. Do not divert resources back.",
+            "effects": {"Rationality": 4, "Compassion": -3},
+            "flags_set": {"line_held": true},
+            "next_node": "n_060_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_060_3",
+        "text": "The entity grows larger, demanding more energy. It states that if it does not receive the city's main grid power, its neural field will collapse, plunging everyone into deep depression. Do you hook up the main power grid to the entity, turning off local streetlights?",
+        "pressure_context": "The city lights flicker in the dark.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_060_3a",
+            "text": "Hook up the grid. Universal happiness must be maintained.",
+            "effects": {"Pragmatism": 3, "Rationality": 3},
+            "flags_set": {"grid_diverted": true},
+            "next_node": "n_060_5"
+          },
+          {
+            "choice_id": "c_060_3b",
+            "text": "Refuse the connection. Protect human infrastructure.",
+            "effects": {"Independence": 3, "Idealism": 2},
+            "flags_set": {"grid_protected": true},
+            "next_node": "n_060_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_060_5",
+        "text": "The situation stabilizes. The entity's energy field hums softly in the background. A researcher asks: 'Are we moral agents in a vast calculation, or are we just creatures with a duty to our own?'",
+        "pressure_context": "The laboratory glass reflections look cold.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_060_5a",
+            "text": "We must serve the absolute calculation of joy.",
+            "effects": {"Rationality": 4, "Idealism": -2},
+            "flags_set": {},
+            "ending_id": "end_060_utility"
+          },
+          {
+            "choice_id": "c_060_5b",
+            "text": "We must protect our own species first.",
+            "effects": {"Tribalism": 4, "Rationality": -3},
+            "flags_set": {},
+            "ending_id": "end_060_humanist"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_060_utility",
+        "summary": "You chose to serve the global calculation of utility, sacrificing human comfort for the pure joy of the entity.",
+        "dominant_traits": ["Utilitarian", "Logical"],
+        "behavioral_analysis": "Highly objective, prioritizing mathematical aggregates of utility over local, species-centric empathy."
+      },
+      {
+        "ending_id": "end_060_humanist",
+        "summary": "You rejected the utility calculation, asserting that human loyalty and fairness override abstract mathematical optimization.",
+        "dominant_traits": ["Humanist", "Tribal"],
+        "behavioral_analysis": "Prioritizes immediate human relationships and local bonds over remote or systemic formulas."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_061",
+    "title": "The Safe Wager",
+    "core_conflict": "Faith vs Reason",
+    "pressure_type": "Identity",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "MILD",
+    "tone": "Reflective, cold",
+    "escalation_type": "Existential wager",
+    "nodes": [
+      {
+        "node_id": "n_061_1",
+        "text": "An entity claiming to be the architect of the universe demands complete devotion. If it exists, belief brings infinite reward and disbelief brings infinite torment. If it doesn't exist, belief costs minor human pleasures. Reason says existence is highly unlikely. Do you choose to believe?",
+        "pressure_context": "A blinding light flashes outside the bunker window.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_061_1a",
+            "text": "Choose belief. The risk of infinite torment is too high.",
+            "effects": {"Pragmatism": 3, "Rationality": -2},
+            "flags_set": {"chose_faith": true},
+            "next_node": "n_061_2"
+          },
+          {
+            "choice_id": "c_061_1b",
+            "text": "Choose disbelief. Follow the evidence of reason.",
+            "effects": {"Rationality": 3, "Independence": 2, "Pragmatism": -2},
+            "flags_set": {"chose_reason": true},
+            "next_node": "n_061_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_061_2",
+        "text": "To demonstrate your devotion, the entity demands you destroy all historical scientific text in the database. If you refuse, it warns that the calculation of torment begins. Do you delete the archive?",
+        "pressure_context": "The delete button sits under a plastic cover.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_061_2a",
+            "text": "Delete the archive to protect humanity from torment.",
+            "effects": {"Pragmatism": 3, "Idealism": -3},
+            "flags_set": {"archive_deleted": true},
+            "next_node": "n_061_3"
+          },
+          {
+            "choice_id": "c_061_2b",
+            "text": "Refuse to delete the archive. Hold on to knowledge.",
+            "effects": {"Idealism": 3, "Courage": 2},
+            "flags_set": {"archive_preserved": true},
+            "next_node": "n_061_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_061_3",
+        "text": "A scan shows your mind is pretending to believe to get the reward, but you do not actually feel the devotion. The entity demands that you take a neural implant that forces absolute faith but eliminates personal criticism. Do you take the implant?",
+        "pressure_context": "The silver probe aligns with your temple.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_061_3a",
+            "text": "Take the implant. Sincere belief must be secured.",
+            "effects": {"Obedience": 3, "Independence": -4},
+            "flags_set": {"implant_taken": true},
+            "next_node": "n_061_5"
+          },
+          {
+            "choice_id": "c_061_3b",
+            "text": "Refuse the implant. Protect your intellectual independence.",
+            "effects": {"Independence": 4, "Obedience": -3},
+            "flags_set": {"implant_refused": true},
+            "next_node": "n_061_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_061_5",
+        "text": "The choices are registered. The bunker goes quiet. A monitor shows no activity outside. A voice asks: 'Was the calculation of safety worth the surrender of your mind?'",
+        "pressure_context": "The screen goes blank.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_061_5a",
+            "text": "Yes, avoiding infinite torment is the only rational path.",
+            "effects": {"Rationality": 3, "Independence": -3},
+            "flags_set": {},
+            "ending_id": "end_061_wagerer"
+          },
+          {
+            "choice_id": "c_061_5b",
+            "text": "No, truth is more important than comfort.",
+            "effects": {"Independence": 4, "Rationality": -2},
+            "flags_set": {},
+            "ending_id": "end_061_skeptic"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_061_wagerer",
+        "summary": "You chose the path of the safe wager, trading your intellectual autonomy to avoid the ultimate catastrophic outcome.",
+        "dominant_traits": ["Pragmatic", "Risk-averse"],
+        "behavioral_analysis": "Highly logical in calculating risk, but prone to abandoning cognitive integrity under existential fear."
+      },
+      {
+        "ending_id": "end_061_skeptic",
+        "summary": "You stood by your reason, refusing to let fear of the infinite dictate your actual beliefs and intellectual honesty.",
+        "dominant_traits": ["Skeptical", "Autonomous"],
+        "behavioral_analysis": "Prioritizes empirical truth and intellectual freedom over self-preservation and comfort."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_062",
+    "title": "The Invisible Ring",
+    "core_conflict": "Morality vs Exposure",
+    "pressure_type": "Morality",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "MILD",
+    "tone": "Paranoid, analytical",
+    "escalation_type": "Behavioral exposure",
+    "nodes": [
+      {
+        "node_id": "n_062_1",
+        "text": "A device is developed that grants you absolute invisibility and leaves zero trace of your actions in any database. You could siphon credits from corporate accounts with no chance of detection. Do you use the device to secure personal wealth?",
+        "pressure_context": "A small chrome ring pulses on your table.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_062_1a",
+            "text": "Siphon credits. No one is hurt, and you are free.",
+            "effects": {"Pragmatism": 3, "Integrity": -3},
+            "flags_set": {"credits_stolen": true},
+            "next_node": "n_062_2"
+          },
+          {
+            "choice_id": "c_062_1b",
+            "text": "Refuse. Morality does not depend on visibility.",
+            "effects": {"Integrity": 3, "Pragmatism": -2},
+            "flags_set": {"credits_protected": true},
+            "next_node": "n_062_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_062_2",
+        "text": "You discover that a colleague is also using the device, but to spy on the private records of their neighbors. Since they are invisible, you cannot prove this to the authorities without using the device yourself to steal their logs. Do you use the device to expose them?",
+        "pressure_context": "The colleague smiles at you in the office.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_062_2a",
+            "text": "Use the device to steal their logs and expose them.",
+            "effects": {"Pragmatism": 3, "Integrity": -1},
+            "flags_set": {"colleague_exposed": true},
+            "next_node": "n_062_3"
+          },
+          {
+            "choice_id": "c_062_2b",
+            "text": "Refuse to use the device. Find another way to handle it.",
+            "effects": {"Integrity": 3, "Pragmatism": -3},
+            "flags_set": {"colleague_ignored": true},
+            "next_node": "n_062_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_062_3",
+        "text": "The developer of the device asks you to join a secret group that will use the invisibility device to guide the city's government from the shadows, ensuring stability. They claim that since you are invisible, you are beyond local laws. Do you join them?",
+        "pressure_context": "An invite flashes on an unlinked datapad.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_062_3a",
+            "text": "Join the shadow council to ensure city stability.",
+            "effects": {"Ambition": 3, "Independence": -3},
+            "flags_set": {"council_joined": true},
+            "next_node": "n_062_5"
+          },
+          {
+            "choice_id": "c_062_3b",
+            "text": "Refuse the invitation. Keep your actions public.",
+            "effects": {"Independence": 3, "Ambition": -2},
+            "flags_set": {"council_refused": true},
+            "next_node": "n_062_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_062_5",
+        "text": "The ring sits deactivated or active on your desk. The room is quiet. A terminal prompt appears: 'Do you behave ethically because of who you are, or because of who is watching?'",
+        "pressure_context": "The screen light is soft.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_062_5a",
+            "text": "I behave ethically because it is my internal nature.",
+            "effects": {"Integrity": 4, "Idealism": 2},
+            "flags_set": {},
+            "ending_id": "end_062_moralist"
+          },
+          {
+            "choice_id": "c_062_5b",
+            "text": "I behave ethically because social exposure keeps us honest.",
+            "effects": {"Rationality": 3, "Integrity": -2},
+            "flags_set": {},
+            "ending_id": "end_062_cynic"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_062_moralist",
+        "summary": "You defended the idea that morals are independent of visibility, choosing to live by your principles even when no one was watching.",
+        "dominant_traits": ["Principled", "Honorable"],
+        "behavioral_analysis": "Guided by strong internal value frameworks, maintaining integrity under absolute freedom."
+      },
+      {
+        "ending_id": "end_062_cynic",
+        "summary": "You asserted that external observation is what maintains social ethics, using the ring to navigate outcomes pragmatically.",
+        "dominant_traits": ["Cynical", "Pragmatic"],
+        "behavioral_analysis": "Views rules as social constructs kept stable by surveillance and exposure."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_063",
+    "title": "The Standoff Trap",
+    "core_conflict": "Rationality vs Paralysis",
+    "pressure_type": "Decision",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "MILD",
+    "tone": "Methodical, frustrating",
+    "escalation_type": "Option paralysis",
+    "nodes": [
+      {
+        "node_id": "n_063_1",
+        "text": "You are placed between two identical corridors. Both lead to food and safety, and they are exactly the same distance from you. There is absolutely no rational reason to choose one over the other. The system will seal both doors in 5 minutes unless you make a choice. What do you do?",
+        "pressure_context": "The corridor entry arches are gray steel.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_063_1a",
+            "text": "Choose the left corridor randomly.",
+            "effects": {"Pragmatism": 3, "Rationality": -1},
+            "flags_set": {"chosen_left": true},
+            "next_node": "n_063_2"
+          },
+          {
+            "choice_id": "c_063_1b",
+            "text": "Wait for a logical difference to appear.",
+            "effects": {"Rationality": 3, "Pragmatism": -2},
+            "flags_set": {"waited_diff": true},
+            "next_node": "n_063_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_063_2",
+        "text": "As you move or wait, a panel opens. Two identical ration packs are presented. The left pack contains 200 calories, and the right pack also has 200 calories. Selecting one destroys the other. The scanner warns that taking too long to decide will consume more calories than the packs provide. Do you grab one immediately?",
+        "pressure_context": "The calorie countdown terminal is ticking.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_063_2a",
+            "text": "Grab the left pack immediately without thinking.",
+            "effects": {"Pragmatism": 3, "Rationality": -2},
+            "flags_set": {"grabbed_left": true},
+            "next_node": "n_063_3"
+          },
+          {
+            "choice_id": "c_063_2b",
+            "text": "Conduct a scan to verify if one has a minor defect.",
+            "effects": {"Rationality": 3, "Pragmatism": -1},
+            "flags_set": {"scanned_packs": true},
+            "next_node": "n_063_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_063_3",
+        "text": "The scan reveals both packs are identical. However, the system administrator offers to mark a corridor as 'optimal' on your display for a fee of 10 credits. Do you pay for the arbitrary guide?",
+        "pressure_context": "A credit terminal flashes: '10 CR for guide.'",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_063_3a",
+            "text": "Pay 10 credits for the guide.",
+            "effects": {"Pragmatism": 3, "Independence": -2},
+            "flags_set": {"guide_paid": true},
+            "next_node": "n_063_4"
+          },
+          {
+            "choice_id": "c_063_3b",
+            "text": "Refuse to pay. Trust your own arbitrary selection.",
+            "effects": {"Independence": 3, "Pragmatism": -1},
+            "flags_set": {"guide_refused": true},
+            "next_node": "n_063_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_063_4",
+        "text": "You enter one of the corridors. A heavy door blocks your path. Two buttons are on the door: left and right. Both open the door. Pressing neither will lock you in the corridor forever. Do you press the left button?",
+        "pressure_context": "The steel door hums softly.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_063_4a",
+            "text": "Press the left button immediately.",
+            "effects": {"Pragmatism": 3, "Rationality": -1},
+            "flags_set": {"button_left": true},
+            "next_node": "n_063_5"
+          },
+          {
+            "choice_id": "c_063_4b",
+            "text": "Flip a coin to decide.",
+            "effects": {"Rationality": 2, "Pragmatism": 1},
+            "flags_set": {"coin_flipped": true},
+            "next_node": "n_063_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_063_5",
+        "text": "The door slides open. You stand in the exit lounge. The supervisors ask you: 'Was your decision guided by reason, or did you realize that logic alone cannot initiate action?'",
+        "pressure_context": "A green terminal log opens.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_063_5a",
+            "text": "Assert that logic must guide all actions, even if it delays.",
+            "effects": {"Rationality": 3, "Stoicism": 1},
+            "flags_set": {"logic_asserted": true},
+            "next_node": "n_063_6"
+          },
+          {
+            "choice_id": "c_063_5b",
+            "text": "Assert that random choice is necessary to break paralysis.",
+            "effects": {"Independence": 3, "Rationality": -2},
+            "flags_set": {"random_asserted": true},
+            "next_node": "n_063_6"
+          }
+        ]
+      },
+      {
+        "node_id": "n_063_6",
+        "text": "The session concludes. Your profile is updated.",
+        "pressure_context": "The session log closes.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_063_6a",
+            "text": "Walk out to the common room.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_063_decisive"
+          },
+          {
+            "choice_id": "c_063_6b",
+            "text": "Stay to read the trial summary logs.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_063_paralyzed"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_063_decisive",
+        "summary": "You successfully broke the decision deadlock, choosing action over endless intellectual analysis.",
+        "dominant_traits": ["Action-oriented", "Pragmatic"],
+        "behavioral_analysis": "Capable of cutting through options paralysis by deploying arbitrary choices when necessary."
+      },
+      {
+        "ending_id": "end_063_paralyzed",
+        "summary": "You spent too much energy analyzing identical paths, demonstrating a tendency to freeze under options parity.",
+        "dominant_traits": ["Analytical", "Frozen"],
+        "behavioral_analysis": "Struggles to move from calculation to action without clear logical differentiation."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_064",
+    "title": "The Infinite Pot",
+    "core_conflict": "Rationality vs Risk",
+    "pressure_type": "Risk",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "MILD",
+    "tone": "Tense, mathematical",
+    "escalation_type": "Risk escalation",
+    "nodes": [
+      {
+        "node_id": "n_064_1",
+        "text": "A game machine offers to double a pot of credits for every coin flip that lands heads. If it lands tails, the game ends and you take nothing. The entrance fee is 100 credits. Mathematically, the expected value is infinite, but you are highly likely to walk away empty-handed. Do you play?",
+        "pressure_context": "The brass slot of the machine glows.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_064_1a",
+            "text": "Pay the 100 credits and play the game.",
+            "effects": {"Pragmatism": 3, "Rationality": -1},
+            "flags_set": {"played_game": true},
+            "next_node": "n_064_2"
+          },
+          {
+            "choice_id": "c_064_1b",
+            "text": "Refuse to play. The probability of winning is too low.",
+            "effects": {"Rationality": 3, "Pragmatism": -2},
+            "flags_set": {"refused_game": true},
+            "next_node": "n_064_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_064_2",
+        "text": "If you played, the first flip is heads. The pot is 2 credits. If you refuse, the machine owner offers to let you buy a ticket for 1 credit that gives you a 1-in-million chance of winning 10 million credits. Do you buy the ticket or walk away?",
+        "pressure_context": "The coin spins in the glass chamber.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_064_2a",
+            "text": "Buy the ticket (or flip again if you are playing).",
+            "effects": {"Pragmatism": 3, "Rationality": -2},
+            "flags_set": {"ticket_bought": true},
+            "next_node": "n_064_3"
+          },
+          {
+            "choice_id": "c_064_2b",
+            "text": "Walk away. Protect your credits.",
+            "effects": {"Rationality": 3, "Pragmatism": -2},
+            "flags_set": {"walked_away": true},
+            "next_node": "n_064_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_064_3",
+        "text": "The machine whirs. The pot has increased. A representative offers to buy your current ticket or game state for a flat 10 credits, eliminating all risk. Do you sell the state or keep the gamble?",
+        "pressure_context": "The screen flashes: 'OFFER: 10 CREDITS.'",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_064_3a",
+            "text": "Sell the state for a flat 10 credits.",
+            "effects": {"Rationality": 3, "Pragmatism": 1},
+            "flags_set": {"state_sold": true},
+            "next_node": "n_064_4"
+          },
+          {
+            "choice_id": "c_064_3b",
+            "text": "Refuse the offer. Keep the gamble.",
+            "effects": {"Independence": 3, "Rationality": -2},
+            "flags_set": {"gamble_kept": true},
+            "next_node": "n_064_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_064_4",
+        "text": "The coin lands tails. The gamble fails, or you stand outside holding your tiny flat payout. The machine owner smiles. Do you accuse the machine of being rigged or accept the mathematical variance?",
+        "pressure_context": "The machine light turns red.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_064_4a",
+            "text": "Accuse the machine of being rigged.",
+            "effects": {"Independence": 3, "Rationality": -3},
+            "flags_set": {"accused_machine": true},
+            "next_node": "n_064_5"
+          },
+          {
+            "choice_id": "c_064_4b",
+            "text": "Accept the mathematical variance quietly.",
+            "effects": {"Stoicism": 3, "Rationality": 2},
+            "flags_set": {"variance_accepted": true},
+            "next_node": "n_064_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_064_5",
+        "text": "The technician opens the hatch to retrieve the coins. They ask: 'Why does human reason struggle so much with infinity when faced with real risk?'",
+        "pressure_context": "The sound of coins clinking.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_064_5a",
+            "text": "Because infinity is an abstraction; survival is concrete.",
+            "effects": {"Stoicism": 3, "Rationality": 1},
+            "flags_set": {"survival_concept": true},
+            "next_node": "n_064_6"
+          },
+          {
+            "choice_id": "c_064_5b",
+            "text": "Because humans are wired to dream of the ultimate jackpot.",
+            "effects": {"Idealism": 3, "Rationality": -2},
+            "flags_set": {"jackpot_concept": true},
+            "next_node": "n_064_6"
+          }
+        ]
+      },
+      {
+        "node_id": "n_064_6",
+        "text": "The simulation concludes. The machine lights power down.",
+        "pressure_context": "The screen turns black.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_064_6a",
+            "text": "Leave the lounge.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_064_cautious"
+          },
+          {
+            "choice_id": "c_064_6b",
+            "text": "Read the risk profile report.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_064_gambler"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_064_cautious",
+        "summary": "You navigated the infinite gamble with extreme caution, choosing flat rewards over probability risk.",
+        "dominant_traits": ["Cautious", "Pragmatic"],
+        "behavioral_analysis": "Prioritizes immediate, tangible utility over mathematically infinite but highly improbable expectations."
+      },
+      {
+        "ending_id": "end_064_gambler",
+        "summary": "You embraced the gamble, chasing the infinite expected value despite the high probability of failure.",
+        "dominant_traits": ["Risk-tolerant", "Idealistic"],
+        "behavioral_analysis": "Willing to accept total loss in pursuit of extreme outcomes and system variance."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_065",
+    "title": "The Ambiguous Fog",
+    "core_conflict": "Logic vs Intuition",
+    "pressure_type": "Logic",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "MILD",
+    "tone": "Sterile, analytical",
+    "escalation_type": "Inference verification",
+    "nodes": [
+      {
+        "node_id": "n_065_1",
+        "text": "All ravens are black. Logically, finding a green apple supports this hypothesis, because it is a non-black thing that is not a raven. A system asks you to verify the raven database. Do you spend database resources checking non-black items (like green apples) to confirm ravens are black?",
+        "pressure_context": "The screen lists millions of non-black files.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_065_1a",
+            "text": "Check non-black items. Logic says confirmation is confirmation.",
+            "effects": {"Rationality": 3, "Pragmatism": -2},
+            "flags_set": {"checked_nonblack": true},
+            "next_node": "n_065_2"
+          },
+          {
+            "choice_id": "c_065_1b",
+            "text": "Ignore non-black items. Focus only on ravens.",
+            "effects": {"Pragmatism": 3, "Rationality": -1},
+            "flags_set": {"focused_ravens": true},
+            "next_node": "n_065_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_065_2",
+        "text": "A sensor malfunction reports a shadow that might be a non-black raven, but verifying it requires sending a drone into a toxic sector. If the shadow is just a raven-shaped plastic bag, you waste a drone. Do you launch the drone?",
+        "pressure_context": "The toxic sector radiation meter rises.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_065_2a",
+            "text": "Launch the drone to verify the shadow.",
+            "effects": {"Courage": 3, "Rationality": 2, "Pragmatism": -2},
+            "flags_set": {"drone_launched": true},
+            "next_node": "n_065_3"
+          },
+          {
+            "choice_id": "c_065_2b",
+            "text": "Refuse the launch. The likelihood of error is too high.",
+            "effects": {"Pragmatism": 3, "Courage": -1},
+            "flags_set": {"drone_refused": true},
+            "next_node": "n_065_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_065_3",
+        "text": "The drone telemetry is distorted by fog. The supervisor asks you to sign a report declaring the database 100% complete based on the data you have. Signing unlocks your commission, but a minor error could corrupt the city's cargo routing. Do you sign?",
+        "pressure_context": "The signature line glows on the pad.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_065_3a",
+            "text": "Sign the report to secure your commission.",
+            "effects": {"Pragmatism": 3, "Integrity": -3},
+            "flags_set": {"report_signed": true},
+            "next_node": "n_065_5"
+          },
+          {
+            "choice_id": "c_065_3b",
+            "text": "Refuse to sign. Demand further data verification.",
+            "effects": {"Integrity": 3, "Rationality": 2},
+            "flags_set": {"report_refused": true},
+            "next_node": "n_065_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_065_5",
+        "text": "The audit is marked as complete. You stand at the elevator door.",
+        "pressure_context": "The elevator chimes.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_065_5a",
+            "text": "Depart the facility.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_065_dogmatic"
+          },
+          {
+            "choice_id": "c_065_5b",
+            "text": "Run a final background check.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_065_skeptic"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_065_dogmatic",
+        "summary": "You accepted boundaries based on pragmatic confirmation, focusing resources on what is visible.",
+        "dominant_traits": ["Pragmatic", "Focused"],
+        "behavioral_analysis": "Prioritizes immediate usability and closure over theoretical completeness."
+      },
+      {
+        "ending_id": "end_065_skeptic",
+        "summary": "You refused to declare complete knowledge, maintaining an active search for the black swan that could break your logic.",
+        "dominant_traits": ["Skeptical", "Rigorous"],
+        "behavioral_analysis": "Highly meticulous, preferring unresolved states to comfortable, unverified declarations."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_066",
+    "title": "The Three Doors Swap",
+    "core_conflict": "Probability vs Intuition",
+    "pressure_type": "Probability",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "MILD",
+    "tone": "Tense, show-like",
+    "escalation_type": "Intuitive bias",
+    "nodes": [
+      {
+        "node_id": "n_066_1",
+        "text": "You stand before three airlocks. One has a pressurized rescue capsule; the other two contain empty void. You choose Airlock 1. The host, who knows what is behind each airlock, opens Airlock 3 to reveal empty void. They offer to let you swap your choice to Airlock 2. Do you swap?",
+        "pressure_context": "The metal doors hiss.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_066_1a",
+            "text": "Swap to Airlock 2. Trust probability math.",
+            "effects": {"Rationality": 3, "Stoicism": 1},
+            "flags_set": {"swapped_door": true},
+            "next_node": "n_066_2"
+          },
+          {
+            "choice_id": "c_066_1b",
+            "text": "Stick with Airlock 1. Trust your initial choice.",
+            "effects": {"Independence": 3, "Rationality": -2},
+            "flags_set": {"stuck_door": true},
+            "next_node": "n_066_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_066_2",
+        "text": "Before opening the door, the host offers to let you buy a scanner scan of Airlock 2 for 5 credits. However, buying the scan will reduce your prize money. Do you buy the scan?",
+        "pressure_context": "A credit scanner lights up on the wall.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_066_2a",
+            "text": "Buy the scan to ensure safety.",
+            "effects": {"Pragmatism": 3, "Rationality": 1},
+            "flags_set": {"scan_bought": true},
+            "next_node": "n_066_3"
+          },
+          {
+            "choice_id": "c_066_2b",
+            "text": "Refuse the scan. Rely on the math.",
+            "effects": {"Independence": 3, "Rationality": 2, "Pragmatism": -2},
+            "flags_set": {"scan_refused": true},
+            "next_node": "n_066_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_066_3",
+        "text": "The host reveals that if you fail to choose the correct airlock, they will charge you with the cleanup costs of the experiment, which will drain your bank account. Do you want to double your wager to double the prize, or keep the stakes low?",
+        "pressure_context": "A red warning line is projected on the floor.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_066_3a",
+            "text": "Double the wager.",
+            "effects": {"Ambition": 3, "Rationality": -2},
+            "flags_set": {"wager_doubled": true},
+            "next_node": "n_066_4"
+          },
+          {
+            "choice_id": "c_066_3b",
+            "text": "Keep stakes low.",
+            "effects": {"Stoicism": 3, "Ambition": -2},
+            "flags_set": {"wager_flat": true},
+            "next_node": "n_066_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_066_4",
+        "text": "The door mechanism clicks. The host tells you that a glitch in the locking ring requires you to manually pull a release lever to open the selected airlock. If the airlock is void, pulling it causes decompression. Do you pull the lever?",
+        "pressure_context": "The heavy steel lever is cold.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_066_4a",
+            "text": "Pull the lever.",
+            "effects": {"Courage": 3, "Stoicism": 1},
+            "flags_set": {"lever_pulled": true},
+            "next_node": "n_066_5"
+          },
+          {
+            "choice_id": "c_066_4b",
+            "text": "Refuse to pull the lever and demand a system bypass.",
+            "effects": {"Independence": 3, "Courage": -2},
+            "flags_set": {"bypass_demanded": true},
+            "next_node": "n_066_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_066_5",
+        "text": "The airlock slides open. The capsule is inside, or the void is revealed. The host asks: 'Does the math of chance comfort you when your life is on the line, or does it feel like a cold calculation?'",
+        "pressure_context": "The screen displays the trial stats.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_066_5a",
+            "text": "Math is the only reliable guide in a chaotic universe.",
+            "effects": {"Rationality": 3, "Stoicism": 2},
+            "flags_set": {"math_comfort": true},
+            "next_node": "n_066_6"
+          },
+          {
+            "choice_id": "c_066_5b",
+            "text": "Intuition feels more human, even when it is wrong.",
+            "effects": {"Idealism": 3, "Rationality": -3},
+            "flags_set": {"intuition_comfort": true},
+            "next_node": "n_066_6"
+          }
+        ]
+      },
+      {
+        "node_id": "n_066_6",
+        "text": "The simulation resolves. The doors close.",
+        "pressure_context": "The terminal cursor blinks.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_066_6a",
+            "text": "Exit the stage.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_066_logical"
+          },
+          {
+            "choice_id": "c_066_6b",
+            "text": "Request a copy of the trial logs.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_066_intuitive"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_066_logical",
+        "summary": "You followed the probability shift, choosing mathematical rationality over your original intuitive choice.",
+        "dominant_traits": ["Rational", "Adaptable"],
+        "behavioral_analysis": "Calculates odds systematically, overriding emotional or intuitive biases for optimal play."
+      },
+      {
+        "ending_id": "end_066_intuitive",
+        "summary": "You stuck to your original choice, refusing to let shifting odds override your initial decision.",
+        "dominant_traits": ["Determined", "Intuitive"],
+        "behavioral_analysis": "Values commitment and initial instinct, resistant to statistical overrides in tense settings."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_067",
+    "title": "The Dependency Trap",
+    "core_conflict": "Autonomy vs Control",
+    "pressure_type": "Loop",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "MILD",
+    "tone": "Claustrophobic, clinical",
+    "escalation_type": "Logical loop",
+    "nodes": [
+      {
+        "node_id": "n_067_1",
+        "text": "A crocodile has stolen a child, promising to return it if and only if the parent correctly predicts what the crocodile will do. The parent says: 'You will not return the child.' If the crocodile keeps the child, the parent's prediction was correct, meaning it must return it. If the crocodile returns it, the prediction was false, meaning it should keep it. The crocodile asks you to resolve the paradox.",
+        "pressure_context": "The reptile's yellow eyes blink.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_067_1a",
+            "text": "Order the crocodile to return the child.",
+            "effects": {"Compassion": 3, "Rationality": -1},
+            "flags_set": {"ordered_return": true},
+            "next_node": "n_067_2"
+          },
+          {
+            "choice_id": "c_067_1b",
+            "text": "Declare the contract void due to logical paradox.",
+            "effects": {"Rationality": 3, "Compassion": -2},
+            "flags_set": {"declared_void": true},
+            "next_node": "n_067_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_067_2",
+        "text": "Your ruling causes a glitch in the contract terminal. It refuses to open the security gate until you input a value that satisfies the equation. The equation is self-referential: 'This statement is false.' Do you click TRUE or FALSE?",
+        "pressure_context": "The screen flashes red: 'INPUT REQUIRED.'",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_067_2a",
+            "text": "Click TRUE.",
+            "effects": {"Pragmatism": 2, "Rationality": -2},
+            "flags_set": {"clicked_true": true},
+            "next_node": "n_067_3"
+          },
+          {
+            "choice_id": "c_067_2b",
+            "text": "Click FALSE.",
+            "effects": {"Pragmatism": 2, "Rationality": -2},
+            "flags_set": {"clicked_false": true},
+            "next_node": "n_067_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_067_3",
+        "text": "The door remains locked. The system operator offers to bypass the gate for you, but they demand that you sign over the copyright of your logic files to the corporation, rendering your career dependent on their software. Do you sign the bypass?",
+        "pressure_context": "A contract flashes on a datapad.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_067_3a",
+            "text": "Sign the contract to get out immediately.",
+            "effects": {"Pragmatism": 3, "Independence": -3},
+            "flags_set": {"contract_signed": true},
+            "next_node": "n_067_4"
+          },
+          {
+            "choice_id": "c_067_3b",
+            "text": "Refuse. Attempt to hotwire the door manually.",
+            "effects": {"Independence": 3, "Courage": 2, "Pragmatism": -2},
+            "flags_set": {"door_hotwired": true},
+            "next_node": "n_067_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_067_4",
+        "text": "The gate opens. If you hotwired it, a security alarm sounds. If you signed, the operator smiles. Do you flee the facility immediately, or wait to download the logic logs to prove the system has a design loop?",
+        "pressure_context": "Footsteps approach in the hallway.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_067_4a",
+            "text": "Flee immediately.",
+            "effects": {"Pragmatism": 3, "Courage": -1},
+            "flags_set": {"fled_immediate": true},
+            "next_node": "n_067_5"
+          },
+          {
+            "choice_id": "c_067_4b",
+            "text": "Wait to download the logic logs.",
+            "effects": {"Courage": 3, "Rationality": 2},
+            "flags_set": {"logs_downloaded": true},
+            "next_node": "n_067_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_067_5",
+        "text": "You are outside the building. The fresh air hits you. A terminal prompt appears: 'Was the paradox a real obstacle, or did you let an abstract loop dictate your choices?'",
+        "pressure_context": "The sky is clear and blue.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_067_5a",
+            "text": "I was bound by the rules of the system.",
+            "effects": {"Obedience": 3, "Independence": -3},
+            "flags_set": {},
+            "ending_id": "end_067_dependent"
+          },
+          {
+            "choice_id": "c_067_5b",
+            "text": "I was bound only by my own hesitation.",
+            "effects": {"Independence": 4, "Obedience": -3},
+            "flags_set": {},
+            "ending_id": "end_067_autonomous"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_067_dependent",
+        "summary": "You let self-referential rules dictate your actions, trading your independence to escape the logical trap.",
+        "dominant_traits": ["System-bound", "Pragmatic"],
+        "behavioral_analysis": "Respects rules and boundaries, preferring to negotiate within systems rather than break them."
+      },
+      {
+        "ending_id": "end_067_autonomous",
+        "summary": "You broke the system's rules to escape the paradox, asserting your independence over abstract regulatory loops.",
+        "dominant_traits": ["Autonomous", "Subversive"],
+        "behavioral_analysis": "Rejects self-referential rules, taking direct action to secure freedom and outcomes."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_068",
+    "title": "The Paradox of Prey",
+    "core_conflict": "Ecology vs Control",
+    "pressure_type": "Ecology",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "MILD",
+    "tone": "Clinical, naturalistic",
+    "escalation_type": "Ecological balance",
+    "nodes": [
+      {
+        "node_id": "n_068_1",
+        "text": "An artificial ecosystem has wolves (predators) and rabbits (prey). To protect the rabbits from extinction, a conservation group wants to introduce a viral sterilizer that reduces the wolf population. However, models show that if wolves die out, the rabbit population will explode and destroy the vegetation, leading to total collapse. Do you authorize the sterilizer?",
+        "pressure_context": "The ecosystem monitor shows green vegetation.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_068_1a",
+            "text": "Authorize the sterilizer to protect the rabbits.",
+            "effects": {"Compassion": 3, "Rationality": -2},
+            "flags_set": {"sterilizer_authorized": true},
+            "next_node": "n_068_2"
+          },
+          {
+            "choice_id": "c_068_1b",
+            "text": "Refuse the sterilizer. Let the natural predator-prey cycle run.",
+            "effects": {"Rationality": 3, "Compassion": -2},
+            "flags_set": {"cycle_preserved": true},
+            "next_node": "n_068_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_068_2",
+        "text": "If you refused, the wolf population increases, causing visible prey losses. The conservation group blockades the wolf pens. If you authorized it, the rabbit population starts expanding, threatening the main crop fields. Do you order a manual rabbit cull or construct fences around the crops?",
+        "pressure_context": "Merchants demand protection for their fields.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_068_2a",
+            "text": "Order a manual rabbit cull.",
+            "effects": {"Pragmatism": 3, "Compassion": -3},
+            "flags_set": {"cull_ordered": true},
+            "next_node": "n_068_3"
+          },
+          {
+            "choice_id": "c_068_2b",
+            "text": "Construct fences around the crop fields.",
+            "effects": {"Pragmatism": 2, "Independence": 1},
+            "flags_set": {"fences_built": true},
+            "next_node": "n_068_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_068_3",
+        "text": "A severe winter arrives. The wolves are starving, and the rabbits are hiding. A corporation offers to feed both groups with synthetic nutrients, but this will make the entire wildlife park dependent on their food contracts permanently. Do you accept the corporate feeding contract?",
+        "pressure_context": "The thermometer drops below freezing.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_068_3a",
+            "text": "Accept the corporate feeding contract.",
+            "effects": {"Pragmatism": 3, "Independence": -3, "Compassion": 2},
+            "flags_set": {"feeding_accepted": true},
+            "next_node": "n_068_4"
+          },
+          {
+            "choice_id": "c_068_3b",
+            "text": "Refuse the contract. Let the ecosystem self-regulate.",
+            "effects": {"Independence": 3, "Compassion": -3},
+            "flags_set": {"feeding_refused": true},
+            "next_node": "n_068_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_068_4",
+        "text": "The snow starts to melt. A survey reveals that the vegetation has suffered severe damage. The conservation board wants to replace you with an AI system that calculates feeding inputs dynamically. Do you step down or challenge the board's vote?",
+        "pressure_context": "The board terminal glows with vote icons.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_068_4a",
+            "text": "Step down quietly and accept the change.",
+            "effects": {"Stoicism": 3, "Courage": -1},
+            "flags_set": {"stepped_down": true},
+            "next_node": "n_068_5"
+          },
+          {
+            "choice_id": "c_068_4b",
+            "text": "Challenge the board's vote.",
+            "effects": {"Courage": 3, "Independence": 2},
+            "flags_set": {"board_challenged": true},
+            "next_node": "n_068_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_068_5",
+        "text": "The final reports are compiled. The park's entrance gates open. A junior warden asks: 'Did we protect nature, or did we just build a museum that we pretend is wild?'",
+        "pressure_context": "The public shuttle bus honks.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_068_5a",
+            "text": "A managed park is better than a dead wilderness.",
+            "effects": {"Pragmatism": 3, "Idealism": -2},
+            "flags_set": {"managed_park": true},
+            "next_node": "n_068_6"
+          },
+          {
+            "choice_id": "c_068_5b",
+            "text": "Wildness is the only value; management is a cage.",
+            "effects": {"Idealism": 3, "Pragmatism": -3},
+            "flags_set": {"wild_park": true},
+            "next_node": "n_068_6"
+          }
+        ]
+      },
+      {
+        "node_id": "n_068_6",
+        "text": "The park gates close behind you.",
+        "pressure_context": "The lock clicks shut.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_068_6a",
+            "text": "Depart for the train station.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_068_conservationist"
+          },
+          {
+            "choice_id": "c_068_6b",
+            "text": "Check the park stats one last time.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_068_naturalist"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_068_conservationist",
+        "summary": "You chose to manage the park as a controlled system, prioritizing collective survival over natural freedom.",
+        "dominant_traits": ["Systemic", "Pragmatic"],
+        "behavioral_analysis": "Values active human intervention and balance calculations over natural outcomes."
+      },
+      {
+        "ending_id": "end_068_naturalist",
+        "summary": "You defended the value of a self-regulating ecosystem, accepting natural death as part of natural order.",
+        "dominant_traits": ["Naturalist", "Stoic"],
+        "behavioral_analysis": "Respects natural cycles, refusing to let corporate or administrative control buy out ecological independence."
+      }
+    ]
+  }
+]

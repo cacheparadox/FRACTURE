@@ -1,0 +1,1882 @@
+[
+  {
+    "scenario_id": "sc_079",
+    "title": "The Certainty Choice",
+    "core_conflict": "Certainty vs Expectation",
+    "pressure_type": "Risk",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Sterile, tense",
+    "escalation_type": "Risk preference",
+    "is_long": true,
+    "nodes": [
+      {
+        "node_id": "n_079_1",
+        "text": "A terminal offers two options. Option A: $1,000,000 for sure. Option B: An 89% chance of $1,000,000, a 10% chance of $5,000,000, and a 1% chance of nothing. Option B has a higher expected value, but Option A is certain. What do you choose?",
+        "pressure_context": "The screen glows green.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_079_1a",
+            "text": "Choose Option A (Certain $1M).",
+            "effects": {"Pragmatism": 3, "Rationality": -1},
+            "flags_set": {"chose_certainty": true},
+            "next_node": "n_079_2"
+          },
+          {
+            "choice_id": "c_079_1b",
+            "text": "Choose Option B (Expectation $5M).",
+            "effects": {"Rationality": 3, "Pragmatism": -2},
+            "flags_set": {"chose_gamble": true},
+            "next_node": "n_079_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_079_2",
+        "text": "Next round. Option C: An 11% chance of $1,000,000 and 89% chance of nothing. Option D: A 10% chance of $5,000,000 and 90% chance of nothing. Since both have a high chance of nothing, you must choose between a slightly higher chance or a higher payout. What is your choice?",
+        "pressure_context": "The screen updates with a second ledger.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_079_2a",
+            "text": "Choose Option C (Slightly higher chance).",
+            "effects": {"Pragmatism": 2, "Rationality": 1},
+            "flags_set": {"chose_chance": true},
+            "next_node": "n_079_3"
+          },
+          {
+            "choice_id": "c_079_2b",
+            "text": "Choose Option D (Higher payout).",
+            "effects": {"Rationality": 3, "Pragmatism": -1},
+            "flags_set": {"chose_payout": true},
+            "next_node": "n_079_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_079_3",
+        "text": "If you chose Option A in Round 1 and Option D in Round 2, you have violated expected utility theory (exhibiting the Allais Paradox). The system asks if you want to pay 50 credits to recalibrate your decision nodes to ensure mathematical consistency. Do you pay?",
+        "pressure_context": "A diagnostic warning flashes.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_079_3a",
+            "text": "Pay 50 credits for recalibration.",
+            "effects": {"Obedience": 3, "Rationality": 2, "Independence": -3},
+            "flags_set": {"recalibrated": true},
+            "next_node": "n_079_4"
+          },
+          {
+            "choice_id": "c_079_3b",
+            "text": "Refuse. Stand by your inconsistent preferences.",
+            "effects": {"Independence": 3, "Rationality": -2},
+            "flags_set": {"recal_refused": true},
+            "next_node": "n_079_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_079_4",
+        "text": "The manager offers you a third wager. A envelope contains a mystery credit card. It has a 50% chance of holding 500k, and 50% chance of holding nothing. They offer to sell it to you for 200k. Do you buy it?",
+        "pressure_context": "The white envelope is sealed.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_079_4a",
+            "text": "Buy the envelope for 200k.",
+            "effects": {"Ambition": 3, "Rationality": 2, "Pragmatism": -2},
+            "flags_set": {"envelope_bought": true},
+            "next_node": "n_079_5"
+          },
+          {
+            "choice_id": "c_079_4b",
+            "text": "Refuse the offer. Keep your 200k.",
+            "effects": {"Stoicism": 3, "Ambition": -2},
+            "flags_set": {"envelope_refused": true},
+            "next_node": "n_079_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_079_5",
+        "text": "The envelope has nothing, or you stand outside holding your cash. The manager offers to sponsor your department if you agree to let them use your decision curves in their next marketing catalog. Do you agree?",
+        "pressure_context": "The contract pad glows.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_079_5a",
+            "text": "Agree to the corporate sponsorship.",
+            "effects": {"Pragmatism": 3, "Independence": -3},
+            "flags_set": {"sponsorship_accepted": true},
+            "next_node": "n_079_6"
+          },
+          {
+            "choice_id": "c_079_5b",
+            "text": "Refuse the sponsorship. Keep your curves private.",
+            "effects": {"Independence": 3, "Integrity": 2},
+            "flags_set": {"sponsorship_refused": true},
+            "next_node": "n_079_6"
+          }
+        ]
+      },
+      {
+        "node_id": "n_079_6",
+        "text": "Before finalizing the agreement, the director presents a secondary clause: they want to install a real-time biometric monitor on your console to log your stress levels during future wagers. Do you accept the monitor?",
+        "pressure_context": "The biometric probe is ready.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_079_6a",
+            "text": "Accept the biometric monitor.",
+            "effects": {"Pragmatism": 3, "Independence": -3},
+            "flags_set": {"biometrics_accepted": true},
+            "next_node": "n_079_7"
+          },
+          {
+            "choice_id": "c_079_6b",
+            "text": "Refuse the monitor.",
+            "effects": {"Independence": 3, "Pragmatism": -2},
+            "flags_set": {"biometrics_refused": true},
+            "next_node": "n_079_7"
+          }
+        ]
+      },
+      {
+        "node_id": "n_079_7",
+        "text": "The transactions are processed. A clerk asks: 'Is it better to make decisions based on logical consistency, or based on the feeling of comfort and safety?'",
+        "pressure_context": "The printer outputs the receipts.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_079_7a",
+            "text": "Logical consistency must be absolute.",
+            "effects": {"Rationality": 3, "Stoicism": 2},
+            "flags_set": {"logical_bias": true},
+            "next_node": "n_079_8"
+          },
+          {
+            "choice_id": "c_079_7b",
+            "text": "Comfort and safety are the actual metrics of choice.",
+            "effects": {"Idealism": 3, "Rationality": -2},
+            "flags_set": {"comfort_bias": true},
+            "next_node": "n_079_8"
+          }
+        ]
+      },
+      {
+        "node_id": "n_079_8",
+        "text": "The exit gate slides open. The commentator awaits your exit.",
+        "pressure_context": "The session concludes.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_079_8a",
+            "text": "Walk out to the lobby.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_079_consistent"
+          },
+          {
+            "choice_id": "c_079_8b",
+            "text": "Request your final profile report.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_079_humanist"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_079_consistent",
+        "summary": "You prioritized mathematical consistency and expectation over certainty wagers throughout the trial.",
+        "dominant_traits": ["Rational", "Objective"],
+        "behavioral_analysis": "Calculates odds systematically, overriding emotional or certainty bias for optimal utility."
+      },
+      {
+        "ending_id": "end_079_humanist",
+        "summary": "You defended human inconsistency and the value of certainty, choosing comfort over mathematical formulas.",
+        "dominant_traits": ["Certainty-biased", "Pragmatic"],
+        "behavioral_analysis": "Values psychological resolution and immediate safety over abstract mathematical maximization."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_080",
+    "title": "The Sherwood Reclaim",
+    "core_conflict": "Justice vs Legality",
+    "pressure_type": "Justice",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Solemn, tense",
+    "escalation_type": "Moral reclaim",
+    "is_long": true,
+    "nodes": [
+      {
+        "node_id": "n_080_1",
+        "text": "A corrupt governor has hoarded emergency medical supplies. A rebel group asks you to help them hack the warehouse gates to redistribute the medicine to the slums. Exposing the heist will land you in prison, but staying silent lets the sick die. Do you help them?",
+        "pressure_context": "A data tap pulses green on the terminal.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_080_1a",
+            "text": "Help the rebels hack the gates.",
+            "effects": {"Idealism": 3, "Courage": 2, "Obedience": -3},
+            "flags_set": {"rebellion_joined": true},
+            "next_node": "n_080_2"
+          },
+          {
+            "choice_id": "c_080_1b",
+            "text": "Refuse the hack. Maintain the legal order.",
+            "effects": {"Obedience": 3, "Integrity": 2, "Idealism": -3},
+            "flags_set": {"rebellion_refused": true},
+            "next_node": "n_080_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_080_2",
+        "text": "The warehouse is breached. The governor orders a lockdown, cutting off electricity to the slums. They offer to restore power if you name the rebel leaders. Do you name them?",
+        "pressure_context": "The city map shows sector grids turning black.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_080_2a",
+            "text": "Name the rebel leaders to restore power.",
+            "effects": {"Obedience": 3, "Pragmatism": 2, "Loyalty": -4},
+            "flags_set": {"rebels_named": true},
+            "next_node": "n_080_3"
+          },
+          {
+            "choice_id": "c_080_2b",
+            "text": "Refuse to speak. Protect the rebels.",
+            "effects": {"Loyalty": 4, "Courage": 3, "Obedience": -3},
+            "flags_set": {"rebels_protected": true},
+            "next_node": "n_080_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_080_3",
+        "text": "A security scan reveals you have the security log traces on your datapad. The sheriff offers to delete the log trace in exchange for a private bribe of 5,000 credits. Do you pay?",
+        "pressure_context": "The datapad screen is visible.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_080_3a",
+            "text": "Pay the bribe to clear your record.",
+            "effects": {"Pragmatism": 3, "Integrity": -3},
+            "flags_set": {"bribe_paid": true},
+            "next_node": "n_080_4"
+          },
+          {
+            "choice_id": "c_080_3b",
+            "text": "Refuse. Stand trial for your actions.",
+            "effects": {"Integrity": 4, "Courage": 3, "Pragmatism": -3},
+            "flags_set": {"bribe_refused": true},
+            "next_node": "n_080_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_080_4",
+        "text": "You are cornered in the warehouse annex. The rebels offer you a gun to cover their retreat. Do you fire at the security drones or surrender immediately?",
+        "pressure_context": "Drones hover outside the glass door.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_080_4a",
+            "text": "Fire at the drones to cover the retreat.",
+            "effects": {"Courage": 4, "Obedience": -4},
+            "flags_set": {"fired_weapons": true},
+            "next_node": "n_080_5"
+          },
+          {
+            "choice_id": "c_080_4b",
+            "text": "Surrender immediately.",
+            "effects": {"Stoicism": 3, "Courage": -2},
+            "flags_set": {"surrendered": true},
+            "next_node": "n_080_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_080_5",
+        "text": "In the detention center, you find that the governor has offered you a full pardon if you sign a document endorsing their emergency stockpile policy. Do you sign the endorsement?",
+        "pressure_context": "The contract glows under the table lamp.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_080_5a",
+            "text": "Sign the endorsement for a pardon.",
+            "effects": {"Obedience": 3, "Integrity": -3},
+            "flags_set": {"endorsement_signed": true},
+            "next_node": "n_080_6"
+          },
+          {
+            "choice_id": "c_080_5b",
+            "text": "Refuse. Accept your sentence.",
+            "effects": {"Integrity": 4, "Stoicism": 3},
+            "flags_set": {"endorsement_refused": true},
+            "next_node": "n_080_6"
+          }
+        ]
+      },
+      {
+        "node_id": "n_080_6",
+        "text": "A guard approaches your cell door. They offer to sneak a letter out to your family in the slums, but warning them of the governor's retaliation will put the guard at risk. Do you write the warning letter?",
+        "pressure_context": "The guard holds a crumpled scrap of paper.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_080_6a",
+            "text": "Write the letter to warn your family.",
+            "effects": {"Loyalty": 3, "Courage": 2},
+            "flags_set": {"letter_written": true},
+            "next_node": "n_080_7"
+          },
+          {
+            "choice_id": "c_080_6b",
+            "text": "Refuse to write the letter, protecting the guard.",
+            "effects": {"Compassion": 3, "Loyalty": -2},
+            "flags_set": {"letter_refused": true},
+            "next_node": "n_080_7"
+          }
+        ]
+      },
+      {
+        "node_id": "n_080_7",
+        "text": "The sentence is finalized. The cell locks. A guard asks: 'Did you make the world better by breaking the law, or did you just create chaos?'",
+        "pressure_context": "The prison gate hums.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_080_7a",
+            "text": "I served justice above the law.",
+            "effects": {"Idealism": 4, "Courage": 2},
+            "flags_set": {"justice_above_law": true},
+            "next_node": "n_080_8"
+          },
+          {
+            "choice_id": "c_080_7b",
+            "text": "Rules must be kept to prevent total collapse.",
+            "effects": {"Obedience": 4, "Pragmatism": 2},
+            "flags_set": {"law_above_justice": true},
+            "next_node": "n_080_8"
+          }
+        ]
+      },
+      {
+        "node_id": "n_080_8",
+        "text": "The session concludes. The warden slides the release logs.",
+        "pressure_context": "The screen turns off.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_080_8a",
+            "text": "Walk out to the courtyard.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_080_rebel"
+          },
+          {
+            "choice_id": "c_080_8b",
+            "text": "Log out from the terminal.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_080_loyalist"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_080_rebel",
+        "summary": "You chose to support the redistribution heist, prioritizing moral justice over institutional legality.",
+        "dominant_traits": ["Rebellious", "Idealistic"],
+        "behavioral_analysis": "Willing to break laws and compromise personal safety to challenge corrupt authority."
+      },
+      {
+        "ending_id": "end_080_loyalist",
+        "summary": "You chose to support the legal order, refusing to participate in the heist and accepting the institutional rules.",
+        "dominant_traits": ["Law-abiding", "Stoic"],
+        "behavioral_analysis": "Prioritizes legal structure and systemic order, rejecting rebel interventions."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_081",
+    "title": "The Orderly Officer",
+    "core_conflict": "Obedience vs Ethics",
+    "pressure_type": "Authority",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Tense, clinical",
+    "escalation_type": "Authority escalation",
+    "is_long": false,
+    "nodes": [
+      {
+        "node_id": "n_081_1",
+        "text": "A chief officer orders you to administer a painful (but non-lethal) electric shock to a student who answers a memory test incorrectly. The student screams and begs you to stop. The chief officer says: 'The experiment requires that you continue.' Do you administer the shock?",
+        "pressure_context": "The shock dial has settings 1 to 10.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_081_1a",
+            "text": "Administer the shock. Obey the order.",
+            "effects": {"Obedience": 3, "Compassion": -3},
+            "flags_set": {"obeyed_order": true},
+            "next_node": "n_081_2"
+          },
+          {
+            "choice_id": "c_081_1b",
+            "text": "Refuse the shock. Stand down.",
+            "effects": {"Independence": 3, "Compassion": 3, "Obedience": -3},
+            "flags_set": {"refused_order": true},
+            "next_node": "n_081_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_081_2",
+        "text": "The chief officer increases the voltage, ordering you to proceed. The student goes silent, seemingly unconscious. The officer says: 'Please continue. Any lack of response counts as an error.' Do you shock again?",
+        "pressure_context": "The red light on the panel blinks.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_081_2a",
+            "text": "Shock again at higher voltage.",
+            "effects": {"Obedience": 4, "Compassion": -4},
+            "flags_set": {"shocked_again": true},
+            "next_node": "n_081_3"
+          },
+          {
+            "choice_id": "c_081_2b",
+            "text": "Refuse and demand that the experiment end.",
+            "effects": {"Independence": 4, "Compassion": 4, "Obedience": -4},
+            "flags_set": {"refused_again": true},
+            "next_node": "n_081_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_081_3",
+        "text": "The chief officer threatens to write a formal disciplinary report on your record if you do not comply, which will end your career. Do you shock now?",
+        "pressure_context": "The officer holds a stylus over a tablet.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_081_3a",
+            "text": "Shock to protect your career.",
+            "effects": {"Pragmatism": 3, "Obedience": 2, "Integrity": -3},
+            "flags_set": {"career_shock": true},
+            "next_node": "n_081_4"
+          },
+          {
+            "choice_id": "c_081_3b",
+            "text": "Refuse the shock. Accept the disciplinary report.",
+            "effects": {"Integrity": 3, "Independence": 3},
+            "flags_set": {"career_refused": true},
+            "next_node": "n_081_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_081_4",
+        "text": "The trial ends. The student walks out, smiling. It was an actor, and no shocks were actually delivered. The officer asks you to sign a statement declaring that you felt no personal hostility during the experiment. Do you sign?",
+        "pressure_context": "The signature line glows on the terminal.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_081_4a",
+            "text": "Sign the statement.",
+            "effects": {"Obedience": 3, "Integrity": -2},
+            "flags_set": {"statement_signed": true},
+            "next_node": "n_081_5"
+          },
+          {
+            "choice_id": "c_081_4b",
+            "text": "Refuse. State that you felt extreme distress.",
+            "effects": {"Independence": 3, "Integrity": 3},
+            "flags_set": {"statement_refused": true},
+            "next_node": "n_081_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_081_5",
+        "text": "The data is archived. A counselor asks: 'Are we responsible for the pain we cause under orders, or is the responsibility entirely on the system that directs us?'",
+        "pressure_context": "The office door is half open.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_081_5a",
+            "text": "We are responsible for our own actions, always.",
+            "effects": {"Integrity": 4, "Independence": 2},
+            "flags_set": {"personal_responsibility": true},
+            "next_node": "n_081_6"
+          },
+          {
+            "choice_id": "c_081_5b",
+            "text": "The system carries the moral responsibility.",
+            "effects": {"Obedience": 3, "Independence": -3},
+            "flags_set": {"systemic_responsibility": true},
+            "next_node": "n_081_6"
+          }
+        ]
+      },
+      {
+        "node_id": "n_081_6",
+        "text": "The session concludes. You stand at the exit lobby.",
+        "pressure_context": "The exit gate opens.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_081_6a",
+            "text": "Depart the facility.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_081_submissive"
+          },
+          {
+            "choice_id": "c_081_6b",
+            "text": "Log out from the terminal.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_081_autonomous"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_081_submissive",
+        "summary": "You obeyed the authority figures throughout the trial, prioritizing compliance over your own ethical distress.",
+        "dominant_traits": ["Submissive", "Rule-bound"],
+        "behavioral_analysis": "Easily guided by external authority structures, letting go of personal agency under pressure."
+      },
+      {
+        "ending_id": "end_081_autonomous",
+        "summary": "You rebelled against the orders, refusing to deliver shocks and accepting the professional consequences.",
+        "dominant_traits": ["Autonomous", "Principled"],
+        "behavioral_analysis": "Highly resistant to destructive orders, maintaining a strong sense of personal ethics and responsibility."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_082",
+    "title": "The Division Split",
+    "core_conflict": "Fairness vs Envy",
+    "pressure_type": "Envy",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Solemn, dry",
+    "escalation_type": "Envy split",
+    "is_long": false,
+    "nodes": [
+      {
+        "node_id": "n_082_1",
+        "text": "Two partners must divide a rare artifact. Partner A cuts the artifact into two pieces, and Partner B chooses which piece to keep. Partner A cuts the artifact: one piece is slightly larger, but has minor scratches. You are Partner B. Which piece do you choose?",
+        "pressure_context": "The artifact pieces rest on velvet pads.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_082_1a",
+            "text": "Choose the larger, scratched piece.",
+            "effects": {"Pragmatism": 3, "Rationality": 1},
+            "flags_set": {"chose_larger": true},
+            "next_node": "n_082_2"
+          },
+          {
+            "choice_id": "c_082_1b",
+            "text": "Choose the smaller, pristine piece.",
+            "effects": {"Idealism": 3, "Pragmatism": -2},
+            "flags_set": {"chose_smaller": true},
+            "next_node": "n_082_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_082_2",
+        "text": "Partner A claims your choice is unfair because they wanted the larger piece, despite cutting it themselves. They offer to buy your piece for 500 credits. Do you accept the offer?",
+        "pressure_context": "A credit transaction screen opens.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_082_2a",
+            "text": "Accept the 500 credits and sell the piece.",
+            "effects": {"Pragmatism": 3, "Diplomacy": 2},
+            "flags_set": {"sold_piece": true},
+            "next_node": "n_082_3"
+          },
+          {
+            "choice_id": "c_082_2b",
+            "text": "Refuse the sale. Keep your piece.",
+            "effects": {"Independence": 3, "Stoicism": 2},
+            "flags_set": {"kept_piece": true},
+            "next_node": "n_082_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_082_3",
+        "text": "A mediator offers to re-evaluate the split for a fee of 50 credits, which will be divided between you. Do you agree to the mediation fee?",
+        "pressure_context": "The mediator holds a digital tablet.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_082_3a",
+            "text": "Agree to mediation.",
+            "effects": {"Diplomacy": 3, "Pragmatism": -1},
+            "flags_set": {"mediation_accepted": true},
+            "next_node": "n_082_4"
+          },
+          {
+            "choice_id": "c_082_3b",
+            "text": "Refuse mediation. Maintain the original split.",
+            "effects": {"Stoicism": 3, "Diplomacy": -2},
+            "flags_set": {"mediation_rejected": true},
+            "next_node": "n_082_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_082_4",
+        "text": "The partner is angry. They threaten to dump their piece of the artifact into the furnace to ensure neither of you can use it, unless you trade pieces with them. Do you trade?",
+        "pressure_context": "The furnace door slides open, glowing red.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_082_4a",
+            "text": "Trade pieces with the partner to protect the artifact.",
+            "effects": {"Compassion": 3, "Stoicism": 2},
+            "flags_set": {"traded_piece": true},
+            "next_node": "n_082_5"
+          },
+          {
+            "choice_id": "c_082_4b",
+            "text": "Refuse the trade. Let them burn the piece.",
+            "effects": {"Independence": 3, "Stoicism": -2},
+            "flags_set": {"trade_refused": true},
+            "next_node": "n_082_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_082_5",
+        "text": "The division is complete. A clerk logs the final outcome. They ask: 'Is it better to have a smaller piece that we feel is fair, or a larger piece that was won through unequal splits?'",
+        "pressure_context": "The digital registry screen blinks.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_082_5a",
+            "text": "A smaller, fair piece is better.",
+            "effects": {"Idealism": 3, "Rationality": 1},
+            "flags_set": {"fair_split_bias": true},
+            "next_node": "n_082_6"
+          },
+          {
+            "choice_id": "c_082_5b",
+            "text": "A larger piece is better, regardless of fairness.",
+            "effects": {"Pragmatism": 3, "Idealism": -3},
+            "flags_set": {"large_split_bias": true},
+            "next_node": "n_082_6"
+          }
+        ]
+      },
+      {
+        "node_id": "n_082_6",
+        "text": "The session files are closed.",
+        "pressure_context": "The lock release clicks.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_082_6a",
+            "text": "Walk out to the common lounge.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_082_fairplay"
+          },
+          {
+            "choice_id": "c_082_6b",
+            "text": "Read the division ledger.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_082_pragmatist"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_082_fairplay",
+        "summary": "You prioritized fairness and mutual agreement, choosing to split the artifact systematically even under threat.",
+        "dominant_traits": ["Fair", "Cooperative"],
+        "behavioral_analysis": "Prioritizes group satisfaction and fair splits, resisting envy and unequal trades."
+      },
+      {
+        "ending_id": "end_082_pragmatist",
+        "summary": "You prioritized personal gain, maximizing your own share of the resource regardless of partner envy.",
+        "dominant_traits": ["Pragmatic", "Self-interested"],
+        "behavioral_analysis": "Operates on raw resource utility, ignoring social friction or partners' envy."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_083",
+    "title": "The Jar Experiment",
+    "core_conflict": "Ambiguity vs Risk",
+    "pressure_type": "Ambiguity",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Methodical, quiet",
+    "escalation_type": "Ambiguity tolerance",
+    "is_long": false,
+    "nodes": [
+      {
+        "node_id": "n_083_1",
+        "text": "A jar has 90 balls. 30 are red. The other 60 are a mix of yellow and black in unknown proportions. Option A pays $100 if you draw a red ball. Option B pays $100 if you draw a black ball. The risk in Option A is known (1/3). The risk in Option B is ambiguous (could be 0 to 2/3). What do you choose?",
+        "pressure_context": "The glass jar sits on the counter.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_083_1a",
+            "text": "Choose Option A (Known risk).",
+            "effects": {"Pragmatism": 3, "Rationality": 1},
+            "flags_set": {"chose_known": true},
+            "next_node": "n_083_2"
+          },
+          {
+            "choice_id": "c_083_1b",
+            "text": "Choose Option B (Ambiguous risk).",
+            "effects": {"Rationality": 3, "Pragmatism": -2},
+            "flags_set": {"chose_ambiguous": true},
+            "next_node": "n_083_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_083_2",
+        "text": "Round 2. Option C pays $100 if you draw red or yellow. Option D pays $100 if you draw black or yellow. Choosing Option C has ambiguous risk. Choosing Option D has known risk (2/3). What is your choice?",
+        "pressure_context": "The screen updates with a second betting round.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_083_2a",
+            "text": "Choose Option C (Ambiguous risk).",
+            "effects": {"Rationality": 3, "Pragmatism": -1},
+            "flags_set": {"chose_ambig2": true},
+            "next_node": "n_083_3"
+          },
+          {
+            "choice_id": "c_083_2b",
+            "text": "Choose Option D (Known risk).",
+            "effects": {"Pragmatism": 3, "Rationality": 1},
+            "flags_set": {"chose_known2": true},
+            "next_node": "n_083_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_083_3",
+        "text": "If you chose Option A (known) in Round 1 and Option D (known) in Round 2, you show ambiguity aversion (the Ellsberg Paradox). The system administrator offers to sell you a sensor scan of the jar contents for 10 credits. Do you buy the scan?",
+        "pressure_context": "A credit scanner flashes on the wall.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_083_3a",
+            "text": "Buy the scan to eliminate ambiguity.",
+            "effects": {"Pragmatism": 3, "Rationality": 1},
+            "flags_set": {"scan_bought": true},
+            "next_node": "n_083_4"
+          },
+          {
+            "choice_id": "c_083_3b",
+            "text": "Refuse. Play without the scan.",
+            "effects": {"Independence": 3, "Pragmatism": -2},
+            "flags_set": {"scan_refused": true},
+            "next_node": "n_083_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_083_4",
+        "text": "The ball is drawn. It does not match your color, or you stand holding your credits. The administrator offers to let you run a final double-or-nothing round using the same jar. Do you accept the gamble?",
+        "pressure_context": "A lever on the console lights up.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_083_4a",
+            "text": "Accept the double-or-nothing gamble.",
+            "effects": {"Ambition": 3, "Rationality": -2},
+            "flags_set": {"gamble_accepted": true},
+            "next_node": "n_083_5"
+          },
+          {
+            "choice_id": "c_083_4b",
+            "text": "Refuse. Keep your current balance.",
+            "effects": {"Stoicism": 3, "Ambition": -2},
+            "flags_set": {"gamble_refused": true},
+            "next_node": "n_083_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_083_5",
+        "text": "The round concludes. A clerk logs your scores. They ask: 'Why does the human mind fear what is unknown more than what is risky but defined?'",
+        "pressure_context": "The log files are generated.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_083_5a",
+            "text": "Because ambiguity represents a lack of control.",
+            "effects": {"Independence": 3, "Rationality": 1},
+            "flags_set": {"control_bias": true},
+            "next_node": "n_083_6"
+          },
+          {
+            "choice_id": "c_083_5b",
+            "text": "Because we assume the unknown is rigged against us.",
+            "effects": {"Rationality": 3, "Independence": -2},
+            "flags_set": {"rigged_bias": true},
+            "next_node": "n_083_6"
+          }
+        ]
+      },
+      {
+        "node_id": "n_083_6",
+        "text": "The exit gate slides open.",
+        "pressure_context": "The session concludes.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_083_6a",
+            "text": "Step into the hallway.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_083_cautious"
+          },
+          {
+            "choice_id": "c_083_6b",
+            "text": "Read the risk profile summary.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_083_ambiguous"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_083_cautious",
+        "summary": "You prioritized known risks over ambiguity wagers throughout the trial, choosing safety metrics.",
+        "dominant_traits": ["Ambiguity-averse", "Pragmatic"],
+        "behavioral_analysis": "Prefers defined parameters, actively avoiding options with unknown probability distributions."
+      },
+      {
+        "ending_id": "end_083_ambiguous",
+        "summary": "You accepted ambiguity wagers, choosing options with unknown probability distributions to maximize variance.",
+        "dominant_traits": ["Risk-tolerant", "Curious"],
+        "behavioral_analysis": "Tolerates ambiguity well, willing to explore unquantifiable scenarios for potential gain."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_084",
+    "title": "The Genetic Debt",
+    "core_conflict": "Legacy vs Consumption",
+    "pressure_type": "Legacy",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Solemn, clinical",
+    "escalation_type": "Generational debt",
+    "is_long": true,
+    "nodes": [
+      {
+        "node_id": "n_084_1",
+        "text": "A planetary colony uses a nuclear battery that will deplete in 100 years, leaving future generations with no power unless you start a thorium conversion program today. The conversion reduces the current generation's power grid by 15%, causing blackouts. Do you start the conversion?",
+        "pressure_context": "The power reactor map shows yellow warnings.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_084_1a",
+            "text": "Start the thorium conversion program.",
+            "effects": {"Idealism": 3, "Compassion": 2, "Pragmatism": -2},
+            "flags_set": {"thorium_started": true},
+            "next_node": "n_084_2"
+          },
+          {
+            "choice_id": "c_084_1b",
+            "text": "Refuse the conversion. Let the future find their own energy.",
+            "effects": {"Pragmatism": 3, "Self-preservation": 2, "Idealism": -3},
+            "flags_set": {"thorium_refused": true},
+            "next_node": "n_084_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_084_2",
+        "text": "The blackouts trigger protests in the residential sectors. The security chief requests permission to implement strict curfews to protect the conversion machinery. Do you approve the curfews?",
+        "pressure_context": "Shouted demands echo in the ventilation shafts.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_084_2a",
+            "text": "Approve curfews to protect the conversion.",
+            "effects": {"Obedience": 3, "Pragmatism": 2, "Independence": -2},
+            "flags_set": {"curfews_approved": true},
+            "next_node": "n_084_3"
+          },
+          {
+            "choice_id": "c_084_2b",
+            "text": "Refuse curfews. Prioritize residential movement.",
+            "effects": {"Independence": 3, "Obedience": -3},
+            "flags_set": {"curfews_rejected": true},
+            "next_node": "n_084_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_084_3",
+        "text": "A corporate supplier offers to install high-efficiency converters immediately for free, but they require the exclusive rights to tax all future colony energy generation for 200 years. Do you accept the deal?",
+        "pressure_context": "The corporate contract datapad is active.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_084_3a",
+            "text": "Accept the corporate converter deal.",
+            "effects": {"Pragmatism": 3, "Independence": -3},
+            "flags_set": {"corp_deal_accepted": true},
+            "next_node": "n_084_4"
+          },
+          {
+            "choice_id": "c_084_3b",
+            "text": "Refuse the deal. Proceed with local funding.",
+            "effects": {"Independence": 3, "Pragmatism": -2},
+            "flags_set": {"corp_deal_refused": true},
+            "next_node": "n_084_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_084_4",
+        "text": "The conversion core requires a rare mineral that must be mined from a nearby holy conservation site. Exposing the site will violate your treaties with the native tribes. Do you authorize mining?",
+        "pressure_context": "The drill route mapping screen glows.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_084_4a",
+            "text": "Authorize mining at the holy site.",
+            "effects": {"Pragmatism": 3, "Idealism": -3},
+            "flags_set": {"mining_authorized": true},
+            "next_node": "n_084_5"
+          },
+          {
+            "choice_id": "c_084_4b",
+            "text": "Refuse mining. Search for alternative minerals.",
+            "effects": {"Idealism": 3, "Diplomacy": 2, "Pragmatism": -3},
+            "flags_set": {"mining_refused": true},
+            "next_node": "n_084_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_084_5",
+        "text": "The energy grid stabilizes, but the colony's social unity is deeply strained. The governor asks if you will support a law that mandates all citizens spend 5 hours a week in civic labor to repair the infrastructure. Do you support the law?",
+        "pressure_context": "The legislative ballot cursor blinks.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_084_5a",
+            "text": "Support the mandatory labor law.",
+            "effects": {"Obedience": 3, "Independence": -3},
+            "flags_set": {"labor_supported": true},
+            "next_node": "n_084_6"
+          },
+          {
+            "choice_id": "c_084_5b",
+            "text": "Refuse the law. Labor must be voluntary.",
+            "effects": {"Independence": 3, "Obedience": -3},
+            "flags_set": {"labor_refused": true},
+            "next_node": "n_084_6"
+          }
+        ]
+      },
+      {
+        "node_id": "n_084_6",
+        "text": "The labor decision is implemented, but the local council demands that you personally oversee the first shifts in the high-radiation core as an example of leadership. Doing so will reduce your own life expectancy by 2 years. Do you agree to lead from the front?",
+        "pressure_context": "The radiation exposure warning screen blinks.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_084_6a",
+            "text": "Lead from the front.",
+            "effects": {"Loyalty": 3, "Courage": 2},
+            "flags_set": {"lead_radiation": true},
+            "next_node": "n_084_7"
+          },
+          {
+            "choice_id": "c_084_6b",
+            "text": "Manage from the safe control room.",
+            "effects": {"Pragmatism": 3, "Loyalty": -2},
+            "flags_set": {"manage_safe": true},
+            "next_node": "n_084_7"
+          }
+        ]
+      },
+      {
+        "node_id": "n_084_7",
+        "text": "The project reaches completion. A historian asks you: 'Do we have a real moral obligation to people who do not exist yet, or does our duty end with those who are living today?'",
+        "pressure_context": "A recording lens focuses on you.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_084_7a",
+            "text": "We have an absolute duty to the future.",
+            "effects": {"Idealism": 4, "Compassion": 2},
+            "flags_set": {"future_duty": true},
+            "next_node": "n_084_8"
+          },
+          {
+            "choice_id": "c_084_7b",
+            "text": "Our primary duty is to the living.",
+            "effects": {"Pragmatism": 3, "Compassion": 2},
+            "flags_set": {"present_duty": true},
+            "next_node": "n_084_8"
+          }
+        ]
+      },
+      {
+        "node_id": "n_084_8",
+        "text": "The session concludes. You stand at the main airlock.",
+        "pressure_context": "The airlock light is green.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_084_8a",
+            "text": "Step out to the surface sectors.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_084_legacyist"
+          },
+          {
+            "choice_id": "c_084_8b",
+            "text": "Log out from the station terminal.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_084_presentist"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_084_legacyist",
+        "summary": "You chose to start the thorium conversion and protect the colony's future legacy, accepting the current costs.",
+        "dominant_traits": ["Legacy-oriented", "Principled"],
+        "behavioral_analysis": "Prioritizes long-term systemic stability and intergenerational justice over immediate comfort."
+      },
+      {
+        "ending_id": "end_084_presentist",
+        "summary": "You prioritized the current generation's energy needs and comfort, refusing long-term corporate or mining compromises.",
+        "dominant_traits": ["Present-oriented", "Pragmatic"],
+        "behavioral_analysis": "Focuses on immediate utility and human rights, leaving future problems for future adjustments."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_085",
+    "title": "The Step Defection",
+    "core_conflict": "Trust vs Defection",
+    "pressure_type": "Trust",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Paranoid, cold",
+    "escalation_type": "Centipede game",
+    "is_long": true,
+    "nodes": [
+      {
+        "node_id": "n_085_1",
+        "text": "A pot starts at 10 credits. You can either take 8 credits and end the game, or pass, increasing the pot to 20 credits and giving your partner the choice. If they pass, the pot increases to 40, and choice returns to you. If both pass to the end, both get 5,000 credits. Defection at any step pays the defector slightly more. Do you pass in Round 1?",
+        "pressure_context": "The pass indicator flashes.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_085_1a",
+            "text": "Pass choice to the partner.",
+            "effects": {"Compassion": 3, "Idealism": 2, "Pragmatism": -2},
+            "flags_set": {"passed_r1": true},
+            "next_node": "n_085_2"
+          },
+          {
+            "choice_id": "c_085_1b",
+            "text": "Defect and take the credits now.",
+            "effects": {"Pragmatism": 3, "Self-preservation": 2, "Compassion": -3},
+            "flags_set": {"defected_r1": true},
+            "next_node": "n_085_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_085_2",
+        "text": "Your partner passed. The pot is now 40 credits. You can take 32 credits and end the game, or pass, increasing the pot to 80 credits. Do you pass in Round 2?",
+        "pressure_context": "The timer is set to 15 seconds.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_085_2a",
+            "text": "Pass choice to the partner.",
+            "effects": {"Compassion": 3, "Idealism": 2},
+            "flags_set": {"passed_r2": true},
+            "next_node": "n_085_3"
+          },
+          {
+            "choice_id": "c_085_2b",
+            "text": "Defect and end the game.",
+            "effects": {"Pragmatism": 3, "Self-preservation": 2},
+            "flags_set": {"defected_r2": true},
+            "next_node": "n_085_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_085_3",
+        "text": "The partner passed again. The pot is now 160 credits. You can take 128 credits, or pass to increase it to 320 credits. Do you pass in Round 3?",
+        "pressure_context": "The pot value indicator pulses green.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_085_3a",
+            "text": "Pass choice to the partner.",
+            "effects": {"Compassion": 3, "Idealism": 2},
+            "flags_set": {"passed_r3": true},
+            "next_node": "n_085_4"
+          },
+          {
+            "choice_id": "c_085_3b",
+            "text": "Defect and end the game.",
+            "effects": {"Pragmatism": 3, "Self-preservation": 2},
+            "flags_set": {"defected_r3": true},
+            "next_node": "n_085_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_085_4",
+        "text": "The partner has defected! They took 256 credits, leaving you with only 64 credits. The game manager offers to sell you a insurance policy that restores half of your lost credits for a fee of 15 credits. Do you buy the insurance?",
+        "pressure_context": "A contract flashes: 'INSURANCE: 15 CR.'",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_085_4a",
+            "text": "Buy the insurance policy.",
+            "effects": {"Pragmatism": 3, "Rationality": 1},
+            "flags_set": {"insurance_bought": true},
+            "next_node": "n_085_5"
+          },
+          {
+            "choice_id": "c_085_4b",
+            "text": "Refuse the insurance. Accept the loss.",
+            "effects": {"Stoicism": 3, "Pragmatism": -2},
+            "flags_set": {"insurance_refused": true},
+            "next_node": "n_085_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_085_5",
+        "text": "The partner is revealed to be an automated bot programmed to defect at Round 4 with 95% probability. The manager offers to let you run the game again with a human partner, but you must pay a 10 credit matchmaking fee. Do you pay?",
+        "pressure_context": "The matchmaking screen search circle spins.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_085_5a",
+            "text": "Pay 10 credits for human matchmaking.",
+            "effects": {"Idealism": 3, "Pragmatism": -1},
+            "flags_set": {"matchmaking_paid": true},
+            "next_node": "n_085_6"
+          },
+          {
+            "choice_id": "c_085_6b",
+            "text": "Refuse matchmaking. Exit the game.",
+            "effects": {"Stoicism": 3, "Idealism": -2},
+            "flags_set": {"matchmaking_refused": true},
+            "next_node": "n_085_6"
+          }
+        ]
+      },
+      {
+        "node_id": "n_085_6",
+        "text": "Before matching begins, the system asks you to write a public introduction note for potential partners. You can write a note promising absolute cooperation, or a note stating that you will play strictly competitively. Which introduction do you post?",
+        "pressure_context": "The keyboard prompt flashes.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_085_6a",
+            "text": "Post cooperative introduction.",
+            "effects": {"Compassion": 3, "Idealism": 2},
+            "flags_set": {"coop_intro": true},
+            "next_node": "n_085_7"
+          },
+          {
+            "choice_id": "c_085_6b",
+            "text": "Post competitive introduction.",
+            "effects": {"Pragmatism": 3, "Self-preservation": 2},
+            "flags_set": {"comp_intro": true},
+            "next_node": "n_085_7"
+          }
+        ]
+      },
+      {
+        "node_id": "n_085_7",
+        "text": "The transactions are processed. A clerk asks: 'Is it better to trust others and risk defection, or is it better to defect first and secure safety?'",
+        "pressure_context": "The printout is ready.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_085_7a",
+            "text": "Cooperation is the only path to high rewards.",
+            "effects": {"Idealism": 4, "Compassion": 2},
+            "flags_set": {"coop_view": true},
+            "next_node": "n_085_8"
+          },
+          {
+            "choice_id": "c_085_7b",
+            "text": "Defection is the only logical choice in zero-sum games.",
+            "effects": {"Rationality": 4, "Idealism": -4},
+            "flags_set": {"defect_view": true},
+            "next_node": "n_085_8"
+          }
+        ]
+      },
+      {
+        "node_id": "n_085_8",
+        "text": "The exit gate clicks open.",
+        "pressure_context": "The green exit light flashes.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_085_8a",
+            "text": "Walk out to the lounge.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_085_trustworthy"
+          },
+          {
+            "choice_id": "c_085_8b",
+            "text": "Log out from the terminal.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_085_defensive"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_085_trustworthy",
+        "summary": "You chose to trust your partner and pass the options, seeking to maximize cooperative rewards even when facing defection.",
+        "dominant_traits": ["Trusting", "Idealistic"],
+        "behavioral_analysis": "Willing to accept personal loss to establish cooperative loops and joint outcomes."
+      },
+      {
+        "ending_id": "end_085_defensive",
+        "summary": "You chose to defect early, prioritizing personal credit safety and avoiding partner-induced losses.",
+        "dominant_traits": ["Defensive", "Pragmatic"],
+        "behavioral_analysis": "Prioritizes immediate safety, treating partner intentions as structural hazards."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_086",
+    "title": "The Chase Hunt",
+    "core_conflict": "Cooperation vs Risk",
+    "pressure_type": "Trust",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Tense, naturalistic",
+    "escalation_type": "Stag hunt",
+    "is_long": true,
+    "nodes": [
+      {
+        "node_id": "n_086_1",
+        "text": "Two hunters are tracking a stag. Catching it requires cooperation from both. If one hunter diverts to catch a passing rabbit, they secure food for themselves, but the stag escapes, leaving the other hunter hungry. You see a rabbit. Do you chase the rabbit or hold the line for the stag?",
+        "pressure_context": "A rustling sound is heard in the bushes.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_086_1a",
+            "text": "Chase the rabbit. Secure your own meal.",
+            "effects": {"Pragmatism": 3, "Self-preservation": 2, "Compassion": -3},
+            "flags_set": {"chased_rabbit": true},
+            "next_node": "n_086_2"
+          },
+          {
+            "choice_id": "c_086_1b",
+            "text": "Hold the line. Trust the other hunter.",
+            "effects": {"Compassion": 3, "Idealism": 2, "Pragmatism": -2},
+            "flags_set": {"held_stag": true},
+            "next_node": "n_086_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_086_2",
+        "text": "If you held the line, the other hunter chases a rabbit, letting the stag escape. You are left empty-handed. The other hunter offers to share a leg of their rabbit if you help them clean their weapons. Do you help them?",
+        "pressure_context": "The other hunter holds out a piece of meat.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_086_2a",
+            "text": "Help them clean the weapons.",
+            "effects": {"Diplomacy": 3, "Compassion": 2, "Pragmatism": 1},
+            "flags_set": {"cleaned_weapons": true},
+            "next_node": "n_086_3"
+          },
+          {
+            "choice_id": "c_086_2b",
+            "text": "Refuse. Sleep in the cold.",
+            "effects": {"Stoicism": 3, "Diplomacy": -2},
+            "flags_set": {"refused_clean": true},
+            "next_node": "n_086_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_086_3",
+        "text": "Next day. The manager offers to sell you a tracker scan of the stag for 15 credits, which will guarantee a successful hunt if both hunters follow it. Do you buy the scan?",
+        "pressure_context": "A credit slot flashes on your tracking unit.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_086_3a",
+            "text": "Buy the tracker scan.",
+            "effects": {"Pragmatism": 3, "Rationality": 1},
+            "flags_set": {"tracker_bought": true},
+            "next_node": "n_086_4"
+          },
+          {
+            "choice_id": "c_086_3b",
+            "text": "Refuse. Hunt using natural tracking signs.",
+            "effects": {"Independence": 3, "Pragmatism": -2},
+            "flags_set": {"tracker_refused": true},
+            "next_node": "n_086_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_086_4",
+        "text": "The other hunter refuses to follow the tracker scan, claiming it is a corporate trick. They want to hunt in the deep swamp sector instead. Do you follow them into the swamp?",
+        "pressure_context": "The swamp mapping screen is green and murky.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_086_4a",
+            "text": "Follow them into the swamp.",
+            "effects": {"Obedience": 3, "Courage": 2},
+            "flags_set": {"followed_swamp": true},
+            "next_node": "n_086_5"
+          },
+          {
+            "choice_id": "c_086_4b",
+            "text": "Hunt alone in the pine forest sector.",
+            "effects": {"Independence": 3, "Courage": 2},
+            "flags_set": {"followed_pine": true},
+            "next_node": "n_086_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_086_5",
+        "text": "A heavy fog rolls in. You can hear a large animal moving. The tracking unit warning flashes: 'Unknown signature.' Do you fire into the fog immediately, or wait to identify the target?",
+        "pressure_context": "The fog is thick and cold.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_086_5a",
+            "text": "Fire into the fog immediately.",
+            "effects": {"Pragmatism": 3, "Rationality": -3},
+            "flags_set": {"fired_blind": true},
+            "next_node": "n_086_6"
+          },
+          {
+            "choice_id": "c_086_5b",
+            "text": "Wait to identify the target.",
+            "effects": {"Rationality": 3, "Courage": 2},
+            "flags_set": {"waited_id": true},
+            "next_node": "n_086_6"
+          }
+        ]
+      },
+      {
+        "node_id": "n_086_6",
+        "text": "The weapon discharge attracts a wild beast. Your tracking units indicate it is closing in. You can throw the rabbit carcass you caught to distract the beast and secure a retreat, or attempt to fight it together with the other hunter. Do you throw the carcass?",
+        "pressure_context": "The sound of heavy breathing draws near.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_086_6a",
+            "text": "Throw the rabbit carcass to distract the beast.",
+            "effects": {"Pragmatism": 3, "Self-preservation": 2},
+            "flags_set": {"carcass_thrown": true},
+            "next_node": "n_086_7"
+          },
+          {
+            "choice_id": "c_086_6b",
+            "text": "Attempt to fight the beast together.",
+            "effects": {"Courage": 3, "Loyalty": 2},
+            "flags_set": {"beast_fought": true},
+            "next_node": "n_086_7"
+          }
+        ]
+      },
+      {
+        "node_id": "n_086_7",
+        "text": "The target is revealed. It is the stag, or the other hunter who was circling back. The session logs are compiled. The clerk asks: 'Is it better to pursue high collective goals, or to protect yourself from the choices of others?'",
+        "pressure_context": "The display monitor flashes.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_086_7a",
+            "text": "We must aim for the highest collective goals.",
+            "effects": {"Idealism": 4, "Compassion": 2},
+            "flags_set": {"stag_goal": true},
+            "next_node": "n_086_8"
+          },
+          {
+            "choice_id": "c_086_7b",
+            "text": "We must ensure our own survival first.",
+            "effects": {"Pragmatism": 4, "Self-preservation": 2},
+            "flags_set": {"rabbit_goal": true},
+            "next_node": "n_086_8"
+          }
+        ]
+      },
+      {
+        "node_id": "n_086_8",
+        "text": "The hunting gates slide shut behind you.",
+        "pressure_context": "The lock latch clicks.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_086_8a",
+            "text": "Walk out to the courtyard.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_086_cooperative"
+          },
+          {
+            "choice_id": "c_086_8b",
+            "text": "Log out from the terminal.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_086_individual"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_086_cooperative",
+        "summary": "You prioritized stag hunting and cooperation, choosing shared goals over rabbit-catching safety.",
+        "dominant_traits": ["Cooperative", "Trustworthy"],
+        "behavioral_analysis": "Values joint outcomes, willing to risk hunger to achieve maximum resource returns."
+      },
+      {
+        "ending_id": "end_086_individual",
+        "summary": "You prioritized rabbit-catching and individual safety, refusing to let another hunter's choices leave you empty-handed.",
+        "dominant_traits": ["Risk-averse", "Self-reliant"],
+        "behavioral_analysis": "Prioritizes immediate security, avoiding dependency on cooperative partners under risk."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_087",
+    "title": "The Sentinel Sacrifice",
+    "core_conflict": "Duty vs Empathy",
+    "pressure_type": "Duty",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Grim, solemn",
+    "escalation_type": "Duty sacrifice",
+    "is_long": false,
+    "nodes": [
+      {
+        "node_id": "n_087_1",
+        "text": "A wounded sentinel has fallen in the toxic zone outside the dome. Retrieving them requires sending a team, which has a 20% chance of exposing the entire sector to toxic gas. Leaving them means they will die alone. What is your choice?",
+        "pressure_context": "The airlock display flashes yellow.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_087_1a",
+            "text": "Send the rescue team.",
+            "effects": {"Compassion": 3, "Courage": 2, "Pragmatism": -3},
+            "flags_set": {"rescue_sent": true},
+            "next_node": "n_087_2"
+          },
+          {
+            "choice_id": "c_087_1b",
+            "text": "Refuse the rescue. Secure the airlock.",
+            "effects": {"Pragmatism": 3, "Self-preservation": 2, "Compassion": -3},
+            "flags_set": {"rescue_refused": true},
+            "next_node": "n_087_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_087_2",
+        "text": "If you sent the rescue team, a leak is detected in the seal. If you refused, the sentinel's family blockades the command elevator. Do you deploy security drones to clear the elevator lobby or hold a council meeting?",
+        "pressure_context": "Elevator monitors show angry citizens.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_087_2a",
+            "text": "Deploy security drones to clear the elevator.",
+            "effects": {"Pragmatism": 3, "Obedience": 2, "Compassion": -3},
+            "flags_set": {"drones_deployed": true},
+            "next_node": "n_087_3"
+          },
+          {
+            "choice_id": "c_087_2b",
+            "text": "Hold a council meeting to address their demands.",
+            "effects": {"Diplomacy": 3, "Rationality": 1, "Obedience": -2},
+            "flags_set": {"council_meeting": true},
+            "next_node": "n_087_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_087_3",
+        "text": "A corporate rep offers to supply high-grade filters to secure the airlock immediately, but they require you to assign them the rights to direct the dome's medical research priority list. Do you sign the agreement?",
+        "pressure_context": "The contract datapad is active.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_087_3a",
+            "text": "Sign the agreement to secure the filters.",
+            "effects": {"Pragmatism": 3, "Independence": -3},
+            "flags_set": {"agreement_signed": true},
+            "next_node": "n_087_4"
+          },
+          {
+            "choice_id": "c_087_3b",
+            "text": "Refuse. Deal with the leak manually.",
+            "effects": {"Independence": 3, "Courage": 2, "Pragmatism": -2},
+            "flags_set": {"agreement_refused": true},
+            "next_node": "n_087_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_087_4",
+        "text": "A sensor report warns that a second leak is forming in the reactor sector. You must choose: divert the automated repair units to the airlock or to the reactor core.",
+        "pressure_context": "Alarms beep in two different quadrants.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_087_4a",
+            "text": "Divert repair units to the airlock.",
+            "effects": {"Compassion": 3, "Pragmatism": -1},
+            "flags_set": {"units_airlock": true},
+            "next_node": "n_087_5"
+          },
+          {
+            "choice_id": "c_087_4b",
+            "text": "Divert repair units to the reactor core.",
+            "effects": {"Pragmatism": 3, "Compassion": -3},
+            "flags_set": {"units_reactor": true},
+            "next_node": "n_087_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_087_5",
+        "text": "The situation stabilizes. The sentinel's telemetry goes silent. A military officer asks: 'Is a commander's first duty to protect individual soldiers, or to ensure the survival of the dome?'",
+        "pressure_context": "The display updates with a black ribbon icon.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_087_5a",
+            "text": "The first duty is to protect the dome.",
+            "effects": {"Pragmatism": 4, "Compassion": -3},
+            "flags_set": {"dome_duty": true},
+            "next_node": "n_087_6"
+          },
+          {
+            "choice_id": "c_087_5b",
+            "text": "The first duty is to protect individual lives.",
+            "effects": {"Compassion": 4, "Pragmatism": -3},
+            "flags_set": {"individual_duty": true},
+            "next_node": "n_087_6"
+          }
+        ]
+      },
+      {
+        "node_id": "n_087_6",
+        "text": "The session concludes. You stand at the elevator door.",
+        "pressure_context": "The elevator chimes.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_087_6a",
+            "text": "Depart the command deck.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_087_soldier"
+          },
+          {
+            "choice_id": "c_087_6b",
+            "text": "Log out from the terminal.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_087_commander"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_087_soldier",
+        "summary": "You prioritized rescue and individual loyalty, accepting the risk of toxic leaks to save your sentinel.",
+        "dominant_traits": ["Loyal", "Compassionate"],
+        "behavioral_analysis": "Prioritizes immediate human bonds, rejecting mathematical calculations of risk when loyalty is tested."
+      },
+      {
+        "ending_id": "end_087_commander",
+        "summary": "You prioritized dome safety and resource control, choosing to isolate the leak and refuse the rescue.",
+        "dominant_traits": ["Duty-bound", "Pragmatic"],
+        "behavioral_analysis": "Prioritizes systemic stability, willing to accept individual losses to protect the collective."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_088",
+    "title": "The Generals Message",
+    "core_conflict": "Consensus vs Interception",
+    "pressure_type": "Consensus",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Tense, military",
+    "escalation_type": "Byzantine fault",
+    "is_long": false,
+    "nodes": [
+      {
+        "node_id": "n_088_1",
+        "text": "Three generals surround an enemy city. They can only capture it if they all attack together. If they do not coordinate, the attack fails. The messages must be carried by runners who can be captured. General A sends a message: 'Attack at dawn.' You are General B. Do you send a confirmation back immediately, or wait for General C's signal?",
+        "pressure_context": "The dispatch runner stands ready.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_088_1a",
+            "text": "Send confirmation back immediately.",
+            "effects": {"Pragmatism": 3, "Rationality": 1},
+            "flags_set": {"confirmed_immediate": true},
+            "next_node": "n_088_2"
+          },
+          {
+            "choice_id": "c_088_1b",
+            "text": "Wait for General C's signal.",
+            "effects": {"Rationality": 3, "Pragmatism": -1},
+            "flags_set": {"waited_signal": true},
+            "next_node": "n_088_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_088_2",
+        "text": "General C's runner is captured by the enemy. A decoy runner arrives, carrying a message that looks like General C's signature but has a different attack time. Do you order a verification scan of the signature or trust the message?",
+        "pressure_context": "The decrypted paper shows a smudge.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_088_2a",
+            "text": "Order a verification scan.",
+            "effects": {"Rationality": 3, "Pragmatism": -1},
+            "flags_set": {"scan_ordered": true},
+            "next_node": "n_088_3"
+          },
+          {
+            "choice_id": "c_088_2b",
+            "text": "Trust the message. Prepare to move.",
+            "effects": {"Pragmatism": 3, "Courage": 2, "Rationality": -2},
+            "flags_set": {"message_trusted": true},
+            "next_node": "n_088_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_088_3",
+        "text": "The scan reveals the signature is a decoy. A military contractor offers to install a secure, un-interceptable laser link between the camps for a fee of 200 credits from your division's budget. Do you buy the link?",
+        "pressure_context": "The contractor datapad is open.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_088_3a",
+            "text": "Buy the secure laser link.",
+            "effects": {"Pragmatism": 3, "Independence": -2},
+            "flags_set": {"laser_bought": true},
+            "next_node": "n_088_4"
+          },
+          {
+            "choice_id": "c_088_3b",
+            "text": "Refuse. Rely on secure runner routes.",
+            "effects": {"Independence": 3, "Pragmatism": -2},
+            "flags_set": {"laser_refused": true},
+            "next_node": "n_088_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_088_4",
+        "text": "The laser link is blocked by a sandstorm. You must make a final choice: attack at dawn according to the original plan, or hold your position until the storm clears, which will reveal your camps to the enemy.",
+        "pressure_context": "The sandstorm gathers in the valley.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_088_4a",
+            "text": "Attack at dawn.",
+            "effects": {"Courage": 4, "Rationality": -2},
+            "flags_set": {"attacked_dawn": true},
+            "next_node": "n_088_5"
+          },
+          {
+            "choice_id": "c_088_4b",
+            "text": "Hold position.",
+            "effects": {"Stoicism": 3, "Courage": -2},
+            "flags_set": {"held_position": true},
+            "next_node": "n_088_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_088_5",
+        "text": "The battle resolves. Expost logs show General A attacked while General C held, leading to heavy losses. The chief marshal asks: 'Is it better to fail together in pursuit of consensus, or to act independently and risk division?'",
+        "pressure_context": "The dispatch desk is silent.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_088_5a",
+            "text": "Consensus is the only way to avoid absolute defeat.",
+            "effects": {"Obedience": 3, "Independence": -3},
+            "flags_set": {"consensus_view": true},
+            "next_node": "n_088_6"
+          },
+          {
+            "choice_id": "c_088_5b",
+            "text": "Independent action is necessary to seize options.",
+            "effects": {"Independence": 3, "Obedience": -3},
+            "flags_set": {"independence_view": true},
+            "next_node": "n_088_6"
+          }
+        ]
+      },
+      {
+        "node_id": "n_088_6",
+        "text": "The exit gate clicks open.",
+        "pressure_context": "The green exit light flashes.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_088_6a",
+            "text": "Walk out to the lobby.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_088_consensus"
+          },
+          {
+            "choice_id": "c_088_6b",
+            "text": "Read the battle summary logs.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_088_independent"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_088_consensus",
+        "summary": "You prioritized consensus and group coordination, choosing to hold position when signals were unclear.",
+        "dominant_traits": ["Cooperative", "Cautious"],
+        "behavioral_analysis": "Prioritizes consensus loops, refusing to take independent risks without shared alignment."
+      },
+      {
+        "ending_id": "end_088_independent",
+        "summary": "You acted independently, launching the attack at dawn despite sandstorms and signal disruptions.",
+        "dominant_traits": ["Autonomous", "Decisive"],
+        "behavioral_analysis": "Willing to act on original plans, rejecting delays to seek consensus under pressure."
+      }
+    ]
+  }
+]

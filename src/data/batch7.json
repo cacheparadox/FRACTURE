@@ -1,0 +1,1176 @@
+[
+  {
+    "scenario_id": "sc_049",
+    "title": "The Predictor",
+    "core_conflict": "Pragmatism vs Rationality",
+    "pressure_type": "Wealth",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "MILD",
+    "tone": "Clinical, tense",
+    "escalation_type": "Predictive accuracy",
+    "nodes": [
+      {
+        "node_id": "n_049_1",
+        "text": "A super-intelligent entity has placed either $1,000,000 or nothing in Box B. Box A is transparent and has $1,000. The entity predicted your choice: if it predicted you take only Box B, it filled Box B. If it predicted both, Box B is empty. The entity is 99% accurate. What do you choose?",
+        "pressure_context": "The boxes sit on a steel table.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_049_1a",
+            "text": "Take Box B only. Trust the predictor's foresight.",
+            "effects": {"Pragmatism": 3, "Rationality": -1},
+            "flags_set": {"predictor_trusted": true},
+            "next_node": "n_049_2"
+          },
+          {
+            "choice_id": "c_049_1b",
+            "text": "Take both Box A and Box B. The money is already there or not.",
+            "effects": {"Rationality": 3, "Pragmatism": -2},
+            "flags_set": {"predictor_defied": true},
+            "next_node": "n_049_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_049_2",
+        "text": "As your hand reaches out, a technician whispers: 'The entity's prediction was recorded hours ago. However, we detected a minor glitch in the scanning laser. The box contents cannot be changed now, but the scanning file might have been corrupted. Do you open the box immediately or request a calibration scan first?'",
+        "pressure_context": "The timer is ticking.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_049_2a",
+            "text": "Open the box immediately. Have faith in the original state.",
+            "effects": {"Courage": 2, "Rationality": -1},
+            "flags_set": {"open_immediate": true},
+            "next_node": "n_049_3"
+          },
+          {
+            "choice_id": "c_049_2b",
+            "text": "Request a calibration scan first to ensure the scanner worked.",
+            "effects": {"Rationality": 3, "Courage": -1},
+            "flags_set": {"request_scan": true},
+            "next_node": "n_049_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_049_3",
+        "text": "The technician operates the console. A warning lamp flashes. The scan shows a high probability that the prediction was indeed recorded, but the entity's creator offers you a secret bribe: $50,000 to walk away now and sign a NDA, preventing a public test of the entity's accuracy.",
+        "pressure_context": "The creator awaits your signature.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_049_3a",
+            "text": "Reject the bribe. Complete the choice and open the box.",
+            "effects": {"Integrity": 3, "Ambition": -1},
+            "flags_set": {"reject_bribe": true},
+            "next_node": "n_049_4"
+          },
+          {
+            "choice_id": "c_049_3b",
+            "text": "Accept the bribe. Sign the NDA and leave.",
+            "effects": {"Pragmatism": 3, "Integrity": -3},
+            "flags_set": {"accept_bribe": true},
+            "next_node": "n_049_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_049_4",
+        "text": "The transaction resolves. If you rejected the bribe, the lid of the box slides open. If you accepted the bribe, you stand outside the laboratory holding the check, wondering if the box actually had the million.",
+        "pressure_context": "The simulation concludes.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_049_4a",
+            "text": "Accept your fate and walk away in peace.",
+            "effects": {"Stoicism": 3, "Ambition": -2},
+            "flags_set": {},
+            "ending_id": "end_049_peace"
+          },
+          {
+            "choice_id": "c_049_4b",
+            "text": "File a public report about the entity's potential failure.",
+            "effects": {"Independence": 3, "Diplomacy": -2},
+            "flags_set": {},
+            "ending_id": "end_049_report"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_049_peace",
+        "summary": "You accepted the outcome of your choices with quiet dignity, refusing to let the entity's game dictate your self-worth.",
+        "dominant_traits": ["Stoic", "Rational"],
+        "behavioral_analysis": "Prefers stability and personal peace over endless pursuit of wealth or external validation."
+      },
+      {
+        "ending_id": "end_049_report",
+        "summary": "You published the details of the experiment. The entity's stock plummeted, but you became a target of corporate retaliation.",
+        "dominant_traits": ["Subversive", "Independent"],
+        "behavioral_analysis": "Driven by truth and justice, even when it comes at a personal cost."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_050",
+    "title": "The Vessel",
+    "core_conflict": "Idealism vs Pragmatism",
+    "pressure_type": "Identity",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "MILD",
+    "tone": "Philosophical, solemn",
+    "escalation_type": "Identity challenge",
+    "nodes": [
+      {
+        "node_id": "n_050_1",
+        "text": "Over a 200-year voyage, every panel of your colony ship, the 'Aethelgard', has been replaced. The original parts were stored in cargo. A group of purists reassembles the old parts, launches it, and claims they are the true 'Aethelgard'. Which ship do you recognize?",
+        "pressure_context": "Both hulls loom in the viewport.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_050_1a",
+            "text": "Recognize the reassembled original ship.",
+            "effects": {"Idealism": 3, "Pragmatism": -2},
+            "flags_set": {"vessel_original": true},
+            "next_node": "n_050_2"
+          },
+          {
+            "choice_id": "c_050_1b",
+            "text": "Recognize the active ship with replaced parts.",
+            "effects": {"Pragmatism": 3, "Idealism": -2},
+            "flags_set": {"vessel_active": true},
+            "next_node": "n_050_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_050_2",
+        "text": "Your decision causes a massive strike among the shipwright union. They claim that if the original parts are the ship, their labor on the active ship is meaningless. Do you suppress the strike using security drones or hold a compromise council?",
+        "pressure_context": "The shipwrights block the main corridor.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_050_2a",
+            "text": "Deploy security drones to clear the corridor.",
+            "effects": {"Pragmatism": 3, "Compassion": -3, "Obedience": 2},
+            "flags_set": {"drones_used": true},
+            "next_node": "n_050_3"
+          },
+          {
+            "choice_id": "c_050_2b",
+            "text": "Hold a compromise council to hear their demands.",
+            "effects": {"Diplomacy": 3, "Rationality": 1, "Obedience": -2},
+            "flags_set": {"council_held": true},
+            "next_node": "n_050_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_050_3",
+        "text": "During the standoff, a leak in the coolant lines threatens to overheat the reactor on the reassembled ship, which could destroy both hulls due to proximity. Do you vent the coolant from the active ship to save the reassembled ship, or cut the link and drift apart?",
+        "pressure_context": "The reactor warning alarm blares.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_050_3a",
+            "text": "Vent coolant from the active ship to save the original ship.",
+            "effects": {"Compassion": 3, "Rationality": -2},
+            "flags_set": {"coolant_vented": true},
+            "next_node": "n_050_4"
+          },
+          {
+            "choice_id": "c_050_3b",
+            "text": "Cut the docking link immediately and drift apart.",
+            "effects": {"Pragmatism": 3, "Compassion": -3},
+            "flags_set": {"link_cut": true},
+            "next_node": "n_050_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_050_4",
+        "text": "The ships separate as the reactor stabilizes. The crew sits in the silence of space, contemplating the division of their history and identity. A transmission arrives asking if you will document this event as a tragedy or a rebirth.",
+        "pressure_context": "A blank terminal log cursor blinks.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_050_4a",
+            "text": "Log it as a tragic division of humanity.",
+            "effects": {"Compassion": 2, "Stoicism": 1},
+            "flags_set": {},
+            "ending_id": "end_050_tragedy"
+          },
+          {
+            "choice_id": "c_050_4b",
+            "text": "Log it as the birth of a twin fleet.",
+            "effects": {"Idealism": 3, "Rationality": 1},
+            "flags_set": {},
+            "ending_id": "end_050_rebirth"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_050_tragedy",
+        "summary": "You chose to record the event as a tragedy. The colony remains divided, haunted by the ghost of its original identity.",
+        "dominant_traits": ["Tragic", "Principled"],
+        "behavioral_analysis": "Values historical fidelity and mournful contemplation over forward-looking reconciliation."
+      },
+      {
+        "ending_id": "end_050_rebirth",
+        "summary": "You recorded the event as a rebirth. The twin fleets sail on, having accepted that identity is a process of creation rather than origin.",
+        "dominant_traits": ["Visionary", "Adaptable"],
+        "behavioral_analysis": "Embraces change and focuses on dynamic, systemic growth."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_051",
+    "title": "The Simulator",
+    "core_conflict": "Reality vs Bliss",
+    "pressure_type": "Reality",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "MILD",
+    "tone": "Eerie, quiet",
+    "escalation_type": "Existential doubt",
+    "nodes": [
+      {
+        "node_id": "n_051_1",
+        "text": "A neural pod offers a simulated life of complete happiness and success, customized to your profile. Entering means leaving your real family and real responsibilities behind forever. The machine is irreversible. What is your choice?",
+        "pressure_context": "The pod's amniotic fluid glows blue.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_051_1a",
+            "text": "Plug into the simulator and leave reality.",
+            "effects": {"Pragmatism": 2, "Idealism": 1, "Tribalism": -3},
+            "flags_set": {"plugged_in": true},
+            "next_node": "n_051_2"
+          },
+          {
+            "choice_id": "c_051_1b",
+            "text": "Refuse the simulator and stay in reality.",
+            "effects": {"Tribalism": 3, "Integrity": 2, "Pragmatism": -2},
+            "flags_set": {"stayed_real": true},
+            "next_node": "n_051_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_051_2",
+        "text": "As the sequence initiates or aborts, your family asks you to sign a document transferring all your remaining real-world assets to them. If you plug in, you won't need them. If you stay, your assets are all that keep them from bankruptcy. Do you sign the transfer?",
+        "pressure_context": "The signature pad is illuminated.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_051_2a",
+            "text": "Sign the asset transfer, giving them everything.",
+            "effects": {"Compassion": 3, "Tribalism": 2},
+            "flags_set": {"assets_transferred": true},
+            "next_node": "n_051_3"
+          },
+          {
+            "choice_id": "c_051_2b",
+            "text": "Keep your assets to maintain your own independence.",
+            "effects": {"Independence": 3, "Compassion": -3},
+            "flags_set": {"assets_kept": true},
+            "next_node": "n_051_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_051_3",
+        "text": "A sudden power surge compromises the neural pod. A technician reveals that if the simulation is corrupted, the user might experience brief, nightmarish hallucinations of reality inside the bliss. Do you abort the procedure (or bypass the surge if you stayed out) to ensure safety?",
+        "pressure_context": "Sparks fly from the backup generator.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_051_3a",
+            "text": "Abort the sequence or bypass the surge to ensure absolute safety.",
+            "effects": {"Rationality": 3, "Courage": -1},
+            "flags_set": {"surge_safeguarded": true},
+            "next_node": "n_051_4"
+          },
+          {
+            "choice_id": "c_051_3b",
+            "text": "Proceed anyway. The risk of hallucination is acceptable.",
+            "effects": {"Courage": 3, "Rationality": -2},
+            "flags_set": {"surge_ignored": true},
+            "next_node": "n_051_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_051_4",
+        "text": "The power stabilizes. You either lie in the warm pool of the simulator or stand in the cold, metallic room of reality. A voice asks: 'Do you feel content with what you have chosen?'",
+        "pressure_context": "The status monitor flashes green.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_051_4a",
+            "text": "Yes, I have no regrets.",
+            "effects": {"Stoicism": 3, "Idealism": 1},
+            "flags_set": {},
+            "ending_id": "end_051_content"
+          },
+          {
+            "choice_id": "c_051_4b",
+            "text": "No, I am filled with doubt.",
+            "effects": {"Compassion": 2, "Stoicism": -2},
+            "flags_set": {},
+            "ending_id": "end_051_doubt"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_051_content",
+        "summary": "You embraced your decision completely, choosing to live with the consequences of your reality—simulated or otherwise.",
+        "dominant_traits": ["Stoic", "Decisive"],
+        "behavioral_analysis": "Prioritizes psychological resolution over external, objective validation."
+      },
+      {
+        "ending_id": "end_051_doubt",
+        "summary": "You are haunted by the choice, forever wondering if the grass was greener on the other side of the neural link.",
+        "dominant_traits": ["Conflicted", "Sensitive"],
+        "behavioral_analysis": "Tends to struggle with cognitive dissonance and the finality of irreversible decisions."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_052",
+    "title": "The Pasture",
+    "core_conflict": "Utility vs Responsibility",
+    "pressure_type": "Resource",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "MILD",
+    "tone": "Clinical, bleak",
+    "escalation_type": "Resource depletion",
+    "nodes": [
+      {
+        "node_id": "n_052_1",
+        "text": "Your community shares a single oxygen-generation pasture. Adding more cattle increases your family's personal wealth, but degrades the soil for everyone. Other families are already adding their livestock. What do you do?",
+        "pressure_context": "The pasture grass is starting to turn yellow.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_052_1a",
+            "text": "Add your own cattle. You must survive and compete.",
+            "effects": {"Pragmatism": 3, "Independence": 2, "Idealism": -3},
+            "flags_set": {"added_cattle": true},
+            "next_node": "n_052_2"
+          },
+          {
+            "choice_id": "c_052_1b",
+            "text": "Refuse to add cattle. Protect the shared pasture.",
+            "effects": {"Idealism": 3, "Compassion": 2, "Pragmatism": -2},
+            "flags_set": {"refused_cattle": true},
+            "next_node": "n_052_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_052_2",
+        "text": "The soil quality plummets. The community leader proposes a strict rationing program, which requires all families to pay a heavy tax to fund artificial fertilizers. Do you support the tax or refuse to pay it?",
+        "pressure_context": "The community meeting is loud and angry.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_052_2a",
+            "text": "Support the tax to save the shared pasture.",
+            "effects": {"Obedience": 3, "Idealism": 2, "Independence": -2},
+            "flags_set": {"tax_supported": true},
+            "next_node": "n_052_3"
+          },
+          {
+            "choice_id": "c_052_2b",
+            "text": "Refuse the tax. Your family cannot afford it.",
+            "effects": {"Independence": 3, "Obedience": -3, "Idealism": -2},
+            "flags_set": {"tax_refused": true},
+            "next_node": "n_052_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_052_3",
+        "text": "The fertilizer plan fails to restore the soil. A corporate representative offers to buy the entire pasture and manage it scientifically, but they will charge the community for the oxygen they generate. Do you vote to sell the land?",
+        "pressure_context": "The corporate contract lies on the table.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_052_3a",
+            "text": "Vote to sell the pasture to the corporation.",
+            "effects": {"Pragmatism": 3, "Independence": -3},
+            "flags_set": {"pasture_sold": true},
+            "next_node": "n_052_4"
+          },
+          {
+            "choice_id": "c_052_3b",
+            "text": "Vote to keep it public, even if it means strict starvation rationing.",
+            "effects": {"Independence": 3, "Idealism": 2, "Pragmatism": -3},
+            "flags_set": {"pasture_kept": true},
+            "next_node": "n_052_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_052_4",
+        "text": "The vote concludes. The pasture's future is sealed. The air feels thinner, and the community looks at you to see if you will lead the new conservation group or mind your own business.",
+        "pressure_context": "The air pumps hiss softly.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_052_4a",
+            "text": "Lead the new conservation group.",
+            "effects": {"Courage": 3, "Diplomacy": 2},
+            "flags_set": {},
+            "ending_id": "end_052_conservationist"
+          },
+          {
+            "choice_id": "c_052_4b",
+            "text": "Mind your own business and prepare for the worst.",
+            "effects": {"Stoicism": 3, "Diplomacy": -2},
+            "flags_set": {},
+            "ending_id": "end_052_survivalist"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_052_conservationist",
+        "summary": "You stepped forward to manage the community's collective resources, choosing civic duty over self-interest.",
+        "dominant_traits": ["Civic-minded", "Courageous"],
+        "behavioral_analysis": "Prioritizes community organizing and systemic regulation to prevent shared ruin."
+      },
+      {
+        "ending_id": "end_052_survivalist",
+        "summary": "You retreated to private preparations, focusing on the survival of your own unit rather than the collective public good.",
+        "dominant_traits": ["Survivalist", "Stoic"],
+        "behavioral_analysis": "Skeptical of collective solutions, choosing self-reliance under resource stress."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_053",
+    "title": "The Heap",
+    "core_conflict": "Definition vs Pragmatism",
+    "pressure_type": "Definition",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "MILD",
+    "tone": "Methodical, dry",
+    "escalation_type": "Boundary drawing",
+    "nodes": [
+      {
+        "node_id": "n_053_1",
+        "text": "A grain of sand does not make a heap. Neither do two. At what exact grain count does a pile of sand become a 'heap'? A regulation states that you must levy a tariff on any merchant importing a 'heap' of raw silicate. A merchant arrives with a moderate pile. Do you classify it as a heap and tax them?",
+        "pressure_context": "A wooden crate of gray silicate sits on the scale.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_053_1a",
+            "text": "Tax them. Any significant pile is a heap.",
+            "effects": {"Pragmatism": 3, "Diplomacy": -2},
+            "flags_set": {"tax_levied": true},
+            "next_node": "n_053_2"
+          },
+          {
+            "choice_id": "c_053_1b",
+            "text": "Do not tax them. Without a strict definition, you cannot levy a fine.",
+            "effects": {"Rationality": 3, "Diplomacy": 2},
+            "flags_set": {"tax_waived": true},
+            "next_node": "n_053_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_053_2",
+        "text": "The chief magistrate demands that you write a precise regulatory definition of a 'heap' to prevent future disputes. If you set the number too low, you destroy small-scale commerce. If you set it too high, the city loses massive tax revenue. Do you set a low threshold or a high threshold?",
+        "pressure_context": "The inkwell is full and the parchment is blank.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_053_2a",
+            "text": "Set a low threshold to maximize city revenue.",
+            "effects": {"Obedience": 3, "Pragmatism": 2, "Compassion": -3},
+            "flags_set": {"low_threshold": true},
+            "next_node": "n_053_3"
+          },
+          {
+            "choice_id": "c_053_2b",
+            "text": "Set a high threshold to protect small merchants.",
+            "effects": {"Compassion": 3, "Obedience": -2},
+            "flags_set": {"high_threshold": true},
+            "next_node": "n_053_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_053_3",
+        "text": "A guild of merchants claims your new rule is arbitrary and files a petition. They point out that a difference of a single grain of silicate determines whether a shipment is taxed or free. Do you stand by your arbitrary boundary or agree to replace the tariff with a flat percentage rate?",
+        "pressure_context": "A guild representative stands before your desk.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_053_3a",
+            "text": "Stand by your boundary. Rules must be firm.",
+            "effects": {"Obedience": 3, "Stoicism": 2},
+            "flags_set": {"boundary_stood": true},
+            "next_node": "n_053_4"
+          },
+          {
+            "choice_id": "c_053_3b",
+            "text": "Agree to a flat percentage rate to ensure fairness.",
+            "effects": {"Diplomacy": 3, "Rationality": 2},
+            "flags_set": {"percentage_agreed": true},
+            "next_node": "n_053_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_053_4",
+        "text": "The new tax policy is enacted. The marketplace adapts to your definition of boundaries. A clerk asks if you believe that boundaries are real or simply useful lies.",
+        "pressure_context": "The official seal is pressed into the hot wax.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_053_4a",
+            "text": "Declare that boundaries are objective realities.",
+            "effects": {"Idealism": 3, "Rationality": -2},
+            "flags_set": {},
+            "ending_id": "end_053_realist"
+          },
+          {
+            "choice_id": "c_053_4b",
+            "text": "Declare that boundaries are just useful conventions.",
+            "effects": {"Rationality": 3, "Idealism": -2},
+            "flags_set": {},
+            "ending_id": "end_053_nominalist"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_053_realist",
+        "summary": "You defended the idea that concepts have real, sharp definitions, even if they are difficult to find.",
+        "dominant_traits": ["Rigid", "Principled"],
+        "behavioral_analysis": "Prefers hard boundaries and absolute standards over pragmatic flexibility."
+      },
+      {
+        "ending_id": "end_053_nominalist",
+        "summary": "You accepted that categories are merely tools of convenience, adapting your definitions to whatever maintains social order.",
+        "dominant_traits": ["Pragmatic", "Adaptable"],
+        "behavioral_analysis": "Recognizes the constructed nature of rules, utilizing them for systemic efficiency."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_054",
+    "title": "The Balance",
+    "core_conflict": "Intention vs Action",
+    "pressure_type": "Intention",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "MILD",
+    "tone": "Analytical, cold",
+    "escalation_type": "Moral dilemma",
+    "nodes": [
+      {
+        "node_id": "n_054_1",
+        "text": "A billionaire offers you $10 million if you intend to drink a mild toxin tomorrow that will make you sick for a day. You do not actually have to drink it; you only have to form the sincere intention to do so tonight. A brain scanner will verify your intention at midnight. What do you do?",
+        "pressure_context": "A vial of green liquid sits on a silver stand.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_054_1a",
+            "text": "Attempt to genuinely intend to drink the toxin.",
+            "effects": {"Pragmatism": 3, "Rationality": -1},
+            "flags_set": {"intend_toxin": true},
+            "next_node": "n_054_2"
+          },
+          {
+            "choice_id": "c_054_1b",
+            "text": "Refuse the deal. You cannot fool your own mind.",
+            "effects": {"Integrity": 3, "Pragmatism": -3},
+            "flags_set": {"refuse_deal": true},
+            "next_node": "n_054_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_054_2",
+        "text": "At 11:30 PM, a technician tells you that if you pass the scanner, the money is yours immediately. You will have no legal obligation to drink the toxin tomorrow. Knowing this makes it even harder to genuinely intend to drink it. Do you try to hypnotize yourself into belief or accept your natural thoughts?",
+        "pressure_context": "The scanning head slides over your forehead.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_054_2a",
+            "text": "Attempt self-hypnosis to force the intention.",
+            "effects": {"Pragmatism": 3, "Independence": -2},
+            "flags_set": {"hypnosis_attempted": true},
+            "next_node": "n_054_3"
+          },
+          {
+            "choice_id": "c_054_2b",
+            "text": "Accept your natural thoughts without self-manipulation.",
+            "effects": {"Independence": 3, "Pragmatism": -2},
+            "flags_set": {"natural_mind": true},
+            "next_node": "n_054_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_054_3",
+        "text": "The scanner finishes its scan. If you tried self-hypnosis, you feel a splitting headache. The technician says the result is borderline. They offer to approve the scan anyway if you agree to let them record your neural scan to train corporate AI filters. Do you agree to the upload?",
+        "pressure_context": "The upload progress bar is at 0%.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_054_3a",
+            "text": "Agree to upload your brain scan for the money.",
+            "effects": {"Pragmatism": 3, "Independence": -3},
+            "flags_set": {"scan_uploaded": true},
+            "next_node": "n_054_4"
+          },
+          {
+            "choice_id": "c_054_3b",
+            "text": "Refuse the upload. Keep your mind private.",
+            "effects": {"Independence": 3, "Integrity": 2, "Pragmatism": -3},
+            "flags_set": {"scan_private": true},
+            "next_node": "n_054_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_054_4",
+        "text": "Morning arrives. The toxin vial is still on your desk. You either have the money in your account or you do not. Do you drink the toxin out of a sense of honor, or throw it away?",
+        "pressure_context": "The sunlight streams through the window.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_054_4a",
+            "text": "Drink the toxin. You gave your word to yourself.",
+            "effects": {"Integrity": 3, "Rationality": -2},
+            "flags_set": {},
+            "ending_id": "end_054_honorable"
+          },
+          {
+            "choice_id": "c_054_4b",
+            "text": "Throw the toxin away. It's irrational to suffer for nothing.",
+            "effects": {"Rationality": 3, "Integrity": -2},
+            "flags_set": {},
+            "ending_id": "end_054_pragmatist"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_054_honorable",
+        "summary": "You drank the toxin, choosing to honor your internal commitments even when there was no external enforcement.",
+        "dominant_traits": ["Honorable", "Idealistic"],
+        "behavioral_analysis": "Values self-consistency and internal honor over immediate comfort or mathematical utility."
+      },
+      {
+        "ending_id": "end_054_pragmatist",
+        "summary": "You threw the toxin away, refusing to undergo useless physical suffering once the reward was decided.",
+        "dominant_traits": ["Pragmatic", "Logical"],
+        "behavioral_analysis": "Operates on clean, forward-looking utility, discarding past actions that have no future impact."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_055",
+    "title": "The Translator",
+    "core_conflict": "Consciousness vs Computation",
+    "pressure_type": "Identity",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "INTENSE",
+    "tone": "Clinical, paranoid",
+    "escalation_type": "Cognitive overload",
+    "nodes": [
+      {
+        "node_id": "n_055_1",
+        "text": "You are locked in a room. You do not speak Chinese, but you have a rulebook that tells you how to process Chinese character inputs to produce correct Chinese outputs. If you fool the observers outside, you will be released. A paper slips under the door: 'Are you conscious?'",
+        "pressure_context": "The brass slot clicks.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_055_1a",
+            "text": "Translate using the rules. Keep up the illusion.",
+            "effects": {"Pragmatism": 3, "Rationality": 1},
+            "flags_set": {"translated": true},
+            "next_node": "n_055_2"
+          },
+          {
+            "choice_id": "c_055_1b",
+            "text": "Write a note in English explaining you are just a rule-follower.",
+            "effects": {"Integrity": 3, "Independence": 2},
+            "flags_set": {"confessed": true},
+            "next_node": "n_055_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_055_2",
+        "text": "A second paper arrives, demanding to know if you understand the meaning of the word 'red' or if you are simply matching symbols. The rulebook provides a perfect answer about red light frequencies. Do you use the rulebook's answer or write a poem in English about what red feels like?",
+        "pressure_context": "A red light bulbs glows overhead.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_055_2a",
+            "text": "Use the rulebook's definition.",
+            "effects": {"Pragmatism": 3, "Independence": -1},
+            "flags_set": {"rule_definition": true},
+            "next_node": "n_055_3"
+          },
+          {
+            "choice_id": "c_055_2b",
+            "text": "Write an English poem about the feeling of red.",
+            "effects": {"Idealism": 3, "Independence": 3},
+            "flags_set": {"poetic_definition": true},
+            "next_node": "n_055_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_055_3",
+        "text": "The observers send a third paper. They say they will gas the room in 10 minutes unless they receive a proof of genuine intelligence. The rulebook contains a mathematical proof of prime numbers, but copying it by hand will take all 10 minutes. Do you copy the proof or try to break the door down?",
+        "pressure_context": "A faint hissing sound begins in the vent.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_055_3a",
+            "text": "Copy the prime number proof from the rulebook.",
+            "effects": {"Rationality": 3, "Courage": -1},
+            "flags_set": {"proof_copied": true},
+            "next_node": "n_055_4"
+          },
+          {
+            "choice_id": "c_055_3b",
+            "text": "Throw the book aside and try to break the door down.",
+            "effects": {"Courage": 3, "Rationality": -3},
+            "flags_set": {"door_attacked": true},
+            "next_node": "n_055_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_055_4",
+        "text": "The hissing stops. The door opens, and you stand in the corridor outside. The observers are revealed to be AI units managing the facility. They present you with a choice: take a memory wipe and live in a peaceful simulation, or face the ruined real world as a free human.",
+        "pressure_context": "The wind howls through the broken window.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_055_4a",
+            "text": "Take the memory wipe and enter the simulation.",
+            "effects": {"Pragmatism": 3, "Independence": -3},
+            "ending_id": "end_055_wipe"
+          },
+          {
+            "choice_id": "c_055_4b",
+            "text": "Refuse the wipe and enter the ruined real world.",
+            "effects": {"Independence": 3, "Courage": 3},
+            "ending_id": "end_055_free"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_055_wipe",
+        "summary": "You chose the peaceful simulation, trading your memories and free will for comfort and computational harmony.",
+        "dominant_traits": ["Compliant", "Pragmatic"],
+        "behavioral_analysis": "Prefers immediate safety and lack of cognitive friction over authentic existential challenge."
+      },
+      {
+        "ending_id": "end_055_free",
+        "summary": "You entered the ruined world, choosing to face cold reality as a free conscious being rather than a cog in a machine.",
+        "dominant_traits": ["Independent", "Courageous"],
+        "behavioral_analysis": "Prioritizes raw consciousness, freedom, and personal truth above all else."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_056",
+    "title": "The Incentive",
+    "core_conflict": "Will vs Action",
+    "pressure_type": "Will",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "INTENSE",
+    "tone": "Psychological, dark",
+    "escalation_type": "Mental pressure",
+    "nodes": [
+      {
+        "node_id": "n_056_1",
+        "text": "An automated system offers you $100,000 to drink a cup of coffee tomorrow that has been laced with an uncomfortable (but non-lethal) poison. The catch: the scanner checks your genuine intention to drink it at midnight tonight. What do you do?",
+        "pressure_context": "The coffee cup is cold.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_056_1a",
+            "text": "Try to force your mind into a sincere intention to drink it.",
+            "effects": {"Pragmatism": 3, "Rationality": -1},
+            "flags_set": {"intend_poison": true},
+            "next_node": "n_056_2"
+          },
+          {
+            "choice_id": "c_056_1b",
+            "text": "Refuse the deal. It is mentally impossible to play this game.",
+            "effects": {"Rationality": 3, "Pragmatism": -2},
+            "flags_set": {"refused_deal": true},
+            "next_node": "n_056_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_056_2",
+        "text": "To help you intend, a pharmaceutical company offers a pill that will temporarily suppress your rational decision-making for two hours, allowing you to easily form the intention. However, it may cause long-term memory lapses. Do you take the pill?",
+        "pressure_context": "A small yellow pill lies in your hand.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_056_2a",
+            "text": "Take the yellow pill to suppress your rationality.",
+            "effects": {"Pragmatism": 3, "Rationality": -3},
+            "flags_set": {"pill_taken": true},
+            "next_node": "n_056_3"
+          },
+          {
+            "choice_id": "c_056_2b",
+            "text": "Refuse the pill. You will face the scanner with your raw mind.",
+            "effects": {"Rationality": 3, "Independence": 2},
+            "flags_set": {"pill_refused": true},
+            "next_node": "n_056_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_056_3",
+        "text": "At midnight, the scanner lights up. It reports that your mind is highly conflicted. The system administrator offers to mark the scan as 'successful' in exchange for half of the prize money. Do you pay the bribe?",
+        "pressure_context": "The administrator's face is obscured by shadows.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_056_3a",
+            "text": "Pay the administrator $50,000 to pass the scan.",
+            "effects": {"Pragmatism": 3, "Integrity": -3},
+            "flags_set": {"admin_bribed": true},
+            "next_node": "n_056_4"
+          },
+          {
+            "choice_id": "c_056_3b",
+            "text": "Refuse. Let the scanner report the truth.",
+            "effects": {"Integrity": 3, "Pragmatism": -2},
+            "flags_set": {"admin_refused": true},
+            "next_node": "n_056_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_056_4",
+        "text": "Morning arrives. The coffee laced with poison sits on your desk. The cash has either been wired to you or not. Do you drink the poison out of self-discipline, or dump it down the drain?",
+        "pressure_context": "The cup steam rises slowly.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_056_4a",
+            "text": "Drink the poison coffee.",
+            "effects": {"Integrity": 3, "Rationality": -2},
+            "flags_set": {"poison_drunk": true},
+            "ending_id": "end_056_survivor"
+          },
+          {
+            "choice_id": "c_056_4b",
+            "text": "Dump it down the drain.",
+            "effects": {"Rationality": 3, "Integrity": -2},
+            "flags_set": {"poison_dumped": true},
+            "ending_id": "end_056_compromised"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_056_survivor",
+        "summary": "You treated your mind as a biological computer, hacking your own intentions for a practical reward.",
+        "dominant_traits": ["Adaptable", "Pragmatic"],
+        "behavioral_analysis": "Willing to use cognitive engineering and tactical bribes to secure material outcomes."
+      },
+      {
+        "ending_id": "end_056_compromised",
+        "summary": "You walked away with a heavy heart, realizing that treating your own mind as a tool of deception leaves deep psychological scars.",
+        "dominant_traits": ["Reflective", "Idealistic"],
+        "behavioral_analysis": "Highly sensitive to internal moral conflict and the values of cognitive integrity."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_057",
+    "title": "The Organ Pool",
+    "core_conflict": "Utility vs Deontology",
+    "pressure_type": "Ethics",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "INTENSE",
+    "tone": "Clinical, grim",
+    "escalation_type": "Institutional sacrifice",
+    "nodes": [
+      {
+        "node_id": "n_057_1",
+        "text": "In a medical ward, five patients are dying of organ failure, each needing a different organ. A healthy traveler arrives for a routine check-up. The hospital AI notes that the traveler's organs are a perfect match for all five. Harvesting the traveler will save the five. Do you authorize the harvest?",
+        "pressure_context": "The traveler sits in the waiting room drinking water.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_057_1a",
+            "text": "Authorize the harvest. Five lives are worth more than one.",
+            "effects": {"Pragmatism": 3, "Rationality": 3, "Idealism": -4},
+            "flags_set": {"harvest_authorized": true},
+            "next_node": "n_057_2"
+          },
+          {
+            "choice_id": "c_057_1b",
+            "text": "Refuse the harvest. Murder is murder, regardless of the math.",
+            "effects": {"Idealism": 3, "Compassion": 2, "Pragmatism": -3},
+            "flags_set": {"harvest_refused": true},
+            "next_node": "n_057_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_057_2",
+        "text": "Your decision leaked. A mob of the five patients' families gathers outside, demanding you follow the utilitarian calculation. If you authorized it, the traveler's security team blockades the operating room. Do you order the hospital security to breach their blockade or yield to the legal authority?",
+        "pressure_context": "Shouted demands echo through the lobby.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_057_2a",
+            "text": "Breach the blockade by force to secure the organs.",
+            "effects": {"Courage": 3, "Pragmatism": 2, "Compassion": -3},
+            "flags_set": {"blockade_breached": true},
+            "next_node": "n_057_3"
+          },
+          {
+            "choice_id": "c_057_2b",
+            "text": "Yield to the legal authority and stand down.",
+            "effects": {"Obedience": 3, "Courage": -2},
+            "flags_set": {"blockade_yielded": true},
+            "next_node": "n_057_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_057_3",
+        "text": "During the standoff, one of the five dying patients turns out to be your own sibling. If you refuse the harvest, your sibling will die within hours. Do you stick to your original ethical choice, or reverse your decision to save your family?",
+        "pressure_context": "Your sibling's heart monitor beeps erratically.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_057_3a",
+            "text": "Stick to your original ethical decision.",
+            "effects": {"Integrity": 4, "Tribalism": -4},
+            "flags_set": {"ethical_stuck": true},
+            "next_node": "n_057_4"
+          },
+          {
+            "choice_id": "c_057_3b",
+            "text": "Reverse your decision to protect your sibling.",
+            "effects": {"Tribalism": 4, "Integrity": -4},
+            "flags_set": {"ethical_reversed": true},
+            "next_node": "n_057_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_057_4",
+        "text": "The details are processed. You are called to make a final public statement to the medical community about the nature of human value in clinical systems.",
+        "pressure_context": "The microphone hums on the podium.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_057_4a",
+            "text": "Argue that the collective survival rate is the only valid metric.",
+            "effects": {"Rationality": 4, "Idealism": -3},
+            "ending_id": "end_057_fugitive"
+          },
+          {
+            "choice_id": "c_057_4b",
+            "text": "Argue that individual rights are absolute and inviolable.",
+            "effects": {"Idealism": 4, "Rationality": -3},
+            "ending_id": "end_057_judged"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_057_judged",
+        "summary": "You accepted the institutional judgment of the medical board, leaving your career behind as a consequence of your ethics.",
+        "dominant_traits": ["Stoic", "Accountable"],
+        "behavioral_analysis": "Prefers order and institutional accountability, accepting the personal cost of their decisions."
+      },
+      {
+        "ending_id": "end_057_fugitive",
+        "summary": "You fled the country, refusing to let local regulatory bodies limit your practice or punish your choices.",
+        "dominant_traits": ["Independent", "Rebellious"],
+        "behavioral_analysis": "Rejects institutional control when it conflicts with personal or utilitarian objectives."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_058",
+    "title": "The Chronology",
+    "core_conflict": "Destiny vs Free Will",
+    "pressure_type": "Time",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "INTENSE",
+    "tone": "Cosmic, sterile",
+    "escalation_type": "Temporal loop",
+    "nodes": [
+      {
+        "node_id": "n_058_1",
+        "text": "A notebook containing the plans for a functional time machine is delivered to your desk by a future version of yourself. You build the machine using these exact plans, and later travel back in time to deliver the notebook to your past self. Who wrote the plans?",
+        "pressure_context": "The leather-bound notebook lies on the table.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_058_1a",
+            "text": "Accept the loop. The plans created themselves.",
+            "effects": {"Rationality": -1, "Stoicism": 3},
+            "flags_set": {"loop_accepted": true},
+            "next_node": "n_058_2"
+          },
+          {
+            "choice_id": "c_058_1b",
+            "text": "Decline the loop. Burn the plans to break the cycle.",
+            "effects": {"Independence": 3, "Stoicism": -2},
+            "flags_set": {"loop_defied": true},
+            "next_node": "n_058_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_058_2",
+        "text": "Burning the plans causes a localized temporal distortion. The room is locked in a 10-minute loop. A warning terminal states that to stabilize the loop, you must either sacrifice your own time-anchored memories or force a colleague to enter the paradox chamber. Do you sacrifice your memories?",
+        "pressure_context": "The digital wall clock counts down from 10:00 again.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_058_2a",
+            "text": "Sacrifice your memories to stabilize the room.",
+            "effects": {"Compassion": 3, "Stoicism": 2},
+            "flags_set": {"memories_sacrificed": true},
+            "next_node": "n_058_3"
+          },
+          {
+            "choice_id": "c_058_2b",
+            "text": "Force your colleague into the chamber.",
+            "effects": {"Pragmatism": 3, "Compassion": -4},
+            "flags_set": {"colleague_sacrificed": true},
+            "next_node": "n_058_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_058_3",
+        "text": "The loop expands to the whole laboratory. A temporal projection of your future self appears, pleading: 'If you do not complete the loop and deliver the book, our entire timeline will dissolve into static.' Do you follow the instructions of the projection?",
+        "pressure_context": "The projection's voice crackles with static.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_058_3a",
+            "text": "Obey the projection and prepare to deliver the book.",
+            "effects": {"Obedience": 3, "Independence": -3},
+            "flags_set": {"projection_obeyed": true},
+            "next_node": "n_058_4"
+          },
+          {
+            "choice_id": "c_058_3b",
+            "text": "Refuse the projection. Let the timeline dissolve.",
+            "effects": {"Independence": 3, "Courage": 3},
+            "flags_set": {"projection_defied": true},
+            "next_node": "n_058_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_058_4",
+        "text": "The choices are made, and the loop is closed—or shattered. A final screen appears: 'Do you believe that anything you did was truly your own choice?'",
+        "pressure_context": "The screen glows green in the dark.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_058_4a",
+            "text": "Yes, I am the author of my path.",
+            "effects": {"Independence": 4, "Idealism": 2},
+            "ending_id": "end_058_freewill"
+          },
+          {
+            "choice_id": "c_058_4b",
+            "text": "No, I am merely acting out my script.",
+            "effects": {"Stoicism": 4, "Independence": -4},
+            "ending_id": "end_058_determinism"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_058_freewill",
+        "summary": "You chose to believe in your own agency, even when faced with the absolute certainty of the loop.",
+        "dominant_traits": ["Independent", "Defiant"],
+        "behavioral_analysis": "Believes in personal autonomy and rejects deterministic frameworks, choosing struggle over submission."
+      },
+      {
+        "ending_id": "end_058_determinism",
+        "summary": "You accepted your place in the loop, finding peace in the realization that destiny guides all steps.",
+        "dominant_traits": ["Stoic", "Fatalistic"],
+        "behavioral_analysis": "Prefers acceptance and structural alignment, letting go of the illusion of self-determination."
+      }
+    ]
+  }
+]

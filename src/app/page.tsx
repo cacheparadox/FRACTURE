@@ -451,6 +451,11 @@ export default function Home() {
                         >
                           {scenario.stakes_type} STAKES
                         </span>
+                        {scenario.is_long && (
+                          <span className="text-[10px] uppercase tracking-widest px-2 py-1 border border-red-500/50 text-red-500 font-bold bg-red-950/20 ml-2">
+                            LONG
+                          </span>
+                        )}
                       </div>
                       
                       {/* Blinking status dot indicator */}

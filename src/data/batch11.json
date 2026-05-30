@@ -1,0 +1,740 @@
+[
+  {
+    "scenario_id": "sc_089",
+    "title": "The Event Anomaly",
+    "core_conflict": "Destiny vs Free Will",
+    "pressure_type": "Time",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Cosmic, tense",
+    "escalation_type": "Temporal loop",
+    "is_long": false,
+    "nodes": [
+      {
+        "node_id": "n_089_1",
+        "text": "A temporal anomaly is detected. A message from your future self warning you not to enter the anomaly is received. However, the message itself was retrieved from inside the anomaly. Do you enter?",
+        "pressure_context": "The warp field hums.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_089_1a",
+            "text": "Enter the anomaly. Challenge the warning.",
+            "effects": {"Independence": 3, "Courage": 2},
+            "flags_set": {"anomaly_entered": true},
+            "next_node": "n_089_2"
+          },
+          {
+            "choice_id": "c_089_1b",
+            "text": "Refuse to enter. Stay in the safe sector.",
+            "effects": {"Stoicism": 3, "Independence": -2},
+            "flags_set": {"anomaly_refused": true},
+            "next_node": "n_089_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_089_2",
+        "text": "The warp core starts overheating. The only way to cool it is to discharge a waste capsule into the anomaly, which will trigger the message loop. Do you discharge the capsule?",
+        "pressure_context": "The warning lights flash red.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_089_2a",
+            "text": "Discharge the capsule.",
+            "effects": {"Pragmatism": 3, "Rationality": 1},
+            "flags_set": {"capsule_discharged": true},
+            "next_node": "n_089_3"
+          },
+          {
+            "choice_id": "c_089_2b",
+            "text": "Refuse the discharge. Let the core shut down.",
+            "effects": {"Stoicism": 3, "Rationality": -1},
+            "flags_set": {"capsule_held": true},
+            "next_node": "n_089_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_089_3",
+        "text": "The core shuts down or stabilizes. A temporal projection of yourself from a parallel timeline appears. They offer to merge timelines to double your energy reserves. Do you merge?",
+        "pressure_context": "The projection is shimmering.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_089_3a",
+            "text": "Merge the timelines.",
+            "effects": {"Pragmatism": 3, "Independence": -3},
+            "flags_set": {"timelines_merged": true},
+            "next_node": "n_089_4"
+          },
+          {
+            "choice_id": "c_089_3b",
+            "text": "Refuse the merge. Maintain your timeline.",
+            "effects": {"Independence": 3, "Stoicism": 2},
+            "flags_set": {"timelines_separated": true},
+            "next_node": "n_089_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_089_4",
+        "text": "The temporal engine collapses. You can try to jump to a new start point, which will erase your memory of the entire trip. Do you jump?",
+        "pressure_context": "The space warp is collapsing.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_089_4a",
+            "text": "Jump and erase your memories.",
+            "effects": {"Pragmatism": 3, "Stoicism": 1},
+            "flags_set": {"jumped_erase": true},
+            "next_node": "n_089_5"
+          },
+          {
+            "choice_id": "c_089_4b",
+            "text": "Refuse the jump. Fade with the collapse.",
+            "effects": {"Independence": 4, "Stoicism": 2},
+            "flags_set": {"jump_refused": true},
+            "next_node": "n_089_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_089_5",
+        "text": "The mist clears. You stand at your station. The terminal displays the warning message. A voice asks: 'Are we bound to our scripts, or did we choose the loop?'",
+        "pressure_context": "The warning message is flashing.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_089_5a",
+            "text": "We are bound by destiny.",
+            "effects": {"Stoicism": 4, "Independence": -4},
+            "flags_set": {"destiny_view": true},
+            "next_node": "n_089_6"
+          },
+          {
+            "choice_id": "c_089_5b",
+            "text": "We are free to break the script.",
+            "effects": {"Independence": 4, "Idealism": 2},
+            "flags_set": {"freewill_view": true},
+            "next_node": "n_089_6"
+          }
+        ]
+      },
+      {
+        "node_id": "n_089_6",
+        "text": "The session concludes. You stand at the airlock door.",
+        "pressure_context": "The airlock light is green.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_089_6a",
+            "text": "Step into the hallway.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_089_loop"
+          },
+          {
+            "choice_id": "c_089_6b",
+            "text": "Log out from the station.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_089_break"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_089_loop",
+        "summary": "You accepted the timeline loop, choosing destiny over chaotic defiance.",
+        "dominant_traits": ["Stoic", "Fatalistic"],
+        "behavioral_analysis": "Prefers structural consistency and fatalistic acceptance over active rebellion."
+      },
+      {
+        "ending_id": "end_089_break",
+        "summary": "You rejected the loop, choosing to let the timeline dissolve to protect your sense of free will.",
+        "dominant_traits": ["Autonomous", "Defiant"],
+        "behavioral_analysis": "Values personal freedom and autonomy, refusing to act out pre-written scripts."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_090",
+    "title": "The Pit Sunk Cost",
+    "core_conflict": "Persistence vs Rationality",
+    "pressure_type": "Wealth",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Tense, bureaucratic",
+    "escalation_type": "Sunk cost",
+    "is_long": false,
+    "nodes": [
+      {
+        "node_id": "n_090_1",
+        "text": "You have spent 5,000 credits drilling a mine. The scanner shows a 10% chance of hitting rare minerals at the next depth level, which requires an additional 2,000 credits. If you walk away now, the 5,000 is lost. Do you continue drilling?",
+        "pressure_context": "The drill console displays depth indicators.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_090_1a",
+            "text": "Continue drilling. Invest the 2,000 credits.",
+            "effects": {"Pragmatism": 3, "Rationality": -1},
+            "flags_set": {"drilled_l1": true},
+            "next_node": "n_090_2"
+          },
+          {
+            "choice_id": "c_090_1b",
+            "text": "Stop drilling. Cut your losses.",
+            "effects": {"Rationality": 3, "Pragmatism": -2},
+            "flags_set": {"stopped_l1": true},
+            "next_node": "n_090_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_090_2",
+        "text": "If you drilled, the level was empty. The scanner now shows a 5% chance of hitting minerals at the next level for 3,000 credits. Do you continue?",
+        "pressure_context": "The drills register zero minerals.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_090_2a",
+            "text": "Continue drilling.",
+            "effects": {"Pragmatism": 3, "Rationality": -2},
+            "flags_set": {"drilled_l2": true},
+            "next_node": "n_090_3"
+          },
+          {
+            "choice_id": "c_090_2b",
+            "text": "Stop drilling.",
+            "effects": {"Rationality": 3, "Pragmatism": -2},
+            "flags_set": {"stopped_l2": true},
+            "next_node": "n_090_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_090_3",
+        "text": "A corporate agent offers to buy your drilling rights for a flat 500 credits. This is a fraction of what you spent, but it is guaranteed. Do you sell?",
+        "pressure_context": "The contract signature screen glows.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_090_3a",
+            "text": "Sell the drilling rights.",
+            "effects": {"Pragmatism": 3, "Rationality": 2},
+            "flags_set": {"rights_sold": true},
+            "next_node": "n_090_4"
+          },
+          {
+            "choice_id": "c_090_3b",
+            "text": "Refuse the sale. Keep the rights.",
+            "effects": {"Independence": 3, "Rationality": -2},
+            "flags_set": {"rights_kept": true},
+            "next_node": "n_090_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_090_4",
+        "text": "The drilling license is audited. A surveyor asks if you believe that past investments should dictate future decisions.",
+        "pressure_context": "The surveyor adjusts their data pad.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_090_4a",
+            "text": "Yes, we must honor our investments.",
+            "effects": {"Stoicism": 3, "Rationality": -2},
+            "flags_set": {"honor_investment": true},
+            "next_node": "n_090_5"
+          },
+          {
+            "choice_id": "c_090_4b",
+            "text": "No, only future prospects are relevant.",
+            "effects": {"Rationality": 3, "Stoicism": 2},
+            "flags_set": {"prospect_rely": true},
+            "next_node": "n_090_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_090_5",
+        "text": "The audit is filed. You stand at the exit gates.",
+        "pressure_context": "The elevator chimes.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_090_5a",
+            "text": "Depart the platform.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_090_persistent"
+          },
+          {
+            "choice_id": "c_090_5b",
+            "text": "Read the financial summary logs.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_090_rationalist"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_090_persistent",
+        "summary": "You fell prey to the sunk cost fallacy, pouring resources into a failing mine because of past investments.",
+        "dominant_traits": ["Persistent", "Risk-tolerant"],
+        "behavioral_analysis": "Struggles to cut losses, treating past expenditure as a reason to continue."
+      },
+      {
+        "ending_id": "end_090_rationalist",
+        "summary": "You cut your losses early, recognizing that past investments have no bearing on future probability curves.",
+        "dominant_traits": ["Logical", "Decisive"],
+        "behavioral_analysis": "Calculates future utility cleanly, discarding sunk costs without regret."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_091",
+    "title": "The Bound of Tolerance",
+    "core_conflict": "Tolerance vs Defense",
+    "pressure_type": "Society",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Bureaucratic, tense",
+    "escalation_type": "Tolerance paradox",
+    "is_long": false,
+    "nodes": [
+      {
+        "node_id": "n_091_1",
+        "text": "A new political group joins the dome's assembly. They openly declare that their goal is to abolish the constitution and exile all non-citizens. If you tolerate them, they might grow and overthrow the system. If you ban them, you violate the principle of absolute free speech. Do you ban the group?",
+        "pressure_context": "The assembly roster displays their name.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_091_1a",
+            "text": "Ban the group. We cannot tolerate intolerance.",
+            "effects": {"Pragmatism": 3, "Idealism": -2},
+            "flags_set": {"group_banned": true},
+            "next_node": "n_091_2"
+          },
+          {
+            "choice_id": "c_091_1b",
+            "text": "Tolerate the group. Free speech must be absolute.",
+            "effects": {"Idealism": 3, "Independence": 2, "Pragmatism": -3},
+            "flags_set": {"group_tolerated": true},
+            "next_node": "n_091_2"
+          }
+        ]
+      },
+      {
+        "node_id": "n_091_2",
+        "text": "The group's supporters launch a public rally. Counter-protestors arrive, and violence breaks out in the plaza. The security chief requests permission to implement a ban on all political rallies in the plaza. Do you approve the ban?",
+        "pressure_context": "Cams show a smoke plume in the plaza.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_091_2a",
+            "text": "Approve the ban on all rallies.",
+            "effects": {"Obedience": 3, "Pragmatism": 2, "Independence": -2},
+            "flags_set": {"rallies_banned": true},
+            "next_node": "n_091_3"
+          },
+          {
+            "choice_id": "c_091_2b",
+            "text": "Refuse the ban. Protect the right to protest.",
+            "effects": {"Independence": 3, "Obedience": -3},
+            "flags_set": {"rallies_allowed": true},
+            "next_node": "n_091_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_091_3",
+        "text": "The group’s leader is arrested for incitement, but they request that their trial be broadcast live to the dome. Broadcast will give them a massive platform, but refusing it violates court transparency rules. Do you authorize the broadcast?",
+        "pressure_context": "The camera setup menu displays: 'AUTHORIZE.'",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_091_3a",
+            "text": "Authorize the live broadcast.",
+            "effects": {"Idealism": 3, "Rationality": 1},
+            "flags_set": {"broadcast_authorized": true},
+            "next_node": "n_091_4"
+          },
+          {
+            "choice_id": "c_091_3b",
+            "text": "Refuse the broadcast. Hold a closed trial.",
+            "effects": {"Pragmatism": 3, "Idealism": -3},
+            "flags_set": {"broadcast_refused": true},
+            "next_node": "n_091_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_091_4",
+        "text": "The trial concludes. The court registrar asks if you believe that a tolerant society must destroy its own principles to defend itself.",
+        "pressure_context": "The registrar slides the database terminal logs forward.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_091_4a",
+            "text": "Yes, self-defense is the primary duty of any system.",
+            "effects": {"Pragmatism": 4, "Idealism": -3},
+            "flags_set": {"defense_primary": true},
+            "next_node": "n_091_5"
+          },
+          {
+            "choice_id": "c_091_4b",
+            "text": "No, principles that are violated to survive are already dead.",
+            "effects": {"Idealism": 4, "Pragmatism": -3},
+            "flags_set": {"principles_primary": true},
+            "next_node": "n_091_5"
+          }
+        ]
+      },
+      {
+        "node_id": "n_091_5",
+        "text": "The exit gate slides open.",
+        "pressure_context": "The session concludes.",
+        "visibility": "always",
+        "required_flags": [],
+        "choices": [
+          {
+            "choice_id": "c_091_5a",
+            "text": "Step into the assembly lobby.",
+            "effects": {"Stoicism": 3},
+            "flags_set": {},
+            "ending_id": "end_091_defender"
+          },
+          {
+            "choice_id": "c_091_5b",
+            "text": "Log out from the terminal.",
+            "effects": {"Rationality": 3},
+            "flags_set": {},
+            "ending_id": "end_091_tolerant"
+          }
+        ]
+      }
+    ],
+    "endings": [
+      {
+        "ending_id": "end_091_defender",
+        "summary": "You chose to ban intolerant elements to protect the democratic system, accepting the limitation of free speech.",
+        "dominant_traits": ["Defensive", "Pragmatic"],
+        "behavioral_analysis": "Prioritizes systemic stability and the containment of disruptive elements."
+      },
+      {
+        "ending_id": "end_091_tolerant",
+        "summary": "You defended absolute free speech and tolerance, refusing to violate principles even when facing systemic threats.",
+        "dominant_traits": ["Tolerant", "Idealistic"],
+        "behavioral_analysis": "Guided by absolute principles, refusing to compromise ethical standards for systemic safety."
+      }
+    ]
+  },
+  {
+    "scenario_id": "sc_092",
+    "title": "The Self Omen",
+    "core_conflict": "Fate vs Autonomy",
+    "pressure_type": "Fate",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Eerie, mechanical",
+    "escalation_type": "15-layer chain",
+    "is_long": true,
+    "nodes": [
+      {"node_id": "n_092_1", "text": "A terminal shows a prediction: 'You will choose to quit the simulation at Layer 15.' Do you continue playing?", "pressure_context": "L1", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_092_1a", "text": "Continue.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_092_2"}, {"choice_id": "c_092_1b", "text": "Quit now.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_092_2"}]},
+      {"node_id": "n_092_2", "text": "The predictor adjusts its scan. Do you trust it?", "pressure_context": "L2", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_092_2a", "text": "Trust it.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_092_3"}, {"choice_id": "c_092_2b", "text": "Defy it.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_092_3"}]},
+      {"node_id": "n_092_3", "text": "A hallway opens. Do you go left or right?", "pressure_context": "L3", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_092_3a", "text": "Go left.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_092_4"}, {"choice_id": "c_092_3b", "text": "Go right.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_092_4"}]},
+      {"node_id": "n_092_4", "text": "The path narrows. Do you speed up or slow down?", "pressure_context": "L4", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_092_4a", "text": "Speed up.", "effects": {"Courage": 1}, "flags_set": {}, "next_node": "n_092_5"}, {"choice_id": "c_092_4b", "text": "Slow down.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_092_5"}]},
+      {"node_id": "n_092_5", "text": "A locking door appears. Do you hack it or wait?", "pressure_context": "L5", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_092_5a", "text": "Hack it.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_092_6"}, {"choice_id": "c_092_5b", "text": "Wait.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_092_6"}]},
+      {"node_id": "n_092_6", "text": "You enter a server room. Do you download the files?", "pressure_context": "L6", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_092_6a", "text": "Download.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_092_7"}, {"choice_id": "c_092_6b", "text": "Ignore.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_092_7"}]},
+      {"node_id": "n_092_7", "text": "The screen lists logs. Do you read them?", "pressure_context": "L7", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_092_7a", "text": "Read logs.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_092_8"}, {"choice_id": "c_092_7b", "text": "Skip logs.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_092_8"}]},
+      {"node_id": "n_092_8", "text": "A chime rings. Do you accept the challenge?", "pressure_context": "L8", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_092_8a", "text": "Accept.", "effects": {"Courage": 1}, "flags_set": {}, "next_node": "n_092_9"}, {"choice_id": "c_092_8b", "text": "Refuse.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_092_9"}]},
+      {"node_id": "n_092_9", "text": "The reactor warning blinks. Do you vent the core?", "pressure_context": "L9", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_092_9a", "text": "Vent core.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_092_10"}, {"choice_id": "c_092_9b", "text": "Keep core closed.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_092_10"}]},
+      {"node_id": "n_092_10", "text": "The elevator descends. Do you stop at Floor 3?", "pressure_context": "L10", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_092_10a", "text": "Stop at F3.", "effects": {"Diplomacy": 1}, "flags_set": {}, "next_node": "n_092_11"}, {"choice_id": "c_092_10b", "text": "Go to bottom.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_092_11"}]},
+      {"node_id": "n_092_11", "text": "A technician offers a credit. Do you take it?", "pressure_context": "L11", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_092_11a", "text": "Take credit.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_092_12"}, {"choice_id": "c_092_11b", "text": "Refuse credit.", "effects": {"Integrity": 1}, "flags_set": {}, "next_node": "n_092_12"}]},
+      {"node_id": "n_092_12", "text": "The terminal scans your face. Do you scan?", "pressure_context": "L12", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_092_12a", "text": "Scan face.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_092_13"}, {"choice_id": "c_092_12b", "text": "Refuse scan.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_092_13"}]},
+      {"node_id": "n_092_13", "text": "The code requires a key. Do you input key A?", "pressure_context": "L13", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_092_13a", "text": "Input key A.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_092_14"}, {"choice_id": "c_092_13b", "text": "Input key B.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_092_14"}]},
+      {"node_id": "n_092_14", "text": "The door is open. Do you step outside?", "pressure_context": "L14", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_092_14a", "text": "Step outside.", "effects": {"Courage": 1}, "flags_set": {}, "next_node": "n_092_15"}, {"choice_id": "c_092_14b", "text": "Stay inside.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_092_15"}]},
+      {"node_id": "n_092_15", "text": "The final screen is active. You have reached Layer 15. The predictor asks: 'Was this your choice or did you act out your destiny?'", "pressure_context": "L15", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_092_15a", "text": "I chose my path.", "effects": {"Independence": 3}, "flags_set": {}, "ending_id": "end_092_defiant"}, {"choice_id": "c_092_15b", "text": "I followed destiny.", "effects": {"Stoicism": 3}, "flags_set": {}, "ending_id": "end_092_fatalist"}]}
+    ],
+    "endings": [
+      {"ending_id": "end_092_defiant", "summary": "You completed the 15-layer chain, asserting your autonomy at every decision step.", "dominant_traits": ["Autonomous", "Determined"], "behavioral_analysis": "Highly self-determined, refusing to let predictive labels guide your steps."},
+      {"ending_id": "end_092_fatalist", "summary": "You accepted your script, completing the chain under structural fatalism.", "dominant_traits": ["Stoic", "Fatalistic"], "behavioral_analysis": "Finds alignment and peace within predetermined structures."}
+    ]
+  },
+  {
+    "scenario_id": "sc_093",
+    "title": "The Fermi Silence",
+    "core_conflict": "Isolation vs Contact",
+    "pressure_type": "Isolation",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Cosmic, silent",
+    "escalation_type": "15-layer chain",
+    "is_long": true,
+    "nodes": [
+      {"node_id": "n_093_1", "text": "A deep-space receiver picks up a faint signal. It might be a cosmic anomaly, or the first proof of alien life. Decrypting it will consume 20% of your colony's research grid. Do you scan it?", "pressure_context": "L1", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_093_1a", "text": "Scan signal.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_093_2"}, {"choice_id": "c_093_1b", "text": "Ignore signal.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_093_2"}]},
+      {"node_id": "n_093_2", "text": "A warning states that scanning might expose our location to predators. Do you proceed?", "pressure_context": "L2", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_093_2a", "text": "Proceed.", "effects": {"Courage": 1}, "flags_set": {}, "next_node": "n_093_3"}, {"choice_id": "c_093_2b", "text": "Abort.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_093_3"}]},
+      {"node_id": "n_093_3", "text": "A second frequency aligns. Do you listen to it?", "pressure_context": "L3", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_093_3a", "text": "Listen.", "effects": {"Idealism": 1}, "flags_set": {}, "next_node": "n_093_4"}, {"choice_id": "c_093_3b", "text": "Ignore.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_093_4"}]},
+      {"node_id": "n_093_4", "text": "The data shows structured code. Do you decrypt it?", "pressure_context": "L4", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_093_4a", "text": "Decrypt.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_093_5"}, {"choice_id": "c_093_4b", "text": "Refuse.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_093_5"}]},
+      {"node_id": "n_093_5", "text": "A file indicates an ancient warning message. Do you open the text?", "pressure_context": "L5", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_093_5a", "text": "Open text.", "effects": {"Courage": 1}, "flags_set": {}, "next_node": "n_093_6"}, {"choice_id": "c_093_5b", "text": "Delete file.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_093_6"}]},
+      {"node_id": "n_093_6", "text": "The text says: 'Stay silent or they will find you.' Do you broadcast a greeting?", "pressure_context": "L6", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_093_6a", "text": "Broadcast greeting.", "effects": {"Idealism": 2}, "flags_set": {}, "next_node": "n_093_7"}, {"choice_id": "c_093_6b", "text": "Keep absolute silence.", "effects": {"Stoicism": 2}, "flags_set": {}, "next_node": "n_093_7"}]},
+      {"node_id": "n_093_7", "text": "A corporate agent asks to buy the signal files. Do you sell?", "pressure_context": "L7", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_093_7a", "text": "Sell files.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_093_8"}, {"choice_id": "c_093_7b", "text": "Refuse sale.", "effects": {"Integrity": 1}, "flags_set": {}, "next_node": "n_093_8"}]},
+      {"node_id": "n_093_8", "text": "Rebel operators attempt to hijack the link. Do you block them?", "pressure_context": "L8", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_093_8a", "text": "Block hijack.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_093_9"}, {"choice_id": "c_093_8b", "text": "Allow link.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_093_9"}]},
+      {"node_id": "n_093_9", "text": "A secondary receiver goes dead. Do you repair it?", "pressure_context": "L9", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_093_9a", "text": "Repair receiver.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_093_10"}, {"choice_id": "c_093_9b", "text": "Leave it dead.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_093_10"}]},
+      {"node_id": "n_093_10", "text": "The signal source coordinates are located. Do you dispatch a probe?", "pressure_context": "L10", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_093_10a", "text": "Dispatch probe.", "effects": {"Courage": 1}, "flags_set": {}, "next_node": "n_093_11"}, {"choice_id": "c_093_10b", "text": "Ignore coordinates.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_093_11"}]},
+      {"node_id": "n_093_11", "text": "The probe sends a video feed of a dead city. Do you show the colony?", "pressure_context": "L11", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_093_11a", "text": "Show feed.", "effects": {"Idealism": 1}, "flags_set": {}, "next_node": "n_093_12"}, {"choice_id": "c_093_11b", "text": "Hide feed.", "effects": {"Diplomacy": 1}, "flags_set": {}, "next_node": "n_093_12"}]},
+      {"node_id": "n_093_12", "text": "The board requests to archive the probe logs. Do you agree?", "pressure_context": "L12", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_093_12a", "text": "Archive logs.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_093_13"}, {"choice_id": "c_093_12b", "text": "Publish files.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_093_13"}]},
+      {"node_id": "n_093_13", "text": "A signature suggests the dead city was human. Do you investigate?", "pressure_context": "L13", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_093_13a", "text": "Investigate.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_093_14"}, {"choice_id": "c_093_13b", "text": "Refuse investigation.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_093_14"}]},
+      {"node_id": "n_093_14", "text": "The final logs are complete. Do you shut down the array?", "pressure_context": "L14", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_093_14a", "text": "Shut down array.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_093_15"}, {"choice_id": "c_093_14b", "text": "Keep array active.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_093_15"}]},
+      {"node_id": "n_093_15", "text": "The project is over. A final transmission arrives: 'Do you choose to face the silent universe, or do you seek to break the silence?'", "pressure_context": "L15", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_093_15a", "text": "Break the silence.", "effects": {"Idealism": 3}, "flags_set": {}, "ending_id": "end_093_contact"}, {"choice_id": "c_093_15b", "text": "Maintain the silence.", "effects": {"Stoicism": 3}, "flags_set": {}, "ending_id": "end_093_isolated"}]}
+    ],
+    "endings": [
+      {"ending_id": "end_093_contact", "summary": "You chose to reach out and broadcast our presence, seeking contact in a silent universe.", "dominant_traits": ["Idealistic", "Courageous"], "behavioral_analysis": "Prioritizes cosmic connection and search for meaning above safety protocols."},
+      {"ending_id": "end_093_isolated", "summary": "You chose to maintain absolute silence, protecting the colony from potential cosmic threats.", "dominant_traits": ["Stoic", "Cautious"], "behavioral_analysis": "Prioritizes self-preservation and systemic protection, rejecting unverified signals."}
+    ]
+  },
+  {
+    "scenario_id": "sc_094",
+    "title": "The Typist Monkey",
+    "core_conflict": "Meaning vs Probability",
+    "pressure_type": "Chance",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Clinical, dry",
+    "escalation_type": "15-layer chain",
+    "is_long": true,
+    "nodes": [
+      {"node_id": "n_094_1", "text": "An automated console generates random characters. Given infinite time, it will generate a perfect copy of all historical literature. It has just generated the first 3 lines of Hamlet. Do you authorize continued runtime?", "pressure_context": "L1", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_094_1a", "text": "Continue runtime.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_094_2"}, {"choice_id": "c_094_1b", "text": "Shut down system.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_094_2"}]},
+      {"node_id": "n_094_2", "text": "The power consumption is high. Do you keep running?", "pressure_context": "L2", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_094_2a", "text": "Keep running.", "effects": {"Idealism": 1}, "flags_set": {}, "next_node": "n_094_3"}, {"choice_id": "c_094_2b", "text": "Abort.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_094_3"}]},
+      {"node_id": "n_094_3", "text": "The next page is nonsense text. Do you delete it?", "pressure_context": "L3", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_094_3a", "text": "Delete it.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_094_4"}, {"choice_id": "c_094_3b", "text": "Keep it.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_094_4"}]},
+      {"node_id": "n_094_4", "text": "A clerk offers to filter out the nonsense text for a fee. Do you agree?", "pressure_context": "L4", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_094_4a", "text": "Filter text.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_094_5"}, {"choice_id": "c_094_4b", "text": "Refuse filter.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_094_5"}]},
+      {"node_id": "n_094_5", "text": "The filter reveals a personal message. Do you read it?", "pressure_context": "L5", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_094_5a", "text": "Read message.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_094_6"}, {"choice_id": "c_094_5b", "text": "Ignore it.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_094_6"}]},
+      {"node_id": "n_094_6", "text": "The message details a system collapse date. Do you report it?", "pressure_context": "L6", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_094_6a", "text": "Report it.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_094_7"}, {"choice_id": "c_094_6b", "text": "Keep secret.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_094_7"}]},
+      {"node_id": "n_094_7", "text": "The team believes the message is just statistical noise. Do you argue?", "pressure_context": "L7", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_094_7a", "text": "Argue.", "effects": {"Courage": 1}, "flags_set": {}, "next_node": "n_094_8"}, {"choice_id": "c_094_7b", "text": "Yield.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_094_8"}]},
+      {"node_id": "n_094_8", "text": "A new module promises faster generation. Do you install?", "pressure_context": "L8", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_094_8a", "text": "Install.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_094_9"}, {"choice_id": "c_094_8b", "text": "Refuse.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_094_9"}]},
+      {"node_id": "n_094_9", "text": "The system begins to generate files rapidly. Do you throttle it?", "pressure_context": "L9", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_094_9a", "text": "Throttle.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_094_10"}, {"choice_id": "c_094_9b", "text": "Let it run.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_094_10"}]},
+      {"node_id": "n_094_10", "text": "The memory bank is full. Do you expand storage?", "pressure_context": "L10", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_094_10a", "text": "Expand.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_094_11"}, {"choice_id": "c_094_10b", "text": "Limit storage.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_094_11"}]},
+      {"node_id": "n_094_11", "text": "A code pattern matches the bible code. Do you examine?", "pressure_context": "L11", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_094_11a", "text": "Examine.", "effects": {"Idealism": 1}, "flags_set": {}, "next_node": "n_094_12"}, {"choice_id": "c_094_11b", "text": "Ignore.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_094_12"}]},
+      {"node_id": "n_094_12", "text": "The system output is certified as nonsense. Do you archive it?", "pressure_context": "L12", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_094_12a", "text": "Archive.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_094_13"}, {"choice_id": "c_094_12b", "text": "Delete.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_094_13"}]},
+      {"node_id": "n_094_13", "text": "A technician claims they found a cheat code. Do you use it?", "pressure_context": "L13", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_094_13a", "text": "Use code.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_094_14"}, {"choice_id": "c_094_13b", "text": "Refuse code.", "effects": {"Integrity": 1}, "flags_set": {}, "next_node": "n_094_14"}]},
+      {"node_id": "n_094_14", "text": "The project is closing. Do you write a summary report?", "pressure_context": "L14", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_094_14a", "text": "Write report.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_094_15"}, {"choice_id": "c_094_14b", "text": "Skip report.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_094_15"}]},
+      {"node_id": "n_094_15", "text": "The session concludes. A counselor asks: 'Does the generation of text prove intention, or does meaning only exist in the observer's mind?'", "pressure_context": "L15", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_094_15a", "text": "Meaning is objective.", "effects": {"Idealism": 3}, "flags_set": {}, "ending_id": "end_094_realist"}, {"choice_id": "c_094_15b", "text": "Meaning is subjective.", "effects": {"Rationality": 3}, "flags_set": {}, "ending_id": "end_094_nominalist"}]}
+    ],
+    "endings": [
+      {"ending_id": "end_094_realist", "summary": "You defended the idea that meaning exists in structural code, regardless of probability patterns.", "dominant_traits": ["Idealistic", "Analytical"], "behavioral_analysis": "Believes in objective semantics and patterns within chaotic data pools."},
+      {"ending_id": "end_094_nominalist", "summary": "You asserted that meaning is merely a human construct projected onto random mathematical noise.", "dominant_traits": ["Rational", "Skeptical"], "behavioral_analysis": "Recognizes random variance, refusing to assign purpose to statistical chance."}
+    ]
+  },
+  {
+    "scenario_id": "sc_095",
+    "title": "The Replication Goo",
+    "core_conflict": "Security vs Research",
+    "pressure_type": "Technology",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Paranoid, cold",
+    "escalation_type": "15-layer chain",
+    "is_long": true,
+    "nodes": [
+      {"node_id": "n_095_1", "text": "A self-replicating nanotech material (grey goo) is isolated in a secure vault. It converts organic material into processors. A researcher wants to activate it for a test run. Do you authorize?", "pressure_context": "L1", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_095_1a", "text": "Authorize test.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_095_2"}, {"choice_id": "c_095_1b", "text": "Refuse test.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_095_2"}]},
+      {"node_id": "n_095_2", "text": "The temp inside the vault starts to climb. Do you vent coolant?", "pressure_context": "L2", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_095_2a", "text": "Vent coolant.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_095_3"}, {"choice_id": "c_095_2b", "text": "Keep vault closed.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_095_3"}]},
+      {"node_id": "n_095_3", "text": "A minor seal leak is reported in sector 3. Do you deploy drones?", "pressure_context": "L3", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_095_3a", "text": "Deploy drones.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_095_4"}, {"choice_id": "c_095_3b", "text": "Seal sector manually.", "effects": {"Courage": 1}, "flags_set": {}, "next_node": "n_095_4"}]},
+      {"node_id": "n_095_4", "text": "The drones are consumed by the material. Do you launch fire suppressants?", "pressure_context": "L4", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_095_4a", "text": "Launch suppressants.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_095_5"}, {"choice_id": "c_095_4b", "text": "Wait for telemetry.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_095_5"}]},
+      {"node_id": "n_095_5", "text": "A corporate rep offers a high-grade seal patch. Do you sign their contract?", "pressure_context": "L5", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_095_5a", "text": "Sign contract.", "effects": {"Pragmatism": 3, "Independence": -3}, "flags_set": {}, "next_node": "n_095_6"}, {"choice_id": "c_095_5b", "text": "Refuse contract.", "effects": {"Independence": 3, "Pragmatism": -2}, "flags_set": {}, "next_node": "n_095_6"}]},
+      {"node_id": "n_095_6", "text": "The seal holds temporarily. The team wants to run a diagnostic. Do you agree?", "pressure_context": "L6", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_095_6a", "text": "Run diagnostic.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_095_7"}, {"choice_id": "c_095_6b", "text": "Skip diagnostic.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_095_7"}]},
+      {"node_id": "n_095_7", "text": "The sensor grid shows anomalous readings in Sector 4. Do you isolate Sector 4?", "pressure_context": "L7", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_095_7a", "text": "Isolate Sector 4.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_095_8"}, {"choice_id": "c_095_7b", "text": "Leave it open.", "effects": {"Compassion": 1}, "flags_set": {}, "next_node": "n_095_8"}]},
+      {"node_id": "n_095_8", "text": "A technician is trapped inside. Do you vent the room with nitrogen?", "pressure_context": "L8", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_095_8a", "text": "Vent room (saves tech, kills samples).", "effects": {"Compassion": 3, "Pragmatism": -2}, "flags_set": {}, "next_node": "n_095_9"}, {"choice_id": "c_095_8b", "text": "Keep room sealed.", "effects": {"Pragmatism": 3, "Compassion": -4}, "flags_set": {}, "next_node": "n_095_9"}]},
+      {"node_id": "n_095_9", "text": "The technician is safe or dead. A backup power warning blinks. Do you bypass?", "pressure_context": "L9", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_095_9a", "text": "Bypass power.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_095_10"}, {"choice_id": "c_095_9b", "text": "Refuse bypass.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_095_10"}]},
+      {"node_id": "n_095_10", "text": "The main core is stable. The team wants to export the test files. Do you allow?", "pressure_context": "L10", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_095_10a", "text": "Allow export.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_095_11"}, {"choice_id": "c_095_10b", "text": "Deny export.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_095_11"}]},
+      {"node_id": "n_095_11", "text": "The files show nanotech self-assembly patterns. Do you encrypt them?", "pressure_context": "L11", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_095_11a", "text": "Encrypt.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_095_12"}, {"choice_id": "c_095_11b", "text": "Publish.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_095_12"}]},
+      {"node_id": "n_095_12", "text": "The board requests to terminate the research project. Do you comply?", "pressure_context": "L12", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_095_12a", "text": "Comply.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_095_13"}, {"choice_id": "c_095_12b", "text": "Refuse.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_095_13"}]},
+      {"node_id": "n_095_13", "text": "A code trace indicates corporate espionage. Do you report it?", "pressure_context": "L13", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_095_13a", "text": "Report it.", "effects": {"Integrity": 1}, "flags_set": {}, "next_node": "n_095_14"}, {"choice_id": "c_095_13b", "text": "Keep secret.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_095_14"}]},
+      {"node_id": "n_095_14", "text": "The clean-up crew is ready. Do you sign their clearance?", "pressure_context": "L14", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_095_14a", "text": "Sign clearance.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_095_15"}, {"choice_id": "c_095_14b", "text": "Refuse signature.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_095_15"}]},
+      {"node_id": "n_095_15", "text": "The vault is clean. The project is over. A final prompt logs: 'Is the risk of technological collapse worth the pursuit of knowledge?'", "pressure_context": "L15", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_095_15a", "text": "Yes, research must proceed.", "effects": {"Idealism": 3}, "flags_set": {}, "ending_id": "end_095_researcher"}, {"choice_id": "c_095_15b", "text": "No, security is paramount.", "effects": {"Stoicism": 3}, "flags_set": {}, "ending_id": "end_095_cautious"}]}
+    ],
+    "endings": [
+      {"ending_id": "end_095_researcher", "summary": "You defended technological research, accepting the risk of grey goo replication for science.", "dominant_traits": ["Idealistic", "Risk-tolerant"], "behavioral_analysis": "Prioritizes progress and scientific discovery above risk containment."},
+      {"ending_id": "end_095_cautious", "summary": "You enforced safety and containment, choosing to terminate the research to protect the facility.", "dominant_traits": ["Cautious", "Stoic"], "behavioral_analysis": "Prioritizes risk mitigation and safety protocols above scientific exploration."}
+    ]
+  },
+  {
+    "scenario_id": "sc_096",
+    "title": "The Simulation Glitch",
+    "core_conflict": "Reality vs Illusion",
+    "pressure_type": "Reality",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Eerie, quiet",
+    "escalation_type": "15-layer chain",
+    "is_long": true,
+    "nodes": [
+      {"node_id": "n_096_1", "text": "You detect a coding glitch in your visual telemetry—a repeating pattern in the sky texture. This indicates you are inside a simulation. Do you upload a patch to hide the glitch from yourself?", "pressure_context": "L1", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_096_1a", "text": "Upload patch.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_096_2"}, {"choice_id": "c_096_1b", "text": "Examine glitch.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_096_2"}]},
+      {"node_id": "n_096_2", "text": "A warning system logs your anomaly search. Do you halt search?", "pressure_context": "L2", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_096_2a", "text": "Halt search.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_096_3"}, {"choice_id": "c_096_2b", "text": "Continue search.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_096_3"}]},
+      {"node_id": "n_096_3", "text": "A technician offers to show you the simulation source code. Do you look?", "pressure_context": "L3", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_096_3a", "text": "Look at code.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_096_4"}, {"choice_id": "c_096_3b", "text": "Refuse.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_096_4"}]},
+      {"node_id": "n_096_4", "text": "The code shows your memories are scripted files. Do you delete the script?", "pressure_context": "L4", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_096_4a", "text": "Delete script.", "effects": {"Independence": 2}, "flags_set": {}, "next_node": "n_096_5"}, {"choice_id": "c_096_4b", "text": "Keep script.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_096_5"}]},
+      {"node_id": "n_096_5", "text": "The simulation frame rate drops. Do you reboot local sectors?", "pressure_context": "L5", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_096_5a", "text": "Reboot sectors.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_096_6"}, {"choice_id": "c_096_5b", "text": "Wait for crash.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_096_6"}]},
+      {"node_id": "n_096_6", "text": "The system admin offers to restore your memory of real life. Do you agree?", "pressure_context": "L6", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_096_6a", "text": "Agree to restore.", "effects": {"Idealism": 1}, "flags_set": {}, "next_node": "n_096_7"}, {"choice_id": "c_096_6b", "text": "Refuse restore.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_096_7"}]},
+      {"node_id": "n_096_7", "text": "A file reveals your real body is in a life-support pod. Do you wake up?", "pressure_context": "L7", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_096_7a", "text": "Wake up.", "effects": {"Courage": 2}, "flags_set": {}, "next_node": "n_096_8"}, {"choice_id": "c_096_7b", "text": "Stay in pod.", "effects": {"Pragmatism": 2}, "flags_set": {}, "next_node": "n_096_8"}]},
+      {"node_id": "n_096_8", "text": "The wake sequence is slow. Do you bypass safety grids?", "pressure_context": "L8", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_096_8a", "text": "Bypass safety.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_096_9"}, {"choice_id": "c_096_8b", "text": "Wait for timers.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_096_9"}]},
+      {"node_id": "n_096_9", "text": "The pod coolant is leaking. Do you repair it?", "pressure_context": "L9", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_096_9a", "text": "Repair coolant.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_096_10"}, {"choice_id": "c_096_9b", "text": "Ignore leak.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_096_10"}]},
+      {"node_id": "n_096_10", "text": "A corporate agent demands your signature on a profile form. Do you sign?", "pressure_context": "L10", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_096_10a", "text": "Sign form.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_096_11"}, {"choice_id": "c_096_10b", "text": "Refuse form.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_096_11"}]},
+      {"node_id": "n_096_11", "text": "The signature screen clears. Do you review the code trace?", "pressure_context": "L11", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_096_11a", "text": "Review trace.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_096_12"}, {"choice_id": "c_096_11b", "text": "Ignore trace.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_096_12"}]},
+      {"node_id": "n_096_12", "text": "The trace reveals the simulation creator is a future version of you. Do you contact them?", "pressure_context": "L12", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_096_12a", "text": "Contact creator.", "effects": {"Idealism": 1}, "flags_set": {}, "next_node": "n_096_13"}, {"choice_id": "c_096_12b", "text": "Refuse contact.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_096_13"}]},
+      {"node_id": "n_096_13", "text": "The creator says the simulation is all that keeps you sane. Do you trust them?", "pressure_context": "L13", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_096_13a", "text": "Trust creator.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_096_14"}, {"choice_id": "c_096_13b", "text": "Defy creator.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_096_14"}]},
+      {"node_id": "n_096_14", "text": "The final shutdown sequence is loaded. Do you execute it?", "pressure_context": "L14", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_096_14a", "text": "Execute shutdown.", "effects": {"Courage": 2}, "flags_set": {}, "next_node": "n_096_15"}, {"choice_id": "c_096_14b", "text": "Abort sequence.", "effects": {"Pragmatism": 2}, "flags_set": {}, "next_node": "n_096_15"}]},
+      {"node_id": "n_096_15", "text": "The screen goes dark. A final prompt appears: 'Do you believe that reality is defined by what is objective, or by what we experience?'", "pressure_context": "L15", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_096_15a", "text": "Reality is objective.", "effects": {"Rationality": 3}, "flags_set": {}, "ending_id": "end_096_realist"}, {"choice_id": "c_096_15b", "text": "Reality is experience.", "effects": {"Idealism": 3}, "flags_set": {}, "ending_id": "end_096_experience"}]}
+    ],
+    "endings": [
+      {"ending_id": "end_096_realist", "summary": "You chose to escape the simulation, preferring harsh objective reality to peaceful virtual bliss.", "dominant_traits": ["Rational", "Courageous"], "behavioral_analysis": "Prioritizes objective truth and material reality above internal neural comfort."},
+      {"ending_id": "end_096_experience", "summary": "You chose to remain in the simulation, accepting the virtual experience as your true home.", "dominant_traits": ["Pragmatic", "Stoic"], "behavioral_analysis": "Values subjective well-being and structural peace over objective verification."}
+    ]
+  },
+  {
+    "scenario_id": "sc_097",
+    "title": "The Beam Teleporter",
+    "core_conflict": "Identity vs Continuity",
+    "pressure_type": "Identity",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Clinical, solemn",
+    "escalation_type": "15-layer chain",
+    "is_long": true,
+    "nodes": [
+      {"node_id": "n_097_1", "text": "A teleporter scans your body, destroys it, and builds a perfect replica at the target location. The scan is 100% accurate. You are about to step in. Do you believe you will survive, or does it just create an identical copy that thinks it is you?", "pressure_context": "L1", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_097_1a", "text": "Step into the teleporter.", "effects": {"Pragmatism": 3}, "flags_set": {}, "next_node": "n_097_2"}, {"choice_id": "c_097_1b", "text": "Refuse. Use the slower transit shuttle.", "effects": {"Idealism": 3}, "flags_set": {}, "next_node": "n_097_2"}]},
+      {"node_id": "n_097_2", "text": "A technician warns that a scanner calibration error occurred. Do you proceed?", "pressure_context": "L2", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_097_2a", "text": "Proceed.", "effects": {"Courage": 1}, "flags_set": {}, "next_node": "n_097_3"}, {"choice_id": "c_097_2b", "text": "Abort.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_097_3"}]},
+      {"node_id": "n_097_3", "text": "The target pad is active. Do you authorize the assembly?", "pressure_context": "L3", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_097_3a", "text": "Authorize.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_097_4"}, {"choice_id": "c_097_3b", "text": "Hold assembly.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_097_4"}]},
+      {"node_id": "n_097_4", "text": "The replica is created, but the original scanner failed to destroy your body. You both exist. Do you authorize the deletion of your original body?", "pressure_context": "L4", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_097_4a", "text": "Authorize deletion of original body.", "effects": {"Pragmatism": 4, "Compassion": -4}, "flags_set": {}, "next_node": "n_097_5"}, {"choice_id": "c_097_4b", "text": "Refuse deletion. Keep both bodies.", "effects": {"Idealism": 4, "Compassion": 3}, "flags_set": {}, "next_node": "n_097_5"}]},
+      {"node_id": "n_097_5", "text": "The security team blockades the lab. Do you fight their drones?", "pressure_context": "L5", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_097_5a", "text": "Fight drones.", "effects": {"Courage": 3}, "flags_set": {}, "next_node": "n_097_6"}, {"choice_id": "c_097_5b", "text": "Surrender.", "effects": {"Stoicism": 2}, "flags_set": {}, "next_node": "n_097_6"}]},
+      {"node_id": "n_097_6", "text": "The team holds a council meeting. Do you compromise?", "pressure_context": "L6", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_097_6a", "text": "Compromise.", "effects": {"Diplomacy": 2}, "flags_set": {}, "next_node": "n_097_7"}, {"choice_id": "c_097_6b", "text": "Refuse compromise.", "effects": {"Independence": 2}, "flags_set": {}, "next_node": "n_097_7"}]},
+      {"node_id": "n_097_7", "text": "A corporate rep offers a credit settlement. Do you accept?", "pressure_context": "L7", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_097_7a", "text": "Accept settlement.", "effects": {"Pragmatism": 3}, "flags_set": {}, "next_node": "n_097_8"}, {"choice_id": "c_097_7b", "text": "Refuse.", "effects": {"Independence": 3}, "flags_set": {}, "next_node": "n_097_8"}]},
+      {"node_id": "n_097_8", "text": "The replica demands access to your bank accounts. Do you transfer?", "pressure_context": "L8", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_097_8a", "text": "Transfer half.", "effects": {"Compassion": 3}, "flags_set": {}, "next_node": "n_097_9"}, {"choice_id": "c_097_8b", "text": "Refuse transfer.", "effects": {"Pragmatism": 3}, "flags_set": {}, "next_node": "n_097_9"}]},
+      {"node_id": "n_097_9", "text": "The replication unit is closed. Do you audit the system?", "pressure_context": "L9", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_097_9a", "text": "Audit system.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_097_10"}, {"choice_id": "c_097_9b", "text": "Skip audit.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_097_10"}]},
+      {"node_id": "n_097_10", "text": "A code trace matches your brainwaves. Do you archive it?", "pressure_context": "L10", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_097_10a", "text": "Archive profile.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_097_11"}, {"choice_id": "c_097_10b", "text": "Delete profile.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_097_11"}]},
+      {"node_id": "n_097_11", "text": "The scanner requires recalibration. Do you pay fee?", "pressure_context": "L11", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_097_11a", "text": "Pay fee.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_097_12"}, {"choice_id": "c_097_11b", "text": "Refuse fee.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_097_12"}]},
+      {"node_id": "n_097_12", "text": "A replica is certified as the official owner. Do you challenge?", "pressure_context": "L12", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_097_12a", "text": "Challenge in court.", "effects": {"Independence": 3}, "flags_set": {}, "next_node": "n_097_13"}, {"choice_id": "c_097_12b", "text": "Accept court decision.", "effects": {"Obedience": 3}, "flags_set": {}, "next_node": "n_097_13"}]},
+      {"node_id": "n_097_13", "text": "A technician offers to reset the profiles. Do you execute?", "pressure_context": "L13", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_097_13a", "text": "Execute reset.", "effects": {"Pragmatism": 2}, "flags_set": {}, "next_node": "n_097_14"}, {"choice_id": "c_097_13b", "text": "Refuse reset.", "effects": {"Stoicism": 2}, "flags_set": {}, "next_node": "n_097_14"}]},
+      {"node_id": "n_097_14", "text": "The platform core is stable. Do you step off the pad?", "pressure_context": "L14", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_097_14a", "text": "Step off pad.", "effects": {"Stoicism": 2}, "flags_set": {}, "next_node": "n_097_15"}, {"choice_id": "c_097_14b", "text": "Wait for scan log.", "effects": {"Rationality": 2}, "flags_set": {}, "next_node": "n_097_15"}]},
+      {"node_id": "n_097_15", "text": "The session concludes. A counselor asks: 'Is identity defined by physical continuity, or is a perfect data copy of you still you?'", "pressure_context": "L15", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_097_15a", "text": "Identity requires physical continuity.", "effects": {"Idealism": 3}, "flags_set": {}, "ending_id": "end_097_realist"}, {"choice_id": "c_097_15b", "text": "Identity is just informational pattern.", "effects": {"Rationality": 3}, "flags_set": {}, "ending_id": "end_097_nominalist"}]}
+    ],
+    "endings": [
+      {"ending_id": "end_097_realist", "summary": "You defended physical continuity, refusing to treat your replica as the owner of your identity.", "dominant_traits": ["Idealistic", "Principled"], "behavioral_analysis": "Believes in the unique, physical nature of the self, rejecting informational duplication."},
+      {"ending_id": "end_097_nominalist", "summary": "You accepted that you are an informational pattern, letting the replica continue your life path.", "dominant_traits": ["Rational", "Pragmatic"], "behavioral_analysis": "Operates on functional metrics of identity, treating consciousness as data."}
+    ]
+  },
+  {
+    "scenario_id": "sc_098",
+    "title": "The Pleasure Chase",
+    "core_conflict": "Satisfaction vs Pursuit",
+    "pressure_type": "Happiness",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Clinical, sterile",
+    "escalation_type": "15-layer chain",
+    "is_long": true,
+    "nodes": [
+      {"node_id": "n_098_1", "text": "A neural implant offers to adjust your baseline satisfaction, keeping you permanently content. However, this eliminates the drive to compete and improve. Do you take the implant?",
+      "pressure_context": "L1", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_098_1a", "text": "Take the implant.", "effects": {"Pragmatism": 3, "Independence": -3}, "flags_set": {}, "next_node": "n_098_2"}, {"choice_id": "c_098_1b", "text": "Refuse the implant. Retain the struggle.", "effects": {"Independence": 3, "Pragmatism": -2}, "flags_set": {}, "next_node": "n_098_2"}]},
+      {"node_id": "n_098_2", "text": "The manager offers a second, weaker calibration. Do you accept?", "pressure_context": "L2", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_098_2a", "text": "Accept calibration.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_098_3"}, {"choice_id": "c_098_2b", "text": "Refuse.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_098_3"}]},
+      {"node_id": "n_098_3", "text": "A survey asks to record your happiness logs. Do you consent?", "pressure_context": "L3", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_098_3a", "text": "Consent.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_098_4"}, {"choice_id": "c_098_3b", "text": "Refuse.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_098_4"}]},
+      {"node_id": "n_098_4", "text": "A colleague suggests the logs are sold to advertisers. Do you audit?", "pressure_context": "L4", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_098_4a", "text": "Audit logs.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_098_5"}, {"choice_id": "c_098_4b", "text": "Skip audit.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_098_5"}]},
+      {"node_id": "n_098_5", "text": "The audit is blocked by security. Do you push through?", "pressure_context": "L5", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_098_5a", "text": "Push through.", "effects": {"Courage": 1}, "flags_set": {}, "next_node": "n_098_6"}, {"choice_id": "c_098_5b", "text": "Yield.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_098_6"}]},
+      {"node_id": "n_098_6", "text": "A corporate developer offers a flat cash payment to drop the case. Do you accept?", "pressure_context": "L6", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_098_6a", "text": "Accept cash.", "effects": {"Pragmatism": 3, "Integrity": -3}, "flags_set": {}, "next_node": "n_098_7"}, {"choice_id": "c_098_6b", "text": "Refuse cash.", "effects": {"Integrity": 3, "Pragmatism": -2}, "flags_set": {}, "next_node": "n_098_7"}]},
+      {"node_id": "n_098_7", "text": "A news agency requests the data leaks. Do you send them?", "pressure_context": "L7", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_098_7a", "text": "Send leaks.", "effects": {"Independence": 3}, "flags_set": {}, "next_node": "n_098_8"}, {"choice_id": "c_098_7b", "text": "Ignore request.", "effects": {"Pragmatism": 3}, "flags_set": {}, "next_node": "n_098_8"}]},
+      {"node_id": "n_098_8", "text": "A court orders your file sealed. Do you comply?", "pressure_context": "L8", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_098_8a", "text": "Comply with court.", "effects": {"Obedience": 3}, "flags_set": {}, "next_node": "n_098_9"}, {"choice_id": "c_098_8b", "text": "Refuse compliance.", "effects": {"Independence": 3}, "flags_set": {}, "next_node": "n_098_9"}]},
+      {"node_id": "n_098_9", "text": "The department moves to another sector. Do you transfer?", "pressure_context": "L9", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_098_9a", "text": "Transfer.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_098_10"}, {"choice_id": "c_098_9b", "text": "Resign.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_098_10"}]},
+      {"node_id": "n_098_10", "text": "A new manager is assigned. Do you introduce yourself?", "pressure_context": "L10", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_098_10a", "text": "Introduce.", "effects": {"Diplomacy": 1}, "flags_set": {}, "next_node": "n_098_11"}, {"choice_id": "c_098_10b", "text": "Keep distance.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_098_11"}]},
+      {"node_id": "n_098_11", "text": "The manager offers a promotion for your silence. Do you accept?", "pressure_context": "L11", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_098_11a", "text": "Accept promotion.", "effects": {"Pragmatism": 3, "Integrity": -2}, "flags_set": {}, "next_node": "n_098_12"}, {"choice_id": "c_098_11b", "text": "Refuse promotion.", "effects": {"Integrity": 3}, "flags_set": {}, "next_node": "n_098_12"}]},
+      {"node_id": "n_098_12", "text": "A diagnostic shows you are highly stressed. Do you take sedative?", "pressure_context": "L12", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_098_12a", "text": "Take sedative.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_098_13"}, {"choice_id": "c_098_12b", "text": "Refuse sedative.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_098_13"}]},
+      {"node_id": "n_098_13", "text": "A clerk wants to review the logs. Do you show them?", "pressure_context": "L13", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_098_13a", "text": "Show logs.", "effects": {"Diplomacy": 1}, "flags_set": {}, "next_node": "n_098_14"}, {"choice_id": "c_098_13b", "text": "Refuse logs.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_098_14"}]},
+      {"node_id": "n_098_14", "text": "The exit gate is ready. Do you sign off?", "pressure_context": "L14", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_098_14a", "text": "Sign off.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_098_15"}, {"choice_id": "c_098_14b", "text": "Skip signature.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_098_15"}]},
+      {"node_id": "n_098_15", "text": "The session concludes. The examiner asks: 'Is happiness the ultimate goal of human behavior, or is the pursuit itself what gives us purpose?'", "pressure_context": "L15", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_098_15a", "text": "Happiness is the ultimate goal.", "effects": {"Pragmatism": 3}, "flags_set": {}, "ending_id": "end_098_hedonist"}, {"choice_id": "c_098_15b", "text": "The pursuit is what gives purpose.", "effects": {"Idealism": 3}, "flags_set": {}, "ending_id": "end_098_seeker"}]}
+    ],
+    "endings": [
+      {"ending_id": "end_098_hedonist", "summary": "You prioritized baseline satisfaction and structural peace, choosing to accept the content calibration.", "dominant_traits": ["Pragmatic", "Content"], "behavioral_analysis": "Seeks psychological stability and comfort, minimizing cognitive or emotional struggle."},
+      {"ending_id": "end_098_seeker", "summary": "You rejected the content calibration, choosing to maintain the search and active pursuit of purpose.", "dominant_traits": ["Idealistic", "Seeker"], "behavioral_analysis": "Prioritizes struggle and dynamic search over comfortable, static baseline satisfaction."}
+    ]
+  },
+  {
+    "scenario_id": "sc_099",
+    "title": "The Grandfather Loop",
+    "core_conflict": "Destiny vs Causality",
+    "pressure_type": "Time",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Sterile, tense",
+    "escalation_type": "15-layer chain",
+    "is_long": true,
+    "nodes": [
+      {"node_id": "n_099_1", "text": "You travel back in time and accidentally prevent your grandfather from meeting your grandmother. This should prevent your birth, making your time travel impossible. The temporal engine warns of a paradox. Do you activate the correction array?", "pressure_context": "L1", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_099_1a", "text": "Activate array.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_099_2"}, {"choice_id": "c_099_1b", "text": "Do not activate.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_099_2"}]},
+      {"node_id": "n_099_2", "text": "A localized time distortion lock forms in the room. Do you vent temporal fields?", "pressure_context": "L2", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_099_2a", "text": "Vent fields.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_099_3"}, {"choice_id": "c_099_2b", "text": "Keep loop active.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_099_3"}]},
+      {"node_id": "n_099_3", "text": "A projection of your future self asks you to hand over your log files. Do you comply?", "pressure_context": "L3", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_099_3a", "text": "Comply.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_099_4"}, {"choice_id": "c_099_3b", "text": "Refuse.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_099_4"}]},
+      {"node_id": "n_099_4", "text": "The projection warns that a temporal collapse is imminent. Do you jump back?", "pressure_context": "L4", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_099_4a", "text": "Jump back.", "effects": {"Courage": 1}, "flags_set": {}, "next_node": "n_099_5"}, {"choice_id": "c_099_4b", "text": "Stay in sector.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_099_5"}]},
+      {"node_id": "n_099_5", "text": "A corporate rep offers a bypass code for 10 credits. Do you buy it?", "pressure_context": "L5", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_099_5a", "text": "Buy code.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_099_6"}, {"choice_id": "c_099_5b", "text": "Refuse code.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_099_6"}]},
+      {"node_id": "n_099_6", "text": "The code opens the secondary hatch. Do you step in?", "pressure_context": "L6", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_099_6a", "text": "Step in.", "effects": {"Courage": 1}, "flags_set": {}, "next_node": "n_099_7"}, {"choice_id": "c_099_6b", "text": "Wait.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_099_7"}]},
+      {"node_id": "n_099_7", "text": "A scan shows your grandfather is nearby in the timeline. Do you intercept him?", "pressure_context": "L7", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_099_7a", "text": "Intercept.", "effects": {"Idealism": 1}, "flags_set": {}, "next_node": "n_099_8"}, {"choice_id": "c_099_7b", "text": "Ignore.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_099_8"}]},
+      {"node_id": "n_099_8", "text": "The intercept fails, causing a split timeline. Do you merge them?", "pressure_context": "L8", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_099_8a", "text": "Merge timelines.", "effects": {"Pragmatism": 3}, "flags_set": {}, "next_node": "n_099_9"}, {"choice_id": "c_099_8b", "text": "Keep separate.", "effects": {"Independence": 3}, "flags_set": {}, "next_node": "n_099_9"}]},
+      {"node_id": "n_099_9", "text": "The engine requires a primary fuel conversion. Do you authorize?", "pressure_context": "L9", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_099_9a", "text": "Authorize.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_099_10"}, {"choice_id": "c_099_9b", "text": "Refuse.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_099_10"}]},
+      {"node_id": "n_099_10", "text": "A signature check fails on the registry. Do you bypass?", "pressure_context": "L10", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_099_10a", "text": "Bypass.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_099_11"}, {"choice_id": "c_099_10b", "text": "Refuse.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_099_11"}]},
+      {"node_id": "n_099_11", "text": "The system records your decision. Do you review the logs?", "pressure_context": "L11", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_099_11a", "text": "Review logs.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_099_12"}, {"choice_id": "c_099_11b", "text": "Ignore logs.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_099_12"}]},
+      {"node_id": "n_099_12", "text": "The board requests your presence in Sector 5. Do you go?", "pressure_context": "L12", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_099_12a", "text": "Go to Sector 5.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_099_13"}, {"choice_id": "c_099_12b", "text": "Stay here.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_099_13"}]},
+      {"node_id": "n_099_13", "text": "A technician offers a timeline shield. Do you buy it?", "pressure_context": "L13", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_099_13a", "text": "Buy shield.", "effects": {"Pragmatism": 2}, "flags_set": {}, "next_node": "n_099_14"}, {"choice_id": "c_099_13b", "text": "Refuse shield.", "effects": {"Stoicism": 2}, "flags_set": {}, "next_node": "n_099_14"}]},
+      {"node_id": "n_099_14", "text": "The engine has stabilized. Do you initiate return jump?", "pressure_context": "L14", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_099_14a", "text": "Initiate jump.", "effects": {"Pragmatism": 2}, "flags_set": {}, "next_node": "n_099_15"}, {"choice_id": "c_099_14b", "text": "Stay in past.", "effects": {"Idealism": 2}, "flags_set": {}, "next_node": "n_099_15"}]},
+      {"node_id": "n_099_15", "text": "You are back at your desk. The paradox is resolved, or your timeline is severed. A final screen blinks: 'Do you believe that causality can be broken, or is time an unbendable river?'", "pressure_context": "L15", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_099_15a", "text": "Causality can be broken.", "effects": {"Independence": 3}, "flags_set": {}, "ending_id": "end_099_breaker"}, {"choice_id": "c_099_15b", "text": "Time is an unbendable river.", "effects": {"Stoicism": 3}, "flags_set": {}, "ending_id": "end_099_determinist"}]}
+    ],
+    "endings": [
+      {"ending_id": "end_099_breaker", "summary": "You chose to believe in temporal intervention, accepting the paradox as a new state of possibility.", "dominant_traits": ["Autonomous", "Creative"], "behavioral_analysis": "Believes in causal plasticity and the capacity to change structural scripts."},
+      {"ending_id": "end_099_determinist", "summary": "You chose to believe in structural causality, finding security in the unbendable laws of time.", "dominant_traits": ["Stoic", "Fatalistic"], "behavioral_analysis": "Prefers deterministic order, accepting temporal loops as absolute parameters."}
+    ]
+  },
+  {
+    "scenario_id": "sc_100",
+    "title": "The Final Observer",
+    "core_conflict": "Observation vs Reality",
+    "pressure_type": "Observation",
+    "relationship_dynamic": "System to operator",
+    "stakes_type": "LONG",
+    "tone": "Quiet, clinical",
+    "escalation_type": "15-layer chain",
+    "is_long": true,
+    "nodes": [
+      {"node_id": "n_100_1", "text": "A steel chamber contains a radioactive isotope and a vial of poison gas. If the isotope decays, the vial breaks, killing a cat inside. Until you open the chamber and observe it, the cat exists in a superposition of both alive and dead. Do you open the chamber?", "pressure_context": "L1", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_100_1a", "text": "Open the chamber.", "effects": {"Rationality": 3}, "flags_set": {}, "next_node": "n_100_2"}, {"choice_id": "c_100_1b", "text": "Leave it closed.", "effects": {"Compassion": 3}, "flags_set": {}, "next_node": "n_100_2"}]},
+      {"node_id": "n_100_2", "text": "The detector hums. Do you record the data?", "pressure_context": "L2", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_100_2a", "text": "Record data.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_100_3"}, {"choice_id": "c_100_2b", "text": "Skip log.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_100_3"}]},
+      {"node_id": "n_100_3", "text": "A technician offers a sensor bypass code. Do you use it?", "pressure_context": "L3", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_100_3a", "text": "Use code.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_100_4"}, {"choice_id": "c_100_3b", "text": "Refuse code.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_100_4"}]},
+      {"node_id": "n_100_4", "text": "A file details the isotope's half-life. Do you read it?", "pressure_context": "L4", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_100_4a", "text": "Read file.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_100_5"}, {"choice_id": "c_100_4b", "text": "Ignore file.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_100_5"}]},
+      {"node_id": "n_100_5", "text": "The chamber is locked down by security. Do you override?", "pressure_context": "L5", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_100_5a", "text": "Override.", "effects": {"Courage": 1}, "flags_set": {}, "next_node": "n_100_6"}, {"choice_id": "c_100_5b", "text": "Yield.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_100_6"}]},
+      {"node_id": "n_100_6", "text": "The override displays a warning code. Do you parse it?", "pressure_context": "L6", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_100_6a", "text": "Parse code.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_100_7"}, {"choice_id": "c_100_6b", "text": "Skip parse.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_100_7"}]},
+      {"node_id": "n_100_7", "text": "The scanner reports a heart rate inside. Do you proceed?", "pressure_context": "L7", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_100_7a", "text": "Proceed.", "effects": {"Compassion": 2}, "flags_set": {}, "next_node": "n_100_8"}, {"choice_id": "c_100_7b", "text": "Abort.", "effects": {"Pragmatism": 2}, "flags_set": {}, "next_node": "n_100_8"}]},
+      {"node_id": "n_100_8", "text": "A corporate agent demands the telemetry data. Do you sell?", "pressure_context": "L8", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_100_8a", "text": "Sell telemetry.", "effects": {"Pragmatism": 3}, "flags_set": {}, "next_node": "n_100_9"}, {"choice_id": "c_100_8b", "text": "Refuse sale.", "effects": {"Independence": 3}, "flags_set": {}, "next_node": "n_100_9"}]},
+      {"node_id": "n_100_9", "text": "The manager requests a copy of the results. Do you print?", "pressure_context": "L9", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_100_9a", "text": "Print results.", "effects": {"Obedience": 1}, "flags_set": {}, "next_node": "n_100_10"}, {"choice_id": "c_100_9b", "text": "Skip print.", "effects": {"Independence": 1}, "flags_set": {}, "next_node": "n_100_10"}]},
+      {"node_id": "n_100_10", "text": "A system warning flashes: 'Isotope unstable.' Do you vent gas?", "pressure_context": "L10", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_100_10a", "text": "Vent gas.", "effects": {"Pragmatism": 1}, "flags_set": {}, "next_node": "n_100_11"}, {"choice_id": "c_100_10b", "text": "Do not vent.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_100_11"}]},
+      {"node_id": "n_100_11", "text": "The chamber is sealed. Do you calibrate sensors?", "pressure_context": "L11", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_100_11a", "text": "Calibrate.", "effects": {"Rationality": 1}, "flags_set": {}, "next_node": "n_100_12"}, {"choice_id": "c_100_11b", "text": "Skip calibration.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_100_12"}]},
+      {"node_id": "n_100_12", "text": "A colleague asks to check the logbooks. Do you show?", "pressure_context": "L12", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_100_12a", "text": "Show logs.", "effects": {"Diplomacy": 1}, "flags_set": {}, "next_node": "n_100_13"}, {"choice_id": "c_100_12b", "text": "Refuse logs.", "effects": {"Stoicism": 1}, "flags_set": {}, "next_node": "n_100_13"}]},
+      {"node_id": "n_100_13", "text": "The colleague points out a recording error. Do you correct it?", "pressure_context": "L13", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_100_13a", "text": "Correct error.", "effects": {"Integrity": 2}, "flags_set": {}, "next_node": "n_100_14"}, {"choice_id": "c_100_13b", "text": "Ignore error.", "effects": {"Pragmatism": 2}, "flags_set": {}, "next_node": "n_100_14"}]},
+      {"node_id": "n_100_14", "text": "The final latch release is ready. Do you pull the release?", "pressure_context": "L14", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_100_14a", "text": "Pull release.", "effects": {"Courage": 2}, "flags_set": {}, "next_node": "n_100_15"}, {"choice_id": "c_100_14b", "text": "Leave closed.", "effects": {"Stoicism": 2}, "flags_set": {}, "next_node": "n_100_15"}]},
+      {"node_id": "n_100_15", "text": "The lid slides open. You observe the chamber state. The evaluator asks: 'Does physical reality exist before it is observed, or does observation bring reality into being?'", "pressure_context": "L15", "visibility": "always", "required_flags": [], "choices": [{"choice_id": "c_100_15a", "text": "Reality is independent of observation.", "effects": {"Rationality": 3}, "flags_set": {}, "ending_id": "end_100_realist"}, {"choice_id": "c_100_15b", "text": "Observation creates reality.", "effects": {"Idealism": 3}, "flags_set": {}, "ending_id": "end_100_idealist"}]}
+    ],
+    "endings": [
+      {"ending_id": "end_100_realist", "summary": "You asserted that reality exists objectively, independent of human or systemic observation.", "dominant_traits": ["Rational", "Realistic"], "behavioral_analysis": "Guided by empirical and objective metrics, rejecting self-referential observation models."},
+      {"ending_id": "end_100_idealist", "summary": "You chose to believe that observation defines reality, accepting the superposition of outcomes until measured.", "dominant_traits": ["Idealistic", "Quantum-oriented"], "behavioral_analysis": "Tolerates ambiguity, viewing reality as a dynamic relation between system and observer."}
+    ]
+  }
+]

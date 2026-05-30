@@ -45,4 +45,5 @@ export interface Scenario {
   nodes: Node[];
   endings: Ending[];
   difficulty?: "MILD" | "INTENSE" | "BRUTAL";
+  is_long?: boolean;
 }

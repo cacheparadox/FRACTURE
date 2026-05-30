@@ -1584,22 +1584,45 @@
         ]
       },
       {
-        "node_id": "n_087_2",
-        "text": "If you sent the rescue team, a leak is detected in the seal. If you refused, the sentinel's family blockades the command elevator. Do you deploy security drones to clear the elevator lobby or hold a council meeting?",
-        "pressure_context": "Elevator monitors show angry citizens.",
-        "visibility": "always",
-        "required_flags": [],
+        "node_id": "n_087_2_sent",
+        "text": "The rescue team enters the toxic zone. Minutes after the airlock seals behind them, sensors detect a micro-leak forming in the airlock seal — the entry may have compromised the perimeter integrity. Do you deploy security drones to reinforce the seal, or call a council meeting to assess the exposure risk?",
+        "pressure_context": "Elevator monitors show concerned crew members.",
+        "visibility": "conditional",
+        "required_flags": ["rescue_sent"],
         "choices": [
           {
-            "choice_id": "c_087_2a",
-            "text": "Deploy security drones to clear the elevator.",
+            "choice_id": "c_087_2a_sent",
+            "text": "Deploy security drones to reinforce and seal the breach immediately.",
             "effects": {"Pragmatism": 3, "Obedience": 2, "Compassion": -3},
             "flags_set": {"drones_deployed": true},
             "next_node": "n_087_3"
           },
           {
-            "choice_id": "c_087_2b",
-            "text": "Hold a council meeting to address their demands.",
+            "choice_id": "c_087_2b_sent",
+            "text": "Hold a council meeting to assess the exposure risk before acting.",
+            "effects": {"Diplomacy": 3, "Rationality": 1, "Obedience": -2},
+            "flags_set": {"council_meeting": true},
+            "next_node": "n_087_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_087_2_refused",
+        "text": "Word spreads fast. The sentinel dies in the toxic zone, and their family storms the command sector, blockading the elevator to the command deck and demanding you face consequences for your decision. Do you deploy security drones to clear the elevator lobby, or hold a council meeting to address their demands?",
+        "pressure_context": "Elevator monitors show angry citizens.",
+        "visibility": "conditional",
+        "required_flags": ["rescue_refused"],
+        "choices": [
+          {
+            "choice_id": "c_087_2a_ref",
+            "text": "Deploy security drones to clear the elevator lobby.",
+            "effects": {"Pragmatism": 3, "Obedience": 2, "Compassion": -3},
+            "flags_set": {"drones_deployed": true},
+            "next_node": "n_087_3"
+          },
+          {
+            "choice_id": "c_087_2b_ref",
+            "text": "Hold a council meeting to address the family's demands.",
             "effects": {"Diplomacy": 3, "Rationality": 1, "Obedience": -2},
             "flags_set": {"council_meeting": true},
             "next_node": "n_087_3"

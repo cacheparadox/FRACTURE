@@ -79,23 +79,46 @@
         ]
       },
       {
-        "node_id": "n_049_4",
-        "text": "The transaction resolves. If you rejected the bribe, the lid of the box slides open. If you accepted the bribe, you stand outside the laboratory holding the check, wondering if the box actually had the million.",
+        "node_id": "n_049_4_rejected",
+        "text": "You stood your ground. The lid of the box slides open with a mechanical hiss. The evaluator steps forward, and the crowd falls silent as the result is finally revealed.",
         "pressure_context": "The simulation concludes.",
-        "visibility": "always",
-        "required_flags": [],
+        "visibility": "conditional",
+        "required_flags": ["reject_bribe"],
         "choices": [
           {
-            "choice_id": "c_049_4a",
-            "text": "Accept your fate and walk away in peace.",
+            "choice_id": "c_049_4a_rej",
+            "text": "Accept whatever you find inside — truth is its own reward.",
             "effects": {"Stoicism": 3, "Ambition": -2},
             "flags_set": {},
             "ending_id": "end_049_peace"
           },
           {
-            "choice_id": "c_049_4b",
-            "text": "File a public report about the entity's potential failure.",
+            "choice_id": "c_049_4b_rej",
+            "text": "File a public report about the entity's accuracy to challenge its creator.",
             "effects": {"Independence": 3, "Diplomacy": -2},
+            "flags_set": {},
+            "ending_id": "end_049_report"
+          }
+        ]
+      },
+      {
+        "node_id": "n_049_4_accepted",
+        "text": "You walk out of the laboratory holding the check. The box remains sealed behind you. Standing in the corridor, you begin to wonder — was there truly a million inside? The creator never intended for anyone to find out.",
+        "pressure_context": "The simulation concludes.",
+        "visibility": "conditional",
+        "required_flags": ["accept_bribe"],
+        "choices": [
+          {
+            "choice_id": "c_049_4a_acc",
+            "text": "Cash the check and move on. What you don't know can't hurt you.",
+            "effects": {"Pragmatism": 3, "Idealism": -2},
+            "flags_set": {},
+            "ending_id": "end_049_peace"
+          },
+          {
+            "choice_id": "c_049_4b_acc",
+            "text": "Return the check and demand to see inside the box.",
+            "effects": {"Independence": 3, "Pragmatism": -2},
             "flags_set": {},
             "ending_id": "end_049_report"
           }

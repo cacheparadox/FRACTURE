@@ -1256,22 +1256,45 @@
         ]
       },
       {
-        "node_id": "n_068_2",
-        "text": "If you refused, the wolf population increases, causing visible prey losses. The conservation group blockades the wolf pens. If you authorized it, the rabbit population starts expanding, threatening the main crop fields. Do you order a manual rabbit cull or construct fences around the crops?",
+        "node_id": "n_068_2_authorized",
+        "text": "The wolf sterilizer is deployed. Within weeks the wolf population drops sharply, and the rabbit population begins expanding rapidly, threatening the main crop fields. Do you order a manual rabbit cull or construct fences around the crops?",
         "pressure_context": "Merchants demand protection for their fields.",
-        "visibility": "always",
-        "required_flags": [],
+        "visibility": "conditional",
+        "required_flags": ["sterilizer_authorized"],
         "choices": [
           {
-            "choice_id": "c_068_2a",
+            "choice_id": "c_068_2a_auth",
             "text": "Order a manual rabbit cull.",
             "effects": {"Pragmatism": 3, "Compassion": -3},
             "flags_set": {"cull_ordered": true},
             "next_node": "n_068_3"
           },
           {
-            "choice_id": "c_068_2b",
+            "choice_id": "c_068_2b_auth",
             "text": "Construct fences around the crop fields.",
+            "effects": {"Pragmatism": 2, "Independence": 1},
+            "flags_set": {"fences_built": true},
+            "next_node": "n_068_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_068_2_refused",
+        "text": "You left the natural cycle intact. The wolf population surges, causing visible prey losses across the park. Alarmed, the conservation group blockades the wolf pens demanding immediate action. Do you order a manual rabbit cull to restore balance, or construct fences to protect the remaining prey from wolves?",
+        "pressure_context": "Merchants demand protection for their fields.",
+        "visibility": "conditional",
+        "required_flags": ["cycle_preserved"],
+        "choices": [
+          {
+            "choice_id": "c_068_2a_ref",
+            "text": "Order a manual rabbit cull to restore the balance.",
+            "effects": {"Pragmatism": 3, "Compassion": -3},
+            "flags_set": {"cull_ordered": true},
+            "next_node": "n_068_3"
+          },
+          {
+            "choice_id": "c_068_2b_ref",
+            "text": "Construct fences to shield the remaining rabbit population.",
             "effects": {"Pragmatism": 2, "Independence": 1},
             "flags_set": {"fences_built": true},
             "next_node": "n_068_3"

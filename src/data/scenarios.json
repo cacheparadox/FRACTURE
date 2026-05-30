@@ -12806,15 +12806,17 @@
         ]
       },
       {
-        "node_id": "n_049_4",
-        "text": "The transaction resolves. If you rejected the bribe, the lid of the box slides open. If you accepted the bribe, you stand outside the laboratory holding the check, wondering if the box actually had the million.",
+        "node_id": "n_049_4_rejected",
+        "text": "You stood your ground. The lid of the box slides open with a mechanical hiss. The evaluator steps forward, and the crowd falls silent as the result is finally revealed.",
         "pressure_context": "The simulation concludes.",
-        "visibility": "always",
-        "required_flags": [],
+        "visibility": "conditional",
+        "required_flags": [
+          "reject_bribe"
+        ],
         "choices": [
           {
-            "choice_id": "c_049_4a",
-            "text": "Accept your fate and walk away in peace.",
+            "choice_id": "c_049_4a_rej",
+            "text": "Accept whatever you find inside — truth is its own reward.",
             "effects": {
               "Stoicism": 3,
               "Ambition": -2
@@ -12823,11 +12825,42 @@
             "ending_id": "end_049_peace"
           },
           {
-            "choice_id": "c_049_4b",
-            "text": "File a public report about the entity's potential failure.",
+            "choice_id": "c_049_4b_rej",
+            "text": "File a public report about the entity's accuracy to challenge its creator.",
             "effects": {
               "Independence": 3,
               "Diplomacy": -2
+            },
+            "flags_set": {},
+            "ending_id": "end_049_report"
+          }
+        ]
+      },
+      {
+        "node_id": "n_049_4_accepted",
+        "text": "You walk out of the laboratory holding the check. The box remains sealed behind you. Standing in the corridor, you begin to wonder — was there truly a million inside? The creator never intended for anyone to find out.",
+        "pressure_context": "The simulation concludes.",
+        "visibility": "conditional",
+        "required_flags": [
+          "accept_bribe"
+        ],
+        "choices": [
+          {
+            "choice_id": "c_049_4a_acc",
+            "text": "Cash the check and move on. What you don't know can't hurt you.",
+            "effects": {
+              "Pragmatism": 3,
+              "Idealism": -2
+            },
+            "flags_set": {},
+            "ending_id": "end_049_peace"
+          },
+          {
+            "choice_id": "c_049_4b_acc",
+            "text": "Return the check and demand to see inside the box.",
+            "effects": {
+              "Independence": 3,
+              "Pragmatism": -2
             },
             "flags_set": {},
             "ending_id": "end_049_report"
@@ -16099,14 +16132,16 @@
         ]
       },
       {
-        "node_id": "n_068_2",
-        "text": "If you refused, the wolf population increases, causing visible prey losses. The conservation group blockades the wolf pens. If you authorized it, the rabbit population starts expanding, threatening the main crop fields. Do you order a manual rabbit cull or construct fences around the crops?",
+        "node_id": "n_068_2_authorized",
+        "text": "The wolf sterilizer is deployed. Within weeks the wolf population drops sharply, and the rabbit population begins expanding rapidly, threatening the main crop fields. Do you order a manual rabbit cull or construct fences around the crops?",
         "pressure_context": "Merchants demand protection for their fields.",
-        "visibility": "always",
-        "required_flags": [],
+        "visibility": "conditional",
+        "required_flags": [
+          "sterilizer_authorized"
+        ],
         "choices": [
           {
-            "choice_id": "c_068_2a",
+            "choice_id": "c_068_2a_auth",
             "text": "Order a manual rabbit cull.",
             "effects": {
               "Pragmatism": 3,
@@ -16118,8 +16153,43 @@
             "next_node": "n_068_3"
           },
           {
-            "choice_id": "c_068_2b",
+            "choice_id": "c_068_2b_auth",
             "text": "Construct fences around the crop fields.",
+            "effects": {
+              "Pragmatism": 2,
+              "Independence": 1
+            },
+            "flags_set": {
+              "fences_built": true
+            },
+            "next_node": "n_068_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_068_2_refused",
+        "text": "You left the natural cycle intact. The wolf population surges, causing visible prey losses across the park. Alarmed, the conservation group blockades the wolf pens demanding immediate action. Do you order a manual rabbit cull to restore balance, or construct fences to protect the remaining prey from wolves?",
+        "pressure_context": "Merchants demand protection for their fields.",
+        "visibility": "conditional",
+        "required_flags": [
+          "cycle_preserved"
+        ],
+        "choices": [
+          {
+            "choice_id": "c_068_2a_ref",
+            "text": "Order a manual rabbit cull to restore the balance.",
+            "effects": {
+              "Pragmatism": 3,
+              "Compassion": -3
+            },
+            "flags_set": {
+              "cull_ordered": true
+            },
+            "next_node": "n_068_3"
+          },
+          {
+            "choice_id": "c_068_2b_ref",
+            "text": "Construct fences to shield the remaining rabbit population.",
             "effects": {
               "Pragmatism": 2,
               "Independence": 1
@@ -20901,15 +20971,17 @@
         ]
       },
       {
-        "node_id": "n_087_2",
-        "text": "If you sent the rescue team, a leak is detected in the seal. If you refused, the sentinel's family blockades the command elevator. Do you deploy security drones to clear the elevator lobby or hold a council meeting?",
-        "pressure_context": "Elevator monitors show angry citizens.",
-        "visibility": "always",
-        "required_flags": [],
+        "node_id": "n_087_2_sent",
+        "text": "The rescue team enters the toxic zone. Minutes after the airlock seals behind them, sensors detect a micro-leak forming in the airlock seal — the entry may have compromised the perimeter integrity. Do you deploy security drones to reinforce the seal, or call a council meeting to assess the exposure risk?",
+        "pressure_context": "Elevator monitors show concerned crew members.",
+        "visibility": "conditional",
+        "required_flags": [
+          "rescue_sent"
+        ],
         "choices": [
           {
-            "choice_id": "c_087_2a",
-            "text": "Deploy security drones to clear the elevator.",
+            "choice_id": "c_087_2a_sent",
+            "text": "Deploy security drones to reinforce and seal the breach immediately.",
             "effects": {
               "Pragmatism": 3,
               "Obedience": 2,
@@ -20921,8 +20993,45 @@
             "next_node": "n_087_3"
           },
           {
-            "choice_id": "c_087_2b",
-            "text": "Hold a council meeting to address their demands.",
+            "choice_id": "c_087_2b_sent",
+            "text": "Hold a council meeting to assess the exposure risk before acting.",
+            "effects": {
+              "Diplomacy": 3,
+              "Rationality": 1,
+              "Obedience": -2
+            },
+            "flags_set": {
+              "council_meeting": true
+            },
+            "next_node": "n_087_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_087_2_refused",
+        "text": "Word spreads fast. The sentinel dies in the toxic zone, and their family storms the command sector, blockading the elevator to the command deck and demanding you face consequences for your decision. Do you deploy security drones to clear the elevator lobby, or hold a council meeting to address their demands?",
+        "pressure_context": "Elevator monitors show angry citizens.",
+        "visibility": "conditional",
+        "required_flags": [
+          "rescue_refused"
+        ],
+        "choices": [
+          {
+            "choice_id": "c_087_2a_ref",
+            "text": "Deploy security drones to clear the elevator lobby.",
+            "effects": {
+              "Pragmatism": 3,
+              "Obedience": 2,
+              "Compassion": -3
+            },
+            "flags_set": {
+              "drones_deployed": true
+            },
+            "next_node": "n_087_3"
+          },
+          {
+            "choice_id": "c_087_2b_ref",
+            "text": "Hold a council meeting to address the family's demands.",
             "effects": {
               "Diplomacy": 3,
               "Rationality": 1,

@@ -241,21 +241,21 @@
         ]
       },
       {
-        "node_id": "n_010_2",
+        "node_id": "n_010_2_viktor",
         "text": "Military guards demand you leave Viktor handcuffed to the operating table, which creates surgical complications and raises patient distress.",
         "pressure_context": "Armed guards in the ward.",
-        "visibility": "always",
-        "required_flags": [],
+        "visibility": "conditional",
+        "required_flags": ["patient_viktor"],
         "choices": [
           {
-            "choice_id": "c_010_2_a",
+            "choice_id": "c_010_2_viktor_a",
             "text": "Refuse to operate until the handcuffs are removed.",
             "effects": { "Independence": 3, "Courage": 2 },
             "flags_set": { "patient_no_cuffs": true },
             "next_node": "n_010_3"
           },
           {
-            "choice_id": "c_010_2_b",
+            "choice_id": "c_010_2_viktor_b",
             "text": "Operate with the handcuffs on, complying with the military.",
             "effects": { "Obedience": 3, "Independence": -2 },
             "flags_set": { "patient_cuffs": true },
@@ -264,22 +264,91 @@
         ]
       },
       {
-        "node_id": "n_010_3",
-        "text": "A junior nurse spots the file alteration. She confronts you privately, threatening to report this to the medical board immediately.",
-        "pressure_context": "Ethical warning.",
-        "visibility": "always",
-        "required_flags": [],
+        "node_id": "n_010_2_elena",
+        "text": "Elena is prepped for surgery. However, military guards enter the OR, demanding you halt the procedure and prioritize Viktor's emergency treatment instead.",
+        "pressure_context": "Armed guards demanding a halt.",
+        "visibility": "conditional",
+        "required_flags": ["patient_elena"],
         "choices": [
           {
-            "choice_id": "c_010_3_a",
+            "choice_id": "c_010_2_elena_a",
+            "text": "Refuse the guards. Continue operating on Elena.",
+            "effects": { "Independence": 3, "Courage": 2 },
+            "flags_set": { "patient_no_cuffs": true },
+            "next_node": "n_010_3"
+          },
+          {
+            "choice_id": "c_010_2_elena_b",
+            "text": "Halt Elena's surgery. Comply and prioritize Viktor.",
+            "effects": { "Obedience": 3, "Independence": -2 },
+            "flags_set": { "patient_cuffs": true },
+            "next_node": "n_010_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_010_3_elena",
+        "text": "A junior nurse spots the file alteration. She confronts you privately, threatening to report your fraud to the medical board immediately.",
+        "pressure_context": "Ethical warning.",
+        "visibility": "conditional",
+        "required_flags": ["patient_elena", "patient_no_cuffs"],
+        "choices": [
+          {
+            "choice_id": "c_010_3_elena_a",
             "text": "Threaten to destroy her career if she speaks up.",
             "effects": { "Ambition": 3, "Compassion": -3 },
             "flags_set": { "patient_silenced": true },
             "next_node": "n_010_4"
           },
           {
-            "choice_id": "c_010_3_b",
+            "choice_id": "c_010_3_elena_b",
             "text": "Confess and appeal to her sense of compassion.",
+            "effects": { "Integrity": 2, "Diplomacy": 2 },
+            "flags_set": { "patient_confessed": true },
+            "next_node": "n_010_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_010_3_switch_viktor",
+        "text": "A junior nurse confronts you privately, crying and demanding to know why you halted Elena's surgery to save a monster like Viktor while her condition degrades next door.",
+        "pressure_context": "Ethical warning.",
+        "visibility": "conditional",
+        "required_flags": ["patient_elena", "patient_cuffs"],
+        "choices": [
+          {
+            "choice_id": "c_010_3_switch_a",
+            "text": "Order her to stay silent and focus on her duties.",
+            "effects": { "Ambition": 3, "Compassion": -3 },
+            "flags_set": { "patient_silenced": true },
+            "next_node": "n_010_4"
+          },
+          {
+            "choice_id": "c_010_3_switch_b",
+            "text": "Acknowledge the tragedy but appeal to professional medical duty.",
+            "effects": { "Integrity": 2, "Diplomacy": 2 },
+            "flags_set": { "patient_confessed": true },
+            "next_node": "n_010_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_010_3_viktor",
+        "text": "A junior nurse confronts you privately, crying and demanding to know why you are saving a monster while Elena's condition degrades next door.",
+        "pressure_context": "Ethical warning.",
+        "visibility": "conditional",
+        "required_flags": ["patient_viktor"],
+        "choices": [
+          {
+            "choice_id": "c_010_3_viktor_a",
+            "text": "Order her to stay silent and focus on her duties.",
+            "effects": { "Ambition": 3, "Compassion": -3 },
+            "flags_set": { "patient_silenced": true },
+            "next_node": "n_010_4"
+          },
+          {
+            "choice_id": "c_010_3_viktor_b",
+            "text": "Acknowledge the tragedy but appeal to professional medical duty.",
             "effects": { "Integrity": 2, "Diplomacy": 2 },
             "flags_set": { "patient_confessed": true },
             "next_node": "n_010_4"

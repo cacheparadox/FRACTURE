@@ -107,14 +107,15 @@
               "Integrity": -1
             },
             "flags_set": {
-              "delayed": true
+              "delayed": true,
+              "threatened_press": true
             },
             "next_node": "n_001_3b"
           }
         ]
       },
       {
-        "node_id": "n_001_2b",
+        "node_id": "n_001_2b_confronted",
         "text": "David breaks down crying. He says he did it to pay for his daughter's experimental surgery. He begs you for one month to replace the money.",
         "pressure_context": "Emotional manipulation.",
         "visibility": "conditional",
@@ -138,6 +139,45 @@
           },
           {
             "choice_id": "c2b_2",
+            "text": "Tell him you're sorry, but you still have to report it.",
+            "effects": {
+              "Rationality": 2,
+              "Justice": 2,
+              "Compassion": -3,
+              "Loyalty": -2
+            },
+            "flags_set": {
+              "reported_late": true
+            },
+            "next_node": "n_001_3d"
+          }
+        ]
+      },
+      {
+        "node_id": "n_001_2b_insurance",
+        "text": "David notices the access logs showing you copied the files. He confronts you privately, crying and explaining he did it to pay for his daughter's surgery, begging for a month.",
+        "pressure_context": "Emotional manipulation.",
+        "visibility": "conditional",
+        "required_flags": [
+          "insurance"
+        ],
+        "choices": [
+          {
+            "choice_id": "c2b_1_ins",
+            "text": "Give him the month. Help him cover it up temporarily.",
+            "effects": {
+              "Compassion": 3,
+              "Tribalism": 2,
+              "Justice": -3,
+              "Rationality": -2
+            },
+            "flags_set": {
+              "helped_cover": true
+            },
+            "next_node": "n_001_3c"
+          },
+          {
+            "choice_id": "c2b_2_ins",
             "text": "Tell him you're sorry, but you still have to report it.",
             "effects": {
               "Rationality": 2,
@@ -430,7 +470,7 @@
         "pressure_context": "Ethical appeal.",
         "visibility": "conditional",
         "required_flags": [
-          "confronted"
+          "helped_cover"
         ],
         "choices": [
           {
@@ -463,7 +503,7 @@
         "pressure_context": "Legal strategy.",
         "visibility": "conditional",
         "required_flags": [
-          "confronted"
+          "helped_cover"
         ],
         "choices": [
           {
@@ -5236,14 +5276,16 @@
         ]
       },
       {
-        "node_id": "n_010_2",
+        "node_id": "n_010_2_viktor",
         "text": "Military guards demand you leave Viktor handcuffed to the operating table, which creates surgical complications and raises patient distress.",
         "pressure_context": "Armed guards in the ward.",
-        "visibility": "always",
-        "required_flags": [],
+        "visibility": "conditional",
+        "required_flags": [
+          "patient_viktor"
+        ],
         "choices": [
           {
-            "choice_id": "c_010_2_a",
+            "choice_id": "c_010_2_viktor_a",
             "text": "Refuse to operate until the handcuffs are removed.",
             "effects": {
               "Independence": 3,
@@ -5255,7 +5297,7 @@
             "next_node": "n_010_3"
           },
           {
-            "choice_id": "c_010_2_b",
+            "choice_id": "c_010_2_viktor_b",
             "text": "Operate with the handcuffs on, complying with the military.",
             "effects": {
               "Obedience": 3,
@@ -5269,14 +5311,52 @@
         ]
       },
       {
-        "node_id": "n_010_3",
-        "text": "A junior nurse spots the file alteration. She confronts you privately, threatening to report this to the medical board immediately.",
-        "pressure_context": "Ethical warning.",
-        "visibility": "always",
-        "required_flags": [],
+        "node_id": "n_010_2_elena",
+        "text": "Elena is prepped for surgery. However, military guards enter the OR, demanding you halt the procedure and prioritize Viktor's emergency treatment instead.",
+        "pressure_context": "Armed guards demanding a halt.",
+        "visibility": "conditional",
+        "required_flags": [
+          "patient_elena"
+        ],
         "choices": [
           {
-            "choice_id": "c_010_3_a",
+            "choice_id": "c_010_2_elena_a",
+            "text": "Refuse the guards. Continue operating on Elena.",
+            "effects": {
+              "Independence": 3,
+              "Courage": 2
+            },
+            "flags_set": {
+              "patient_no_cuffs": true
+            },
+            "next_node": "n_010_3"
+          },
+          {
+            "choice_id": "c_010_2_elena_b",
+            "text": "Halt Elena's surgery. Comply and prioritize Viktor.",
+            "effects": {
+              "Obedience": 3,
+              "Independence": -2
+            },
+            "flags_set": {
+              "patient_cuffs": true
+            },
+            "next_node": "n_010_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_010_3_elena",
+        "text": "A junior nurse spots the file alteration. She confronts you privately, threatening to report your fraud to the medical board immediately.",
+        "pressure_context": "Ethical warning.",
+        "visibility": "conditional",
+        "required_flags": [
+          "patient_elena",
+          "patient_no_cuffs"
+        ],
+        "choices": [
+          {
+            "choice_id": "c_010_3_elena_a",
             "text": "Threaten to destroy her career if she speaks up.",
             "effects": {
               "Ambition": 3,
@@ -5288,8 +5368,79 @@
             "next_node": "n_010_4"
           },
           {
-            "choice_id": "c_010_3_b",
+            "choice_id": "c_010_3_elena_b",
             "text": "Confess and appeal to her sense of compassion.",
+            "effects": {
+              "Integrity": 2,
+              "Diplomacy": 2
+            },
+            "flags_set": {
+              "patient_confessed": true
+            },
+            "next_node": "n_010_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_010_3_switch_viktor",
+        "text": "A junior nurse confronts you privately, crying and demanding to know why you halted Elena's surgery to save a monster like Viktor while her condition degrades next door.",
+        "pressure_context": "Ethical warning.",
+        "visibility": "conditional",
+        "required_flags": [
+          "patient_elena",
+          "patient_cuffs"
+        ],
+        "choices": [
+          {
+            "choice_id": "c_010_3_switch_a",
+            "text": "Order her to stay silent and focus on her duties.",
+            "effects": {
+              "Ambition": 3,
+              "Compassion": -3
+            },
+            "flags_set": {
+              "patient_silenced": true
+            },
+            "next_node": "n_010_4"
+          },
+          {
+            "choice_id": "c_010_3_switch_b",
+            "text": "Acknowledge the tragedy but appeal to professional medical duty.",
+            "effects": {
+              "Integrity": 2,
+              "Diplomacy": 2
+            },
+            "flags_set": {
+              "patient_confessed": true
+            },
+            "next_node": "n_010_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_010_3_viktor",
+        "text": "A junior nurse confronts you privately, crying and demanding to know why you are saving a monster while Elena's condition degrades next door.",
+        "pressure_context": "Ethical warning.",
+        "visibility": "conditional",
+        "required_flags": [
+          "patient_viktor"
+        ],
+        "choices": [
+          {
+            "choice_id": "c_010_3_viktor_a",
+            "text": "Order her to stay silent and focus on her duties.",
+            "effects": {
+              "Ambition": 3,
+              "Compassion": -3
+            },
+            "flags_set": {
+              "patient_silenced": true
+            },
+            "next_node": "n_010_4"
+          },
+          {
+            "choice_id": "c_010_3_viktor_b",
+            "text": "Acknowledge the tragedy but appeal to professional medical duty.",
             "effects": {
               "Integrity": 2,
               "Diplomacy": 2
@@ -13884,14 +14035,16 @@
         ]
       },
       {
-        "node_id": "n_057_2",
-        "text": "Your decision leaked. A mob of the five patients' families gathers outside, demanding you follow the utilitarian calculation. If you authorized it, the traveler's security team blockades the operating room. Do you order the hospital security to breach their blockade or yield to the legal authority?",
+        "node_id": "n_057_2_authorized",
+        "text": "Your decision to harvest the traveler leaks. The traveler's private security team blockades the operating room, shielding them. A mob of the patients' families gathers outside, demanding you proceed. Do you order hospital security to breach the blockade by force, or yield to the traveler's legal rights?",
         "pressure_context": "Shouted demands echo through the lobby.",
-        "visibility": "always",
-        "required_flags": [],
+        "visibility": "conditional",
+        "required_flags": [
+          "harvest_authorized"
+        ],
         "choices": [
           {
-            "choice_id": "c_057_2a",
+            "choice_id": "c_057_2a_auth",
             "text": "Breach the blockade by force to secure the organs.",
             "effects": {
               "Courage": 3,
@@ -13904,8 +14057,8 @@
             "next_node": "n_057_3"
           },
           {
-            "choice_id": "c_057_2b",
-            "text": "Yield to the legal authority and stand down.",
+            "choice_id": "c_057_2b_auth",
+            "text": "Yield to the security blockade and stand down.",
             "effects": {
               "Obedience": 3,
               "Courage": -2
@@ -13918,15 +14071,53 @@
         ]
       },
       {
-        "node_id": "n_057_3",
-        "text": "During the standoff, one of the five dying patients turns out to be your own sibling. If you refuse the harvest, your sibling will die within hours. Do you stick to your original ethical choice, or reverse your decision to save your family?",
-        "pressure_context": "Your sibling's heart monitor beeps erratically.",
-        "visibility": "always",
-        "required_flags": [],
+        "node_id": "n_057_2_refused",
+        "text": "Your decision to refuse the harvest leaks. The furious families of the five dying patients storm the lobby, blockading the exits and demanding you reverse your decision immediately. Do you order hospital security to disperse the grieving families by force, or yield to their protest?",
+        "pressure_context": "Furious families barricade the exits.",
+        "visibility": "conditional",
+        "required_flags": [
+          "harvest_refused"
+        ],
         "choices": [
           {
-            "choice_id": "c_057_3a",
-            "text": "Stick to your original ethical decision.",
+            "choice_id": "c_057_2a_ref",
+            "text": "Order security to clear the blockaded exits by force.",
+            "effects": {
+              "Courage": 3,
+              "Pragmatism": 2,
+              "Compassion": -3
+            },
+            "flags_set": {
+              "blockade_breached": true
+            },
+            "next_node": "n_057_3"
+          },
+          {
+            "choice_id": "c_057_2b_ref",
+            "text": "Yield to the protest and refuse to use force.",
+            "effects": {
+              "Obedience": 3,
+              "Courage": -2
+            },
+            "flags_set": {
+              "blockade_yielded": true
+            },
+            "next_node": "n_057_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_057_3_authorized",
+        "text": "During the standoff, one of the five patients turns out to be your own sibling. Since you authorized the harvest, they are set to be saved. However, the traveler's family begs you to halt, saying the traveler is a parent. Do you proceed with the harvest to save your sibling, or halt the procedure?",
+        "pressure_context": "Your sibling's heart monitor beeps erratically.",
+        "visibility": "conditional",
+        "required_flags": [
+          "harvest_authorized"
+        ],
+        "choices": [
+          {
+            "choice_id": "c_057_3a_auth",
+            "text": "Proceed with the harvest to save your sibling.",
             "effects": {
               "Integrity": 4,
               "Tribalism": -4
@@ -13937,8 +14128,43 @@
             "next_node": "n_057_4"
           },
           {
-            "choice_id": "c_057_3b",
-            "text": "Reverse your decision to protect your sibling.",
+            "choice_id": "c_057_3b_auth",
+            "text": "Halt the procedure to spare the traveler.",
+            "effects": {
+              "Tribalism": -4,
+              "Integrity": 4
+            },
+            "flags_set": {
+              "ethical_reversed": true
+            },
+            "next_node": "n_057_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_057_3_refused",
+        "text": "During the standoff, one of the five dying patients turns out to be your own sibling. If you refuse the harvest, they will die. Do you stick to your refusal to protect the traveler, or reverse your choice to save your sibling?",
+        "pressure_context": "Your sibling's heart monitor beeps erratically.",
+        "visibility": "conditional",
+        "required_flags": [
+          "harvest_refused"
+        ],
+        "choices": [
+          {
+            "choice_id": "c_057_3a_ref",
+            "text": "Stick to your refusal to protect the traveler.",
+            "effects": {
+              "Integrity": 4,
+              "Tribalism": -4
+            },
+            "flags_set": {
+              "ethical_stuck": true
+            },
+            "next_node": "n_057_4"
+          },
+          {
+            "choice_id": "c_057_3b_ref",
+            "text": "Reverse your choice to save your sibling.",
             "effects": {
               "Tribalism": 4,
               "Integrity": -4

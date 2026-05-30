@@ -975,22 +975,22 @@
         ]
       },
       {
-        "node_id": "n_057_2",
-        "text": "Your decision leaked. A mob of the five patients' families gathers outside, demanding you follow the utilitarian calculation. If you authorized it, the traveler's security team blockades the operating room. Do you order the hospital security to breach their blockade or yield to the legal authority?",
+        "node_id": "n_057_2_authorized",
+        "text": "Your decision to harvest the traveler leaks. The traveler's private security team blockades the operating room, shielding them. A mob of the patients' families gathers outside, demanding you proceed. Do you order hospital security to breach the blockade by force, or yield to the traveler's legal rights?",
         "pressure_context": "Shouted demands echo through the lobby.",
-        "visibility": "always",
-        "required_flags": [],
+        "visibility": "conditional",
+        "required_flags": ["harvest_authorized"],
         "choices": [
           {
-            "choice_id": "c_057_2a",
+            "choice_id": "c_057_2a_auth",
             "text": "Breach the blockade by force to secure the organs.",
             "effects": {"Courage": 3, "Pragmatism": 2, "Compassion": -3},
             "flags_set": {"blockade_breached": true},
             "next_node": "n_057_3"
           },
           {
-            "choice_id": "c_057_2b",
-            "text": "Yield to the legal authority and stand down.",
+            "choice_id": "c_057_2b_auth",
+            "text": "Yield to the security blockade and stand down.",
             "effects": {"Obedience": 3, "Courage": -2},
             "flags_set": {"blockade_yielded": true},
             "next_node": "n_057_3"
@@ -998,22 +998,68 @@
         ]
       },
       {
-        "node_id": "n_057_3",
-        "text": "During the standoff, one of the five dying patients turns out to be your own sibling. If you refuse the harvest, your sibling will die within hours. Do you stick to your original ethical choice, or reverse your decision to save your family?",
-        "pressure_context": "Your sibling's heart monitor beeps erratically.",
-        "visibility": "always",
-        "required_flags": [],
+        "node_id": "n_057_2_refused",
+        "text": "Your decision to refuse the harvest leaks. The furious families of the five dying patients storm the lobby, blockading the exits and demanding you reverse your decision immediately. Do you order hospital security to disperse the grieving families by force, or yield to their protest?",
+        "pressure_context": "Furious families barricade the exits.",
+        "visibility": "conditional",
+        "required_flags": ["harvest_refused"],
         "choices": [
           {
-            "choice_id": "c_057_3a",
-            "text": "Stick to your original ethical decision.",
+            "choice_id": "c_057_2a_ref",
+            "text": "Order security to clear the blockaded exits by force.",
+            "effects": {"Courage": 3, "Pragmatism": 2, "Compassion": -3},
+            "flags_set": {"blockade_breached": true},
+            "next_node": "n_057_3"
+          },
+          {
+            "choice_id": "c_057_2b_ref",
+            "text": "Yield to the protest and refuse to use force.",
+            "effects": {"Obedience": 3, "Courage": -2},
+            "flags_set": {"blockade_yielded": true},
+            "next_node": "n_057_3"
+          }
+        ]
+      },
+      {
+        "node_id": "n_057_3_authorized",
+        "text": "During the standoff, one of the five patients turns out to be your own sibling. Since you authorized the harvest, they are set to be saved. However, the traveler's family begs you to halt, saying the traveler is a parent. Do you proceed with the harvest to save your sibling, or halt the procedure?",
+        "pressure_context": "Your sibling's heart monitor beeps erratically.",
+        "visibility": "conditional",
+        "required_flags": ["harvest_authorized"],
+        "choices": [
+          {
+            "choice_id": "c_057_3a_auth",
+            "text": "Proceed with the harvest to save your sibling.",
             "effects": {"Integrity": 4, "Tribalism": -4},
             "flags_set": {"ethical_stuck": true},
             "next_node": "n_057_4"
           },
           {
-            "choice_id": "c_057_3b",
-            "text": "Reverse your decision to protect your sibling.",
+            "choice_id": "c_057_3b_auth",
+            "text": "Halt the procedure to spare the traveler.",
+            "effects": {"Tribalism": -4, "Integrity": 4},
+            "flags_set": {"ethical_reversed": true},
+            "next_node": "n_057_4"
+          }
+        ]
+      },
+      {
+        "node_id": "n_057_3_refused",
+        "text": "During the standoff, one of the five dying patients turns out to be your own sibling. If you refuse the harvest, they will die. Do you stick to your refusal to protect the traveler, or reverse your choice to save your sibling?",
+        "pressure_context": "Your sibling's heart monitor beeps erratically.",
+        "visibility": "conditional",
+        "required_flags": ["harvest_refused"],
+        "choices": [
+          {
+            "choice_id": "c_057_3a_ref",
+            "text": "Stick to your refusal to protect the traveler.",
+            "effects": {"Integrity": 4, "Tribalism": -4},
+            "flags_set": {"ethical_stuck": true},
+            "next_node": "n_057_4"
+          },
+          {
+            "choice_id": "c_057_3b_ref",
+            "text": "Reverse your choice to save your sibling.",
             "effects": {"Tribalism": 4, "Integrity": -4},
             "flags_set": {"ethical_reversed": true},
             "next_node": "n_057_4"
